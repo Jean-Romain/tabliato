@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="UTF-8" />
+	
+	<title>Tabliato | Tablature pour accordéon diatonique</title>
+
+	<style type="text/css">
+html { font-size: 100%; font-family: sans-serif; }
+
+body 
+{
+	background: #EAEAEA;
+	font-size:14px;
+	color:#484848;
+	margin:0;
+	line-height: 1.4;
+}
+
+label
+{
+	display: block;
+	width: 65px;
+	float: left;
+}
+
+a {color: #336699;text-decoration:none;}
+a:hover {text-decoration:underline;}
+a:visited {text-decoration:dashed;}
+
+p, pre { margin:1.5em 0;}
+p:first-child {margin-top:0}
+
+pre {color:white;background-color:black;padding:5px;font-family:Courier;font-size:15px}
+
+li {line-height: 1.7;}
+li p {margin-top:0}
+
+img{border:0}
+
+h1,h2,h3,h4,h5,h6{font-family:'Open Sans',sans-serif;font-weight:normal;color:#363636;line-height: 1.4;}
+h1{font-size:2.5rem;}
+h2{font-size:1.5rem;}
+h3{font-size:1.2rem;}
+
+body > header 
+{
+    background-color: #DEE7EE;
+    border-bottom: 1px solid #B3B8BC;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+}
+
+.main-container {margin-left:auto;margin-right:auto;padding:0;width:810px;text-align:justify;}
+.main-header {padding-top:10px;}
+
+.fr {float:right; margin-left:20px}
+.fl {float:left; margin-right:20px}
+.clear{clear:both}
+.center {text-align:center}
+
+#main-left{float:left;width:640px;display:inline;position:relative;}
+#main-right{float:left;width:160px;}
+
+article {padding: 20px;}
+
+article h1:first-child {margin-top:0;padding-top:0}
+article h2:first-child {margin-top:0;padding-top:0}
+
+.main-old{background:#fff}
+
+table {line-height:120%;}
+td, th {vertical-align: top;}
+
+table.lexicon {width:100%;table-layout: fixed;}
+table.lexicon td, th {width: 20%;text-align: left;}
+
+.erreur
+{
+    border : 2px solid #FD4444;
+    margin-bottom : 8px;
+    width : 90%;
+    padding : 8px;
+    padding-left : 35px;
+    color : #BD0202;
+    background : #FCD9D9 url(img/msg-erreur.png) no-repeat;
+
+    border-radius: 8px;
+    -moz-border-radius: 8px;
+    -webkit-border-radius : 8px;
+}
+
+.information
+{
+    border : 2px solid #43E54F;
+    margin-bottom : 8px;
+    width : 90%;
+    padding : 8px;
+    padding-left : 35px;
+    color : #079711;
+    background : #CDF2B9 url("img/msg-info.png") no-repeat;
+
+    border-radius: 8px;
+    -moz-border-radius: 8px;
+    -webkit-border-radius : 8px;
+}
+
+.attention
+{
+    border : 2px solid orange;
+    margin-bottom : 8px;
+    width : 90%;
+    padding : 8px;
+    padding-left : 35px;
+    color : #CA8500;
+    background : #FEDC92 url(img/msg-attention.png) no-repeat;
+
+    border-radius: 8px;
+    -moz-border-radius: 8px;
+    -webkit-border-radius : 8px;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+	<div class="main-container main-old">
+			<article>
+			
+<h1 id="Top">Tutoriel d'utilisation de Tabliato</h1>
+
+<ol>
+	<li><a href="#Tabliato">Tabliato et Lilypond</a></li>
+	<li><a href="#Notes">Écrire les notes</a></li>
+	<li><a href="#Basses">Écrire les basses</a></li>
+	<li><a href="#Clef">Clé, armure, mesure, tempo</a></li>
+	<li><a href="#Silence">Silences</a></li>
+	<li><a href="#Repetitions">Répétitions</a></li>
+	<li><a href="#Sauts">Changement de ligne</a></li>
+	<li><a href="#Alternatives">Fins alternatives</a></li>
+	<li><a href="#Anacrouse">Mesure incomplète, anacrouse</a></li>
+	<li><a href="#Liaisons">Liaisons</a></li>
+	<li><a href="#Plus">Aller plus loin</a></li>
+</ol>
+
+<h2 id="Tabliato"><a href="#Top">Tabliato repose sur Lilypond</a></h2>
+
+	<p>Tabliato repose sur le logiciel libre Lilypond. Tabliato réalise les analyses spécifiques à l'accordéon alors que Lilypond se charge
+	de produire un résultat visuel (image ou pdf). Ainsi l'essentiel de la syntaxe musicale de Lilypond reste valable dans Tabliato. Ce manuel 
+	décrit la syntaxe spécifique de Tabliato et les bases utiles de Lilypond.</p>
+	
+	<p>Si vous connaissez déjà Lilypond seuls les paragraphes 2, 3 et 4 seront pertinents. Veuillez tout de même lire les notes oranges dans les autres paragraphes.</p>
+
+<h2 id="Notes"><a href="#Top">Écrire les notes</a></h2>
+
+	<p>Rien de plus simple. Pour écrire une note il suffit d'écrire son numéro suivi d'une apostrophe « ' » si c'est un bouton de la seconde rangée. </p>
+
+	<p>Pour indiquer si cette note est poussée ou tirée on ajoute un « p » ou un « t » devant la note. Exemple : 
+
+	<pre>p5'</pre>
+
+	<p>Il n'est pas besoin de le répéter à chaque fois. Tant qu'on joue dans le même sens la lettre s'applique aux autres notes. Exemple :
+
+	<pre>p5 4' 5 6 t7 7' 8 7</pre>
+	
+	<p><img src="img/doc-exemple1.png" /></p>
+	
+	<p>De plus la syntaxe est très permissive. Vous pouvez mettre une minuscule, une majuscule, une espace ou non. Les syntaxes suivantes sont valides et strictement identiques :</p>
+	
+<pre>p5 4 3 
+p5 p4 p3
+P 5 4 3 
+P5 4 p3
+p 5 4 3
+</pre>
+
+	<p>Enfin il faut spécifier si la note est une ronde, une blanche, une noire ou une croche, etc. (c'est le minimum requis de solfège). 
+	Dans les conventions de solfège une ronde est notée 1, une blanche 2, une noire 4, une croche 8, etc. Il suffit d'ajouter le symbole « : » 
+	suivi de la valeur. De même il n'est pas besoin de répéter cette valeur tant qu'elle ne change pas. Exemple : </p>
+
+	<pre>p5:16 4' 5 6 t7:4 7' 8:8 7</pre>
+	
+	<p><img src="img/doc-exemple2.png" /></p>
+
+	<p>Pour les notes pointées, il suffit d'ajouter un point à la valeur du temps. Exemple :</p>
+
+	<pre>p5':4.</pre>
+
+
+<h2 id="Basses"><a href="#Top">Écrire les basses</a></h2>
+
+	<p>Rien de plus simple. Pour écrire les basses il suffit d'écrire les lettres des accords (nomenclature anglaise
+	couramment utilisée en accordéon) dans le champ dédié. Exemple :</p>
+	
+	<table class="lexicon">
+	<tr><td>
+Tablature	
+<pre style="margin-top:0px">p5 4' 5 6 t7 7' 8 </pre>
+
+	</td><td>
+Basses
+<pre style="margin-top:0px">C c E e A a A a</pre>
+
+	</td></tr>
+</table>
+	
+	<p><img src="img/doc-exemple3.png" /></p>
+	
+	<p>Vous devez par ailleurs indiquer la durée des basses dans la liste déroulante « basses » du menu de gauche.</p>
+	
+<h2 id="Clef"><a href="#Top">Clé, armure, mesure, tempo</a></h2>
+
+	<p>Tout est géré par Tabliato dans l'interface graphique. Indiquez grâce aux listes déroulantes les options de votre partition.</p>
+	
+	<p><img src="img/doc-dock.png" /></p>
+	
+<h2 id="Silence"><a href="#Top">Silences</a></h2>
+
+<p>Les silences s'écrivent « r » suivi de la durée, notifiée sur le même principe que les notes.</p>
+							
+<pre>r1 r2 r4 r8 r16 r32 r64 r128</pre>
+
+	<p><img src="img/doc-exemple10.png" /></p>
+	
+	<p>Il s'agit d'un cas particulier où il n'est pas nécessaire d'écrire la durée avec « : ». Cependant la syntaxe suivante est tout
+	aussi correcte :</p>
+	
+<pre>r:1 r:2 r:4 r:8 r:16 r:32 r:64 r:128</pre>
+
+<h2 id="Repetitions"><a href="#Top">Les répétitions</a></h2>
+
+	<p>Les répétitions s'indiquent avec le mot clé « \repeat volta » suivi du nombre de répétitions : </p>
+
+<pre>\repeat volta:2
+{
+   p5 4' 5 6 t7 7' 8 7
+}</pre>
+
+	<p><img src="img/doc-exemple5.png" /></p>
+
+	<p>Dans ce cas le logiciel ajoutera une ou deux barres de répétition comme les conventions l'exigent. Attention
+	si vous mettez des répétitions à des endroits musicalement incohérents cela ne marchera pas. Ce n'est pas un logiciel de dessins de partition, mais un analyseur syntaxique
+	qui traite de la musique avec les règles strictes du solfège.</p>
+	
+	<p class="attention">Attention ! Les utilisateurs de Lilypond remarqueront la nécessité d'écrire le nombre de répétitions avec le symbole
+	« : » et sans espace. Cette différence est due au fait que dans Tabliato un chiffre correspond à une note. Dès lors la syntaxe classique
+	« \repeat voltat n » est mal interprétée.</p>
+	
+<h2 id="Alternatives"><a href="#Top">Les fins alternatives</a></h2>
+	
+	<p>Une fin alternative s'écrit comme suit : on indique qu'il va y avoir une répétition puis on omet la dernière mesure que l'on place dans \alternative.
+	S'il y a trois répétitions on peut bien sûr mettre trois alternatives. Attention à bien ajouter des espaces à l'intérieur des crochets.</p>
+	
+<table class="lexicon">
+	<tr><td>
+Tablature	
+<pre style="margin-top:0px">\repeat volta:2 
+{
+   p5:4 4' 5 6 
+   t7 7' 8 7
+}
+\alternative
+{
+   { t4 5 5' p4 }
+   { t4 5 5':2 }
+}</pre>
+
+	</td><td>
+Basses
+<pre style="margin-top:0px">\repeat volta:2 
+{
+   C c E e
+   A a A a
+}
+\alternative
+{
+   { C c E e }
+   { C c E e }
+}</pre>
+
+	</td></tr>
+</table>
+
+	<p><img src="img/doc-exemple7.png" /></p>
+
+<h2 id="Sauts"><a href="#Top">Les sauts de ligne</a></h2>
+
+	<p>Si la mise en page automatique ne vous convient pas, vous pouvez forcer un retour à la ligne en ajoutant le mot \break. 
+	Dans ce cas la ligne va occuper toute la place disponible même si elle est courte :</p>
+
+<table class="lexicon">
+	<tr><td>
+Tablature	
+<pre style="margin-top:0px">p5 4' 5 6 t7 7' 8 7
+\break
+t4 5 5' p4 5 7 6 t7</pre>
+
+	</td><td>
+Basses
+<pre style="margin-top:0px">C c E e A a A a
+
+A a A c C c E a
+</pre>
+
+	</td></tr>
+</table>
+
+	<p><img src="img/doc-exemple6.png" /></p>
+	
+<h2 id="Anacrouse"><a href="#Top">Mesure incomplète, anacrouse</a></h2>
+
+	<p>Le mesures incomplètes s'annoncent avec le mot clé \partial suivi du nombre de temps (ici la durée d'une blanche) :</p>
+
+<table class="lexicon">
+	<tr><td>
+Tablature	
+<pre style="margin-top:0px">\partial:2 p5:4 4'
+
+p5:2 6 t7:4 7' 8 7</pre>
+
+	</td><td>
+Basses
+<pre style="margin-top:0px">\partial:2 C c 
+
+C c E e A a A a</pre>
+
+	</td></tr>
+</table>
+
+	<p><img src="img/doc-exemple4.png" /></p>
+
+	<p class="attention">Attention ! Les utilisateurs de Lilypond remarqueront la nécessité d'écrire la durée de l'anacrouse avec le symbole
+	« : » et sans espace. Cette différence est due au fait que dans Tabliato un chiffre correspond à une note. Dès lors la syntaxe classique
+	« \partial 2 » est mal interprétée.</p>
+
+<h2 id="Liaisons"><a href="#Top">Les liaisons</a></h2>
+	
+	<p>Les liaisons de prolongation s'écrivent avec un « ~ ». Les liaisons ne sont pas affichées dans la tablature :</p>
+	
+<pre>t5:4~ 5 p4:2~ 4:4~ 4 6:8~ 6:4 t7:8</pre>
+
+	<p><img src="img/doc-exemple8.png" /></p>
+	
+	<p>Les liaisons d'articulation et de phrasé s'écrivent avec des parenthèses :</p>
+	
+<pre>p5 ( 4' 5 ) 6 t7 7' ( 8 7 )</pre>
+
+	<p><img src="img/doc-exemple9.png" /></p>
+	
+<h2 id="Plus"><a href="#Top">Aller plus loin</a></h2>
+
+	<p>Tout le reste du solfège doit pouvoir être utilisé. Je ne l'ai personnellement jamais utilisé ni vu utilisé sur des tablatures d'accordéon diatonique 
+	qui sont en général des partitions très simples. Pour écrire des choses plus complexes veuillez vous référer à la 
+	<a href="http://www.lilypond.org/manuals.fr.html">documentation de Lilypond</a>.</p>
+			
+</body>
+</html>

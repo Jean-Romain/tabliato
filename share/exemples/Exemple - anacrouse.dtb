@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tabliato>
+    <propertie instrument="" subtitle="" tempo="4=130" composer="" displayFingering="auto" motif="3" key="c \major" system="cadb" tagline="" time="3/4" poet="" accordion="ctl1gc" title="Example - anacrouse" rythm="B a a "/>
+    <tabulature>\partial:8*3 p4':8 t6 p4' [r8 d:8 r8]
+
+p7:4 7:8 6' 8 7' E
+7:4. 7:8 6' 7 E
+t7:4 6':8 7 p6 t6 [D d a]
+p6:4 4':8 4' t6 p4 [E e a]</tabulature>
+    <lyric></lyric>
+</tabliato>

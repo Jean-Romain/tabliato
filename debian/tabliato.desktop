@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=tabliato
+Comment=
+Categories=Qt;AudioVideo;Music;Utility;TextEditor;
+Keywords=lilypond;editor;sheet music;
+Exec=tabliato
+Icon=tabliato
+Terminal=false
+Type=Application
+StartupNotify=true

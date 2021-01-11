@@ -1,0 +1,12 @@
+ctl1gc;Viennois 2 rangs 8 basses sol/do (defaut);ctl_1st_rank_2sd_rank_GC;ctl_8bass_GC
+ctl1ad;Viennois 2 rangs 8 basses la/ré;ctl_1st_rank_2sd_rank_AD;ctl_8bass_AD
+ctl2gc;Viennois 2 rangs + 2 boutons 8 basses sol/do/#;ctl_1st_rank_2sd_rank_GC;ctl_3rd_rank_+2_GC;ctl_8bass_GC
+ctl3gc;Viennois 2 rangs + 2 boutons 12 basses sol/do/#;ctl_1st_rank_2sd_rank_GC;ctl_3rd_rank_+2_GC;ctl_12bass_GC
+ctl4gc;Viennois 3 rangs 12 basses sol/do/#;ctl_1st_rank_2sd_rank_GC;ctl_3rd_rank_GC;ctl_12bass_GC
+lry1gc;Leray 3 rangs 12 basses sol/do;lry_ranks_1_2_3_GC;lry_12bass_GC
+lry2gc;Leray 3 rangs 18 basses sol/do;lry_ranks_1_2_3_GC;lry_12bass_GC;lry_+6bass_GC
+cog1gc;Cogeron 3 rangs 12 basses sol/do;cog_ranks_1_2_3_GC;lry_12bass_GC
+cog2gc;Cogeron 3 rangs 18 basses sol/do;cog_ranks_1_2_3_GC;lry_12bass_GC;lry_+6bass_GC
+mel1c;Mélodéon standart 1 rang 2 basses do;mel_C
+mel1g;Mélodéon standart 1 rang 2 basses sol;mel_G
+mel1d;Mélodéon standart 1 rang 2 basses ré;mel_D

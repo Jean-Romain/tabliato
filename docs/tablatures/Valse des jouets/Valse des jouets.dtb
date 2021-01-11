@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tabliato>
+    <propertie instrument="" key="c \major" time="3/4" system="cadb" accordion="ctl1gc" composer="Michel Faubert" tempo="4=120" motif="3" poet="" title="Valse des jouets" rythm="B a a " subtitle="" displayFingering="auto" tagline=""/>
+    <tabulature>\set Timing.beamExceptions = #'()
+
+% first part
+
+p7:8 t7 p7 t8 p7 t7 p6 t5 p5 4 3:4
+p7:8 t7 p7 t8 p7 t7 p6 t5 p5 4 3:4
+
+\break
+
+t7:8 p6 t7 p7 t7 p6 
+t6:4. p6:8 t6 5 
+p5 t3 p5 t5 6 p5 
+6 t5 p5 4 3:4 
+
+\break
+
+p7:8 t7 p7 t8 p7 t7 p6 t5 p5 4 3:4
+p7:8 t7 p7 t8 p7 t7 p6 t5 p5 4 3:4
+
+\break
+
+t7:8 p6 t7 p7 t7 p6 
+t6:4. p6:8 t6 5 
+p5 t5 p5 t4 p4 t3
+p3:2 ~ 3:8 p6
+
+% second part
+
+\break
+
+p6:8 t6 p6 5 4 5
+t4 p5 t5:4. p6:8 
+6:8 t5 6 p5 t5 6 
+p6:8 t7 p7:4. 7:8
+
+\break
+
+6 7 t9 p7 6 p7 
+t9 p7 t8:4. t7:8 
+7 p6 t6 p5 t6 t7 
+p8 t7 p7:4. p6:8 
+
+\break
+
+p6 t6 5 p4 4 p4 
+t5 p4 t4:4. t7:8 
+t7 p6 t6 5 p5 t4 
+p4 t3 p4:2~ 
+
+\break
+
+p4:4 t4:8 p4 t4 p5 t5 6 
+
+p6 t7 p7:4 ~ 7:8 7:8
+
+t8:8 7 6 7 
+
+t5 p5 p6:2
+
+
+
+</tabulature>
+    <lyric></lyric>
+</tabliato>

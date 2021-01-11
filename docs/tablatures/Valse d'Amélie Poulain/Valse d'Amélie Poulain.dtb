@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tabliato>
+    <propertie composer="Yann Tiersen" title="Valse d'Amélie Poulain" tempo="4=200" key="c \major" motif="3" tagline="Édité avec Tabliato et Lilypond" instrument="" displayFingering="auto" rythm="B a a " poet="" system="cadb" time="3/4" accordion="ctl1gc" subtitle=""/>
+    <tabulature>\partial 4*5 t7:4 6' 8 6' 8 [a:8 r a:8 r] A
+
+\bar ".|" 
+
+t7':2.~
+7':2~ 7':8 8
+6':2.
+7
+7'~
+
+7':8 9 7' 8 6' 8
+6':2.
+7
+p6'~
+6':2~ 6':8 t6'
+
+p4':2.
+p4':4 t4' p4'
+6':2.~
+6':8 8 6' 7 6' 7
+4':2.
+4':4 t4' p4'
+
+D D A A
+A D A A 
+F F C C 
+F F C C
+
+
+\bar "|." 
+
+\break
+
+\repeat volta 2
+{
+t7':8 5 4' 5 4' 5
+7' 5 4' 5 4' 8
+6' 3' 5 3' 5 3'
+7 3' 5 3' 5 3'
+
+D D A A 
+}
+
+\break
+
+\repeat volta 2
+{
+p6' 5 4' 5 4' 5
+6' 5 4' 5 4' 7
+6 3' 5 3' 5 3'
+6 3' 5 3' 5 3'
+
+F F C C
+}</tabulature>
+    <lyric></lyric>
+</tabliato>

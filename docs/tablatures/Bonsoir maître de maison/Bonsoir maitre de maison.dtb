@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tabliato>
+    <propertie displayFingering="auto" subtitle="Andro" rythm="B a B a " poet="" key="c \major" time="4/4" instrument="" system="cadb" tagline="Édité avec Tabliato et Lilypond" tempo="4=150" title="Bonsoir, maître de maison" accordion="ctl1gc" composer="Trad." motif="22"/>
+    <tabulature>t8:4 8:8 8 p7:4 7:8 6':8 [A a G g]
+7:4 6 t7:2 [G g A a]
+8:4 8:8 8 p7:4 7:8 6':8 [A a G g]
+7:4 6 t7:2 [G g A a]
+
+\break
+
+\repeat volta 2
+{
+  t7:4 6' 8 8 A
+  p8 7' 7' 8 [G g C c]
+  t8 6':8 8 7:4. 7:8 [A a F f]
+}
+\alternative
+{
+  { p7:4 6 4':2 [G g E e] }
+  { p7:4 6 t7:2 [G g A a] }
+}
+
+\bar "|."</tabulature>
+    <lyric>Bon -- soir, le maî -- tre de la mai -- son, Bon -- soir, le maî -- tre de la mai -- son, Et à toute la com -- pa -- gni -- e, man -- tir -- e -- li -- re lon -- li -- ra, lon -- li -- ra
+
+Non je ne suis pas venu ici
+Ni pour pleurer, ni pour rire, mantirelire lonlira
+
+Je suis venu pour vous demander
+A marier votre fille, mantirelire lonlira
+
+Jeune homme laquelle voulez-vous
+La grande ou bien la petite, mantirelire lonlira
+
+Monsieur la petite s'il vous plaît
+Car elle est la plus gentille, mantirelire lonlira
+
+La grande est assise au coin du feu
+Qui pleure et qui soupire, mantirelire lonlira
+
+Oh ma soeur, ne pleurez pas tant
+Car vous serez mariée, mantirelire lonlira
+
+Mariée à un riche marchand
+Revendeur de pommes cuites, mantirelire lonlira
+
+Et qui vous mènera à Paris
+A cheval sur une bourrique, mantirelire lonlira</lyric>
+</tabliato>

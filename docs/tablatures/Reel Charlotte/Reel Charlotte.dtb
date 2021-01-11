@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tabliato>
+    <propertie instrument="" tagline="" time="2/4" key="c \major" motif="22" subtitle="" rythm="B a B a " composer="" title="Reel Charlotte" displayFingering="auto" poet="" accordion="ctl1gc" tempo="4=80" system="cadb"/>
+    <tabulature>\repeat volta 2
+{
+p5':8 6' t&lt;5' 4'>:4 p5':8 6' t&lt;5' 4'>:4
+p5':8 6' 7' t7' 5' 6' \tuplet 3/2 { 5':16 t6' 5' } p5':8
+p5':8 6' t&lt;5' 4'>:4 p5':8 6' t&lt;5' 4'>:4
+p5':8 6' 7' t7' &lt;5' 4'> &lt;6' 4'> p &lt;6' 4'>:4
+
+[C c F f] [C c F f]
+[C c C g] [G g G c]
+[C c G g] [C c G g]
+[C c G g] [C c G c]
+}
+
+\break
+
+\repeat volta 2
+{
+p5':8 6' 6':16 6' 6' 6' t6':8 p6' t7':4
+p5':8 t7' 7':16 7' 7' 7' p6':8 t7' p7':4
+7':8 8' t8' p7' t7' p6' t&lt;5' 4'>:4
+p&lt;5' 4'>:8 6' 7' t7' &lt;5' 4'> &lt;6' 4'> p&lt;6' 4'>:4
+
+[C c C c] [G c G g]
+[C g G g] [C g C c]
+[C c G c] [G c F f]
+[G g G d] [G g C c]
+}</tabulature>
+    <lyric></lyric>
+</tabliato>

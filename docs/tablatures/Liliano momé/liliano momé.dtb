@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tabliato>
+    <propertie accordion="ctl4gc" tempo="4=130" poet="" time="7/8" displayFingering="auto" key="c \major" subtitle="Traditionnel bulgare" tagline="" motif="-1" system="cadb" instrument="" rythm="Manuel" composer="" title="Liliano momé"/>
+    <tabulature>\motif [B:4. a:4 a:4]
+
+\set Timing.beatStructure=3,3,2
+
+\repeat volta 2
+{
+t8:8 6' 7 8 6' 7 6':16 8
+7':4 7:8 7':4 7'
+7':8 9 8' 9 7' 8  7'
+p7':4 t8':8 p7':4 7'
+
+\break
+
+t8:8 6' 7 8 6' 7 6':16 8
+7':4 8:8 7':4 7'
+p4' 4':8 fis':4 gis'
+t7:4 5:8 7:4 7
+
+A D G C A D E A
+}
+
+\break
+
+\repeat volta 2
+{
+t7:8 9 9 9:4 9
+8':4 9:8 7':4 8
+p7:8 8 8 8:4 8
+7' 8:8 6':4 7
+
+\break
+
+t7:8 8 8 8:4 8
+7' 8:8 6':4 7
+p gis':8 7:8 7 7:4 7
+
+A D G C F D E
+}
+\alternative
+{
+  { t8 7':8 9:2 A}
+  { t8:4 6':8 7:2 A}
+}
+\bar "|." </tabulature>
+    <lyric>
+
+Liliano mome Liliano,
+ia stani rano prizori,
+ia stani rano prizori-
+i libeto si pregarni.
+
+Ne e izliazla Liliana,
+nai e izliazla maika i,
+nai e izliazla maika i,
+i si na Georgi dumashe:
+
+Idi si Georgi, idi si,
+Liliana bolna legnala
+Liliana bolna legnala
+i ne mozhe da stane.
+
+Nedei go laga male ma,
+Az sam si Georgi liubila
+Az sam si Georgi liubila
+i za nego shte se ozhenya</lyric>
+</tabliato>

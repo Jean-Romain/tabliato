@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tabliato>
+    <propertie instrument="" subtitle="" tempo="4=130" composer="" displayFingering="auto" motif="2" key="c \major" system="cadb" tagline="" time="2/2" poet="" accordion="ctl1gc" title="Exemple - boutons ou notes" rythm="B a (binaire)"/>
+    <tabulature>% Il est possible de donner la note au lieu du bouton
+% Si il n'y a qu'une seule possibilité la conversion est automatique
+
+p e':2 e'' c' c''
+t f':4 f'' c' c''
+
+% Si il y a plusieurs possibilités il faut préciser le rang. Ici sur le rang 2
+t a''/2
+
+% La meme note sur le rang 1
+t a''/1:2.
+
+% On peut mélanger note et bouton
+p 7':2 8' e'' t f'' 9' p 9
+
+A A G G A [A g] [G a]</tabulature>
+    <lyric></lyric>
+</tabliato>

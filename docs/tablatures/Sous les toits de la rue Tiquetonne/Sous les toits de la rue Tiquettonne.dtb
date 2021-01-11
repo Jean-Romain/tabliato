@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tabliato>
+    <propertie instrument="" tagline="Édité avec Tabliato et Lilypond" time="3/4" key="c \major" motif="3" subtitle="Valse" rythm="B a a " composer="Daniel Denécheau" title="Sous les toits de la rue Tiquetonne" displayFingering="auto" poet="" accordion="ctl1gc" tempo="4=130" system="cadb"/>
+    <tabulature>\repeat volta 2
+{
+ t5:4. 3':8 4 2'
+ 3:4. 4:8 5 8 
+ 6':4. 7:8 4' 7 
+ p4':2.
+
+ t4':4 7 6'
+ 7 4' 4
+ p4:8 3' 5 4' 5 3'
+ 4:2 4:8 t4'
+
+ 5:4. 3':8 4 2'
+ 3:4. 4:8 5 8
+ 6':4. 7:8 4' 7 
+ 5:2.
+
+ 4':4 7 6' 
+ 8 6' 7 
+ p4' 6' 7 
+ t7:2 7:8 4'
+
+ A A D E
+ D A E E
+ A A D A 
+ D A E A
+}
+
+\break
+
+\repeat volta 2
+{
+ t7':8 6' 4' 7' 6' 4'
+ 8 7 5 8 7 5 
+ p7 6' 8 7' 8 6'
+ t9:4 7':8 8 6' 7
+
+ 7' 6' 4' 7' 6' 4'
+ 8 7 5 8 7 5
+ p7 6' 8:4 6':8 7
+ t7:2.
+
+ D A E A
+ A D A E
+}
+
+\break
+
+\repeat volta 2
+{
+ t5:4. 3':8 4 2'
+ 3 2' 4 3' 5 8 
+ 6' 8 6' 7 4' 7
+ 4':2.
+ 
+ 4':4 7:8 4' 6' 4'
+ 7 5 3' 4 2' 3
+ p4 3' 5 4' 5 3'
+ 4:4 3' 5
+
+ t5:4. 3':8 4 2'
+ 3 2' 4 3' 5 8
+ 6' 8 6' 7 4' 7
+ 5:2.
+
+ 4':4 7:8 4' 6' 4'
+ 8 5 6' 5 7 5
+ p4':4 6':8 4' 7 4
+ 7:2 4':4
+
+ A A D E 
+ D A E E
+ A A D A 
+ D A E A
+}
+
+\break
+
+\repeat volta 2
+{
+ t4':8 6' 7' 4' 6' 7'
+ 5 7 8 5 7 8
+ p7 6' 8 7' 8 6'
+ t9:4 7':8 8 6' 7
+
+ 4' 6' 7' 4' 6' 7'
+ 5 7 8 5 7 8
+ p7 6' 8:4 6':8 7
+ t7:2.
+
+ D A E A 
+ D A E A
+}
+</tabulature>
+    <lyric></lyric>
+</tabliato>

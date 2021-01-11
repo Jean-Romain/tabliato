@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tabliato>
+    <propertie instrument="" subtitle="" tempo="4=130" composer="" displayFingering="auto" motif="-1" key="c \major" system="cadb" tagline="" time="7/8" poet="" accordion="ctl1gc" title="Exemple - rythme spécial" rythm="Manuel"/>
+    <tabulature>\motif [B:4. a:4 a:4]
+
+\set Timing.beatStructure=3,3,2
+
+t8:8 6' 7 8 6' 7 6':16 8 A
+7':4 7:8 7':4 7' D
+7':8 9 8' 9 7' 8  7' G
+p7':4 t8':8 p7':4 7' C</tabulature>
+    <lyric></lyric>
+</tabliato>

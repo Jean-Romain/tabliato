@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tabliato>
+    <propertie composer="Trad." title="Mazurka des écoliers de Saint-Genest" tempo="4=110" key="g \major" motif="3" tagline="Édité avec Tabliato et Lylipond" instrument="" displayFingering="auto" rythm="B a a " poet="" system="cadb" time="3/4" accordion="ctl1gc" subtitle=""/>
+    <tabulature>\partial:8*3 p4':8 t6 p4' [r8 d:8 r8]
+
+\repeat volta 2
+{
+  p7:4 7:8 6' 8 7'
+  7:4. 7:8 6' 7
+  t7:4 6':8 7 p6 t6
+  p6:4 4':8 4' t6 p4'
+
+ \break
+
+  p7:4 7:8 6' 8 7'
+  7:4. 7:8 6' 7
+  t7:4 6':8 7 p6 t6
+
+  E E [D d a] [E e a]
+  E E [D d a]
+}
+\alternative
+{
+  { p4':4. 4':8 t6 p4' [E e a] }
+  { p4':2 7':8 8  E }
+}
+\bar "|."
+
+\break
+
+\repeat volta 2
+{
+  t8:4 8:8 6' 8 7'
+  9:4. 9:8 7' 8
+  p7:4 7:8 t7 p7 6'
+  7:8 6 4':4 7':8 8
+
+  \break
+
+  t8:4 8:8 6' 8 7'
+  9:4. 9:8 7' 8
+  p7:4 t7:8 p6 t6 p6:8
+
+  A A E E
+  A A [E d a]
+}
+\alternative
+{
+  { t6:4 p4' 7':8 8:8 D }
+  { p4':2. [E e a] }
+}
+
+\bar "|."</tabulature>
+    <lyric></lyric>
+</tabliato>

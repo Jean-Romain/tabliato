@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tabliato>
+    <propertie displayFingering="auto" time="9/8" key="c \major" subtitle="" poet="" tagline="Édité avec Tabliato et Lilypond" accordion="ctl1gc" motif="3" composer="Trad." rythm="B a a " system="cadb" title="Gavotte ton doubl" instrument="" tempo="4=225"/>
+    <tabulature>\time 9/8
+
+p6':4 7:8 6':4 8:8 7':4 t8':8 C
+7':4. 8:8 6' 7 8:4 6':8 D
+
+\bar "||" 
+
+\time 6/8
+p6:4. 6 [G:4. g:4.]
+
+\break
+
+\time 9/8
+p6':4 7:8 6':4 8:8 7':4 t8':8 C
+7':4 7':8 8:4 7:8 8:4 6':8 D
+
+\bar "||" 
+
+\time 6/8
+p6:4. 6 [G:4. g:4.]
+
+\break
+
+\repeat volta 2
+{
+    \time 9/8
+    p6':4 7:8 6':4 8:8 7':4 t8':8 C
+    7':4. 8:8 7' 9 8':4 p9:8 D
+
+    \bar "||" 
+
+    \time 6/8
+    p7':4 t8':8 p8:4. [G:4. g:4.]
+
+    \break
+
+    \time 9/8
+    t8:4 6':8 8:4 7':8 9:4 8':8 A
+    7':4 7':8 8:4 7:8 8:4 6':8 D
+
+   \bar "||" 
+
+   \time 6/8
+   p6:4. 6 [G:4. g:4.]
+}</tabulature>
+    <lyric></lyric>
+</tabliato>

@@ -1,0 +1,16 @@
+Package: tabliato
+Version: 1.0
+Section: sound
+Maintainer: Jean-Romain Roussel <jromain.roussel@gmail.com>
+Homepage: https://jean-romain.github.io/Tabliato/
+Priority: optional
+Architecture: amd64
+Depends: lilypond, timidity, freepats, timidity-interfaces-extra, libc6, qtbase5-dev
+Description: Tablatures de qualité pour accordéon diatonique
+ Tabliato est un logiciel permettant de créer rapidement 
+ et facilement des tablatures pour accordéon diatonique 
+ de grande qualité graphique. Tabliato gère les formats de 
+ tablature CADB et Cogeron.
+
+
+

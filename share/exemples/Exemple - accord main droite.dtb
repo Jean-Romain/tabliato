@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tabliato>
+    <propertie instrument="" subtitle="" tempo="4=150" composer="" displayFingering="auto" motif="3" key="c \major" system="cadb" tagline="Édité avec Tabliato et Lilypond" time="3/4" poet="" accordion="ctl1gc" title="Exemple - accords main droite" rythm="B a a "/>
+    <tabulature>% Les accords s'écrivent poussé/tiré&lt;note1, note2, note3>:durée
+
+t &lt;7 8 9>:2 &lt;7 8 9>:4 A
+&lt;7 8 8'>:2 &lt;7 8 8'>:4 A
+p &lt;6 7 8>:2 &lt;6 7 8>:4 G
+&lt;6 7 7'>:2 p&lt;6 7 7'>:4 G
+
+\break
+</tabulature>
+    <lyric></lyric>
+</tabliato>

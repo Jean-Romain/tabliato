@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tabliato>
+    <propertie composer="Trad. Morvan" title="Les cotillons verts" tempo="4=130" key="c \major" motif="2" tagline="Édité avec Tabliato et Lilypond" instrument="" displayFingering="auto" rythm="B a (binaire)" poet="" system="cadb" time="2/4" accordion="2 rangs 8 basses sol/do" subtitle="Scottish-Valse"/>
+    <tabulature>\repeat volta 2 
+{ 
+ p e'':8 d'' c'' b' c'':4 d'':8 e'' 
+ t f'':4 d'':8 f'' e'':4 c'' 
+ p e'':8 d'' c'' b' c'':4 d'':8 e'' 
+ t f'':4 d'' c'':2 
+
+  C [C g] F C C [C g] F C
+} 
+ 
+ \break 
+ 
+ \time 3/4 
+
+ \motif Brarar
+
+ F [G c g] C [C g c]
+ [G g c] [G c g] C  C
+ F [G c g] C [C g c]
+ [G g c] [G c g] C C
+ 
+ p g''/1:4 t a''/1 p g''/1 
+ f'' d'' e'' 
+ f'' g''/1 f'' 
+ t e'':2 c'':4 
+ e'' f'' e'' 
+ d'' t b'/1 c'' 
+ p d'' e'' f'' 
+ p g'':2./1 
+ 
+ p g''/1:4 t a''/1 p g''/1 
+ f'' d'' e'' 
+ f'' g''/1 f'' 
+ t e'':2 c'':4 
+ e''  f'' e'' 
+ d'' t b'/1 c'' 
+ p d'' e'' d'' 
+ c'':2. </tabulature>
+    <lyric></lyric>
+</tabliato>

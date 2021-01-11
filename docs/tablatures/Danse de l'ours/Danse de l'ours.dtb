@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tabliato>
+    <propertie poet="" subtitle="" system="cadb" displayFingering="auto" instrument="" motif="22" rythm="B a B a " tagline="Édité avec Tabliato et Lilypond" time="2/4" tempo="4=110" accordion="ctl1gc" key="c \major" composer="Trad." title="Danse de l'ours"/>
+    <tabulature>\repeat volta 2 
+{
+    t9:8 7 7:16 6' 8 7'
+    9:8 7 7:8. p7:16
+    p6':8 6' 7 6'
+    8 8 6' 8 
+    A A F G
+ 
+    \break
+	
+    t9 7 9 7
+    9 7 7:8. p7:16	
+    p6':8 6' 7 6'
+    t7:4. r8
+
+    A A [F f G g] A
+}
+
+\break
+
+\repeat volta 2 
+{
+    t7:8 8 7 8
+    p7 6 6:8. 6:16
+    t7:8 8 7 8
+    p8:4 8:8 6':16 8
+
+    A G A G
+    
+    \break
+        
+    t9:8 9 p8 8
+    t8 8 p7:4
+    t7:8 8 p7 6
+    t7:2   
+
+    [A a G g] [F f E e] [A a G g] A
+}
+
+\break
+
+\repeat volta 2
+{
+   t9:16 8' 9 7' 8 7' 8 6'
+   7 6' 8 7' 9:8 8
+   p9 8 7 6
+
+   A A G
+}
+\alternative
+{
+  { p9 8 7 6 G }
+  { t7 7 7:4 A }
+}
+\bar "|."</tabulature>
+    <lyric></lyric>
+</tabliato>

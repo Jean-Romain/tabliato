@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tabliato>
+    <propertie composer="Jean-Marc Siche" title="Valse des Moussaillons" tempo="2=80" key="c \major" motif="3" tagline="Édité avec tabliato et Lilypond" instrument="" displayFingering="auto" rythm="B a a " poet="" system="cadb" time="3/4" accordion="ctl1gc" subtitle=""/>
+    <tabulature>\repeat volta 2
+{
+t7:2.
+p7
+t8
+7
+8
+p7
+t8:4 7 8
+p7:2.
+t7
+p7
+t8 7 8
+p7
+t8:4 7 8
+t9:2.
+
+A E A A A E A E
+A E A A A E A A
+}
+
+\break
+
+\repeat volta 2
+{
+9
+9:4 8 7
+p8:2.
+7
+t8
+p7
+t8:4 7 8
+p7:2.
+t9
+9:4 8 7
+p8:2.
+7
+t8
+p7:4 6 7
+t7:2.
+7
+
+A A E E A E A E
+A A E E A E A A
+
+}
+
+</tabulature>
+    <lyric></lyric>
+</tabliato>

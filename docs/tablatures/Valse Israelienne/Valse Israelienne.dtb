@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tabliato>
+    <propertie subtitle="" poet="" tempo="4=130" title="Valse Israëlienne" composer="" displayFingering="auto" motif="3" rythm="B a a " tagline="" key="c \major" time="3/4" accordion="ctl1gc" system="cadb" instrument=""/>
+    <tabulature>\repeat volta 2
+{
+t9:4. 8':8 9 8
+t9:4. 8':8 9 8
+9:4 7' 8
+p7:2.
+
+A A A E
+
+\break
+
+p8:4. 7':8 8 7
+8:4. 7':8 8 7
+8:4 6' 7
+t7:2.
+
+E E E A
+}
+
+\break
+
+t7:4 8 9
+9':2 9':4
+p9':4 t10' 9'
+p7':2 7':4
+
+A F F C
+
+\break
+
+p8':4 t8' 7'
+6':2 6':4
+7':4 8 7'
+p7' 6' 7
+
+[C g g] G G C
+
+\break
+
+t7 8 9
+9':2 9':4
+p9':4 t10' 9'
+p7':2 7':4
+
+A F F C
+
+\break
+
+8':4 t8' 7'
+6':2 6':4
+p8:4 6' 7
+t7:2.
+
+[C g g] G E A
+</tabulature>
+    <lyric></lyric>
+</tabliato>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tabliato>
+    <propertie key="c \major" motif="2" instrument="" title="Les filles des forges" poet="" system="cadb" accordion="ctl1gc" tagline="Édité avec Tabliato et Lilypond" displayFingering="auto" rythm="B a (binaire)" composer="Trad." time="2/4" subtitle="Pilé-menu" tempo="2=100"/>
+    <tabulature>\partial:8 t5:8 [r:8]
+
+\repeat volta 2
+{
+  t5:4 7 
+  7:4. 7:8 
+  7:4 8 
+  6' 7
+  p6:2
+  t5:4. 5:8
+
+  A A A A G A
+}
+
+\break
+
+\repeat volta 2
+{
+  t7:2
+  6':4. 8:8
+  7':4 8
+  p7:4. p7:8
+  6':4 7
+
+  A A A G G
+}
+\alternative
+{
+  { t7:4 t7 A }
+  { t7:2 A }
+}
+\bar "|." 
+
+
+</tabulature>
+    <lyric>Digue, ding don, don, ce sont les filles des for -- ges - Des for -- ges de Paim -- pont, digue ding don -- daine
+
+Digue, ding don, don, elles s'en vont à confesse
+Digue, ding don, don, elles s'en vont à confesse
+Au curé du canton, digue ding dondaine
+Au curé du canton, dingue ding dondon
+
+Digue, ding don, don, qu'avions-vous fait les filles
+Digue, ding don, don, qu'avions-vous fait les filles
+Pour demander pardon, digue ding dondaine
+Pour demander pardon, dingue ding dondon
+
+Digue, ding don, don, j'avions couru les bals
+Digue, ding don, don, j'avions couru les bals
+Et les jolis garçons, digue ding dondaine
+Et les jolis garçons, dingue ding dondon
+
+Digue, ding don, don, ma fille pour pénitence
+Digue, ding don, don, ma fille pour pénitence
+Nous nous embrasserons, digue ding dondaine
+Nous nous embrasserons, dingue ding dondon
+
+Digue, ding don, don, je n'embrasse point les prêtres
+Digue, ding don, don, je n'embrasse point les prêtres
+Mais les jolis garçons, digue ding dondaine
+Qu'ont du poil au menton, dingue ding dondon
+
+Digue, ding don, don, ce sont les filles des forges
+Digue, ding don, don, ce sont les filles des forges
+Des forges de Paimpont, digue ding dondaine
+Des forges de Paimpont, dingue ding dondon</lyric>
+</tabliato>

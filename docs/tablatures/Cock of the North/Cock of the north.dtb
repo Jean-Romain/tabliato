@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tabliato>
+    <propertie instrument="" tagline="" time="6/8" key="c \major" motif="11" subtitle="" rythm="B aB a" composer="Trad." title="Cock of the North" displayFingering="auto" poet="" accordion="ctl1gc" tempo="4.=100" system="cadb"/>
+    <tabulature>\partial:8 p5':8 [r:8]
+
+\repeat volta 2 
+{
+p6':4 5':8 t5':4 p5':8
+6':4 5':8 t5':4 p5':8
+4':4 4':8 4' 5 p3'
+t3':4. ~ 3':4 p5':8 
+
+[C c G c] [C c G c] C [G g G r]
+
+\break
+
+p6':4 5':8 t5':4 p5':8 
+6':4 5':8 t5':4 p5':8
+4':4 4':8 5 4' 5
+p3':4. ~ 3':4 5':8
+
+[C c G c] [C c G c] [C c G c] [C c C r]
+}
+
+\break
+
+\repeat volta 2 
+{
+
+p4':4 4':8 4':8 t3':8 p3'
+4':4 5':8 t5':4 p5':8
+4':4 4':8 4':8 t3':8 p3':8 t3':2.
+
+C [C c G c] C G 
+
+\break
+
+p4':4 4':8 4':8 t3':8 p3'
+4':4 5':8 t5':4 p5':8
+4':4 4':8 5 4' 5 3':2.
+
+C [C c G c] C C
+}
+</tabulature>
+    <lyric></lyric>
+</tabliato>

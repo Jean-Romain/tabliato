@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tabliato>
+    <propertie subtitle="" poet="" instrument="" system="cadb" title="Tripping upstair" time="6/8" key="c \major" tagline="Édité avec Tabliato et Lilypond" tempo="4.=110" motif="11" displayFingering="auto" rythm="B aB a" accordion="ctl1gc" composer="Trad."/>
+    <tabulature>\repeat volta 2
+{
+ p4':8 5' 6' t4' 7 8 
+ p4' 5' 6' 7' t7' p6'
+ t6' 6' 6' p 5' t5' 6'
+ p6' 7' t7' p6' t6' p5'
+
+\break
+
+ p4':8 5' 6' t4' 7 8 
+ p4' 5' 6' 7' t7' p6'
+ t6' 6' 6' p 5' t5' 6'
+
+ [C c F f]
+ C
+ [G g C c]
+ [C g C c]
+
+ [C c F f]
+ C
+ [G g C g]
+}
+\alternative
+{
+  {  p6' 7' t7' p6':4 p5':8 [C g C c] }
+  {  p6' 7' t7' p6':4 t6':8 [C g C g] }
+}
+\bar "|." 
+
+\break
+
+\repeat volta 2
+{
+ t8 7 7 9:4 9:8
+ 9 8' 9 9 7' 8
+ p7 6 6 8:4 8:8
+ 8 7 8 8 6' 7
+
+\break
+
+ t8 7 7 9:4 9:8
+ 9 8' 9 9 7' 8
+ p7 7 7 p5' t5' 6'
+
+ A [F f D d]
+ G [G g E e]
+ A [F f D d]
+ [G g G d]
+}
+\alternative
+{
+  { p6' 7' t7' p6':4 t6':8 [C g C g] }
+  { p6' 7' t7' p6':4. [C g C c] }
+}
+\bar "|." </tabulature>
+    <lyric></lyric>
+</tabliato>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tabliato>
+    <propertie instrument="" tagline="" time="3/4" key="c \major" motif="3" subtitle="" rythm="B a a " composer="Alain Ollu" title="Valse à Ollu" displayFingering="auto" poet="" accordion="ctl1gc" tempo="4=120" system="cadb"/>
+    <tabulature>\set Timing.beamExceptions = #'() 
+
+ % Partie normale
+
+\repeat volta 2
+{
+t7:8 6' 8 7' 9 8'
+9:4 7' 8
+p8:8 6 7 8 7' 9
+7':4 8 7
+
+A F G E
+
+\break
+
+t7:8 6' 8 7' 9 8'
+9:4 7' 8
+p8:8 6 7 8 7' 8
+6':4 7 6
+
+A F G E
+}
+
+\break
+
+\repeat volta 2
+{
+t7:4. 6':8 8:4
+t7:4. 6':8 8:4
+p7:4. 6':8 8:4
+6' 7 6 
+
+A F G E
+}
+
+\break
+
+% Pont
+
+t &lt;9 8 7>:2 &lt;9 8 7>:4
+t &lt;8' 8 7>:2 &lt;8' 8 7>:4
+p &lt;8 7 6>:2 &lt;8 7 6>:4
+p &lt;7' 7 6>:2 &lt;7' 7 6>:4
+
+A F G E
+
+\break
+
+r:4 t 9,8,7 9,8,7
+r t 8',8,7 8',8,7
+r p 8,7,6 8,7,6
+r p 7',7,6 7',7,6
+
+A F G E
+
+\break
+
+% Variante 1
+
+\repeat volta 2
+{
+t7:4 8:8 7 8 7
+t7:4 8:8 7 8 7
+p6:4 7:8 6 7 6
+p6:4 7:8 6 7 6
+
+A F G E
+}
+
+\break
+
+
+% Variante 1
+
+\repeat volta 2
+{
+t9:8 8 7 9 8 7 
+8' 8 7 8' 8 7 
+p8 7 6 8 7 6
+7' 7 6 7' 7 6
+
+A F G E
+}</tabulature>
+    <lyric></lyric>
+</tabliato>

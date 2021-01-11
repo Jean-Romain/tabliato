@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tabliato>
+    <propertie composer="" title="Pelot d'Hennebont" tempo="4=130" key="c \major" motif="22" tagline="Édité avec Tabliato et Lilypond" instrument="" displayFingering="auto" rythm="B a B a " poet="" system="cadb" time="4/4" accordion="ctl1gc" subtitle="An dro"/>
+    <tabulature>\partial:8 t7:8 [r8]
+
+\repeat volta 2
+{
+  t7:4 7 9:4. 7':8
+  9:4 8' p7':4. 8:8
+  6':4 7 8:4. 6':8
+  7:4 6' 7:4. t7:8
+
+   A [A a C c] 
+   [C c G g] [G g E e]
+}
+
+\break
+
+\repeat volta 2
+{
+  t7:4 7 p7:4. 8:8
+  7:4 6' t7:4. 7:8
+  7:4 7 p7:4. 8:8 
+  p7:4 6' t7:4. 7:8
+
+  [A a G g] [G g A a] 
+  [A a G g] [G g A a]
+}
+</tabulature>
+    <lyric>Ma chère ma -- man je vous é -- cris que nous sommes en -- trés dans Pa -- ris  que je sommes dé -- jà Ca -- po -- ral et qu'je s'rons bien -- tôt Gé -- né -- ral À
+
+À la bataille, je combattions
+Les ennemis de la nation
+Et tous ceux qui se présentiont
+À grand coups de sabres les émondions
+
+Le roi Louis m'a z'appelé
+C'est "sans quartier" qu'il m'a nommé
+Mais "sans quartier", c'est point mon nom,
+J'lui dit "j'm'appelle Pelot d'Hennebont"
+
+J'y aquiris un biaux ruban
+Et je n'sais quoi au goût d'argent
+Il dit boute ça sur ton habit
+Et combats toujours l'ennemi
+
+Faut qu'ce soye que'que chose de précieux
+Pour que les autres m'appellent monsieur
+Et foutent lou main à lou chapiau
+Quand ils veulent conter au Pelot
+
+Ma mère si j'meurs en combattant
+J'vous enverrais ce biau ruban
+Et vous l'foutrez à votre fusiau
+En souvenir du gars Pelot
+
+Dites à mon père, à mon cousin
+À mes amis que je vais bien
+Je suis leur humble serviteur
+Pelot qui vous embrasse le cœur
+</lyric>
+</tabliato>

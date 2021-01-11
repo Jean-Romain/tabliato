@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="UTF-8" />
+	
+	<title>Tabliato | Tablature pour accordéon diatonique</title>
+
+	<style type="text/css">
+html { font-size: 100%; font-family: sans-serif; }
+
+body 
+{
+	background: #EAEAEA;
+	font-size:14px;
+	color:#484848;
+	margin:0;
+	line-height: 1.4;
+}
+
+label
+{
+	display: block;
+	width: 65px;
+	float: left;
+}
+
+a {color: #336699;text-decoration:none;}
+a:hover {text-decoration:underline;}
+a:visited {text-decoration:dashed;}
+
+p, pre { margin:1.5em 0;}
+p:first-child {margin-top:0}
+
+pre {color:white;background-color:black;padding:5px;font-family:Courier;font-size:15px}
+
+li {line-height: 1.7;}
+li p {margin-top:0}
+
+img{border:0}
+
+h1,h2,h3,h4,h5,h6{font-family:'Open Sans',sans-serif;font-weight:normal;color:#363636;line-height: 1.4;}
+h1{font-size:2.5rem;}
+h2{font-size:1.5rem;}
+h3{font-size:1.2rem;}
+
+body > header 
+{
+    background-color: #DEE7EE;
+    border-bottom: 1px solid #B3B8BC;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+}
+
+.main-container {margin-left:auto;margin-right:auto;padding:0;width:810px;text-align:justify;}
+.main-header {padding-top:10px;}
+
+.fr {float:right; margin-left:20px}
+.fl {float:left; margin-right:20px}
+.clear{clear:both}
+.center {text-align:center}
+
+#main-left{float:left;width:640px;display:inline;position:relative;}
+#main-right{float:left;width:160px;}
+
+article {padding: 20px;}
+
+article h1:first-child {margin-top:0;padding-top:0}
+article h2:first-child {margin-top:0;padding-top:0}
+
+.main-old{background:#fff}
+
+table {line-height:120%;}
+td, th {vertical-align: top;}
+
+table.lexicon {width:100%;table-layout: fixed;}
+table.lexicon td, th {width: 20%;text-align: left;}
+
+.erreur
+{
+    border : 2px solid #FD4444;
+    margin-bottom : 8px;
+    width : 90%;
+    padding : 8px;
+    padding-left : 35px;
+    color : #BD0202;
+    background : #FCD9D9 url(img/msg-erreur.png) no-repeat;
+
+    border-radius: 8px;
+    -moz-border-radius: 8px;
+    -webkit-border-radius : 8px;
+}
+
+.information
+{
+    border : 2px solid #43E54F;
+    margin-bottom : 8px;
+    width : 90%;
+    padding : 8px;
+    padding-left : 35px;
+    color : #079711;
+    background : #CDF2B9 url("img/msg-info.png") no-repeat;
+
+    border-radius: 8px;
+    -moz-border-radius: 8px;
+    -webkit-border-radius : 8px;
+}
+
+.attention
+{
+    border : 2px solid orange;
+    margin-bottom : 8px;
+    width : 90%;
+    padding : 8px;
+    padding-left : 35px;
+    color : #CA8500;
+    background : #FEDC92 url(img/msg-attention.png) no-repeat;
+
+    border-radius: 8px;
+    -moz-border-radius: 8px;
+    -webkit-border-radius : 8px;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+	<div class="main-container main-old">
+			<article>
+			
+<h1 id="Top">Utilisation de Tabliato</h1>
+
+<ol>
+	<li><a href="#First">Première utilisation</a></li>
+	<li><a href="#Exemples">Charger des exemples</a></li>
+	<li><a href="#Export">Exporter la tablature</a></li>
+	<li><a href="#Syntaxe">Syntaxe : comment écrire une tablature</a></li>
+	<li><a href="#Debug">Debuggage en cas d'erreur</a></li>
+</ol>
+
+<h2 id="First"><a href="#Top">Première utilisation</a></h2>
+
+<p>La première fois que Tabliato se lance, la Valse Trise est préchargée. Le code écrit peut paraître abscon
+et l'apperçus est vide. Pour générer une tablature vous devez cliquer sur le bouton « compiler ». Si Tabliato
+et Lilypond sont bien installés il n'y aura aucun problème. Vous verrez apparaître une image de la tablature. 
+Une fois que la tablature est apparue c'est que tout est bon. Vous pourrez écouter la musique.</p>
+
+<img src="img/doc-description-fenetre.png" />
+
+<h2 id="Exemples"><a href="#Top">Charger des exemples</a></h2>
+
+<p>Pour vous familiariser avec le logiciel vous pouvez charger des exemples pré-installés en allant dans 
+fichier->Ouvrir un exemple (Ctrl + Maj + O)</p>
+	
+<h2 id="Export"><a href="#Top">Exporter la tablature</a></h2>
+
+<p>Pour pouvoir exporter la tablature et récupérer un pdf vous devez préalablement enregistrer le fichier Tabliato (format .dtb). 
+Ensuite, lorsque vous compilez la tablature, le pdf, l'image ou la musique se retrouve au même endroit que le fichier Tabliato et 
+portent le même nom.</p>
+
+<p>Notez que quand vous ouvrez un fichier d'exemple, celui-ci est toujours considéré comme non enregistré. Vous devez préalablement 
+enregistrer le fichier dans vos documents pour récupérer le pdf.</p>
+
+<h2 id="Syntaxe"><a href="#Top">Syntaxe : comment écrire une tablature</a></h2>
+
+<p>La syntaxe est directement héritée de Lilypond. Et pour cause Tabliato se base sur Lilypond. Allez dans Aide->Aide de Tabliato->Écrire une 
+tablature pour accéder à une documentation permettant de comprendre simplement la syntaxe.</p>
+
+<h2 id="Debug"><a href="#Top">Debuggage en cas d'erreur</a></h2>
+
+<p>Si le code n'est pas correct, la tablature va, au mieux avoir des erreurs, au pire ne pas pouvoir être créée. Si elle n'est même pas créée vous 
+aurez un message vous invitant à regarder la réponse de Lilypond dans la console. La réponse est souvent difficile à lire et à comprendre. Si vous ne 
+comprennez pas le message il faudra tatonner pour trouver votre erreur.</p>
+
+<p class="information">Astruce : si le code est mal coloré c'est qu'il y a, a priori, une erreur.</p>
+
+
+</body>
+</html>

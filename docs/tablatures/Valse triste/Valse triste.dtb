@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tabliato>
+    <propertie instrument="" tagline="Édité avec Tabliato et Lilypond" time="3/4" key="c \major" motif="3" subtitle="" rythm="B a a " composer="Trad." title="Valse triste" displayFingering="auto" poet="" accordion="ctl1gc" tempo="4=130" system="cadb"/>
+    <tabulature>\repeat volta 2 
+{
+  t5:2. 4' 5
+  5:4 4' 5
+  p5:2. 4' 5
+  5:4 4' 5
+  
+  \break
+  
+  t4:2. 3' 4
+  4:4 3' 4
+  p4:2. 3' 4
+  4:4 3' 5
+
+  A A A A
+  G G G G
+  A A A A
+  G G G G
+}
+
+\break
+
+\repeat volta 2 
+{
+  t5:2. 4' 7
+  5:4 7 5
+  p5:2. 4' 7
+  5:4 7 5
+  
+  \break
+  
+  t4:2. 5 8
+  8:4 6' 7
+  p7:2. 6'
+
+  A A A A
+  G G G G
+  A A A A
+  G G
+}
+\alternative
+{
+  { p7 5:4 4' 5 G G }
+  { t7:2.~ 7 A A }
+} </tabulature>
+    <lyric></lyric>
+</tabliato>

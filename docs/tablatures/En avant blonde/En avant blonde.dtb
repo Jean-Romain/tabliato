@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tabliato>
+    <propertie composer="Trad." subtitle="" instrument="" tempo="2=100" displayFingering="auto" key="c \major" tagline="Édité avec Tabliato et Lilypond" motif="3" accordion="ctl1gc" poet="" rythm="B a a " system="cadb" time="3/4" title="En avant blonde"/>
+    <tabulature>\repeat volta 2
+{
+  t7:4 8 7'
+  9:2 9:4
+  p6 7 6'
+  8:2 8:4
+
+  A A G G
+
+  \break
+
+  8 6' 7
+  t7:2 8:4
+  p7:2 6:4
+  t7:2.
+ 
+  G A G A
+}
+
+\break
+
+\repeat volta 2
+{
+   9:4 9:8 7' 8 7'
+   9:4 8 7
+   p8 8:8 6' 7 6'
+
+   A A G
+}
+\alternative
+{
+  { 8:4 7 6 G }
+  { t7:2. A }
+}
+\bar "|."</tabulature>
+    <lyric>En av -- ant blon -- de, t’as le coeur ten -- dre, -- Tu vas m’ap -- prendre à bien dan -- ser
+
+En avant blonde, t’as le coeur tendre, 
+Tu vas m’apprendre à bien danser,
+En avant brune, fais ma fortune, 
+Tu vas m’apprendre à bien valser.</lyric>
+</tabliato>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tabliato>
+    <propertie composer="Hugues Aufray" title="Santiano" tempo="4=110" key="c \major" motif="22" tagline="Édité avec Tabliato et Lilypond" instrument="" displayFingering="auto" rythm="B a B a " poet="" system="cadb" time="2/4" accordion="2 rangs 8 basses sol/do" subtitle="Folksong"/>
+    <tabulature>\partial:4 t9:4 [A:16 r16 a:16 r16]
+
+\repeat volta 2
+{
+t7:8 7 7 6' A
+8:4 8:8 7' A
+p7':4 7' C
+8 9:8 9 G
+
+\break
+
+t9:2~ A
+9:4 7:8 6' A
+p6' 8 8:4 G
+8:2 G
+
+\break
+
+8:4 8 G
+8 7:8 6' G
+8:4 7  G
+6 t7:8 p7 [G g A a]
+
+\break
+
+t8:4 8 A
+p7 6 G
+t7 7 A
+}
+\alternative
+{
+   { t7:4 9 A }
+   { t7:4 r4 A }
+}
+\bar "|."</tabulature>
+    <lyric></lyric>
+</tabliato>

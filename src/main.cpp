@@ -145,12 +145,12 @@ int main(int argc, char *argv[])
     QFileInfo path(ifile);
     QString filebasepath = path.absolutePath() + "/" + path.baseName();
 
-    QFile::remove(filebasepath + ".midi");
+    /*QFile::remove(filebasepath + ".midi");
     QFile::remove(filebasepath + ".mid");
     QFile::remove(filebasepath + ".pdf");
     QFile::remove(filebasepath + ".png");
     QFile::remove(filebasepath + ".ogg");
-    QFile::remove(filebasepath + ".wav");
+    QFile::remove(filebasepath + ".wav");*/
 
     QFile file(filebasepath + ".ly");
     if(!file.open(QIODevice::WriteOnly | QIODevice::Text))

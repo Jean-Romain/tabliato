@@ -47,6 +47,8 @@ void TabliatoProcessor::parseMusic()
     QStringList parsedSymbolsBass;
 
     int line = 1;
+    int nnote = 0;
+    int nbass = 0;
 
     try
     {
@@ -77,6 +79,7 @@ void TabliatoProcessor::parseMusic()
                 break;
 
             case BUTTON:
+                nnote++;
                 currentSymbolIsBass = false;
 
                 button.setButton(symbol);
@@ -114,6 +117,7 @@ void TabliatoProcessor::parseMusic()
                 break;
 
             case MELODYCHORD:
+                nnote++;
                 currentSymbolIsBass = false;
 
                 multiButton.setMultiButton(symbol);
@@ -178,6 +182,7 @@ void TabliatoProcessor::parseMusic()
 
             case OPENCHORD:
             {
+                nnote++;
                 currentSymbolIsBass = false;
 
                 QStringList tmp;
@@ -231,6 +236,7 @@ void TabliatoProcessor::parseMusic()
             }
             case OPENMANUALBASS:
             {
+                nbass++;
                 bool interpolate = false;
                 currentSymbolIsMelody = false;
 
@@ -271,6 +277,7 @@ void TabliatoProcessor::parseMusic()
             }
             case NOTE:
             {
+                nnote++;
                 currentSymbolIsBass = false;
 
                 button.setNote(symbol);
@@ -302,16 +309,19 @@ void TabliatoProcessor::parseMusic()
                 break;
             }
             case BASSCHORD:
+                nbass++;
                 currentSymbolIsMelody = false;
                 parsed = pattern.parseBassSet(symbol); // Transforms G:g:g in G g g and check compliance with motif B a a
                 break;
 
             case IMPLICITBASS:
+                nbass++;
                 currentSymbolIsMelody = false;
                 parsed = pattern.parseBass(symbol); // Transforms G in G g g if motif is B a a
                 break;
 
             case EXPLICITBASS:
+                nbass++;
                 currentSymbolIsMelody = false;
                 parsed = pattern.parseExplicitBass(symbol); // Detect manual G:4 g:4
                 break;
@@ -366,6 +376,8 @@ void TabliatoProcessor::parseMusic()
     tab->melody = parsedSymbolsMelody.join(" ");
     tab->melody.replace(QRegExp("newline"), "\n");
     tab->melody.replace(QRegExp(":"), "");
+
+    if (nbass == 0) return;
 
     tab->bass = parsedSymbolsBass.join(" ");
     tab->bass.replace(QRegExp("newline"), "\n");

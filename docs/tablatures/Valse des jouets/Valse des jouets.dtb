@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tabliato>
-    <propertie instrument="" key="c \major" time="3/4" system="cadb" accordion="ctl1gc" composer="Michel Faubert" tempo="4=120" motif="3" poet="" title="Valse des jouets" rythm="B a a " subtitle="" displayFingering="auto" tagline=""/>
+    <propertie instrument="" poet="" subtitle="" system="cadb" motif="3" title="Valse des jouets" key="c \major" tempo="4=120" rythm="B a a " displayFingering="auto" tagline="" accordion="ctl1gc" composer="Michel Faubert" time="3/4"/>
     <tabulature>\set Timing.beamExceptions = #'()
 
 % first part

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tabliato>
-    <propertie composer="" title="Pelot d'Hennebont" tempo="4=130" key="c \major" motif="22" tagline="Édité avec Tabliato et Lilypond" instrument="" displayFingering="auto" rythm="B a B a " poet="" system="cadb" time="4/4" accordion="ctl1gc" subtitle="An dro"/>
+    <propertie accordion="ctl1gc" displayFingering="auto" composer="" poet="" instrument="" motif="22" tagline="Édité avec Tabliato et Lilypond" tempo="4=130" key="c \major" system="cadb" subtitle="An dro" time="4/4" rythm="B a B a " title="Pelot d'Hennebont"/>
     <tabulature>\partial:8 t7:8 [r8]
 
 \repeat volta 2
@@ -27,7 +27,7 @@
   [A a G g] [G g A a]
 }
 </tabulature>
-    <lyric>Ma chère ma -- man je vous é -- cris que nous sommes en -- trés dans Pa -- ris  que je sommes dé -- jà Ca -- po -- ral et qu'je s'rons bien -- tôt Gé -- né -- ral À
+    <lyric>- -- Ma chère ma -- man je vous é -- cris que nous sommes en -- trés dans Pa -- ris  que je sommes dé -- jà Ca -- po -- ral et qu'je s'rons bien -- tôt Gé -- né -- ral À
 
 À la bataille, je combattions
 Les ennemis de la nation

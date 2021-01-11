@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tabliato>
+    <propertie accordion="ctl1gc" rythm="B a a " tempo="4=200" system="cadb" tagline="" subtitle="Main theme" composer="Arrang. Roberto Capancioni" motif="3" displayFingering="auto" instrument="" poet="" key="c \major" time="3/4" title="Game of Thrones"/>
+    <tabulature>% mesure 1
+t 9:2. A
+7 A
+8:8 7' 9:2 A
+7 8:8 7' A
+
+% mesure 5
+p 7:2. ~ E
+7 ~ E
+7 ~ E
+7 E
+
+\break
+
+t7' G
+p6 G
+6':8 7 8:2 E
+6:2. E
+
+t8:8 6' 7:2 ~ A
+7:2. ~ A
+7 ~ A
+7 A
+
+t 9:2. A
+7 A
+8:8 7' 9:2 A
+7 8:8 7' A
+
+% mesure 5
+p 7:2. ~ E
+7 ~ E
+7 ~ E
+7 E
+
+\break
+
+t7' G
+p6 G
+7:4. 6' E
+7 6 E
+
+t7:2. ~ A
+7 ~ A
+7 ~ A
+7 A
+
+t&lt;7 4'>:2. ~ F
+t&lt;7 4'> F
+p&lt;6 3'> ~ C
+p&lt;6 3'> C
+
+t3:2. ~ D
+3 D
+5 ~ A
+5 A
+
+t4':2. F
+8 F
+&lt;8 7> D
+p&lt;7 6> D
+
+t&lt;7 5> ~ A
+&lt;7 5> ~ A
+&lt;7 5> ~ A
+&lt;7 5> A
+
+\break
+
+\repeat volta 2
+{
+t9:4 7 8:8 7' A
+t9:4 7 8:8 7' A
+t9:4 7 8:8 7' A
+t9:4 7 8:8 7' A
+
+p7:4 4' 6:8 5' E
+p7:4 4' 6:8 5' E
+p7:4 4' 6:8 5' E
+p7:4 4' 6:8 5' E
+
+p8:4 6 7:8 6' G
+p8:4 6 7:8 6' G
+p8:4 6 7:8 6' E
+p8:4 6 6':8 7 E
+
+t7:4 5 4':8 5' A
+t7:4 5 4':8 5' A
+t7:4 5 4':8 5' A
+t7:4 5 4':8 5' A
+}
+
+\break
+
+\repeat volta 2
+{
+t7:4 4 4':8 5' F
+t7:4 4 4':8 7 F
+p6:4 3' 4':8 t4' C
+p6:4 3' 4':8 6 C
+
+t4':4 3 3':8 5 D
+t4':4 3 3':8 4' D
+t5':4 3 4':8 3' A
+t8:4 4' 7:8 6' A
+
+t8:4 4' 7:8 6' F
+t7:4 6' 7:8 8 F
+p7:4 4' 6':8 7 D
+t7:4 5 4':8 5' E
+
+t7:4 5 4':8 5' A
+t7:4 5 4':8 5' A
+t7:4 5 4':8 5' A
+}
+
+t &lt;7 5>:2. A
+
+</tabulature>
+    <lyric></lyric>
+</tabliato>

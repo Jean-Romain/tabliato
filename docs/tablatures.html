@@ -11,12 +11,20 @@ title: Tablatures à télécharger
 		<th>Écouter</th>
 	</tr>
 
+{% for tab in site.static_files %}
+	{% if tab.path contains 'tablatures/' %}
+
 <tr>
-	<td style="vertical-align:middle; "></td>
-	<td style="vertical-align:middle; " class="center"><a href=""><img src="img/icone-pdf.png" /></a></td>
-	<td style="vertical-align:middle; " class="center"><a href="" download=""><img src="img/icone-tabliato.png" /></a></td>
-	<td style="vertical-align:middle; "><audio controls style="width:200px"><source src="" type="audio/ogg"></audio></td>
+	{% if tab.path contains '.dtb' %}
+	<td style="vertical-align:middle; ">{{ tab.basename }} </td>
+	<td style="vertical-align:middle; " class="center"><a href="{{site.url}}/tablatures/{{ tab.basename }}/{{ tab.basename }}.pdf"><img src="img/icone-pdf.png" /></a></td>
+	<td style="vertical-align:middle; " class="center"><a href="{{site.url}}/tablatures/{{ tab.basename }}/{{ tab.basename }}.dtb" download=""><img src="img/icone-tabliato.png" /></a></td>
+	<td style="vertical-align:middle; "><audio controls style="width:200px"><source src="{{site.url}}/tablatures/{{ tab.basename }}/{{ tab.basename }}.ogg" type="audio/ogg"></audio></td>
+    {% endif %}
+
 </tr>
+    {% endif %}
+{% endfor %}
 
 </table>		
 

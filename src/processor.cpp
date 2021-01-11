@@ -218,14 +218,14 @@ void TabliatoProcessor::parseMusic()
                     spannerMustBeClosed = true;
                 }
 
-                if (multiButton.getDurationAsNumber() > 4 && !spannerIsOpen)
+                if (multiButton.getDurationAsNumber() > 1 && !spannerIsOpen)
                 {
                     spannerIsOpen = true;
                     spannerMustBeClosed = true;
                     openSpanner = true;
                 }
 
-                parsed = multiButton.print();
+                parsed = multiButton.print(markup);
 
                 break;
             }

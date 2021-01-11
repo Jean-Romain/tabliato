@@ -140,7 +140,7 @@ class MainWindow : public QMainWindow
         void open(QString filename);
         void insertText(int text);
         void setIcons();
-        void updatePreview();
+        void updatePreview(QString);
         void exportFiles();
         void writeSettings();
         void readSettings();

@@ -147,7 +147,7 @@ void MainWindow::compile()
     }
 
     terminal(tabliato.readAllStandardOutput());
-    updatePreview();
+    updatePreview(OUTPUT + "/output.pdf");
     midi2audio();
 }
 
@@ -174,25 +174,22 @@ void MainWindow::midi2audioFinished(int exit)
     ui->play_pushButton->setEnabled(true);
 }
 
-void MainWindow::updatePreview()
+void MainWindow::updatePreview(QString path)
 {
-    if (QFileInfo(OUTPUT + "/output.pdf").exists())
-    {
-        int page = ui->pageSpinBox->value();
+    int page = ui->pageSpinBox->value();
 
-        if (pdf->setDocument(OUTPUT + "/output.pdf"))
-        {
-            ui->pageSpinBox->setMinimum(1);
-            ui->pageSpinBox->setMaximum(pdf->document()->numPages());
-            ui->pdfZoomSlider->setEnabled(true);
-            ui->pageSpinBox->setEnabled(true);
-            scaleDocument(ui->pdfZoomSlider->value());
-            ui->pageSpinBox->setValue(page);
-        }
-        else
-        {
-            QMessageBox::warning(this, "PDF Viewer - Failed to Open File", "The specified file could not be opened.");
-        }
+    if (pdf->setDocument(path))
+    {
+        ui->pageSpinBox->setMinimum(1);
+        ui->pageSpinBox->setMaximum(pdf->document()->numPages());
+        ui->pdfZoomSlider->setEnabled(true);
+        ui->pageSpinBox->setEnabled(true);
+        scaleDocument(ui->pdfZoomSlider->value());
+        ui->pageSpinBox->setValue(page);
+    }
+    else
+    {
+        QMessageBox::warning(this, "PDF Viewer - Failed to Open File", "The specified file could not be opened.");
     }
 }
 
@@ -329,27 +326,37 @@ void MainWindow::open()
 }
 
 void MainWindow::open(QString filename)
-{    
-    if(!filename.isEmpty() && QFile(filename).exists())
+{
+    if (filename.isEmpty())
+        return;
+
+    QFile file(filename);
+    QFileInfo fileinfo(filename);
+
+    if(!file.exists())
+        return;
+
+    try
     {
-        try
-        {
-            Tabulature tab = File::readdtb(filename);
-            updateUIFromMusic(tab);
+        Tabulature tab = File::readdtb(filename);
+        updateUIFromMusic(tab);
 
-            currentOpenedFile = filename;
-            documentIsSaved = true;
+        currentOpenedFile = filename;
+        documentIsSaved = true;
 
-            setWindowTitle("Tabliato - " + QFileInfo(currentOpenedFile).baseName());
-            terminal("Ouverture du fichier terminée\n");
-        }
-        catch(const std::exception &e)
-        {
-            QString err("Un problème est survenu. Le logiciel renvoie l'erreur suivante :\n ");
-            err += QString(e.what());
-            QMessageBox::critical(this, "Erreur", err);
-            terminal(e.what());
-        }
+        setWindowTitle("Tabliato - " + QFileInfo(currentOpenedFile).baseName());
+        terminal("Ouverture du fichier terminée\n");
+
+        QString pdf = fileinfo.path() + "/" + fileinfo.completeBaseName() + ".pdf";
+        if (QFile(pdf).exists())
+            updatePreview(pdf);
+    }
+    catch(const std::exception &e)
+    {
+        QString err("Un problème est survenu. Le logiciel renvoie l'erreur suivante :\n ");
+        err += QString(e.what());
+        QMessageBox::critical(this, "Erreur", err);
+        terminal(e.what());
     }
 }
 

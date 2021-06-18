@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tabliato>
+    <propertie system="cadb" tempo="4.=100" time="6/8" title="Marche 125" subtitle="" displayFingering="auto" motif="11" key="c \major" accordion="ctl1gc" composer="" poet="" rythm="B aB a" tagline="" instrument=""/>
+    <tabulature>\repeat volta 2
+{
+p5:4 8:8 7 6 5 G
+4':4 5':8 6':4. C
+t3':4 6:8 7:8 6 7 D
+}
+\alternative
+{
+  { p6:8 7 8 9 8 7 G }
+  { 6:8 7 8 9:4. G }
+}
+
+\break
+
+p 3:8 4 5 3 4 5 G
+t 3 4 5 3 4 5 A
+p 3 4 5 3 4 5 G
+t 3' 6 7 3' 6 7 D
+
+\break
+
+p 3 4 5 3 4 5 G
+t 3 4 5 3 4 5 A
+3':4 6:8 7 6 7 G
+p6:8 7 8 9:4. D
+</tabulature>
+    <lyric></lyric>
+</tabliato>

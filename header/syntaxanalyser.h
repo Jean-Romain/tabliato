@@ -36,7 +36,7 @@ class SyntaxAnalyser
 
         QString getDirection(QString str);
 
-    public:
+    protected:
         QRegExp button_rgx;
         QRegExp comment_rgx;
         QRegExp direction_rgx;
@@ -64,7 +64,27 @@ class SyntaxAnalyser
 
         bool genericTest(QRegExp rx, QString str);
 
-        enum EntityTypes {BUTTON, BUTTONCHORD, DIRECTION, KEYWORD, COMMENT, COMMAND, NEWLINE, NOTE, OTHER, IMPLICITBASS, EXPLICITBASS, BASS, BASSCHORD, FINGER, REST, MELODYCHORD, OPENCHORD, CLOSECHORD, OPENMANUALBASS, CLOSEMANUALBASS, TIE};
+        enum EntityTypes {BUTTON,
+                          BUTTONCHORD,
+                          DIRECTION,
+                          KEYWORD,
+                          COMMENT,
+                          COMMAND,
+                          NEWLINE,
+                          NOTE,
+                          OTHER,
+                          IMPLICITBASS,
+                          EXPLICITBASS,
+                          BASS,
+                          BASSCHORD,
+                          FINGER,
+                          REST,
+                          MELODYCHORD,
+                          OPENCHORD,
+                          CLOSECHORD,
+                          OPENMANUALBASS,
+                          CLOSEMANUALBASS,
+                          TIE};
 };
 
 #endif // SYNTAXANALYSER_H

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tabliato>
+    <propertie displayFingering="auto" motif="22" title="Bella Ciao" accordion="ctl1gc" system="cadb" key="c \major" composer="Trad. Italien" subtitle="" instrument="" poet="" tagline="" rythm="B a B a " tempo="2=120" time="2/2"/>
+    <tabulature>\partial 4*3 t5:4 7 6' [a:8 r:8 A:8 r:8 a:8 r:8]
+
+\repeat volta 2
+{
+ t8 7:2. ~ A
+ 7:4 5 7 6' A
+ 8 7:2.~ A
+ t7:4 5 7 6' A
+
+ 8:2 6':4 7 A
+ 8:2 6':4 7 A
+ p7':2 7' C
+ p7':4 7' 8 7' C
+
+ t8':4 8':2. ~ D
+ 8':4 8' 9 7' D
+ 8' 9:2. ~ A
+ t9:4 9 7' 8 A
+
+ p7:2 7' E
+ 6' 7 E
+ t7:1 ~ A
+}
+\alternative
+{
+  { t7:4 5 7 6' A }
+  { t7:1 A }
+}
+
+%\break
+%
+%p4':2 4' E
+%4':4 8 6' 7 E
+%t7:2 7 A
+%7:4 7 p6 t4'  [A a E a]
+%
+%p4':2 4':4 t7 [E e E a]
+%p 7 8 6' 7 E
+%t7 7:8 6' 8:4 7' A
+%9 7 p6 t4' [A a E a]
+%
+%p4':2 4' E
+%4':4 8 6' 7 E
+%t7:2 7 A
+%t7:4 7 p6 t4' [A a E a]
+%
+%p4':2 4':4 t7 [E e E a]
+%p7 8 6' 7 E
+%t7:2 7 A
+%7:4 5 7 6' A
+</tabulature>
+    <lyric>U -- na mat -- ti -- na mi son al -- za -- to
+O bel -- la ciao, bel -- la ciao, bel -- la ciao, ciao, ciao
+U -- na mat -- ti -- na mi son al -- za -- to
+E ho tro -- va -- to l'in -- va -- sor
+
+Una mattina mi son alzato
+O bella ciao, bella ciao, bella ciao, ciao, ciao
+Una mattina mi son alzato
+E ho trovato l'invasor
+
+
+O partigiano, portami via
+O bella ciao, bella ciao, bella ciao, ciao, ciao
+O partigiano, portami via
+Che mi sento di morir
+
+E se io muoio da partigiano
+O bella ciao, bella ciao, bella ciao, ciao, ciao
+E se io muoio da partigiano
+Tu mi devi seppellir
+
+E seppellire lassù in montagna
+O bella ciao, bella ciao, bella ciao, ciao, ciao
+E seppellire lassù in montagna
+Sotto l'ombra di un bel fior
+
+Tutte le genti che passeranno
+O bella ciao, bella ciao, bella ciao, ciao, ciao
+E le genti che passeranno
+Mi diranno "che bel fior"
+
+È questo il fiore del partigiano
+O bella ciao, bella ciao, bella ciao, ciao, ciao
+È questo il fiore del partigiano
+Morto per la libertà</lyric>
+</tabliato>

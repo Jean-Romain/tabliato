@@ -456,11 +456,6 @@ void TabliatoProcessor::generateLilypondCode()
     tab->lilypond = lilypondCode;
 }
 
-QString TabliatoProcessor::getLogs()
-{
-    return logs.join(" \n");
-}
-
 void TabliatoProcessor::log(QString str)
 {
     logs.append(str);

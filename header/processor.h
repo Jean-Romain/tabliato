@@ -15,16 +15,10 @@ class TabliatoProcessor : public SyntaxAnalyser
 {
     public:
         TabliatoProcessor(Tabulature &tabulature);
-        QString getLogs();
-        void compile();
-        void compile(QStringList option, bool ly = false);
 
     private:
         void parseMusic();
-        //void parseBass();
-        //void parseTabulature();
         void parseLyric();
-        void printKeyboard();
         void generateLilypondCode();
         void log(QString str);
 

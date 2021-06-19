@@ -34,7 +34,7 @@ Highlighter::Highlighter(QTextDocument *parent) : QSyntaxHighlighter(parent)
 
     // Pattern de reconnaissance des basses
     QStringList bassPatterns;
-    bassPatterns << "([ABCDEFG]{1}\\d?\\d?)";
+    bassPatterns << "([ABCDEFG]{1}[m]?\\d?\\d?)";
     foreach (const QString &pattern, bassPatterns)
     {
         rule.pattern = QRegExp(pattern);
@@ -44,7 +44,7 @@ Highlighter::Highlighter(QTextDocument *parent) : QSyntaxHighlighter(parent)
 
     // Pattern de reconnaissance des accords
     QStringList chordPatterns;
-    chordPatterns << "([abcdefg]{1}\\d?\\d?)";
+    chordPatterns << "([abcdefg]{1}[m]?\\d?\\d?)";
     foreach (const QString &pattern, chordPatterns)
     {
         rule.pattern = QRegExp(pattern);

@@ -376,9 +376,9 @@ void MainWindow::checkVersion()
 }
 
 void MainWindow::openHelpLilypond(){ QDesktopServices::openUrl(QUrl("http://www.lilypond.org/introduction.fr.html"));}
-void MainWindow::openHelpTabliato(){ QDesktopServices::openUrl(QUrl("https://jean-romain.github.io/Tabliato/doc.html"));}
-void MainWindow::openHelpSyntax(){ QDesktopServices::openUrl(QUrl("https://jean-romain.github.io/Tabliato/doc.html"));}
-void MainWindow::openContactWebPage(){ QDesktopServices::openUrl(QUrl("http://tabliato.olympe.in/contact.php"));}
+void MainWindow::openHelpTabliato(){ QDesktopServices::openUrl(QUrl("https://jean-romain.github.io/tabliato/doc.html"));}
+void MainWindow::openHelpSyntax(){ QDesktopServices::openUrl(QUrl("https://jean-romain.github.io/tabliato/doc.html"));}
+void MainWindow::openContactWebPage(){ QDesktopServices::openUrl(QUrl("https://github.com/Jean-Romain/tabliato/issues"));}
 
 void MainWindow::openNew()
 {

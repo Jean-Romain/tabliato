@@ -237,18 +237,18 @@ QString Motif::interpretLetter(QString str, QString duration)
     str.replace(QRegExp("(^D$)"), "<d, d>" + duration + "^\"D\"");
     str.replace(QRegExp("(^d$)"), "<d fis a>" + duration + "^\"d\"");
 
-    str.replace(QRegExp("(^Am$)"), "<a, a>" + duration + "^\"Am\"");
-    str.replace(QRegExp("(^am$)"), "<a c e>" + duration + "^\"am\"");
-    str.replace(QRegExp("(^Cm$)"), "<c, c>" + duration + "^\"Cm\"");
-    str.replace(QRegExp("(^cm$)"), "<c e g>" + duration + "^\"cm\"");
-    str.replace(QRegExp("(^Em$)"), "<e, e>" + duration + "^\"Em\"");
-    str.replace(QRegExp("(^em$)"), "<e g b>" + duration + "^\"em\"");
-    str.replace(QRegExp("(^Fm$)"), "<f, f>" + duration + "^\"Fm\"");
-    str.replace(QRegExp("(^fm$)"), "<f a c>" + duration + "^\"fm\"");
-    str.replace(QRegExp("(^Gm$)"), "<g, g>" + duration + "^\"Gm\"");
-    str.replace(QRegExp("(^gm$)"), "<g b d>" + duration + "^\"gm\"");
-    str.replace(QRegExp("(^Dm$)"), "<d, d>" + duration + "^\"Dm\"");
-    str.replace(QRegExp("(^dm$)"), "<d f a>" + duration + "^\"dm\"");
+    str.replace(QRegExp("(^Am$)"), "<a, a>" + duration + "^\"A\"");
+    str.replace(QRegExp("(^am$)"), "<a c e>" + duration + "^\"a\"");
+    str.replace(QRegExp("(^Cm$)"), "<c, c>" + duration + "^\"C\"");
+    str.replace(QRegExp("(^cm$)"), "<c e g>" + duration + "^\"c\"");
+    str.replace(QRegExp("(^Em$)"), "<e, e>" + duration + "^\"E\"");
+    str.replace(QRegExp("(^em$)"), "<e g b>" + duration + "^\"e\"");
+    str.replace(QRegExp("(^Fm$)"), "<f, f>" + duration + "^\"F\"");
+    str.replace(QRegExp("(^fm$)"), "<f a c>" + duration + "^\"f\"");
+    str.replace(QRegExp("(^Gm$)"), "<g, g>" + duration + "^\"G\"");
+    str.replace(QRegExp("(^gm$)"), "<g b d>" + duration + "^\"g\"");
+    str.replace(QRegExp("(^Dm$)"), "<d, d>" + duration + "^\"D\"");
+    str.replace(QRegExp("(^dm$)"), "<d f a>" + duration + "^\"d\"");
     //str.replace(QRegExp("(^r$)"), "r" + duration);
     return str;
 }

@@ -17,7 +17,6 @@ all:
 
 clean:
 	rm -rf tabliato/
-	rm tabliato.deb
 
 install:
 	apt-get install --reinstall ./tabliato.deb

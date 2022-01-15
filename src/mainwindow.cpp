@@ -134,6 +134,7 @@ void MainWindow::compile()
     arguments.append("--png");
     arguments.append("--pdf");
     arguments.append("--midi");
+    arguments.append("--ly");
     arguments.append(dtb);
 
     tabliato.start(APPPATH, arguments);

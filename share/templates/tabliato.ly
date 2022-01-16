@@ -479,6 +479,8 @@ diatoButtonSetup = \with
   \override Dots #'staff-position = #-2
   \override Flag #'stencil = #point-stencil  		% suppression des queues de croches
   \override Clef #'stencil = #ly:text-interface::print
+  \override Script #'stencil = ##f
+  \override DynamicText #'stencil = ##f
   
   \override Clef #'text = 
   #(if cadb

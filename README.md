@@ -1,8 +1,8 @@
 # Tabliato
 
-Tabliato est un logiciel pour GNU/Linux permettant d'écrire des tablatures d'accordéon diatonique de grande qualité aux formats CADB ou Cogeron.
+[Tabliato](https://jean-romain.github.io/tabliato/) est un logiciel pour GNU/Linux permettant d'écrire des tablatures d'accordéon diatonique de grande qualité aux formats CADB ou Cogeron.
 
-![](docs/img/slideview.png)
+[![](docs/img/slideview.png)](https://jean-romain.github.io/tabliato/)
 
 ## Compilation
 

@@ -73,6 +73,11 @@ Thumbs.db
 
 Tabliato
 tabliato
+windows/
+release/
+debug/
+poppler/bin/
+
 share/exemples/*.pdf
 share/exemples/*.ly
 share/exemples/*.png

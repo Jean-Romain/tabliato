@@ -1,7 +1,16 @@
 TEMPLATE = app
 TARGET = tabliato
+
+win32{
+INCLUDEPATH += . ./header ./poppler/include/poppler/qt5
+LIBS += -L./poppler/bin -lpoppler-qt5 -lstdc++
+Release:DESTDIR = windows
+}
+
+unix{
 INCLUDEPATH += . ./header /usr/include/poppler/qt5
 LIBS += -L/usr/local/lib -lpoppler-qt5 -lstdc++
+}
 
 QT += core\
     widgets\

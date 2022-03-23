@@ -36,6 +36,10 @@ int main(int argc, char *argv[])
 
         return app.exec();
     }
+    else
+    {
+        LOCAL = APPDIR;
+    }
 
     QCommandLineParser parser;
     parser.setApplicationDescription("Generate tabulature for accordion from FILE");
@@ -166,10 +170,10 @@ int main(int argc, char *argv[])
     arguments.append(filebasepath + ".ly");
 
 
-    #ifdef Q_WS_WIN
+    #ifdef Q_OS_WINDOWS
     QSettings settings("HKEY_LOCAL_MACHINE\\SOFTWARE\\wow6432node\\LilyPond", QSettings::NativeFormat); // 32 bits : HKEY_LOCAL_MACHINE\\SOFTWARE\\LilyPond
-    QString path = settings.value("Install_Dir").toString();
-    QString command = "\"" + path + "\\usr\\bin\\lilypond.exe" + "\"";
+    QString lilypath = settings.value("Install_Dir").toString();
+    QString command = "\"" + lilypath + "\\usr\\bin\\lilypond.exe" + "\"";
     #endif
 
     #ifdef Q_OS_LINUX
@@ -207,11 +211,12 @@ int main(int argc, char *argv[])
 
     QProcess timidity;
 
-    #ifdef Q_WS_WIN
+    #ifdef Q_OS_WINDOWS
     File::write(LOCAL + "\\TiMidity++\\Timidity.cfg", "dir \"" + LOCAL + "\\TiMidity++\\soundfonts\"\nsoundfont \"8MBGMSFX.SF2\"");
     QString command = LOCAL + "\\TiMidity++\\timidity.exe";
     QString ext =  ".wav";
     QString mode = "-Ow";
+    QFile::remove(ofolder + "/" + ofile + ext);
     #endif
 
     #ifdef Q_OS_LINUX

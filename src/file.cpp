@@ -37,6 +37,7 @@ void File::write(QString path, QString text)
         throw std::logic_error(QString("Impossible d'écrire le fichier : " + path).toStdString());
 
     QTextStream out(&file);
+    out.setCodec("UTF-8");
     out << text;
 
     file.close();

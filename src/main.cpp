@@ -6,6 +6,7 @@
 
 #include "global.h"
 #include "mainwindow.h"
+#include "file.h"
 
 QCoreApplication* createApplication(int &argc, char *argv[])
 {
@@ -165,12 +166,7 @@ int main(int argc, char *argv[])
             QFile::remove(filebasepath + ".wav");
             */
 
-            QFile file(filebasepath + ".ly");
-            if(!file.open(QIODevice::WriteOnly | QIODevice::Text))
-                throw std::logic_error(QString("Impossible d'écrire le fichier : " + filebasepath + ".ly").toStdString());
-            QTextStream stream(&file);
-            stream << tab.lilypond;
-            file.close();
+            File::write(filebasepath + ".ly", tab.lilypond);
 
             QStringList arguments;
             if (png) arguments.append("--png");

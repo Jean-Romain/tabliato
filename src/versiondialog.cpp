@@ -32,14 +32,14 @@ VersionDialog::~VersionDialog()
 
 void VersionDialog::gotoDownloadPage()
 {
-    QDesktopServices::openUrl(QUrl("http://tabliato.olympe.in/download.php"));
+    QDesktopServices::openUrl(QUrl("https://jean-romain.github.io/tabliato/download.html"));
 }
 
 void VersionDialog::launchChecker()
 {
     ui.pushButtonCheck->setEnabled(false);
     timer.start(10000);
-    reply = manager.get (  QNetworkRequest(QUrl("http://tabliato.olympe.in/version.txt"))  );
+    reply = manager.get(QNetworkRequest(QUrl("https://raw.githubusercontent.com/Jean-Romain/tabliato/master/version")));
     QObject::connect (reply, SIGNAL (finished()),this, SLOT(showResultChecker()));
 
 }

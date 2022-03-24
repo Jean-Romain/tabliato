@@ -20,7 +20,7 @@ int main(int argc, char *argv[])
 {
     QScopedPointer<QCoreApplication> app(createApplication(argc, argv));
     QApplication::setApplicationName("tabliato");
-    QApplication::setApplicationVersion("1.0");
+    QApplication::setApplicationVersion("1.0.0");
 
     APPDIR = QApplication::applicationDirPath();
     APPPATH = QApplication::applicationFilePath();

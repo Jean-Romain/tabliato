@@ -5,6 +5,7 @@ win32{
 INCLUDEPATH += . ./header ./poppler/include/poppler/qt5
 LIBS += -L./poppler/bin -lpoppler-qt5 -lstdc++
 Release:DESTDIR = windows
+#RC_ICONS = ./share/icon/tabliato.svg
 }
 
 unix{

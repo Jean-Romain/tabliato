@@ -19,8 +19,9 @@ QCoreApplication* createApplication(int &argc, char *argv[])
 int main(int argc, char *argv[])
 {
     QScopedPointer<QCoreApplication> app(createApplication(argc, argv));
-    QApplication::setApplicationName("tabliato");
-    QApplication::setApplicationVersion("1.0.1");
+    QCoreApplication::setOrganizationName("tabliato");
+    QCoreApplication::setApplicationName("tabliato");
+    QCoreApplication::setApplicationVersion("1.0.1");
 
     APPDIR = QApplication::applicationDirPath();
     APPPATH = QApplication::applicationFilePath();
@@ -212,12 +213,14 @@ int main(int argc, char *argv[])
 
         audio:
 
+        qDebug() << ogg;
+
         if (!ogg) return 0;
 
         QProcess timidity;
 
-         #ifdef Q_OS_WINDOWS
-        File::write(LOCAL + "\\TiMidity++\\Timidity.cfg", "dir \"" + LOCAL + "\\TiMidity++\\soundfonts\"\nsoundfont \"8MBGMSFX.SF2\"");
+        #ifdef Q_OS_WINDOWS
+        File::write(LOCAL + "\\TiMidity++\\Timidity.cfg", "soundfont \"" + soundfont + "\"");
         QString command = LOCAL + "\\TiMidity++\\timidity.exe";
         QString ext =  ".wav";
         QString mode = "-Ow";
@@ -231,10 +234,12 @@ int main(int argc, char *argv[])
         #endif
 
         QStringList arguments;
-        arguments.append("--config-string=soundfont\\ " + soundfont);
-        arguments.append(mode);
-        arguments.append("--output-file=" + ofolder + "/" + ofile + ext);
         arguments.append(ifile);
+        arguments.append(mode);
+        #ifdef Q_OS_LINUX
+        arguments.append("--config-string=soundfont\\ " + soundfont);
+        #endif
+        arguments.append("--output-file=" + ofolder + "/" + ofile + ext);
 
         timidity.start(command, arguments);
         timidity.waitForFinished(10000);

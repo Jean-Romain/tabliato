@@ -952,13 +952,17 @@ void MainWindow::initAccordionComboBox()
 void MainWindow::initSf2ComboBox()
 {
     QDir directory(SOUNDFONTS);
-    QStringList sf2 = directory.entryList(QStringList() << "*.sf2",QDir::Files);
+    if (!directory.exists())
+    {
+      QDir().mkpath(SOUNDFONTS);
+      QFile::copy(SHARE + "/soundfonts/Accordion.sf2",  SOUNDFONTS + "/Accordion.sf2");
+    }
+
+    QStringList sf2 = directory.entryList(QStringList() << "*.sf2", QDir::Files);
 
     ui->sf2_combobox->clear();
-    sf2List.clear();
     foreach(QString f, sf2)
     {
-       sf2List.insert(f, f);
        ui->sf2_combobox->addItem(f);
     }
 }

@@ -102,7 +102,6 @@ class MainWindow : public QMainWindow
         bool documentIsSaved;
 
         QMap<QString, Motif> rythmList;
-        QMap<QString, QString> sf2List;
         QMap<QString, QString> accordionList;
         QMap<QString, QString> accordionListReverted;
 

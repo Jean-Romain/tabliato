@@ -4,6 +4,7 @@ QString APPDIR = "";
 QString APPPATH = "";
 
 QString SHARE = "";
+QString TEMP = "";
 QString LOCAL = "";
 
 QString OUTPUT = "";

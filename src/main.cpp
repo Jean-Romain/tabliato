@@ -27,9 +27,18 @@ int main(int argc, char *argv[])
     APPPATH = QApplication::applicationFilePath();
     SHARE = (APPDIR == "/usr/bin") ? "/usr/share/tabliato" : APPDIR + "/share";
 
+    #ifdef Q_OS_WINDOWS
+    LOCAL = SHARE;
+    #endif
+
+    #ifdef Q_OS_LINUX
+    LOCAL = QDir::homePath() + "/.local/share/tabliato";
+    #endif
+
+
     TEMPLATE = SHARE + "/templates";
     KEYBOARDS = SHARE + "/keyboards";
-    SOUNDFONTS = SHARE + "/soundfonts";
+    SOUNDFONTS = LOCAL + "/soundfonts";
     ICON = SHARE + "/icon";
     DOC = SHARE + "/doc";
     HTML = SHARE + "/html";
@@ -38,8 +47,8 @@ int main(int argc, char *argv[])
     if (qobject_cast<QApplication *>(app.data()))
     {
         QTemporaryDir tmpdir;
-        LOCAL = (APPDIR == "/usr/bin") ? tmpdir.path() : APPDIR;
-        OUTPUT = LOCAL + "/output";
+        TEMP = (APPDIR == "/usr/bin") ? tmpdir.path() : APPDIR;
+        OUTPUT = TEMP + "/output";
 
         MainWindow fenetre;
         fenetre.show();
@@ -48,7 +57,7 @@ int main(int argc, char *argv[])
     }
     else
     {
-        LOCAL = APPDIR;
+        TEMP = APPDIR;
 
         QCommandLineParser parser;
         parser.setApplicationDescription("Generate tabulature for accordion from FILE");
@@ -220,8 +229,8 @@ int main(int argc, char *argv[])
         QProcess timidity;
 
         #ifdef Q_OS_WINDOWS
-        File::write(LOCAL + "\\TiMidity++\\Timidity.cfg", "soundfont \"" + soundfont + "\"");
-        QString command = LOCAL + "\\TiMidity++\\timidity.exe";
+        File::write(APPDIR + "\\TiMidity++\\Timidity.cfg", "soundfont \"" + soundfont + "\"");
+        QString command = APPDIR + "\\TiMidity++\\timidity.exe";
         QString ext =  ".wav";
         QString mode = "-Ow";
         QFile::remove(ofolder + "/" + ofile + ext);

@@ -94,6 +94,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     connect(ui->pdfZoomSlider, SIGNAL(valueChanged(int)), this, SLOT(scaleDocument(int)));
     connect(pdf, SIGNAL(scaleChanged(int)), ui->pdfZoomSlider, SLOT(setValue(int)));
 
+    connect(ui->moresf_pushButton, SIGNAL(clicked()), this, SLOT(openSoundfontsWebPage()));
+
     connect(ui->time_combobox,SIGNAL(currentIndexChanged(int)),this,SLOT(updateRythmComboBx()));
 
 
@@ -386,6 +388,7 @@ void MainWindow::openHelpLilypond(){ QDesktopServices::openUrl(QUrl("http://www.
 void MainWindow::openHelpTabliato(){ QDesktopServices::openUrl(QUrl("https://jean-romain.github.io/tabliato/doc.html"));}
 void MainWindow::openHelpSyntax(){ QDesktopServices::openUrl(QUrl("https://jean-romain.github.io/tabliato/doc.html"));}
 void MainWindow::openContactWebPage(){ QDesktopServices::openUrl(QUrl("https://github.com/Jean-Romain/tabliato/issues"));}
+void MainWindow::openSoundfontsWebPage(){ QDesktopServices::openUrl(QUrl("https://jean-romain.github.io/tabliato/soundfonts.html"));}
 
 void MainWindow::openNew()
 {

@@ -52,6 +52,7 @@ class MainWindow : public QMainWindow
         void openHelpLilypond();
         void checkVersion();
         void openContactWebPage();
+        void openSoundfontsWebPage();
 
         void documentSavedTitleChange();
 

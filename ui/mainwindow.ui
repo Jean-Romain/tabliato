@@ -255,7 +255,7 @@
         <property name="geometry">
          <rect>
           <x>0</x>
-          <y>0</y>
+          <y>-149</y>
           <width>374</width>
           <height>277</height>
          </rect>
@@ -1258,6 +1258,9 @@ supplémentaires</string>
              <height>30</height>
             </size>
            </property>
+           <property name="toolTip">
+            <string>Play/Pause</string>
+           </property>
            <property name="text">
             <string/>
            </property>
@@ -1280,6 +1283,9 @@ supplémentaires</string>
              <width>30</width>
              <height>30</height>
             </size>
+           </property>
+           <property name="toolTip">
+            <string>Stop</string>
            </property>
            <property name="text">
             <string/>
@@ -1314,12 +1320,39 @@ supplémentaires</string>
          <item>
           <widget class="QLabel" name="label_3">
            <property name="text">
-            <string>Rendu midi sf2</string>
+            <string>Rendu midi</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QComboBox" name="sf2_combobox"/>
+          <widget class="QComboBox" name="sf2_combobox">
+           <property name="toolTip">
+            <string>Fichier de rendu midi</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="moresf_pushButton">
+           <property name="toolTip">
+            <string>Télécharger plus de soundfonts de rendu</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset>
+             <normaloff>../share/icon/more.svg</normaloff>../share/icon/more.svg</iconset>
+           </property>
+           <property name="autoDefault">
+            <bool>false</bool>
+           </property>
+           <property name="default">
+            <bool>false</bool>
+           </property>
+           <property name="flat">
+            <bool>true</bool>
+           </property>
+          </widget>
          </item>
          <item>
           <spacer name="horizontalSpacer_3">

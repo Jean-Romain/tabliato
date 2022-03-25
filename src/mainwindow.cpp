@@ -158,7 +158,14 @@ void MainWindow::midi2audio()
 
     QStringList arguments;
     arguments.append("--soundfont=" + SOUNDFONTS + "/" + ui->sf2_combobox->currentText());
+
+    #ifdef Q_OS_WINDOWS
+    arguments.append(OUTPUT + "/output.mid");
+    #endif
+
+    #ifdef Q_OS_LINUX
     arguments.append(OUTPUT + "/output.midi");
+    #endif
 
     midi2audioCall->start(APPPATH, arguments);
 }
@@ -422,6 +429,7 @@ void MainWindow::setIcons()
 
     QIcon play(ICON + "/play.svg");
     QIcon stop(ICON + "/stop.svg");
+    QIcon more(ICON + "/more.svg");
 
     // Files icons
 
@@ -530,6 +538,7 @@ void MainWindow::setIcons()
 
     ui->play_pushButton->setIcon(play);
     ui->stop_pushButton->setIcon(stop);
+    ui->moresf_pushButton->setIcon(more);
 
     this->setWindowIcon(logo);
 }
@@ -584,6 +593,7 @@ void MainWindow::playMusic()
 void MainWindow::stopMusic()
 {
     music->stop();
+    music->setMedia(QMediaContent());
 
     QIcon play(ICON + "/play.svg");
     ui->play_pushButton->setIcon(play);

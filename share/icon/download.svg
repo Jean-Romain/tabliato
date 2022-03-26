@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<svg xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://web.resource.org/cc/" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:svg="http://www.w3.org/2000/svg" id="svg2218" viewBox="0 0 93.837 88.67" version="1.0">
+  <defs id="defs2221">
+    <linearGradient id="linearGradient7124" y2="-258.1" gradientUnits="userSpaceOnUse" y1="-157.42" x2="-27.523" x1="34.047">
+      <stop id="stop7120" stop-color="#003dae" offset="0"/>
+      <stop id="stop7122" stop-color="#003dae" stop-opacity="0" offset="1"/>
+    </linearGradient>
+  </defs>
+  <g id="g7126" transform="translate(21.754 222.76)" fill-rule="evenodd">
+    <path id="path2245" stroke-linejoin="bevel" d="m70.083-180.72l-19.83-0.03-0.017-40.01-49.987 0.01-0.0069 39.98-19.996 0.02 44.963 44.66 44.874-44.63z" stroke="#003dae" stroke-width="4" fill="url(#linearGradient7124)"/>
+    <path id="path6147" fill="#003dae" d="m-0.43765-162.63s39.279 7.11 49.455-35.67l1.532 17.72 17.287 0.88-42.89 42.67-25.384-25.6z"/>
+  </g>
+  <metadata>
+    <rdf:RDF>
+      <cc:Work>
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+        <cc:license rdf:resource="http://creativecommons.org/licenses/publicdomain/"/>
+        <dc:publisher>
+          <cc:Agent rdf:about="http://openclipart.org/">
+            <dc:title>Openclipart</dc:title>
+          </cc:Agent>
+        </dc:publisher>
+        <dc:title>Arrow</dc:title>
+        <dc:date>2010-01-05T16:45:46</dc:date>
+        <dc:description>A simple arrow pointing down.</dc:description>
+        <dc:source>http://openclipart.org/detail/28802/arrow-by-purzen</dc:source>
+        <dc:creator>
+          <cc:Agent>
+            <dc:title>purzen</dc:title>
+          </cc:Agent>
+        </dc:creator>
+        <dc:subject>
+          <rdf:Bag>
+            <rdf:li>arrow</rdf:li>
+            <rdf:li>blue</rdf:li>
+            <rdf:li>clip art</rdf:li>
+            <rdf:li>clipart</rdf:li>
+            <rdf:li>colour</rdf:li>
+            <rdf:li>computer</rdf:li>
+            <rdf:li>down</rdf:li>
+            <rdf:li>download</rdf:li>
+            <rdf:li>icon</rdf:li>
+            <rdf:li>image</rdf:li>
+            <rdf:li>logo</rdf:li>
+            <rdf:li>media</rdf:li>
+            <rdf:li>outline</rdf:li>
+            <rdf:li>png</rdf:li>
+            <rdf:li>public domain</rdf:li>
+            <rdf:li>sign</rdf:li>
+            <rdf:li>svg</rdf:li>
+          </rdf:Bag>
+        </dc:subject>
+      </cc:Work>
+      <cc:License rdf:about="http://creativecommons.org/licenses/publicdomain/">
+        <cc:permits rdf:resource="http://creativecommons.org/ns#Reproduction"/>
+        <cc:permits rdf:resource="http://creativecommons.org/ns#Distribution"/>
+        <cc:permits rdf:resource="http://creativecommons.org/ns#DerivativeWorks"/>
+      </cc:License>
+    </rdf:RDF>
+  </metadata>
+</svg>

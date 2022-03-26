@@ -7,6 +7,7 @@
 #include "global.h"
 #include "mainwindow.h"
 #include "file.h"
+#include "filedownloader.h"
 
 QCoreApplication* createApplication(int &argc, char *argv[])
 {
@@ -34,7 +35,6 @@ int main(int argc, char *argv[])
     #ifdef Q_OS_LINUX
     LOCAL = QDir::homePath() + "/.local/share/tabliato";
     #endif
-
 
     TEMPLATE = SHARE + "/templates";
     KEYBOARDS = SHARE + "/keyboards";

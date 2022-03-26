@@ -33,36 +33,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 
-HEADERS += \
-           header/global.h \
-           header/mainwindow.h \
-           header/versiondialog.h \
-           header/highlighter.h \
-           header/pdfviewer.h \
-           header/codeeditor.h \
-           header/button.h \
-           header/file.h \
-           header/keyboard.h \
-           header/motif.h \
-           header/processor.h \
-           header/syntaxanalyser.h \
-           header/tabulature.h
-FORMS += ui/mainwindow.ui \
-         ui/versiondialog.ui
-SOURCES += \
-           src/global.cpp \
-           src/main.cpp \
-           src/mainwindow.cpp \
-           src/tabulature.cpp \
-           src/versiondialog.cpp \
-           src/highlighter.cpp \
-           src/pdfviewer.cpp \
-           src/codeeditor.cpp \
-           src/button.cpp \
-           src/file.cpp \
-           src/keyboard.cpp \
-           src/motif.cpp \
-           src/syntaxanalyser.cpp \
-           src/processor.cpp
+HEADERS += header/*.h
+FORMS += ui/*.ui
+SOURCES += src/*.cpp
 
 QT_LOGGING_RULES=*.debug=true qt-creator

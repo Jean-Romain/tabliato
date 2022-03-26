@@ -77,8 +77,11 @@
    </item>
    <item row="3" column="0" colspan="2">
     <widget class="QPushButton" name="pushButtonDownload">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="text">
-      <string>Aller à la page de téléchargement</string>
+      <string>Mettre à jour</string>
      </property>
     </widget>
    </item>

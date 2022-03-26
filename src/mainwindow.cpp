@@ -6,6 +6,7 @@
 #include <QDesktopServices>
 #include <QUrl>
 #include <QSettings>
+#include <QSignalMapper>
 
 #ifdef Q_WS_WIN
 #include <windows.h>
@@ -23,10 +24,10 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     ui->setupUi(this);
 
     highlighterTab = new Highlighter(ui->melodie_textarea->document());
-    //highlighterBass = new Highlighter(ui->basse_textarea->document());
     music = new QMediaPlayer(this);
     midi2audioCall = new QProcess(this);
     pdf = new PdfViewer();
+    signalMapper = new QSignalMapper(this) ;
 
     connect(ui->actionSave, SIGNAL(triggered()), this, SLOT(save()));
     connect(ui->actionSaveAs, SIGNAL(triggered()), this, SLOT(save_as()));
@@ -94,7 +95,18 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     connect(ui->pdfZoomSlider, SIGNAL(valueChanged(int)), this, SLOT(scaleDocument(int)));
     connect(pdf, SIGNAL(scaleChanged(int)), ui->pdfZoomSlider, SLOT(setValue(int)));
 
-    connect(ui->moresf_pushButton, SIGNAL(clicked()), this, SLOT(openSoundfontsWebPage()));
+    signalMapper->setMapping(ui->actionBallone_Burini, "BalloneBurini.sf2") ;
+    signalMapper->setMapping(ui->actionLoffet, "Loffet.sf2") ;
+    signalMapper->setMapping(ui->actionGaillard, "Gaillard.sf2") ;
+    signalMapper->setMapping(ui->actionSalta_Bourroche, "SaltaBourroche.sf2") ;
+    signalMapper->setMapping(ui->actionSerafini, "Serafini.sf2") ;
+
+    connect(ui->actionBallone_Burini, SIGNAL(triggered()), signalMapper, SLOT(map())) ;
+    connect(ui->actionLoffet, SIGNAL(triggered()), signalMapper, SLOT(map())) ;
+    connect(ui->actionGaillard, SIGNAL(triggered()), signalMapper, SLOT(map())) ;
+    connect(ui->actionSalta_Bourroche, SIGNAL(triggered()), signalMapper, SLOT(map())) ;
+    connect(ui->actionSerafini, SIGNAL(triggered()), signalMapper, SLOT(map())) ;
+    connect(signalMapper, SIGNAL(mapped(QString)), this, SLOT(download_soundfonts(QString))) ;
 
     connect(ui->time_combobox,SIGNAL(currentIndexChanged(int)),this,SLOT(updateRythmComboBx()));
 
@@ -116,6 +128,7 @@ MainWindow::~MainWindow()
     delete music;
     delete midi2audioCall;
     delete pdf;
+    delete signalMapper;
 }
 
 void MainWindow::compile()
@@ -388,7 +401,6 @@ void MainWindow::openHelpLilypond(){ QDesktopServices::openUrl(QUrl("http://www.
 void MainWindow::openHelpTabliato(){ QDesktopServices::openUrl(QUrl("https://jean-romain.github.io/tabliato/doc.html"));}
 void MainWindow::openHelpSyntax(){ QDesktopServices::openUrl(QUrl("https://jean-romain.github.io/tabliato/doc.html"));}
 void MainWindow::openContactWebPage(){ QDesktopServices::openUrl(QUrl("https://github.com/Jean-Romain/tabliato/issues"));}
-void MainWindow::openSoundfontsWebPage(){ QDesktopServices::openUrl(QUrl("https://jean-romain.github.io/tabliato/soundfonts.html"));}
 
 void MainWindow::openNew()
 {
@@ -433,6 +445,9 @@ void MainWindow::setIcons()
     QIcon play(ICON + "/play.svg");
     QIcon stop(ICON + "/stop.svg");
     QIcon more(ICON + "/more.svg");
+
+    QIcon download(ICON + "/download.svg");
+    QIcon check(ICON + "/check.svg");
 
     // Files icons
 
@@ -541,7 +556,31 @@ void MainWindow::setIcons()
 
     ui->play_pushButton->setIcon(play);
     ui->stop_pushButton->setIcon(stop);
-    ui->moresf_pushButton->setIcon(more);
+
+    if (!QFile::exists(SOUNDFONTS + "/Gaillard.sf2"))
+        ui->actionGaillard->setIcon(download);
+    else
+        ui->actionGaillard->setIcon(check);
+
+    if (!QFile::exists(SOUNDFONTS + "/Loffet.sf2"))
+        ui->actionLoffet->setIcon(download);
+    else
+        ui->actionLoffet->setIcon(check);
+
+    if (!QFile::exists(SOUNDFONTS + "/Serafini.sf2"))
+       ui->actionSerafini->setIcon(download);
+    else
+       ui->actionSerafini->setIcon(check);
+
+    if (!QFile::exists(SOUNDFONTS + "/SaltaBourroche.sf2"))
+        ui->actionSalta_Bourroche->setIcon(download);
+    else
+        ui->actionSalta_Bourroche->setIcon(check);
+
+    if (!QFile::exists(SOUNDFONTS + "/BalloneBurini.sf2"))
+        ui->actionBallone_Burini->setIcon(download);
+    else
+        ui->actionBallone_Burini->setIcon(check);
 
     this->setWindowIcon(logo);
 }
@@ -616,19 +655,19 @@ void MainWindow::exportFiles()
         QFile::remove(fi.path() + "/" + fi.baseName() + ".wav");
         QFile::remove(fi.path() + "/" + fi.baseName() + ".ogg");
 
-        if(ui->actionExportPDF_tool->isChecked())
+        if (ui->actionExportPDF_tool->isChecked())
             QFile::copy(OUTPUT + "/output.pdf", fi.path() + "/" + fi.baseName() + ".pdf");
 
-        if(ui->actionExportPNG_tool->isChecked())
+        if (ui->actionExportPNG_tool->isChecked())
             QFile::copy(OUTPUT + "/output.png", fi.path() + "/" + fi.baseName() + ".png");
 
-        if(ui->actionExportMIDI_tool->isChecked())
+        if (ui->actionExportMIDI_tool->isChecked())
             QFile::copy(OUTPUT + "/output.midi", fi.path() + "/" + fi.baseName() + ".midi");
 
-        if(ui->actionExportLY_tool->isChecked())
+        if (ui->actionExportLY_tool->isChecked())
             QFile::copy(OUTPUT + "/output.ly", fi.path() + "/" + fi.baseName() + ".ly");
 
-        if(ui->actionExportWAV_tool->isChecked())
+        if (ui->actionExportWAV_tool->isChecked())
         {
             if(QFile::exists(OUTPUT + "/output.wav"))
                 QFile::copy(OUTPUT + "/output.wav", fi.path() + "/" + fi.baseName() + ".wav");
@@ -829,8 +868,6 @@ void MainWindow::writeSettings()
     settings.setValue("exportPNG",  ui->actionExportPNG_tool->isChecked());
     settings.setValue("sf2", ui->sf2_combobox->currentText());
     settings.setValue("lastOpenedFile", currentOpenedFile);
-
-    qDebug() << "write setting " + currentOpenedFile;
 }
 
 void MainWindow::readSettings()
@@ -1008,6 +1045,23 @@ void MainWindow::seekMusic()
     int percentage = ui->time_slider->value();
     qint64 time = duration*((float)percentage/100);
     music->setPosition(time);
+}
+
+void MainWindow::download_soundfonts(QString name)
+{
+    QString url = "https://media.githubusercontent.com/media/Jean-Romain/tabliato/master/soundfonts/" + name;
+    QString dest = SOUNDFONTS + "/" + name;
+
+    QMessageBox::StandardButton reply;
+    reply = QMessageBox::question(this, "", "Voulez vous télécharger le fichier " + name + " ?" , QMessageBox::Yes|QMessageBox::No);
+    if (reply == QMessageBox::Yes)
+    {
+        terminal("Téléchargement de: " + name);
+        FileDownloader::download(url, dest);
+        initSf2ComboBox();
+        setIcons();
+        QMessageBox::information(this, "Information", "Téléchargement de " + name + " terminé");
+    }
 }
 
 

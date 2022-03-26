@@ -1,19 +1,9 @@
-﻿/***************************************************************************
- *   copyright       : (C) 2003-2013 by Pascal Brachet                     *
- *   http://www.xm1math.net/texmaker/                                      *
- *                                                                         *
- *   This program is free software; you can redistribute it and/or modify  *
- *   it under the terms of the GNU General Public License as published by  *
- *   the Free Software Foundation; either version 2 of the License, or     *
- *   (at your option) any later version.                                   *
- *                                                                         *
- ***************************************************************************/
-
-#include "versiondialog.h"
+﻿#include "versiondialog.h"
 #include "global.h"
 
 #include <QtCore/QUrl>
 #include <QDesktopServices>
+#include <QVersionNumber>
 
 VersionDialog::VersionDialog(QWidget *parent):QDialog( parent)
 {
@@ -32,7 +22,31 @@ VersionDialog::~VersionDialog()
 
 void VersionDialog::gotoDownloadPage()
 {
+    QVersionNumber new_version = QVersionNumber::fromString(ui.lineEditAvailable->text());
+    QVersionNumber current_version = QVersionNumber::fromString(qApp->applicationVersion());
+
+    // Same version
+    if (new_version.majorVersion() == current_version.majorVersion() && new_version.minorVersion() == current_version.minorVersion())
+    {
+        // Seulement des bug fix
+        if (new_version.microVersion() > current_version.microVersion())
+        {
+            // Télécharger uniquement tabliato.exe sous windows sachant qu'il n'y a pas de nouvelles dll ou icones.
+            #ifdef Q_OS_WINDOWS
+            QDesktopServices::openUrl(QUrl("https://jean-romain.github.io/tabliato/download.html"));
+            #endif
+
+            // Sous linux on renvoit toujours à la page de téléchargement
+            #ifdef Q_OS_LINUX
+            QDesktopServices::openUrl(QUrl("https://jean-romain.github.io/tabliato/download.html"));
+            #endif
+
+            return;
+        }
+    }
+
     QDesktopServices::openUrl(QUrl("https://jean-romain.github.io/tabliato/download.html"));
+
 }
 
 void VersionDialog::launchChecker()
@@ -41,7 +55,6 @@ void VersionDialog::launchChecker()
     timer.start(10000);
     reply = manager.get(QNetworkRequest(QUrl("https://raw.githubusercontent.com/Jean-Romain/tabliato/master/version")));
     QObject::connect (reply, SIGNAL (finished()),this, SLOT(showResultChecker()));
-
 }
 
 void VersionDialog::showResultChecker()
@@ -49,11 +62,31 @@ void VersionDialog::showResultChecker()
     timer.stop();
 
     if (reply->error())
+    {
         ui.lineEditAvailable->setText(tr("Erreur"));
+    }
     else
-        ui.lineEditAvailable->setText(QString(reply->readAll()));
+    {
+        QString ans = reply->readAll();
+        QVersionNumber new_version = QVersionNumber::fromString(ans);
+        QVersionNumber current_version = QVersionNumber::fromString(qApp->applicationVersion());
+        ui.lineEditAvailable->setText(ans);
 
-    ui.pushButtonCheck->setEnabled(true);
+        // Same version
+        if (new_version.majorVersion() == current_version.majorVersion() && new_version.minorVersion() == current_version.minorVersion())
+        {
+            // Seulement des bug fix
+            if (new_version.microVersion() > current_version.microVersion())
+            {
+                ui.pushButtonCheck->setText("Mettre à jour");
+            }
+        }
+
+        ui.pushButtonCheck->setEnabled(true);
+
+        if (new_version > current_version)
+            ui.pushButtonDownload->setEnabled(true);
+    }
 }
 
 void VersionDialog::stopChecker()

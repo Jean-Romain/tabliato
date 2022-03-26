@@ -176,10 +176,30 @@
     <addaction name="actionDisplayPlayer"/>
     <addaction name="actionDisplayPreview"/>
    </widget>
+   <widget class="QMenu" name="menuAudio">
+    <property name="title">
+     <string>Audio</string>
+    </property>
+    <widget class="QMenu" name="menuInstaller_des_fontes_sonores">
+     <property name="toolTip">
+      <string>Télécharger des fichiers de rendu audio d'accordéon</string>
+     </property>
+     <property name="title">
+      <string>Installer des fontes sonores</string>
+     </property>
+     <addaction name="actionBallone_Burini"/>
+     <addaction name="actionGaillard"/>
+     <addaction name="actionLoffet"/>
+     <addaction name="actionSalta_Bourroche"/>
+     <addaction name="actionSerafini"/>
+    </widget>
+    <addaction name="menuInstaller_des_fontes_sonores"/>
+   </widget>
    <addaction name="menuFichier"/>
    <addaction name="menuOutils"/>
    <addaction name="menuAffichage"/>
    <addaction name="menuInsertion"/>
+   <addaction name="menuAudio"/>
    <addaction name="menuAide"/>
   </widget>
   <widget class="QToolBar" name="toolBar">
@@ -255,7 +275,7 @@
         <property name="geometry">
          <rect>
           <x>0</x>
-          <y>-149</y>
+          <y>0</y>
           <width>374</width>
           <height>277</height>
          </rect>
@@ -1332,29 +1352,6 @@ supplémentaires</string>
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="moresf_pushButton">
-           <property name="toolTip">
-            <string>Télécharger plus de soundfonts de rendu</string>
-           </property>
-           <property name="text">
-            <string/>
-           </property>
-           <property name="icon">
-            <iconset>
-             <normaloff>../share/icon/more.svg</normaloff>../share/icon/more.svg</iconset>
-           </property>
-           <property name="autoDefault">
-            <bool>false</bool>
-           </property>
-           <property name="default">
-            <bool>false</bool>
-           </property>
-           <property name="flat">
-            <bool>true</bool>
-           </property>
-          </widget>
-         </item>
-         <item>
           <spacer name="horizontalSpacer_3">
            <property name="orientation">
             <enum>Qt::Horizontal</enum>
@@ -2296,6 +2293,35 @@ color: rgb(255, 255, 255);</string>
    </property>
    <property name="text">
     <string>Prévisualisation</string>
+   </property>
+  </action>
+  <action name="actionBallone_Burini">
+   <property name="icon">
+    <iconset>
+     <normaloff>../share/icon/download.svg</normaloff>../share/icon/download.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Ballone Burini </string>
+   </property>
+  </action>
+  <action name="actionGaillard">
+   <property name="text">
+    <string>Gaillard</string>
+   </property>
+  </action>
+  <action name="actionLoffet">
+   <property name="text">
+    <string>Loffet</string>
+   </property>
+  </action>
+  <action name="actionSalta_Bourroche">
+   <property name="text">
+    <string>Salta Bourroche </string>
+   </property>
+  </action>
+  <action name="actionSerafini">
+   <property name="text">
+    <string>Serafini</string>
    </property>
   </action>
   <zorder>playerDock</zorder>

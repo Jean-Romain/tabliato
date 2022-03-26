@@ -14,6 +14,7 @@
 #include "processor.h"
 #include "highlighter.h"
 #include "pdfviewer.h"
+#include "filedownloader.h"
 
 namespace Ui {
 class MainWindow;
@@ -52,7 +53,7 @@ class MainWindow : public QMainWindow
         void openHelpLilypond();
         void checkVersion();
         void openContactWebPage();
-        void openSoundfontsWebPage();
+        void download_soundfonts(QString name);
 
         void documentSavedTitleChange();
 
@@ -97,6 +98,7 @@ class MainWindow : public QMainWindow
         QMediaPlayer *music;
         QProcess *midi2audioCall;
         PdfViewer *pdf;
+        QSignalMapper* signalMapper;
         QVector<qreal> scaleFactors;
 
         QString currentOpenedFile;

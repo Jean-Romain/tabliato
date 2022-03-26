@@ -135,10 +135,9 @@ MainWindow::~MainWindow()
 
 void MainWindow::compile()
 {
-    if (!currentOpenedFile.isEmpty())
-        save();
+    if (!currentOpenedFile.isEmpty()) save();
 
-    ui->console->clear();
+    terminal("Compilation");
 
     Tabulature tab = readMusicFromUI();
     QString dtb = OUTPUT + "/output.dtb";
@@ -164,13 +163,18 @@ void MainWindow::compile()
         return;
     }
 
-    terminal(tabliato.readAllStandardOutput());
+    if (!tabliato.readAllStandardOutput().isEmpty())
+        terminal(tabliato.readAllStandardOutput());
+
+    terminal("Compilation terminée");
     updatePreview(OUTPUT + "/output.pdf");
+    stopMusic();
     midi2audio();
 }
 
 void MainWindow::midi2audio()
 {
+    terminal("Génération du rendu audio");
     ui->play_pushButton->setEnabled(false);
 
     QStringList arguments;
@@ -197,6 +201,18 @@ void MainWindow::midi2audioFinished(int exit)
     exportFiles();
     if (exit) QMessageBox::critical(this, "Erreur", "La musique n'a pas pu être générée pour une raison inconnue");
     ui->play_pushButton->setEnabled(true);
+
+
+    #ifdef Q_OS_WINDOWS
+    QUrl audio = QUrl::fromLocalFile(OUTPUT+ "/output.wav");
+    #endif
+
+    #ifdef Q_OS_LINUX
+    QUrl audio = QUrl::fromLocalFile(OUTPUT+ "/output.ogg");
+    #endif
+
+    music->setMedia(audio);
+    terminal("Génération du rendu audio terminé");
 }
 
 void MainWindow::updatePreview(QString path)
@@ -306,7 +322,7 @@ void MainWindow::save()
         documentIsSaved = true;
         setWindowTitle("Tabliato - " + fi.baseName());
 
-        terminal("Sauvegarde du fichier terminée\n");
+        terminal("Sauvegarde de : " + currentOpenedFile);
     }
 }
 
@@ -352,14 +368,14 @@ void MainWindow::open()
 
 void MainWindow::open(QString filename)
 {
-    if (filename.isEmpty())
-        return;
+    if (filename.isEmpty())return;
 
     QFile file(filename);
     QFileInfo fileinfo(filename);
 
-    if(!file.exists())
-        return;
+    stopMusic();
+
+    if(!file.exists()) return;
 
     try
     {
@@ -370,12 +386,27 @@ void MainWindow::open(QString filename)
         documentIsSaved = true;
 
         setWindowTitle("Tabliato - " + QFileInfo(currentOpenedFile).baseName());
-        terminal("Ouverture du fichier terminée\n");
+        terminal("Chargement de : " + filename);
 
         QString pdf = fileinfo.path() + "/" + fileinfo.completeBaseName() + ".pdf";
         if (QFile(pdf).exists())
+        {
+            terminal("Chargement de : " + pdf);
             updatePreview(pdf);
-    }
+        }
+
+        #ifdef Q_OS_LINUX
+        QString audio = fileinfo.path() + "/" + fileinfo.completeBaseName() + ".ogg";
+        #else
+        QString audio = fileinfo.path() + "/" + fileinfo.completeBaseName() + ".wav";
+        #endif
+
+        if (QFile(audio).exists())
+        {
+            terminal("Chargement de : " + audio);
+            music->setMedia(QUrl::fromLocalFile(audio));
+        }
+     }
     catch(const std::exception &e)
     {
         QString err("Un problème est survenu. Le logiciel renvoie l'erreur suivante :\n ");
@@ -618,20 +649,8 @@ void MainWindow::playMusic()
         QIcon play(ICON + "/play.svg");
         ui->play_pushButton->setIcon(play);
     }
-    else if (music->state() == QMediaPlayer::PausedState)
-    {
-        music->play();
-
-        QIcon pause(ICON + "/pause.svg");
-        ui->play_pushButton->setIcon(pause);
-    }
     else
     {
-        if (QFile::exists(OUTPUT+ "/output.wav"))
-            music->setMedia(QUrl::fromLocalFile(OUTPUT+ "/output.wav")); // Windows
-        else
-            music->setMedia(QUrl::fromLocalFile(OUTPUT+ "/output.ogg")); // Linux
-
         music->play();
 
         QIcon pause(ICON + "/pause.svg");
@@ -642,7 +661,6 @@ void MainWindow::playMusic()
 void MainWindow::stopMusic()
 {
     music->stop();
-    music->setMedia(QMediaContent());
 
     QIcon play(ICON + "/play.svg");
     ui->play_pushButton->setIcon(play);
@@ -900,7 +918,7 @@ void MainWindow::readSettings()
         restoreCheckedDock();
 
         QString lastFile = settings.value("lastOpenedFile").toString();
-        terminal("Ouverture du dernier fichier: " + lastFile + "\n");
+        terminal("Ouverture du dernier fichier: " + lastFile);
         open(lastFile);
     }
     else // it's the first time, register is not written yet
@@ -934,7 +952,7 @@ void MainWindow::readSettings()
 
         open(EXAMPLE + "/exemple.dtb");
 
-        terminal("Premiere utilisation de tabliato.\n");
+        terminal("Premiere utilisation de tabliato");
     }
 }
 

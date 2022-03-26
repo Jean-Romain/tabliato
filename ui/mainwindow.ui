@@ -215,6 +215,8 @@
    <addaction name="actionNew_tool"/>
    <addaction name="actionSave_tool"/>
    <addaction name="actionOpen_tool"/>
+   <addaction name="actionUndo_tool"/>
+   <addaction name="actionRedo_tool"/>
    <addaction name="separator"/>
    <addaction name="actionCompile_tool"/>
   </widget>
@@ -2128,6 +2130,24 @@ color: rgb(255, 255, 255);</string>
    </property>
    <property name="text">
     <string>Nouveau document</string>
+   </property>
+  </action>
+  <action name="actionUndo_tool">
+   <property name="icon">
+    <iconset>
+     <normaloff>../share/icon/undo.svg</normaloff>../share/icon/undo.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Undo</string>
+   </property>
+  </action>
+  <action name="actionRedo_tool">
+   <property name="icon">
+    <iconset>
+     <normaloff>../share/icon/redo.svg</normaloff>../share/icon/redo.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Redo</string>
    </property>
   </action>
   <action name="actionExportPDF_tool">

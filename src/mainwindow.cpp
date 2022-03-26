@@ -39,6 +39,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     connect(ui->actionSave_tool, SIGNAL(triggered()), this, SLOT(save()));
     connect(ui->actionOpen_tool, SIGNAL(triggered()), this, SLOT(open()));
     connect(ui->actionNew_tool, SIGNAL(triggered()), this, SLOT(openNew()));
+    connect(ui->actionUndo_tool, SIGNAL(triggered()), ui->melodie_textarea, SLOT(undo()));
+    connect(ui->actionRedo_tool, SIGNAL(triggered()), ui->melodie_textarea, SLOT(redo()));
     connect(ui->actionCompile_tool, SIGNAL(triggered()), this, SLOT(compile()));
 
     connect(ui->actionHelpTabliato, SIGNAL(triggered()), this, SLOT(openHelpTabliato()));
@@ -435,6 +437,9 @@ void MainWindow::setIcons()
     QIcon open(ICON + "/open.svg");
     QIcon compile(ICON + "/compile.svg");
 
+    QIcon undo(ICON + "/undo.svg");
+    QIcon redo(ICON + "/redo.svg");
+
     QIcon repeat(ICON + "/repeat.svg");
     QIcon question(ICON + "/question.svg");
     QIcon information(ICON + "/information.svg");
@@ -498,6 +503,8 @@ void MainWindow::setIcons()
     ui->actionNew_tool->setIcon(file);
     ui->actionOpen_tool->setIcon(open);
     ui->actionSave_tool->setIcon(save);
+    ui->actionUndo_tool->setIcon(undo);
+    ui->actionRedo_tool->setIcon(redo);
 
     ui->actionCompile_tool->setIcon(compile);
     ui->actionExportPDF_tool->setIcon(pdf);

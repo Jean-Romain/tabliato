@@ -999,6 +999,7 @@ void MainWindow::initAccordionComboBox()
     else
     {
         QTextStream stream(&file);
+        stream.setCodec("UTF-8");
 
         while (!stream.atEnd())
         {

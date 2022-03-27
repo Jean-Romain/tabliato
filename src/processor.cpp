@@ -35,7 +35,7 @@ void TabliatoProcessor::parseMusic()
     tabulature.replace("\t", " ");            // Remplace les tabulations par des espaces
     tabulature.replace("~", " ~");            // Ajoute un espace avant les ~ des liaisons des notes
     tabulature.replace("  ~", " ~");          // Supprime les espaces ajoutés en trop
-    tabulature.replace("\n", " newline ");    // Protection des retours chariots pour linéariser le contenu
+    tabulature.replace("\n", " \n ");         // Protection des retours chariots pour linéariser le contenu
     tabulature.replace("volta 2", "volta:2"); // Protection d'un cas particulier
     tabulature.replace("<<", " \\doubelt ");   // Protection de << pour les contre chants
     tabulature.replace(">>", " \\doubegt ");   // Protection de >> pour les contre chants
@@ -89,8 +89,7 @@ void TabliatoProcessor::parseMusic()
 
             // Un commentaire % on parse et on skip jusqu'à la prochaine ligne
             case COMMENT:
-                while(symbols[i] != "newline" && i < symbols.size()) i++;
-                parsed = "newline";
+                while(i < symbols.size() && !isNewLine(symbols[i])) i++;
                 break;
 
             // Lettre p t P T. On update l'état global courant
@@ -184,7 +183,7 @@ void TabliatoProcessor::parseMusic()
 
                 // On lit jusqu'a la fermeture >
                 QStringList tmp;
-                while (!isCloseChord(symbols[i]) && i < symbols.size())
+                while (i < symbols.size() && !isCloseChord(symbols[i]))
                 {
                     // Si le symbole est un bouton on l'ajoute à la liste
                     if (isButton(symbols[i]))
@@ -199,6 +198,10 @@ void TabliatoProcessor::parseMusic()
                     }
                     i++;
                 }
+
+                if (i == symbols.size())
+                    throw std::logic_error("Chevron < ouvert mais jamais fermé.");
+
 
                 // On joint les boutons en une seule stringavec des virgules car c'est comme
                 // ca que le multibutton parse
@@ -248,7 +251,7 @@ void TabliatoProcessor::parseMusic()
 
                // On lit jusqu'a la fermeture ]
                 QStringList tmp;
-                while (!isCloseManualBass(symbols[i]) && i < symbols.size())
+                while (i < symbols.size() && !isCloseManualBass(symbols[i]))
                 {
                     // Basse/accord explicite e.g B:4 ou a:4
                     if (isExplicitBass(symbols[i]))
@@ -273,6 +276,8 @@ void TabliatoProcessor::parseMusic()
                     i++;
                 };
 
+                if (i == symbols.size())
+                    throw std::logic_error("Crochet [ ouvert mais jamais fermé.");
 
                 if (interpolate)
                 {
@@ -360,7 +365,6 @@ void TabliatoProcessor::parseMusic()
     }
 
     tab->melody = parsedSymbolsMelody.join(" ");
-    tab->melody.replace(QRegExp("newline"), "\n");
     tab->melody.replace(QRegExp(":"), "");
     tab->melody.replace(QRegExp("\\doublegt"), ">>");
     tab->melody.replace(QRegExp("\\doubleglt"), "<<");
@@ -368,7 +372,6 @@ void TabliatoProcessor::parseMusic()
     if (nbass == 0) return;
 
     tab->bass = parsedSymbolsBass.join(" ");
-    tab->bass.replace(QRegExp("newline"), "\n");
     tab->bass.replace(QRegExp(":"), "");
 }
 

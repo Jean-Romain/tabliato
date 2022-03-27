@@ -64,7 +64,7 @@ bool SyntaxAnalyser::isFingering(QString str){
 }
 
 bool SyntaxAnalyser::isNewLine(QString str){
-    return str == "newline";
+    return str == "\n";
 }
 
 /*bool SyntaxAnalyser::isChord(QString str)

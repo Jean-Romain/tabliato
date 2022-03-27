@@ -112,6 +112,12 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 
     connect(ui->time_combobox,SIGNAL(currentIndexChanged(int)),this,SLOT(updateRythmComboBx()));
 
+    // Fix #19 window only. This works natively on linux
+    #ifdef Q_OS_WINDOWS
+    ui->time_combobox->setStyleSheet("QComboBox QAbstractItemView {min-width: 70;}");
+    ui->key_combobox->setStyleSheet("QComboBox QAbstractItemView {min-width: 100;}");
+    ui->accordion_comboBox->setStyleSheet("QComboBox QAbstractItemView {min-width: 300;}");
+    #endif
 
     //ui->player_layout->addWidget(slider);
     ui->scrollArea->setWidget(pdf);

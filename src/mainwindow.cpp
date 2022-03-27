@@ -159,7 +159,7 @@ void MainWindow::compile()
     if (tabliato.exitCode() != 0)
     {
         QString err = tabliato.readAllStandardError();
-        QMessageBox::critical(this, "Erreur", err);
+        QMessageBox::critical(this, "Erreur :", err);
         return;
     }
 

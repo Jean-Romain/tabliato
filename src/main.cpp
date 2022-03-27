@@ -167,14 +167,12 @@ int main(int argc, char *argv[])
             QFileInfo path(ifile);
             QString filebasepath = path.absolutePath() + "/" + path.baseName();
 
-            /*
             QFile::remove(filebasepath + ".midi");
             QFile::remove(filebasepath + ".mid");
             QFile::remove(filebasepath + ".pdf");
             QFile::remove(filebasepath + ".png");
             QFile::remove(filebasepath + ".ogg");
             QFile::remove(filebasepath + ".wav");
-            */
 
             File::write(filebasepath + ".ly", tab.lilypond);
 
@@ -203,8 +201,9 @@ int main(int argc, char *argv[])
 
             if(!QFile(filebasepath + ".pdf").exists() && !QFile(filebasepath + ".png").exists())
             {
-                QTextStream(stderr) << lilypond.readAllStandardError() << endl;
-                throw std::logic_error("Le document n'a pas été compilé.");
+                //QTextStream(stderr) << lilypond.readAllStandardError() << endl;
+                QTextStream(stderr) << "Erreur inconnue: le document n'a pas été compilé. Code probablement incorrect." << endl;
+                return 1;
             }
 
             if(!ly) QFile::remove(filebasepath + ".ly");

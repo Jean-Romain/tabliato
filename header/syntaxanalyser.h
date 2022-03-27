@@ -31,8 +31,6 @@ class SyntaxAnalyser
         bool hasDirection(QString str);
 
         int getType(QString str);
-        int getTypeRightHand(QString str);
-        int getTypeLeftHand(QString str);
 
         QString getDirection(QString str);
 
@@ -43,7 +41,6 @@ class SyntaxAnalyser
         QRegExp impliciteBass_rgx;
         QRegExp expliciteBass_rgx;
         QRegExp rest_rgx;
-        QRegExp impliciteBassSet_rgx;
         QRegExp pushed_rgx;
         QRegExp command_rgx;
         QRegExp fingering_rgx;
@@ -60,7 +57,6 @@ class SyntaxAnalyser
         QRegExp extractTie;
 
         QRegExp hasDirection_rgx;
-        QRegExp isChord_rgx;
 
         bool genericTest(QRegExp rx, QString str);
 
@@ -76,10 +72,8 @@ class SyntaxAnalyser
                           IMPLICITBASS,
                           EXPLICITBASS,
                           BASS,
-                          BASSCHORD,
                           FINGER,
                           REST,
-                          MELODYCHORD,
                           OPENCHORD,
                           CLOSECHORD,
                           OPENMANUALBASS,

@@ -75,6 +75,14 @@ void ButtonParser::setButton(QString str)
     if (extractDuration.indexIn(str) >= 0)
         duration = extractDuration.cap(1);
 
+    if (duration != "1"  && duration != "1."  &&
+        duration != "2"  && duration != "2."  &&
+        duration != "4"  && duration != "4."  &&
+        duration != "8"  && duration != "8."  &&
+        duration != "16" && duration != "16." &&
+        duration != "32" && duration != "32." )
+        throw std::logic_error(QString("La durée " + duration + " n'est pas une durée valide").toStdString());
+
     if (extractNumButton.indexIn(str) >= 0)
         button = extractNumButton.cap(1);
 

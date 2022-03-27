@@ -201,12 +201,12 @@ QString Motif::parseBassSet(QString str)
         }
         else
         {
-            throw std::logic_error(QString("a L'ensemble basses accords " + str + " n'est pas conforme au motif rythmique").toStdString());
+            throw std::logic_error(QString("L'ensemble basses accords " + str.split(":").join(" ") + " n'est pas conforme au motif rythmique").toStdString());
         }
     }
 
     if(j != list.length())
-        throw std::logic_error(QString("L'ensemble basses accords " + str + " n'est pas conforme au motif rythmique").toStdString());
+        throw std::logic_error(QString("L'ensemble basses accords " + str.split(":").join(" ") + " n'est pas conforme au motif rythmique").toStdString());
 
     return out;
 }

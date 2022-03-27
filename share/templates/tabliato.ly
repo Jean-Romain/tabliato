@@ -520,11 +520,11 @@ diatoBassSetup = \with
   \override Slur #'stencil = ##f
   \override Slur #'control-points = #'((0 . 0) (0 . 0) (0 . 0) (0 . 0))
   \override TextSpanner #'style = #'solid-line
-  \override TextSpanner.bound-details.left.padding = #2
-  \override TextSpanner.bound-details.right.padding = #1.5
+  \override TextSpanner.bound-details.left.padding = #2.5
+  \override TextSpanner.bound-details.right.padding = #1
   \override TextSpanner #'to-barline = ##t
-  \override TextSpanner #'staff-padding = #1.1
-   \override VerticalAxisGroup #'staff-staff-spacing =  #'(('basic-distance  . 0) (minimum-distance . 0) (padding . .5) (stretchability . 0))
+  \override TextSpanner #'staff-padding = #1.2
+  \override VerticalAxisGroup #'staff-staff-spacing =  #'(('basic-distance  . 0) (minimum-distance . 0) (padding . .5) (stretchability . 0))
 }
 
 % ===================

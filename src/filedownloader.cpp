@@ -26,6 +26,10 @@ void FileDownloader::download(QString url, QString dest)
     connect(response, SIGNAL(finished()), &event, SLOT(quit()));
     event.exec();
     QByteArray content = response->readAll();
+
+    if (content.isEmpty())
+        throw std::logic_error((QString("Impossible de télécharger l'url : ") + url).toStdString());
+
     QSaveFile file(dest);
     file.open(QIODevice::WriteOnly);
     file.write(content);

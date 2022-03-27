@@ -1083,10 +1083,19 @@ void MainWindow::download_soundfonts(QString name)
     if (reply == QMessageBox::Yes)
     {
         terminal("Téléchargement de: " + name);
-        FileDownloader::download(url, dest);
-        initSf2ComboBox();
-        setIcons();
-        QMessageBox::information(this, "Information", "Téléchargement de " + name + " terminé");
+
+        try
+        {
+            FileDownloader::download(url, dest);
+            initSf2ComboBox();
+            setIcons();
+            QMessageBox::information(this, "Information", "Téléchargement de " + name + " terminé");
+        }
+        catch(std::exception &e)
+        {
+            QMessageBox::critical(this, "Erreur", QString(e.what()));
+            terminal(e.what());
+        }
     }
 }
 

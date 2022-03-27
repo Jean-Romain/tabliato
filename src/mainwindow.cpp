@@ -88,6 +88,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     connect(music, SIGNAL(positionChanged(qint64)), this, SLOT(seekMusic(qint64)));
     connect(ui->time_slider, SIGNAL(sliderReleased()), this, SLOT(seekMusic()));
     //connect(ui->time_slider, SIGNAL(sliderPressed()), this, SLOT(seekMusic()));
+    connect(ui->showsf2ddl_pushButton, SIGNAL(clicked()), this, SLOT(openSF2About()));
 
     connect(midi2audioCall,SIGNAL(readyReadStandardOutput()),this,SLOT(midi2audioReadyRead()));
     connect(midi2audioCall,SIGNAL(finished(int)),this,SLOT(midi2audioFinished(int)));
@@ -429,6 +430,11 @@ void MainWindow::openAbout()
      msgBox.exec();
 }
 
+void MainWindow::openSF2About()
+{
+    QMessageBox::information(this, "Soundfonts", "Pour télécharger d'autres fichiers de rendu audio allez dans: Audio > Installer des fontes sonores");
+}
+
 void MainWindow::checkVersion()
 {
      VersionDialog *verDlg = new VersionDialog(this);
@@ -625,6 +631,8 @@ void MainWindow::setIcons()
         ui->actionBallone_Burini->setIcon(download);
     else
         ui->actionBallone_Burini->setIcon(check);
+
+    ui->showsf2ddl_pushButton->setIcon(more);
 
     this->setWindowIcon(logo);
 }
@@ -1081,7 +1089,9 @@ void MainWindow::seekMusic()
 
 void MainWindow::download_soundfonts(QString name)
 {
-    QString url = "https://media.githubusercontent.com/media/Jean-Romain/tabliato/master/soundfonts/" + name;
+    if (name == "SaltaBourroche.sf2") name = "SaltaBourroche_Light.sf2";
+
+    QString url = "http://jmi.ovh/DiatonicTab/SoundFonts/" + name;
     QString dest = SOUNDFONTS + "/" + name;
 
     QMessageBox::StandardButton reply;

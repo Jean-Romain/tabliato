@@ -48,6 +48,7 @@ class MainWindow : public QMainWindow
         void open_example();
 
         void openAbout();
+        void openSF2About();
         void openHelpTabliato();
         void openHelpSyntax();
         void openHelpLilypond();

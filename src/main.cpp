@@ -3,7 +3,6 @@
 #include <QDir>
 #include <QDebug>
 #include <QLocale>
-
 #include "global.h"
 #include "mainwindow.h"
 #include "file.h"
@@ -22,11 +21,16 @@ int main(int argc, char *argv[])
     QScopedPointer<QCoreApplication> app(createApplication(argc, argv));
     QCoreApplication::setOrganizationName("tabliato");
     QCoreApplication::setApplicationName("tabliato");
-    QCoreApplication::setApplicationVersion("1.0.1");
+    QCoreApplication::setApplicationVersion("1.0.0");
 
     APPDIR = QApplication::applicationDirPath();
     APPPATH = QApplication::applicationFilePath();
     SHARE = (APPDIR == "/usr/bin") ? "/usr/share/tabliato" : APPDIR + "/share";
+
+    /*qDebug() << "Is SSL Enabled? " << QSslSocket::supportsSsl();
+    qDebug() << "SSL Library Build Version (Qt compiled against): " << QSslSocket::sslLibraryBuildVersionString();
+    qDebug() << "SSL Library Version String (available locally): " << QSslSocket::sslLibraryVersionString();*/
+
 
     #ifdef Q_OS_WINDOWS
     LOCAL = SHARE;

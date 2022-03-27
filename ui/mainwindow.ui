@@ -48,14 +48,14 @@
     <item row="1" column="0">
      <widget class="QToolBox" name="toolBox_2">
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="page">
        <property name="geometry">
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>449</width>
+         <width>522</width>
          <height>564</height>
         </rect>
        </property>
@@ -86,7 +86,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>449</width>
+         <width>522</width>
          <height>564</height>
         </rect>
        </property>
@@ -243,7 +243,7 @@
     <string/>
    </property>
    <property name="features">
-    <set>QDockWidget::DockWidgetMovable</set>
+    <set>QDockWidget::DockWidgetFloatable|QDockWidget::DockWidgetMovable</set>
    </property>
    <property name="windowTitle">
     <string>Informations et options</string>
@@ -271,13 +271,13 @@
         </size>
        </property>
        <property name="currentIndex">
-        <number>0</number>
+        <number>1</number>
        </property>
        <widget class="QWidget" name="Informations">
         <property name="geometry">
          <rect>
           <x>0</x>
-          <y>0</y>
+          <y>-128</y>
           <width>374</width>
           <height>277</height>
          </rect>
@@ -713,6 +713,9 @@
            </item>
            <item>
             <widget class="QPushButton" name="pushButton">
+             <property name="enabled">
+              <bool>true</bool>
+             </property>
              <property name="maximumSize">
               <size>
                <width>25</width>
@@ -1257,8 +1260,11 @@ supplémentaires</string>
      <height>157</height>
     </size>
    </property>
+   <property name="floating">
+    <bool>true</bool>
+   </property>
    <property name="features">
-    <set>QDockWidget::DockWidgetMovable</set>
+    <set>QDockWidget::DockWidgetFloatable|QDockWidget::DockWidgetMovable</set>
    </property>
    <property name="windowTitle">
     <string>Lire le morceau</string>
@@ -1350,6 +1356,20 @@ supplémentaires</string>
           <widget class="QComboBox" name="sf2_combobox">
            <property name="toolTip">
             <string>Fichier de rendu midi</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="showsf2ddl_pushButton">
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset>
+             <normaloff>../share/icon/more.svg</normaloff>../share/icon/more.svg</iconset>
+           </property>
+           <property name="flat">
+            <bool>true</bool>
            </property>
           </widget>
          </item>

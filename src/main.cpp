@@ -27,11 +27,6 @@ int main(int argc, char *argv[])
     APPPATH = QApplication::applicationFilePath();
     SHARE = (APPDIR == "/usr/bin") ? "/usr/share/tabliato" : APPDIR + "/share";
 
-    /*qDebug() << "Is SSL Enabled? " << QSslSocket::supportsSsl();
-    qDebug() << "SSL Library Build Version (Qt compiled against): " << QSslSocket::sslLibraryBuildVersionString();
-    qDebug() << "SSL Library Version String (available locally): " << QSslSocket::sslLibraryVersionString();*/
-
-
     #ifdef Q_OS_WINDOWS
     LOCAL = SHARE;
     #endif

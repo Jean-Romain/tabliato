@@ -2,6 +2,7 @@
 #define FILEDOWNLOADER_H
 
 #include <QObject>
+#include <QByteArray>
 
 class FileDownloader : public QObject
 {
@@ -10,6 +11,7 @@ class FileDownloader : public QObject
   FileDownloader();
   ~FileDownloader();
   static void download(QString url, QString dest);
+  static QByteArray download(QString url);
 };
 
 #endif // FILEDOWNLOADER_H

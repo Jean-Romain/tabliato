@@ -1089,9 +1089,7 @@ void MainWindow::seekMusic()
 
 void MainWindow::download_soundfonts(QString name)
 {
-    if (name == "SaltaBourroche.sf2") name = "SaltaBourroche_Light.sf2";
-
-    QString url = "http://jmi.ovh/DiatonicTab/SoundFonts/" + name;
+    QString url = "https://media.githubusercontent.com/media/Jean-Romain/tabliato/master/soundfonts/" + name;
     QString dest = SOUNDFONTS + "/" + name;
 
     QMessageBox::StandardButton reply;

@@ -16,15 +16,9 @@ class VersionDialog : public QDialog
         VersionDialog(QWidget *parent=0);
         ~VersionDialog();
         Ui::VersionDialog ui;
-    private:
-        QNetworkAccessManager manager;
-        QNetworkReply * reply;
-        QTimer timer;
     private slots:
       void gotoDownloadPage();
       void launchChecker();
-      void showResultChecker();
-      void stopChecker();
 };
 
 

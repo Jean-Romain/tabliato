@@ -90,6 +90,7 @@ void TabliatoProcessor::parseMusic()
             // Un commentaire % on parse et on skip jusqu'à la prochaine ligne
             case COMMENT:
                 while(i < symbols.size() && !isNewLine(symbols[i])) i++;
+                parsed = "";
                 break;
 
             // Lettre p t P T. On update l'état global courant
@@ -426,6 +427,7 @@ void TabliatoProcessor::generateLilypondCode()
     lilypondCode = file.readAll();
     file.close();
 
+    lilypondCode.replace(QRegExp("<ranks>"), QString::number(keyboard.ranks()));
     lilypondCode.replace(QRegExp("<basses>"), tab->bass);
     lilypondCode.replace(QRegExp("<tablature>"), tab->melody);
     lilypondCode.replace(QRegExp("<title>"), tab->get("title"));

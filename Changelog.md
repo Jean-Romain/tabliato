@@ -1,3 +1,7 @@
+## Tabliato 1.0.2
+
+- Fix: tabliato démarre maintenant toujours sur la tablature et sur l'onglet "Information"" au lieu de "paroles" et "Information complémentaires".
+
 ## Tabliato 1.0.1
 
 - New: [windows] tabliato dispose maintenant d'un vrai installateur et est installé par default dans `C:\Program File\tabliato` comme un vrai logiciel

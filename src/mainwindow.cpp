@@ -123,6 +123,9 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     //ui->player_layout->addWidget(slider);
     ui->scrollArea->setWidget(pdf);
 
+    ui->toolBox->setCurrentIndex(0);
+    ui->toolBox_2->setCurrentIndex(0);
+
     setIcons();
     initRythmComboBx();
     initAccordionComboBox();

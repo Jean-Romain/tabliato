@@ -6,3 +6,4 @@
   p5 6 7 t5 6 7
   ```
 - Bug: réparation du mode de rendu Cogeron qui ne fonctionnait plus
+- Bug: encodage UTF-8 de l'erreur en cas d'échec de compilation par `lilypond`

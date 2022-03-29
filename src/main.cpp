@@ -201,7 +201,7 @@ int main(int argc, char *argv[])
             if(!QFile(filebasepath + ".pdf").exists() && !QFile(filebasepath + ".png").exists())
             {
                 //QTextStream(stderr) << lilypond.readAllStandardError() << endl;
-                QTextStream(stderr) << "Erreur inconnue: le document n'a pas été compilé. Code probablement incorrect." << endl;
+                QTextStream(stderr) << QString::fromUtf8("Erreur inconnue: le document n'a pas été compilé. Code probablement incorrect.");
                 return 1;
             }
 

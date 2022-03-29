@@ -5,3 +5,4 @@
 % Les notes de la ligne suivante n'étaient pas rendues
 p5 6 7 t5 6 7
 ```
+- Bug: réparation du mode de rendu Cogeron qui ne fonctionnait plus

@@ -9,7 +9,7 @@
 #(define cadb #<system>) %Cogeron f CADB t
 #(define fingerDisplay #<fingerDisplay>)
 #(define bassDisplay #<bassDisplay>)
-%#(define rankNumber <ranks>)
+#(define rankNumber <ranks>)
 
 scoreIn = g
 scoreOut = g
@@ -18,35 +18,30 @@ scoreOut = g
 %   FONCTION D'ANALYSE PT et CADB
 %=====================================
 
-%%Definition d'une fonction scheme pour le calcul du rang du diato
+%% Definition d'une fonction scheme pour le calcul du rang du diato
+%% nom rang
+%% input x string button number i.e. a number followed by 0 1 or 2 symbol ' e.g. 3'
+%% return 1, 2 or 3 refereing the rank of the button
 #(define rang
-    (lambda (touch)
-        (define l (string-length touch))	;longueur de la string
-             (define rng 0)						;par défaut rang 1
-             (if (string=? "'" (substring touch (- l 1) l))
-                 (if (string=? "'" (substring touch (- l 2) (- l 1)))
-                     (+ rng (if (= rankNumber 3) 2 1))
-		     (+ rng (if (= rankNumber 3) 1 2))
-		 )
-		 rng
-	     )
-    )
+    (lambda (x)
+        (define sym "'")
+        (define l (string-length x))	;longueur de la string
+        (define rng 0)						;par défaut rang 1
+        (if (> l 1) (if  (equal? (string-ref "'" 0) (string-ref x (- l 1))) (set! rng (+ rng 1 )) 0) 0)
+        (if (> l 2) (if  (equal? (string-ref "'" 0) (string-ref x (- l 2))) (set! rng (+ rng 1 )) 0) 0)
+        rng
+     )
 )
 
-%%Définition d'une fonction pour retourner uniquement le numéro de la touche
+%% Définition d'une fonction pour retourner uniquement le numéro de la touche
 %% sans les évetuelles apostrophes.
 #(define touchnum
-    (lambda (touch)
-        (if (< 1 (string-length touch))
-             (if (char-numeric? (string-ref touch 1))
-                 (substring touch 0 2)
-	         (substring touch 0 1)
-	     )
-	     touch
-        )
+    (lambda (x)
+        (define l (string-length x))
+        (define n (rang x))
+        (substring x 0 (- l (+ n)))
     )
 )
-
 % Definition d'une fonction pour noter les notes tirées
 % Pour le système corgeron il suffit de rajouter un underline au markup
 %t =
@@ -148,7 +143,7 @@ p =
             ;'pop-first #t
             'grob-property-path
             (list (quote extra-offset))
-            'grob-value (cons 0 -2.9)
+            'grob-value (cons 0 0)
             'symbol
             'TextScript))
         (make-music ; override textspanner position

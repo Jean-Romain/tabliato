@@ -15,3 +15,5 @@ QString EXAMPLE = "";
 QString KEYBOARDS = "";
 QString SOUNDFONTS = "";
 QString HTML = "";
+QString MIDIEXT = "";
+QString AUDIOEXT = "";

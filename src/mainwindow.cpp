@@ -186,15 +186,7 @@ void MainWindow::midi2audio()
 
     QStringList arguments;
     arguments.append("--soundfont=" + SOUNDFONTS + "/" + ui->sf2_combobox->currentText());
-
-    #ifdef Q_OS_WINDOWS
-    arguments.append(OUTPUT + "/output.mid");
-    #endif
-
-    #ifdef Q_OS_LINUX
-    arguments.append(OUTPUT + "/output.midi");
-    #endif
-
+    arguments.append(OUTPUT + "/output" + MIDIEXT);
     midi2audioCall->start(APPPATH, arguments);
 }
 
@@ -208,16 +200,8 @@ void MainWindow::midi2audioFinished(int exit)
     exportFiles();
     if (exit) QMessageBox::critical(this, "Erreur", "La musique n'a pas pu être générée pour une raison inconnue");
     ui->play_pushButton->setEnabled(true);
-
-
-    #ifdef Q_OS_WINDOWS
-    QUrl audio = QUrl::fromLocalFile(OUTPUT+ "/output.wav");
-    #endif
-
-    #ifdef Q_OS_LINUX
-    QUrl audio = QUrl::fromLocalFile(OUTPUT+ "/output.ogg");
-    #endif
-
+    QUrl audio = QUrl::fromLocalFile(OUTPUT+ "/output" + AUDIOEXT);
+    music->setMedia(QMediaContent());
     music->setMedia(audio);
     terminal("Génération du rendu audio terminé");
 }
@@ -402,15 +386,12 @@ void MainWindow::open(QString filename)
             updatePreview(pdf);
         }
 
-        #ifdef Q_OS_LINUX
-        QString audio = fileinfo.path() + "/" + fileinfo.completeBaseName() + ".ogg";
-        #else
-        QString audio = fileinfo.path() + "/" + fileinfo.completeBaseName() + ".wav";
-        #endif
+        QString audio = fileinfo.path() + "/" + fileinfo.completeBaseName() + AUDIOEXT;
 
         if (QFile(audio).exists())
         {
             terminal("Chargement de : " + audio);
+            music->setMedia(QMediaContent());
             music->setMedia(QUrl::fromLocalFile(audio));
         }
      }
@@ -666,7 +647,6 @@ void MainWindow::playMusic()
     else
     {
         music->play();
-
         QIcon pause(ICON + "/pause.svg");
         ui->play_pushButton->setIcon(pause);
     }
@@ -688,11 +668,9 @@ void MainWindow::exportFiles()
 
         QFile::remove(fi.path() + "/" + fi.baseName() + ".pdf");
         QFile::remove(fi.path() + "/" + fi.baseName() + ".png");
-        QFile::remove(fi.path() + "/" + fi.baseName() + ".midi");
-        QFile::remove(fi.path() + "/" + fi.baseName() + ".mid");
         QFile::remove(fi.path() + "/" + fi.baseName() + ".ly");
-        QFile::remove(fi.path() + "/" + fi.baseName() + ".wav");
-        QFile::remove(fi.path() + "/" + fi.baseName() + ".ogg");
+        QFile::remove(fi.path() + "/" + fi.baseName() + MIDIEXT);
+        QFile::remove(fi.path() + "/" + fi.baseName() + AUDIOEXT);
 
         if (ui->actionExportPDF_tool->isChecked())
             QFile::copy(OUTPUT + "/output.pdf", fi.path() + "/" + fi.baseName() + ".pdf");
@@ -701,18 +679,13 @@ void MainWindow::exportFiles()
             QFile::copy(OUTPUT + "/output.png", fi.path() + "/" + fi.baseName() + ".png");
 
         if (ui->actionExportMIDI_tool->isChecked())
-            QFile::copy(OUTPUT + "/output.midi", fi.path() + "/" + fi.baseName() + ".midi");
+            QFile::copy(OUTPUT + "/output" + MIDIEXT, fi.path() + "/" + fi.baseName() + MIDIEXT);
 
         if (ui->actionExportLY_tool->isChecked())
             QFile::copy(OUTPUT + "/output.ly", fi.path() + "/" + fi.baseName() + ".ly");
 
         if (ui->actionExportWAV_tool->isChecked())
-        {
-            if(QFile::exists(OUTPUT + "/output.wav"))
-                QFile::copy(OUTPUT + "/output.wav", fi.path() + "/" + fi.baseName() + ".wav");
-            else
-                QFile::copy(OUTPUT + "/output.ogg", fi.path() + "/" + fi.baseName() + ".ogg");
-        }
+            QFile::copy(OUTPUT + "/output" + AUDIOEXT, fi.path() + "/" + fi.baseName() + AUDIOEXT);
     }
 }
 

@@ -20,5 +20,7 @@ extern QString EXAMPLE;    // where are stored the example files
 extern QString KEYBOARDS;  // where are stored the keyboard configuration files
 extern QString HTML;
 extern QString SOUNDFONTS; // where are stored the soundfont files
+extern QString MIDIEXT;
+extern QString AUDIOEXT;
 
 #endif // GLOBALS_H

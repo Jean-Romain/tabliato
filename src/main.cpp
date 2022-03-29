@@ -3,6 +3,8 @@
 #include <QDir>
 #include <QDebug>
 #include <QLocale>
+#include <QStandardPaths>
+
 #include "global.h"
 #include "mainwindow.h"
 #include "file.h"
@@ -26,15 +28,7 @@ int main(int argc, char *argv[])
     APPDIR = QApplication::applicationDirPath();
     APPPATH = QApplication::applicationFilePath();
     SHARE = (APPDIR == "/usr/bin") ? "/usr/share/tabliato" : APPDIR + "/share";
-
-    #ifdef Q_OS_WINDOWS
-    LOCAL = SHARE;
-    #endif
-
-    #ifdef Q_OS_LINUX
-    LOCAL = QDir::homePath() + "/.local/share/tabliato";
-    #endif
-
+    LOCAL = QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation);
     TEMPLATE = SHARE + "/templates";
     KEYBOARDS = SHARE + "/keyboards";
     SOUNDFONTS = LOCAL + "/soundfonts";
@@ -42,13 +36,21 @@ int main(int argc, char *argv[])
     DOC = SHARE + "/doc";
     HTML = SHARE + "/html";
     EXAMPLE = SHARE + "/exemples";
+    OUTPUT = LOCAL + "/output";
+
+    #ifdef Q_OS_WINDOWS
+    MIDIEXT = ".mid";
+    AUDIOEXT = ".wav";
+    #endif
+
+    #ifdef Q_OS_LINUX
+    MIDIEXT = ".midi";
+    AUDIOEXT = ".ogg";
+    #endif
+
 
     if (qobject_cast<QApplication *>(app.data()))
     {
-        QTemporaryDir tmpdir;
-        TEMP = (APPDIR == "/usr/bin") ? tmpdir.path() : APPDIR;
-        OUTPUT = TEMP + "/output";
-
         MainWindow fenetre;
         fenetre.show();
 
@@ -56,8 +58,6 @@ int main(int argc, char *argv[])
     }
     else
     {
-        TEMP = APPDIR;
-
         QCommandLineParser parser;
         parser.setApplicationDescription("Generate tabulature for accordion from FILE");
         parser.addHelpOption();
@@ -220,33 +220,27 @@ int main(int argc, char *argv[])
 
         audio:
 
-        qDebug() << ogg;
-
         if (!ogg) return 0;
+
+        QFile::remove(ofolder + "/" + ofile + AUDIOEXT);
 
         QProcess timidity;
 
         #ifdef Q_OS_WINDOWS
-        File::write(APPDIR + "\\TiMidity++\\Timidity.cfg", "soundfont \"" + soundfont + "\"");
         QString command = APPDIR + "\\TiMidity++\\timidity.exe";
-        QString ext =  ".wav";
         QString mode = "-Ow";
-        QFile::remove(ofolder + "/" + ofile + ext);
         #endif
 
         #ifdef Q_OS_LINUX
         QString command = "timidity";
-        QString ext =  ".ogg";
         QString mode = "-Ov";
         #endif
 
         QStringList arguments;
         arguments.append(ifile);
         arguments.append(mode);
-        #ifdef Q_OS_LINUX
         arguments.append("--config-string=soundfont\\ " + soundfont);
-        #endif
-        arguments.append("--output-file=" + ofolder + "/" + ofile + ext);
+        arguments.append("--output-file=" + ofolder + "/" + ofile + AUDIOEXT);
 
         timidity.start(command, arguments);
         timidity.waitForFinished(10000);

@@ -38,7 +38,7 @@ void ButtonParser::setNote(QString str)
     else if(avaibleButton.length() > 1)
     {
         if(QString(avaibleButton[1][0]) != direction && QString(avaibleButton[0][0]) != direction)
-            throw std::logic_error(QString("Vous ne pouvez pas jouer la note " + note + " dans le sens " + direction + " avec cet accordéon.").toStdString());
+            throw std::logic_error(QString("Vous ne pouvez pas jouer la note " + note + " dans le sens " + ((direction == "t") ? "tiré" : "poussé") + " avec cet accordéon.").toStdString());
 
         if(rank.isEmpty())
         {

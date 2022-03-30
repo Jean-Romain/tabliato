@@ -1,3 +1,9 @@
+## Tabliato 1.0.3
+
+- New: capacité à détecté et informer avec un message les symboles innatedus dans un accord. Par exemple `p<7 8 G>` affiche un message: *Ligne 1 - Symbole innatentu détecté à l'intérieur d'un accord: G*.
+- New: capacité à détecté et informer avec un message les symboles innatedus dans un accompagment. Par exemple `[A 2 a]` affiche un message: *Ligne 1 - Symbole innatentu détecté à l'intérieur d'un accompagnement: 2*.
+- Bug: lorsqu'une erreur est détectée dans le code, le numéro de la ligne est le bon même si il y a des commentaires avant. Les commentaires trompaient le compte des lignes.
+
 ## Tabliato 1.0.2
 
 - New: tabliato test toujours si une nouvelle version est disponible lors de l'ouverture. Si oui il propose de télécharger la nouvelle version auquel cas l'application renvoie vers la page de téléchargemnt et se ferme. L'utilisateur peut aussi dire non ou remettre à plus tard c'est à dire la prochaine fois que le programme va s'ouvrir.

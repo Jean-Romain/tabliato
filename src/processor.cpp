@@ -57,7 +57,7 @@ void TabliatoProcessor::parseMusic()
     try
     {
         // Initialisation des états. Le parseur s'occupe des spanners de tenu des notes
-        // Si on trouve un note plus longue que blanche alors on inserer ouvrir un testSpanner
+        // Si on trouve un note plus longue que blanche alors on doit ouvrir un testSpanner
         // avant la note et le fermer plus tard. Une liaison à le même effet. On peut aussi
         // avoir des spanner à l'accompagnement dans de rares cas. Exemple G:2.
         bool spannerIsOpen = false;
@@ -91,6 +91,7 @@ void TabliatoProcessor::parseMusic()
             case COMMENT:
                 while(i < symbols.size() && !isNewLine(symbols[i])) i++;
                 parsed = "";
+                line++;
                 break;
 
             // Lettre p t P T. On update l'état global courant
@@ -197,6 +198,10 @@ void TabliatoProcessor::parseMusic()
                         button.setNote(symbols[i]);
                         tmp.append(button.button);
                     }
+                    else if (!isOpenChord(symbols[i]) && !isCloseChord(symbols[i]))
+                    {
+                        throw std::logic_error((QString("Symbole innatentu détecté à l'intérieur d'un accord: ") + symbols[i]).toStdString());
+                    }
                     i++;
                 }
 
@@ -260,18 +265,20 @@ void TabliatoProcessor::parseMusic()
                        interpolate = false;
                        tmp.append(pattern.parseExplicitBass(symbols[i]));
                     }
-
                     // Basse/accord implicite e.g B ou a
-                    if (isImplicitBass(symbols[i]))
+                    else if (isImplicitBass(symbols[i]))
                     {
                         interpolate = true;
                         tmp.append(symbols[i]);
                     }
-
                     // Un silence
-                    if (isRest(symbols[i]))
+                    else if (isRest(symbols[i]))
                     {
                         tmp.append(symbols[i]);
+                    }
+                    else if (!isOpenManualBass(symbols[i]) && !isCloseManualBass(symbols[i]))
+                    {
+                        throw std::logic_error((QString("Symbole innatentu détecté à l'intérieur d'un accompagnement: ") + symbols[i]).toStdString());
                     }
 
                     i++;

@@ -4,6 +4,8 @@
 #include <QDebug>
 #include <QLocale>
 #include <QStandardPaths>
+#include <QMessageBox>
+#include <QDesktopServices>
 
 #include "global.h"
 #include "mainwindow.h"
@@ -23,7 +25,7 @@ int main(int argc, char *argv[])
     QScopedPointer<QCoreApplication> app(createApplication(argc, argv));
     QCoreApplication::setOrganizationName("tabliato");
     QCoreApplication::setApplicationName("tabliato");
-    QCoreApplication::setApplicationVersion("1.0.2");
+    QCoreApplication::setApplicationVersion("1.0.0");
 
     APPDIR = QApplication::applicationDirPath();
     APPPATH = QApplication::applicationFilePath();
@@ -51,6 +53,67 @@ int main(int argc, char *argv[])
 
     if (qobject_cast<QApplication *>(app.data()))
     {
+        // Check if a new version is available before to start the program
+        try
+        {
+            QString res = FileDownloader::download("https://raw.githubusercontent.com/Jean-Romain/tabliato/master/version");
+            QString ans = QString(res);
+            QVersionNumber new_version = QVersionNumber::fromString(ans);
+            QVersionNumber current_version = QVersionNumber::fromString(qApp->applicationVersion());
+            QString fileName(LOCAL + "/no-update");
+            QFile skip_update(fileName);
+
+            QMessageBox msgBox;
+            msgBox.setText("Une nouvelle version de tabliato est disponible");
+            msgBox.setInformativeText(QString("Voulez vous installer tabliato " + new_version.toString()));
+            msgBox.setIcon(QMessageBox::Question);
+            msgBox.setStandardButtons(QMessageBox::Yes | QMessageBox::No | QMessageBox::Ignore);
+            msgBox.setDefaultButton(QMessageBox::Yes);
+            msgBox.setButtonText(QMessageBox::Yes, "Oui");
+            msgBox.setButtonText(QMessageBox::No, "Non");
+            msgBox.setButtonText(QMessageBox::Ignore, "Plus tard");
+
+            if (new_version > current_version)
+            {
+                // Si il n'y a pas de fichier c'est que l'utilisateur n'a jamais cliqué sur Non pour l'update
+                // donc il on demande s'il veut mettre à jour
+                bool suggest_update = false;
+                if (!skip_update.exists())
+                {
+                    suggest_update = true;
+                }
+                // Si le fichier existe c'est que l'utilisateur a dit non pour l'update
+                // mais quand même ca bloque pour l'éternité. Donc si c'est une version encore
+                // plus grande que celle refusée par l'utilisateur on propose quand mêm
+                else
+                {
+                    QVersionNumber skiped_version = QVersionNumber::fromString(File::read(fileName));
+                    if (new_version > skiped_version)
+                        suggest_update = true;
+                }
+
+                if (suggest_update)
+                {
+                    int ret = msgBox.exec();
+                    if (ret == QMessageBox::Yes)
+                    {
+                        QDesktopServices::openUrl(QUrl("https://jean-romain.github.io/tabliato/download.html"));
+                        skip_update.remove();
+                        return 0;
+                    }
+                    else if (ret == QMessageBox::No)
+                    {
+                        File::write(fileName, new_version.toString());
+                    }
+                }
+            }
+        }
+        catch (std::exception &e)
+        {
+
+        }
+
+        // Start the program
         MainWindow fenetre;
         fenetre.show();
 

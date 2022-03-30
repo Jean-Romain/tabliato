@@ -1,7 +1,9 @@
 ## Tabliato 1.0.2
 
-- Fix: tabliato démarre maintenant toujours sur la tablature et sur l'onglet "Information"" au lieu de "paroles" et "Information complémentaires".
 - New: tabliato teste toujour si une nouvelle version est disponible lors de l'ouverture. Si oui il propose de télécharger la nouvelle version auquel cas l'application renvoie vers la page de téléchargemnt et se ferme. L'utilisateur peut aussi dire non ou remettre à plus tard c'est à dire la prochaine fois que le programme va s'ouvrir.
+- Fix: tabliato démarre maintenant toujours sur la tablature et sur l'onglet "Information"" au lieu de "paroles" et "Information complémentaires"
+- Fix: le dock "lecture de la musique" a une taille fixe. Sa taille variait d'une ouverture à l'autre sans raison apparente. Il a maintenant la taille minimal fixe.
+
 
 ## Tabliato 1.0.1
 

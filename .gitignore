@@ -86,3 +86,4 @@ share/exemples/*.wav
 output/
 debian/*.deb
 debian/tabliato/
+public-binaries/

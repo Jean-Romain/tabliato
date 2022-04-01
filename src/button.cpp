@@ -5,185 +5,219 @@
 
 #include "button.h"
 
-QString Button::direction = "p";
-QString Button::duration = "4";
+QString CURRENTDIRECTION = "p";
+QString CURRENTDURATION = "4";
 
 ButtonParser::ButtonParser(Keyboard &keyboard)
 {
     kbd = &keyboard;
 }
 
-void ButtonParser::setNote(QString str)
+void ButtonParser::set_rhs_note(QString str)
 {
+    m_side = RHS;
+    m_duration = CURRENTDURATION;
+    m_direction = CURRENTDIRECTION;
+
     extractNote.indexIn(str);
-    note = extractNote.cap(1);
+    m_note = extractNote.cap(1);
 
     if (extractRankNote.indexIn(str) >= 0)
-        rank = extractRankNote.cap(1);
+        m_rank = extractRankNote.cap(1);
 
     if (extractDuration.indexIn(str) >= 0)
-        duration = extractDuration.cap(1);
+    {
+        m_duration = extractDuration.cap(1);
+    }
 
     if (extractDirection.indexIn(str) >= 0)
     {
-        direction = extractDirection.cap(1);
-        direction = direction.toLower();
+        m_direction = extractDirection.cap(1);
+        m_direction = m_direction.toLower();
     }
 
-    avaibleButton = kbd->getButtons(note);
+    avaibleButton = kbd->getButtons(m_note);
 
-    if(avaibleButton.length() == 1)
-        button = avaibleButton[0];
-
-    else if(avaibleButton.length() > 1)
+    if (avaibleButton.length() == 1)
     {
-        if(QString(avaibleButton[1][0]) != direction && QString(avaibleButton[0][0]) != direction)
-            throw std::logic_error(QString("Vous ne pouvez pas jouer la note " + note + " dans le sens " + ((direction == "t") ? "tiré" : "poussé") + " avec cet accordéon.").toStdString());
+        m_button = avaibleButton[0];
+    }
+    else if (avaibleButton.length() > 1)
+    {
+        if (QString(avaibleButton[1][0]) != m_direction && QString(avaibleButton[0][0]) != m_direction)
+            throw std::logic_error(QString("Vous ne pouvez pas jouer la note " + m_note + " dans le sens " + ((m_direction == "t") ? "tiré" : "poussé") + " avec cet accordéon.").toStdString());
 
-        if(rank.isEmpty())
+        if (m_rank.isEmpty())
         {
-            if(QString(avaibleButton[0][0]) == direction && QString(avaibleButton[1][0]) != direction)
-               button = avaibleButton[0];
-            else if(QString(avaibleButton[1][0]) == direction && QString(avaibleButton[0][0]) != direction)
-               button = avaibleButton[1];
+            if(QString(avaibleButton[0][0]) == m_direction && QString(avaibleButton[1][0]) != m_direction)
+               m_button = avaibleButton[0];
+            else if(QString(avaibleButton[1][0]) == m_direction && QString(avaibleButton[0][0]) != m_direction)
+               m_button = avaibleButton[1];
             else
-            {
-                throw std::logic_error(QString("Il y a deux possibilités pour la note " + note
-                                           + "\n  1. " + avaibleButton[0]
-                                           + "\n  2. " + avaibleButton[1]
-                                           + "\nAjoutez une indication de rang. Par exemple : "
-                                           + note + "/1").toStdString());
-            }
+               throw std::logic_error(QString("Il y a deux possibilités pour la note " + m_note + "\n  1. " + avaibleButton[0] + "\n  2. " + avaibleButton[1] + "\nAjoutez une indication de rang. Par exemple : " + m_note + "/1").toStdString());
         }
         else
         {
-            int i = rank.toInt();
+            int i = m_rank.toInt();
 
-            if(i <= avaibleButton.length())
-                button = avaibleButton[i-1];
+            if (i <= avaibleButton.length())
+                m_button = avaibleButton[i-1];
             else
-                throw std::logic_error(QString("Le rang " + rank + " n'est pas un rang valide pour la note " + note + " sur cet accordéon").toStdString());
+                throw std::logic_error(QString("Le rang " + m_rank + " n'est pas un rang valide pour la note " + m_note + " sur cet accordéon").toStdString());
          }
      }
 
-    if(extractNumButton.indexIn(button) >= 0)
-        button = extractNumButton.cap(1);
+    if (extractNumButton.indexIn(m_button) >= 0)
+        m_button = extractNumButton.cap(1);
 }
 
-void ButtonParser::setButton(QString str)
+void ButtonParser::set_rhs_button(QString str)
 {    
-    if (extractDuration.indexIn(str) >= 0)
-        duration = extractDuration.cap(1);
+    m_side = RHS;
+    m_duration = CURRENTDURATION;
+    m_direction = CURRENTDIRECTION;
 
-    if (duration != "1"  && duration != "1."  &&
-        duration != "2"  && duration != "2."  &&
-        duration != "4"  && duration != "4."  &&
-        duration != "8"  && duration != "8."  &&
-        duration != "16" && duration != "16." &&
-        duration != "32" && duration != "32." )
-        throw std::logic_error(QString("La durée " + duration + " n'est pas une durée valide").toStdString());
+    if (extractDuration.indexIn(str) >= 0)
+    {
+        m_duration = extractDuration.cap(1);
+
+        if (m_duration != "1"  && m_duration != "1."  &&
+            m_duration != "2"  && m_duration != "2."  &&
+            m_duration != "4"  && m_duration != "4."  &&
+            m_duration != "8"  && m_duration != "8."  &&
+            m_duration != "16" && m_duration != "16." &&
+            m_duration != "32" && m_duration != "32." )
+            throw std::logic_error(QString("La durée " + m_duration + " n'est pas une durée valide").toStdString());
+    }
 
     if (extractNumButton.indexIn(str) >= 0)
-        button = extractNumButton.cap(1);
+        m_button = extractNumButton.cap(1);
 
     if (extractDirection.indexIn(str) >= 0)
-        direction = extractDirection.cap(1);
+        m_direction = extractDirection.cap(1);
 
     extractRankButton.indexIn(str);
 
     if (extractRankButton.cap(0) == "")
-        rank = "1";
+        m_rank = "1";
     else if(extractRankButton.cap(0) == "'")
-        rank = "2";
+        m_rank = "2";
     else
-        rank = "3";
+        m_rank = "3";
 
-    note = kbd->getNote(direction + button);
+    m_note = kbd->getNote(m_direction + m_button);
 }
 
-void ButtonParser::setBass(QString str)
+void ButtonParser::set_lhs_button(QString str)
 {
-    if(extractDuration.indexIn(str) >= 0)
-        duration = extractDuration.cap(1);
+    m_side = LHS;
 
-    button = str.split(":")[0];
-
-    direction = "up";
-
-    note = kbd->getNote(button);
-
-    button.replace(QRegExp("#"), "♯");
-    button.replace(QRegExp("([a-gA-G])b"), "\\1♭");
+    // TODO
 }
 
 QString ButtonParser::print(bool markup)
 {
-    QString dir;
-    QString btn;
-    QString nte;
+    if (m_side == RHS)
+    {
+        QString dir;
+        QString btn;
+        QString nte;
 
-    if(!direction.isEmpty() && markup)
-        dir = "\\" + direction + " ";
+        if(!m_direction.isEmpty() && markup)
+            dir = "\\" + m_direction + " ";
 
-    if(!button.isEmpty() && markup)
-        btn = " \"" + button + "\" ";
+        if(!m_button.isEmpty() && markup)
+            btn = " \"" + m_button + "\" ";
 
-    nte = note;
-    if (note.split(" ").length() > 1)
-        nte = "<" + note + ">";
+        nte = m_note;
+        if (m_note.split(" ").length() > 1)
+            nte = "<" + m_note + ">";
 
-    return dir + btn + nte + duration;
+        return dir + btn + nte + m_duration;
+    }
+    else
+    {
+        // TODO
+        return QString("");
+    }
 }
 
 void ButtonParser::clear()
 {
-    button.clear();
-    note.clear();
-    finger.clear();
-    rank.clear();
+    m_button.clear();
+    m_note.clear();
+    m_finger.clear();
+    m_rank.clear();
+    m_direction.clear();
+    m_duration.clear();
 }
 
 //===============================
 
 MultiButtonParser::MultiButtonParser(Keyboard &keyboard)
 {
-    kbd = &keyboard;
+    m_kbd = &keyboard;
 }
 
-void MultiButtonParser::setMultiButton(QString str)
+void MultiButtonParser::set_rhs_multibutton(QString str)
 {
-    chord.clear();
+    m_chord.clear();
 
-    QStringList symbols = str.split(",");
+    // on trouve une durée dans ce bazarre après la fermeture
+    QString duration = CURRENTDURATION;
+    QString direction = CURRENTDIRECTION;
+
+    if (extractDuration.indexIn(str) >= 0)
+        duration = extractDuration.cap(1);
+
+    if (extractDirection.indexIn(str) >= 0)
+        direction = extractDirection.cap(1);
+
+    str = str.split("<")[1]; // remove first character which is <
+    str = str.split(">")[0]; // remove last character which is >
+
+    QStringList symbols = str.split(" ");
     for (QString symbol : symbols)
     {
-        ButtonParser button(*kbd);
-        button.setButton(symbol);
-        chord.append(button);
+        ButtonParser button(*m_kbd);
+        button.set_rhs_button(direction + symbol + ":" + duration);
+        m_chord.append(button);
     }
+}
+
+void MultiButtonParser::set_lhs_multibutton(QString str)
+{
+    // TODO
 }
 
 QString MultiButtonParser::print(bool markup)
 {
     QString out;
-
-    for(int i = 0 ; i < chord.length() ; ++i)
+    if (m_chord[0].side() == Button::RHS)
     {
-        if (markup)
-            out += "\\" + chord[i].direction + " \"" + chord[i].button + "\" ";
-        else
-            out += " ";
+
+        for(int i = 0 ; i < m_chord.length() ; ++i)
+        {
+            if (markup)
+                out += "\\" + m_chord[i].direction() + " \"" + m_chord[i].button() + "\" ";
+            else
+                out += " ";
+        }
+
+        out += "<";
+
+        for(int i = 0 ; i < m_chord.length() ; ++i)
+        {
+            out += m_chord[i].note() + " ";
+        }
+
+        out += "> ";
+        out += m_chord[0].duration();
     }
-
-    out += "<";
-
-    for(int i = 0 ; i < chord.length() ; ++i)
+    else
     {
-        out += chord[i].note + " ";
+        // TODO
     }
-
-    out += "> ";
-    out += chord[0].duration;
 
     return out;
 }

@@ -12,6 +12,7 @@ SyntaxAnalyser::SyntaxAnalyser()
     command_rgx.setPattern("\\\\\\w+");                                                         // matches \blabla
     fingering_rgx.setPattern("/([a-zA-Z]+|\\d)");
     closeChord_rgx.setPattern(">(:\\d{1,2})?\\.?~?");                                           // matches close chord e.g. >, >:2
+    openChord_rgx.setPattern("[ptPT]?<");
     note_rgx.setPattern("\\$?[a-g]{1}(is|es)?(,|'){0,2}(/[123])?(:\\d{0,2}.?)?(/[123])?~?");    // matches a to g gis ges bes cis ces a, b, c', d', d'', d'':2.
     metric_rgx.setPattern("\\d{1,2}/\\d{1,2}");                                                 // matches 3/4, 2/2, 6/8
 
@@ -73,7 +74,7 @@ bool SyntaxAnalyser::isNewLine(QString str){
 }*/
 
 bool SyntaxAnalyser::isOpenChord(QString str){
-    return str == "<";
+    return genericTest(openChord_rgx, str);
 }
 
 bool SyntaxAnalyser::isCloseChord(QString str){

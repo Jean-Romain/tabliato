@@ -45,6 +45,7 @@ class SyntaxAnalyser
         QRegExp command_rgx;
         QRegExp fingering_rgx;
         QRegExp closeChord_rgx;
+        QRegExp openChord_rgx;
         QRegExp note_rgx;
         QRegExp metric_rgx;
 

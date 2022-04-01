@@ -15,6 +15,7 @@ class TabliatoProcessor : public SyntaxAnalyser
 {
     public:
         TabliatoProcessor(Tabulature &tabulature);
+        QString get_logs() { return logs.join("\n"); }
 
     private:
         void parseMusic();

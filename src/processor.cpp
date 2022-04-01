@@ -22,8 +22,8 @@ TabliatoProcessor::TabliatoProcessor(Tabulature &tabulature)
 void TabliatoProcessor::parseMusic()
 {
     // A button holds the logic of parsing the notes and stores some context
-    Button::direction = "p";
-    Button::duration = "4";
+    CURRENTDIRECTION = "p";
+    CURRENTDURATION = "4";
     ButtonParser button(keyboard);
     MultiButtonParser multiButton(keyboard);
 
@@ -39,7 +39,7 @@ void TabliatoProcessor::parseMusic()
     tabulature.replace("volta 2", "volta:2"); // Protection d'un cas particulier
     tabulature.replace("<<", " \\doubelt ");   // Protection de << pour les contre chants
     tabulature.replace(">>", " \\doubegt ");   // Protection de >> pour les contre chants
-    tabulature.replace("<", " < ");
+    tabulature.replace("<", "< ");
     tabulature.replace(">", " >");
     tabulature.replace("[", " [ ");
     tabulature.replace("]", " ] ");
@@ -97,7 +97,7 @@ void TabliatoProcessor::parseMusic()
             // Lettre p t P T. On update l'état global courant
             case DIRECTION:
             {
-                Button::direction = getDirection(symbol);
+                CURRENTDIRECTION = getDirection(symbol);
                 parsed = "";
                 break;
             }
@@ -111,9 +111,12 @@ void TabliatoProcessor::parseMusic()
                 currentSymbolIsBass = false;
 
                 if (type == BUTTON)
-                    button.setButton(symbol);
+                    button.set_rhs_button(symbol);
                 else
-                    button.setNote(symbol);
+                    button.set_rhs_note(symbol);
+
+                CURRENTDURATION = button.duration();
+                CURRENTDIRECTION =  button.direction();
 
                 if (spannerIsOpen && spannerMustBeClosed)
                 {
@@ -182,6 +185,7 @@ void TabliatoProcessor::parseMusic()
             {
                 nnote++;
                 currentSymbolIsBass = false;
+                QString open = symbols[i];
 
                 // On lit jusqu'a la fermeture >
                 QStringList tmp;
@@ -195,8 +199,8 @@ void TabliatoProcessor::parseMusic()
                     // Si c'est une note on la transforme en bouton
                     else if (isNote(symbols[i]))
                     {
-                        button.setNote(symbols[i]);
-                        tmp.append(button.button);
+                        button.set_rhs_note(symbols[i]);
+                        tmp.append(button.button());
                     }
                     else if (!isOpenChord(symbols[i]) && !isCloseChord(symbols[i]))
                     {
@@ -208,16 +212,11 @@ void TabliatoProcessor::parseMusic()
                 if (i == symbols.size())
                     throw std::logic_error("Chevron < ouvert mais jamais fermé.");
 
+                symbol = open + tmp.join(" ") + symbols[i];
 
-                // On joint les boutons en une seule stringavec des virgules car c'est comme
-                // ca que le multibutton parse
-                symbol = tmp.join(",");
+                multiButton.set_rhs_multibutton(symbol);
 
-                // on trouve une durée dans ce bazarre
-                if (extractDuration.indexIn(symbols[i]) >= 0)
-                    symbol += ":" + extractDuration.cap(1);
-
-                multiButton.setMultiButton(symbol);
+                CURRENTDURATION = multiButton.duration();
 
                 if (spannerIsOpen && spannerMustBeClosed)
                 {
@@ -361,7 +360,7 @@ void TabliatoProcessor::parseMusic()
 
 
             // logs
-            if (symbol != "") log("Symbol: " + symbol + " | type: " + QString::number(type) + " | parsed: " + parsed);
+            if (symbol != "" && symbol != "\n") log("Symbol: " + symbol + " >> " + parsed);
         }
 
         if (spannerMustBeClosed) parsedSymbolsMelody.append(QString("\\endSpanners \\stopTextSpan"));

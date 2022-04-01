@@ -150,6 +150,8 @@ void MainWindow::compile()
     terminal("Compilation");
 
     Tabulature tab = readMusicFromUI();
+    TabliatoProcessor proc(tab);
+    terminal(proc.get_logs());
     QString dtb = OUTPUT + "/output.dtb";
 
     File::mkdir(OUTPUT);

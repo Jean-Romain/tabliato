@@ -285,7 +285,15 @@ void TabliatoProcessor::parseMusic()
             // Le cas spécial \motif permer de changer l'état du parseur de motif.
             case COMMAND:
             {
-                if (symbol == "\\break") currentSymbolIsBass = false;
+                if (symbol == "\\break")
+                {
+                    currentSymbolIsBass = false;
+                }
+                if (symbol == "\\partial")
+                {
+                    parsed = symbols[i] + " " + symbols[i+1];
+                    i++;
+                }
                 if (symbol == "\\motif")
                 {
                     // \motif dans être suivit de e.g. [A:2 a:4 a:4] on parse cette sequence

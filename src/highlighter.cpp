@@ -24,7 +24,7 @@ Highlighter::Highlighter(QTextDocument *parent) : QSyntaxHighlighter(parent)
 
     // Pattern de reconnaissance des informations de temps
     QStringList timePatterns;
-    timePatterns << "(:[0-9]{1,2}.?)" << "\\s\\d{1,2}/\\d{1,2}" << "\\s\\d{1,2}\\*\\d{1,2}";
+    timePatterns << "(:[0-9]{1,2}.?)" << "\\s\\d{1,2}/\\d{1,2}" << "\\s\\d{1,2}\\*\\d{1,2}" << "\\\\partial ([0-9]{1,2}.?)";
     foreach (const QString &pattern, timePatterns)
     {
         rule.pattern = QRegExp(pattern);
@@ -64,7 +64,7 @@ Highlighter::Highlighter(QTextDocument *parent) : QSyntaxHighlighter(parent)
 
     // Pattern de reconnaissance des mots clés
     QStringList keywordPatterns;
-    keywordPatterns << "(\\\\[a-z]+)" << "(volta[ ]?[0-9]?)";
+    keywordPatterns << "(\\\\[a-z]+)" << "(volta[ ]?[0-9]?)" << "(Timing.[a-zA-Z]+ ?={1} ?.*)";
     foreach (const QString &pattern, keywordPatterns)
     {
         rule.pattern = QRegExp(pattern);

@@ -3,7 +3,9 @@
 - New: les accords main gauche affichent une ligne de tenu si néccessaire [#14](https://github.com/Jean-Romain/tabliato/issues/14)
 - New: capacité à détecté et informer avec un message les symboles inattendus dans un accord. Par exemple `p<7 8 G>` affiche un message: *Ligne 1 - Symbole innatentu détecté à l'intérieur d'un accord: G*.
 - New: capacité à détecté et informer avec un message les symboles innatedus dans un accompagment. Par exemple `[A 2 a]` affiche un message: *Ligne 1 - Symbole innatentu détecté à l'intérieur d'un accompagnement: 2*.
+- New: la coloration syntaxique reconnait les commandes `\set Timing.*`
 - Bug: lorsqu'une erreur est détectée dans le code, le numéro de la ligne est le bon même si il y a des commentaires avant. Les commentaires trompaient le compte des lignes.
+- Bug: amélioration de l'interprétation de anacrouses. Dans `\partial 4` le 4 était interprété comme le bouton 4. Il fallait écrire `\partial:4` ou  `\partial :4` ou `\partial 2*8` pour protéger le 4. Le mot clé `\partial` est maintenant reconnu et `\partial 4` fonctionne. La coloration syntaxe a été mise à jour.
 
 ## Tabliato 1.0.2
 

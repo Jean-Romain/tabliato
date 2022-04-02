@@ -547,14 +547,12 @@ QString TabliatoProcessor::insert_rhs_spanners(QString str)
 
 QString TabliatoProcessor::insert_lhs_spanners(QString str)
 {
-    qDebug() << "Insert : " + str <<  " o: " << m_lhs_open_spanner <<" c: " << m_lhs_close_spanner;
     if (m_lhs_close_spanner)
         str += " \\stopTextSpan";
 
     if (m_lhs_open_spanner)
         str += " \\startTextSpan";
 
-    qDebug() << "parsed " << str << "\n";
     return str;
 }
 

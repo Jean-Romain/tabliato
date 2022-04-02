@@ -1,6 +1,7 @@
 ## Tabliato 1.0.3
 
-- New: capacité à détecté et informer avec un message les symboles innatedus dans un accord. Par exemple `p<7 8 G>` affiche un message: *Ligne 1 - Symbole innatentu détecté à l'intérieur d'un accord: G*.
+- New: les accords main gauche affichent une ligne de tenu si néccessaire [#14](https://github.com/Jean-Romain/tabliato/issues/14)
+- New: capacité à détecté et informer avec un message les symboles inattendus dans un accord. Par exemple `p<7 8 G>` affiche un message: *Ligne 1 - Symbole innatentu détecté à l'intérieur d'un accord: G*.
 - New: capacité à détecté et informer avec un message les symboles innatedus dans un accompagment. Par exemple `[A 2 a]` affiche un message: *Ligne 1 - Symbole innatentu détecté à l'intérieur d'un accompagnement: 2*.
 - Bug: lorsqu'une erreur est détectée dans le code, le numéro de la ligne est le bon même si il y a des commentaires avant. Les commentaires trompaient le compte des lignes.
 

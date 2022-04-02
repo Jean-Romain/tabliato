@@ -28,7 +28,7 @@ Motif::Motif(QString metric, int num)
     {
         computeCompactMotif();  // From 22 returns the motif BrarBrar
         setBeat(metric);        // From the metrics e.g. 4/4 and the motif BrarBrar computes the duration of each element.
-                                // here 4 quarter per measure 8 element to place i.e. each element is a eigth.
+                                // here 4 quarter per measure 8 elements to place i.e. each element is a eigth.
         computeMotif();         // get the true rythm B8 r8 a8 r8 B8 r8 a8 r8 B8
     }
 }
@@ -139,118 +139,93 @@ void Motif::computeMotif()
 {
     motif = "";
     for (auto ch : compactMotif)
-       motif.append(QString(ch) + ":" + beat + " ");
+        motif.append(QString(ch) + ":" + beat + " ");
 }
 
-QString Motif::parseBass(QString str)
+QStringList Motif::decompact_motif(QString str)
 {
-    if (motif.isEmpty()) return str;
+    QStringList pattern = motif.split(" ");
+    bool has_duration = str.split(":").size() > 1;
 
-    QStringList tmp = motif.split(" ");
-    for (QString &elem : tmp)
+    // Implicit: received something like A or C:2.
+    // It needs to be unpacked A:4 a:4 a:4 or C:2 for examples
+    if (str.split(" ").size() == 1)
     {
-        if (elem != "")
+        // Case C:2
+        if (isExplicitBass(str) | isRest(str))
         {
-            QStringList elems = elem.split(":");
-            QString duration = elems[1];
-            QString letter = elems[0];
-            if (letter == "B")
-                elem = interpretLetter(str.replace(0, 1, str[0].toUpper()), duration);
-            else if (letter == "a")
-                elem = interpretLetter(str.toLower(), duration);
+            return QStringList(str);
         }
-    }
 
-    return tmp.join(" ");
-}
-
-QString Motif::parseBassSet(QString str)
-{
-    if(motif.isEmpty()) return str;
-
-    QStringList tmp = motif.split(" ");
-
-    QString out;
-    int j = 0;
-
-    QStringList list = str.split(QRegExp(":"));
-
-    for(int i = 0 ; i < tmp.length() ; i++)
+        // Case A
+        for (QString &elem : pattern)
+        {
+            if (elem != "")
+            {
+                QStringList elems = elem.split(":");
+                QString duration = elems[1];
+                QString letter = elems[0];
+                if (letter == "B")
+                    elem = str.replace(0, 1, str[0].toUpper()) + ":" + duration;
+                else if (letter == "a")
+                    elem = str.toLower() + ":" + duration;
+                else
+                    elem = "r" + duration;
+            }
+        }
+     }
+    // Semi explicit: received A a c
+    // It needs to be unpacked A:4 a:4 c:4
+    else if (!has_duration)
     {
-        if (tmp[i] == "")
-        {
+        QStringList out;
+        int j = 0;
 
-        }
-        else if(tmp[i].at(0) == 'r')
-        {
-            out.append(tmp[i] + " ");
-        }
-        else if(j < list.length())
-        {
-            QStringList elems = tmp[i].split(":");
-            QString duration = elems[1];
-            QString letter = elems[0];
+        QStringList list = str.split(" ");
 
-            if (letter == "B")
-                list[j] = interpretLetter(list[j].toUpper(), duration);
-            else if (letter == "a")
-                list[j] = interpretLetter(list[j].toLower(), duration);
-
-            out.append(list[j] + " ");
-            j++;
-        }
-        else
+        for(int i = 0 ; i < pattern.length() ; i++)
         {
+            if (pattern[i] == "" || isRest(pattern[i]))
+            {
+
+            }
+            else if (j < list.length())
+            {
+                QStringList elems = pattern[i].split(":");
+                QString duration = elems[1];
+                QString letter = elems[0];
+
+                if (letter == "B")
+                    pattern[i] = list[j].toUpper() + ":" + duration;
+                else if (letter == "a")
+                    pattern[i] = list[j].toLower() + ":" + duration;
+
+                j++;
+            }
+            else
+            {
+                throw std::logic_error(QString("L'ensemble basses accords " + str.split(":").join(" ") + " n'est pas conforme au motif rythmique").toStdString());
+            }
+        }
+
+        if (j != list.length())
             throw std::logic_error(QString("L'ensemble basses accords " + str.split(":").join(" ") + " n'est pas conforme au motif rythmique").toStdString());
+    }
+    // Explicit: received A:4 a:4 c:4
+    // It needs to be kept as is but validity check
+    else
+    {
+        pattern = str.split(" ");
+        for (QString &sym : pattern)
+        {
+            if (extractDuration.indexIn(sym) == -1)
+            {
+              throw std::logic_error((QString("Impossible de mélanger des termes explicites avec durée et des termes implicite sans durée dans ") + str).toStdString());
+            }
         }
     }
 
-    if(j != list.length())
-        throw std::logic_error(QString("L'ensemble basses accords " + str.split(":").join(" ") + " n'est pas conforme au motif rythmique").toStdString());
-
-    return out;
-}
-
-QString Motif::parseExplicitBass(QString str)
-{
-    QString duration;
-    if (extractDuration.indexIn(str) >= 0)
-        duration = extractDuration.cap(1);
-
-    QString note = str.mid(0, str.indexOf(":"));
-    note = interpretLetter(note, duration);
-    return note;
-}
-
-QString Motif::interpretLetter(QString str, QString duration)
-{
-    str.replace(QRegExp("(^A$)"), "<a, a>" + duration + "^\"A\"");
-    str.replace(QRegExp("(^a$)"), "<a c e>" + duration + "^\"a\"");
-    str.replace(QRegExp("(^C$)"), "<c, c>" + duration + "^\"C\"");
-    str.replace(QRegExp("(^c$)"), "<c e g>" + duration + "^\"c\"");
-    str.replace(QRegExp("(^E$)"), "<e, e>" + duration + "^\"E\"");
-    str.replace(QRegExp("(^e$)"), "<e gis b>" + duration + "^\"e\"");
-    str.replace(QRegExp("(^F$)"), "<f, f>" + duration + "^\"F\"");
-    str.replace(QRegExp("(^f$)"), "<f a c>" + duration + "^\"f\"");
-    str.replace(QRegExp("(^G$)"), "<g, g>" + duration + "^\"G\"");
-    str.replace(QRegExp("(^g$)"), "<g b d>" + duration + "^\"g\"");
-    str.replace(QRegExp("(^D$)"), "<d, d>" + duration + "^\"D\"");
-    str.replace(QRegExp("(^d$)"), "<d fis a>" + duration + "^\"d\"");
-
-    str.replace(QRegExp("(^Am$)"), "<a, a>" + duration + "^\"A\"");
-    str.replace(QRegExp("(^am$)"), "<a c e>" + duration + "^\"a\"");
-    str.replace(QRegExp("(^Cm$)"), "<c, c>" + duration + "^\"C\"");
-    str.replace(QRegExp("(^cm$)"), "<c e g>" + duration + "^\"c\"");
-    str.replace(QRegExp("(^Em$)"), "<e, e>" + duration + "^\"E\"");
-    str.replace(QRegExp("(^em$)"), "<e g b>" + duration + "^\"e\"");
-    str.replace(QRegExp("(^Fm$)"), "<f, f>" + duration + "^\"F\"");
-    str.replace(QRegExp("(^fm$)"), "<f a c>" + duration + "^\"f\"");
-    str.replace(QRegExp("(^Gm$)"), "<g, g>" + duration + "^\"G\"");
-    str.replace(QRegExp("(^gm$)"), "<g b d>" + duration + "^\"g\"");
-    str.replace(QRegExp("(^Dm$)"), "<d, d>" + duration + "^\"D\"");
-    str.replace(QRegExp("(^dm$)"), "<d f a>" + duration + "^\"d\"");
-    //str.replace(QRegExp("(^r$)"), "r" + duration);
-    return str;
+    return pattern;
 }
 
 QString Motif::parseMotif(int num, QString note)
@@ -289,12 +264,6 @@ QString Motif::parseMotif(int num, QString note)
        break;
    }
 }
-
-/*int Motif::noteLength()
-{
-    QString str = parseMotif(number, "A");
-    return str.split(" ").length() -1;
-}*/
 
 bool Motif::isCompatible(QString metric)
 {

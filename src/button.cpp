@@ -112,7 +112,24 @@ void ButtonParser::set_lhs_button(QString str)
 {
     m_side = LHS;
 
-    // TODO
+    if (extractDuration.indexIn(str) >= 0)
+    {
+        m_duration = extractDuration.cap(1);
+        m_button = str.split(":")[0];
+        m_note = kbd->getNote(m_button);
+
+        if (m_duration != "1"  && m_duration != "1."  &&
+            m_duration != "2"  && m_duration != "2."  &&
+            m_duration != "4"  && m_duration != "4."  &&
+            m_duration != "8"  && m_duration != "8."  &&
+            m_duration != "16" && m_duration != "16." &&
+            m_duration != "32" && m_duration != "32." )
+            throw std::logic_error(QString("La durée " + m_duration + " n'est pas une durée valide").toStdString());
+
+        return;
+    }
+
+    throw std::logic_error("Erreur interne, un bouton main gauche devrait toujours être associée à une durée");
 }
 
 QString ButtonParser::print(bool markup)
@@ -123,22 +140,20 @@ QString ButtonParser::print(bool markup)
         QString btn;
         QString nte;
 
-        if(!m_direction.isEmpty() && markup)
+        if (!m_direction.isEmpty() && markup)
             dir = "\\" + m_direction + " ";
 
-        if(!m_button.isEmpty() && markup)
+        if (!m_button.isEmpty() && markup)
             btn = " \"" + m_button + "\" ";
 
-        nte = m_note;
-        if (m_note.split(" ").length() > 1)
-            nte = "<" + m_note + ">";
-
-        return dir + btn + nte + m_duration;
+        return dir + btn + m_note + m_duration;
     }
     else
     {
-        // TODO
-        return QString("");
+        QString openSpanner;
+        QString closeSpanner;
+
+        return m_note + m_duration + "^\"" + m_button + "\"";
     }
 }
 

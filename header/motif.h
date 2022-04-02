@@ -15,9 +15,7 @@ public:
     void set(QString str);
     void setBeat(QString metric);
     QString getBeat(QString metric);
-    QString parseBass(QString str);
-    QString parseBassSet(QString str);
-    QString parseExplicitBass(QString str);
+    QStringList decompact_motif(QString str);
     bool isCompatible(QString metric);
 
 public:
@@ -30,9 +28,7 @@ private:
     void computeNumMotif();
     void computeCompactMotif();
     void computeMotif();
-    //int noteLength();
     QString parseMotif(int num, QString note = "");
-    QString interpretLetter(QString str, QString duration);
 };
 
 #endif // MOTIF_H

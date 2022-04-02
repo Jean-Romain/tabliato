@@ -150,10 +150,20 @@ void MainWindow::compile()
     terminal("Compilation");
 
     Tabulature tab = readMusicFromUI();
-    TabliatoProcessor proc(tab);
-    terminal(proc.get_logs());
-    QString dtb = OUTPUT + "/output.dtb";
 
+    try
+    {
+        TabliatoProcessor proc(tab);
+        terminal(proc.get_logs());
+    }
+    catch(const std::exception &e)
+    {
+        QMessageBox::critical(this, "Erreur", QString(e.what()));
+        terminal(e.what());
+        return;
+    }
+
+    QString dtb = OUTPUT + "/output.dtb";
     File::mkdir(OUTPUT);
     File::writedtb(dtb, tab);
 

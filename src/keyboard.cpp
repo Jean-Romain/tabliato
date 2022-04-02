@@ -33,7 +33,7 @@ void Keyboard::buildKeyboard(QString name)
         accordionName = list[0];
     }
 
-    if(stream.atEnd() && accordionName != name)
+    if (stream.atEnd() && accordionName != name)
         throw std::logic_error(QString("Impossible de trouver le clavier " + name  + " dans le fichier de configuration des claviers").toStdString());
 
     file.close();

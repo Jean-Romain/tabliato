@@ -24,7 +24,7 @@ protected:
     Side m_side;
 
 public:
-    static float getDurationAsNumber(QString str)
+    static float get_duration_as_whole_note(QString str)
     {
         bool dotted_note = str.at(str.size()-1) == ".";
         if (dotted_note) str.resize(str.size()-1);
@@ -33,7 +33,7 @@ public:
         return duration;
     }
 
-    float getDurationAsNumber(){ return getDurationAsNumber(m_duration); }
+    float get_duration_as_whole_note(){ return get_duration_as_whole_note(m_duration); }
     QString duration() { return m_duration; }
     QString direction() { return m_direction; }
     QString button() { return m_button; }
@@ -74,7 +74,7 @@ class MultiButtonParser : public MultiButton, public SyntaxAnalyser
        void set_rhs_multibutton(QString str);
        void set_lhs_multibutton(QString str);
        QString print(bool markup = true);
-       float getDurationAsNumber(){ return m_chord[0].getDurationAsNumber(); }
+       float get_duration_as_whole_note(){ return m_chord[0].get_duration_as_whole_note(); }
        QString duration() { return m_chord[0].duration(); }
        QString direction() { return m_chord[0].direction(); }
 

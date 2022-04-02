@@ -10,9 +10,18 @@
 
 TabliatoProcessor::TabliatoProcessor(Tabulature &tabulature)
 {
-    tab = &tabulature;
+    m_tab = &tabulature;
+    m_rhs_spanner_is_open = false;
+    m_lhs_spanner_is_open = false;
+    m_rhs_spanner_must_be_closed = false;
+    m_lhs_spanner_must_be_closed = false;
+    m_rhs_close_spanner = false;
+    m_lhs_close_spanner = false;
+    m_rhs_open_spanner = false;
+    m_lhs_open_spanner = false;
+    m_rhs_markup = true;
 
-    keyboard.buildKeyboard(tab->get("accordion"));
+    m_keyboard.buildKeyboard(m_tab->get("accordion"));
 
     parseMusic();
     parseLyric();
@@ -24,15 +33,15 @@ void TabliatoProcessor::parseMusic()
     // A button holds the logic of parsing the notes and stores some context
     CURRENTDIRECTION = "p";
     CURRENTDURATION = "4";
-    ButtonParser button(keyboard);
-    MultiButtonParser multiButton(keyboard);
+    ButtonParser button(m_keyboard);
+    MultiButtonParser multiButton(m_keyboard);
 
     // A motif holds the logic of parsing the left hand button into something that corresponds to the rythm
-    Motif pattern(tab->get("time"), tab->get("motif").toInt());
+    Motif pattern(m_tab->get("time"), m_tab->get("motif").toInt());
 
     // Protections préliminaires
-    QString tabulature = tab->tabulature;
-    tabulature.replace("\t", " ");            // Remplace les tabulations par des espaces
+    QString tabulature = m_tab->tabulature;
+    tabulature.replace("\t", " ");            // Remplace les m_tabulations par des espaces
     tabulature.replace("~", " ~");            // Ajoute un espace avant les ~ des liaisons des notes
     tabulature.replace("  ~", " ~");          // Supprime les espaces ajoutés en trop
     tabulature.replace("\n", " \n ");         // Protection des retours chariots pour linéariser le contenu
@@ -56,13 +65,6 @@ void TabliatoProcessor::parseMusic()
 
     try
     {
-        // Initialisation des états. Le parseur s'occupe des spanners de tenu des notes
-        // Si on trouve un note plus longue que blanche alors on doit ouvrir un testSpanner
-        // avant la note et le fermer plus tard. Une liaison à le même effet. On peut aussi
-        // avoir des spanner à l'accompagnement dans de rares cas. Exemple G:2.
-        bool spannerIsOpen = false;
-        bool spannerMustBeClosed = false;
-
         // Loop throught all symbols of the code
         for (int i = 0 ; i < symbols.size() ; i++)
         {
@@ -71,9 +73,11 @@ void TabliatoProcessor::parseMusic()
 
             int type = getType(symbol);
 
-            bool closeSpanner = false;
-            bool openSpanner = false;
-            bool markup = true;
+            m_rhs_close_spanner = false;
+            m_rhs_open_spanner = false;
+            m_rhs_markup = true;
+            m_lhs_close_spanner = false;
+            m_lhs_open_spanner = false;
 
             // Séparation de main D/G
             bool currentSymbolIsMelody = true;
@@ -118,31 +122,10 @@ void TabliatoProcessor::parseMusic()
                 CURRENTDURATION = button.duration();
                 CURRENTDIRECTION =  button.direction();
 
-                if (spannerIsOpen && spannerMustBeClosed)
-                {
-                    spannerIsOpen = false;
-                    spannerMustBeClosed = false;
-                    closeSpanner = true;
-                }
-                else if (spannerIsOpen && !spannerMustBeClosed)
-                {
-                    spannerMustBeClosed = true;
-                    markup = false;
-                    log("Suppression des markups: liaison de notes");
-                }
-                else
-                {
-                    spannerMustBeClosed = true;
-                }
+                update_rhs_spanner_state(button.get_duration_as_whole_note());
 
-                if (button.getDurationAsNumber() > 1 && !spannerIsOpen)
-                {
-                    spannerIsOpen = true;
-                    spannerMustBeClosed = true;
-                    openSpanner = true;
-                }
-
-                parsed = button.print(markup);
+                parsed = button.print(m_rhs_markup);
+                parsed = insert_rhs_spanners(parsed);
                 break;
             }
 
@@ -151,17 +134,9 @@ void TabliatoProcessor::parseMusic()
             case TIE:
             {
                 currentSymbolIsBass = false;
-
-                if (spannerIsOpen)
-                {
-                    spannerMustBeClosed = false;
-                }
-                else
-                {
-                    spannerIsOpen = true;
-                    spannerMustBeClosed = false;
+                if (open_rhs_spanner())
                     parsed = "\\startTextSpan ~";
-                }
+
                 break;
             }
 
@@ -169,13 +144,7 @@ void TabliatoProcessor::parseMusic()
             case REST:
             {
                 currentSymbolIsBass = false;
-
-                if (spannerIsOpen)
-                {
-                    spannerMustBeClosed = false;
-                    spannerIsOpen = false;
-                    closeSpanner = true;
-                }
+                close_rhs_spanner();
                 break;
             }
 
@@ -218,31 +187,10 @@ void TabliatoProcessor::parseMusic()
 
                 CURRENTDURATION = multiButton.duration();
 
-                if (spannerIsOpen && spannerMustBeClosed)
-                {
-                    spannerIsOpen = false;
-                    spannerMustBeClosed = false;
-                    closeSpanner = true;
-                }
-                else if (spannerIsOpen && !spannerMustBeClosed)
-                {
-                    spannerMustBeClosed = true;
-                    markup = false;
-                }
-                else
-                {
-                    spannerMustBeClosed = true;
-                }
+                update_rhs_spanner_state(multiButton.get_duration_as_whole_note());
 
-                if (multiButton.getDurationAsNumber() > 1 && !spannerIsOpen)
-                {
-                    spannerIsOpen = true;
-                    spannerMustBeClosed = true;
-                    openSpanner = true;
-                }
-
-                parsed = multiButton.print(markup);
-
+                parsed = multiButton.print(m_rhs_markup);
+                parsed = insert_rhs_spanners(parsed);
                 break;
             }
 
@@ -251,51 +199,53 @@ void TabliatoProcessor::parseMusic()
             case OPENMANUALBASS:
             {
                 nbass++;
-                bool interpolate = false;
                 currentSymbolIsMelody = false;
+                i++;
 
                // On lit jusqu'a la fermeture ]
                 QStringList tmp;
                 while (i < symbols.size() && !isCloseManualBass(symbols[i]))
                 {
-                    // Basse/accord explicite e.g B:4 ou a:4
-                    if (isExplicitBass(symbols[i]))
-                    {
-                       interpolate = false;
-                       tmp.append(pattern.parseExplicitBass(symbols[i]));
-                    }
-                    // Basse/accord implicite e.g B ou a
-                    else if (isImplicitBass(symbols[i]))
-                    {
-                        interpolate = true;
+                    if (!isCloseManualBass(symbols[i]))
                         tmp.append(symbols[i]);
-                    }
-                    // Un silence
-                    else if (isRest(symbols[i]))
+
+                    if (!isExplicitBass(symbols[i]) &&  // Basse/accord explicite e.g B:4 ou a:4
+                        !isImplicitBass(symbols[i]) &&  // Basse/accord implicite e.g B ou a
+                        !isRest(symbols[i]) &&
+                        !isCloseManualBass(symbols[i]))
                     {
-                        tmp.append(symbols[i]);
-                    }
-                    else if (!isOpenManualBass(symbols[i]) && !isCloseManualBass(symbols[i]))
-                    {
-                        throw std::logic_error((QString("Symbole innatentu détecté à l'intérieur d'un accompagnement: ") + symbols[i]).toStdString());
+                        throw std::logic_error((QString("Symbole inattentu détecté à l'intérieur d'un accompagnement: ") + symbols[i]).toStdString());
                     }
 
                     i++;
                 };
 
+                symbol = tmp.join(" ");
+
+                // Liste de choses possibles dans tmp et de leur decompaction explicite possible
+                // A            -> A:8 r:8 a:8 r:8 a:8 r:8
+                // A a          -> A:8 r:8 a:8 r:8
+                // A a a        -> A:8 r:8 a:8 r:8 a:8 r:8
+                // A:2.         -> A:2.
+                // A:2 a:4      -> A:2 a:4
+                // A:4 r:4 a:4  -> A:4 r:4 a:4
+                tmp = pattern.decompact_motif(symbol);
+
                 if (i == symbols.size())
                     throw std::logic_error("Crochet [ ouvert mais jamais fermé.");
 
-                if (interpolate)
+                for (QString &sym : tmp)
                 {
-                    parsed = tmp.join(":");
-                    parsed = pattern.parseBassSet(parsed); // Transforms G:g:g in G g g and check compliance with motif B a a
-                }
-                else
-                {
-                    parsed = tmp.join(" ");
+                    if (isExplicitBass(sym))
+                    {
+                        button.set_lhs_button(sym);
+                        sym = button.print();
+                        update_lhs_spanner_state(button.get_duration_as_whole_note());
+                        sym = insert_lhs_spanners(sym);
+                    }
                 }
 
+                parsed = tmp.join(" ");
                 break;
             }
 
@@ -304,7 +254,18 @@ void TabliatoProcessor::parseMusic()
             {
                 nbass++;
                 currentSymbolIsMelody = false;
-                parsed = pattern.parseBass(symbol); // Transforms G in G g g if motif is B a a
+                QStringList syms = pattern.decompact_motif(symbol);
+                for (int i = 0 ; i < syms.size() ; i++)
+                {
+                    if (isExplicitBass(syms[i]))
+                    {
+                        button.set_lhs_button(syms[i]);
+                        update_lhs_spanner_state(button.get_duration_as_whole_note());
+                        syms[i] = insert_lhs_spanners(button.print());
+                    }
+                }
+
+                parsed = syms.join(" ");
                 break;
             }
 
@@ -313,7 +274,10 @@ void TabliatoProcessor::parseMusic()
             {
                 nbass++;
                 currentSymbolIsMelody = false;
-                parsed = pattern.parseExplicitBass(symbol); // Detect manual G:4 g:4
+                button.set_lhs_button(symbol);
+                update_lhs_spanner_state(button.get_duration_as_whole_note());
+                parsed = button.print();
+                parsed = insert_lhs_spanners(parsed);
                 break;
              }
 
@@ -347,23 +311,17 @@ void TabliatoProcessor::parseMusic()
             }
 
             if (currentSymbolIsMelody)
-            {
                 parsedSymbolsMelody.append(parsed);
-                if (closeSpanner) parsedSymbolsMelody.append("\\stopTextSpan");
-                if (openSpanner) parsedSymbolsMelody.append("\\startTextSpan");
-            }
 
             if (currentSymbolIsBass)
-            {
                 parsedSymbolsBass.append(parsed);
-            }
-
 
             // logs
             if (symbol != "" && symbol != "\n") log("Symbol: " + symbol + " >> " + parsed);
         }
 
-        if (spannerMustBeClosed) parsedSymbolsMelody.append(QString("\\endSpanners \\stopTextSpan"));
+        if (m_rhs_spanner_must_be_closed) parsedSymbolsMelody.append(QString("\\endSpanners \\stopTextSpan"));
+        if (m_lhs_spanner_must_be_closed) parsedSymbolsBass.append(QString("\\endSpanners \\stopTextSpan"));
     }
     catch(std::exception &e)
     {
@@ -371,26 +329,26 @@ void TabliatoProcessor::parseMusic()
         throw std::logic_error(err.toStdString());
     }
 
-    tab->melody = parsedSymbolsMelody.join(" ");
-    tab->melody.replace(QRegExp(":"), "");
-    tab->melody.replace(QRegExp("\\doublegt"), ">>");
-    tab->melody.replace(QRegExp("\\doubleglt"), "<<");
+    m_tab->melody = parsedSymbolsMelody.join(" ");
+    m_tab->melody.replace(QRegExp(":"), "");
+    m_tab->melody.replace(QRegExp("\\doublegt"), ">>");
+    m_tab->melody.replace(QRegExp("\\doubleglt"), "<<");
 
     if (nbass == 0) return;
 
-    tab->bass = parsedSymbolsBass.join(" ");
-    tab->bass.replace(QRegExp(":"), "");
+    m_tab->bass = parsedSymbolsBass.join(" ");
+    m_tab->bass.replace(QRegExp(":"), "");
 }
 
 void TabliatoProcessor::parseLyric()
 {
     QStringList list;
     QStringList list2;
-    list = tab->lyrics.split("\n\n");
+    list = m_tab->lyrics.split("\n\n");
     int n = list.size();
     int hn = n/2;
 
-    tab->firstVerse = list[0];
+    m_tab->firstVerse = list[0];
 
     if (n > 1)
     {
@@ -399,9 +357,9 @@ void TabliatoProcessor::parseLyric()
             list2 = list[i].split("\n");
 
             for(int j = 0 ; j < list2.size() ; j++)
-                tab->leftVerses = tab->leftVerses + "\\line{ " + list2[j] + "} \n";
+                m_tab->leftVerses = m_tab->leftVerses + "\\line{ " + list2[j] + "} \n";
 
-            tab->leftVerses = tab->leftVerses +  "\\vspace #1 \n";
+            m_tab->leftVerses = m_tab->leftVerses +  "\\vspace #1 \n";
         }
 
         for(int i = hn+1 ; i < n ; i++)
@@ -409,9 +367,9 @@ void TabliatoProcessor::parseLyric()
             list2 = list[i].split("\n");
 
             for(int j = 0 ; j < list2.size() ; j++)
-                tab->rightVerses = tab->rightVerses + "\\line{ " + list2[j] + "} \n";
+                m_tab->rightVerses = m_tab->rightVerses + "\\line{ " + list2[j] + "} \n";
 
-            tab->rightVerses = tab->rightVerses +  "\\vspace #1 \n";
+            m_tab->rightVerses = m_tab->rightVerses +  "\\vspace #1 \n";
         }
     }
 }
@@ -423,39 +381,176 @@ void TabliatoProcessor::generateLilypondCode()
     QString bassDisplay;
     QString lilypondCode;
 
-    cadb = (tab->get("system") != "cadb") ? "f" : "t";
-    fingerDisplay = (tab->get("fingerDisplay") != "true") ? "f" : "t";
-    bassDisplay = (tab->bass != "") ? "t" : "f";
+    cadb = (m_tab->get("system") != "cadb") ? "f" : "t";
+    fingerDisplay = (m_tab->get("fingerDisplay") != "true") ? "f" : "t";
+    bassDisplay = (m_tab->bass != "") ? "t" : "f";
 
     QFile file(TEMPLATE + "/tabliato.ly");
     if(!file.open(QIODevice::ReadOnly | QIODevice::Text))
-        throw std::logic_error(QString("Impossible d'ouvrir le fichier : " + TEMPLATE + "/tabliato.ly").toStdString() );
+        throw std::logic_error(QString("Impossible d'ouvrir le fichier : " + TEMPLATE + "/m_tabliato.ly").toStdString() );
     lilypondCode = file.readAll();
     file.close();
 
-    lilypondCode.replace(QRegExp("<ranks>"), QString::number(keyboard.ranks()));
-    lilypondCode.replace(QRegExp("<basses>"), tab->bass);
-    lilypondCode.replace(QRegExp("<tablature>"), tab->melody);
-    lilypondCode.replace(QRegExp("<title>"), tab->get("title"));
-    lilypondCode.replace(QRegExp("<subtitle>"), tab->get("subtitle"));
-    lilypondCode.replace(QRegExp("<composer>"), tab->get("composer"));
-    lilypondCode.replace(QRegExp("<poet>"), tab->get("poet"));
-    lilypondCode.replace(QRegExp("<tagline>"), tab->get("tagline"));
-    lilypondCode.replace(QRegExp("<instrument>"), tab->get("instrument"));
-    lilypondCode.replace(QRegExp("<tempo>"), tab->get("tempo"));
-    lilypondCode.replace(QRegExp("<time>"), tab->get("time"));
-    lilypondCode.replace(QRegExp("<key>"), tab->get("key"));
+    lilypondCode.replace(QRegExp("<ranks>"), QString::number(m_keyboard.ranks()));
+    lilypondCode.replace(QRegExp("<basses>"), m_tab->bass);
+    lilypondCode.replace(QRegExp("<tablature>"), m_tab->melody);
+    lilypondCode.replace(QRegExp("<title>"), m_tab->get("title"));
+    lilypondCode.replace(QRegExp("<subtitle>"), m_tab->get("subtitle"));
+    lilypondCode.replace(QRegExp("<composer>"), m_tab->get("composer"));
+    lilypondCode.replace(QRegExp("<poet>"), m_tab->get("poet"));
+    lilypondCode.replace(QRegExp("<tagline>"), m_tab->get("tagline"));
+    lilypondCode.replace(QRegExp("<instrument>"), m_tab->get("instrument"));
+    lilypondCode.replace(QRegExp("<tempo>"), m_tab->get("tempo"));
+    lilypondCode.replace(QRegExp("<time>"), m_tab->get("time"));
+    lilypondCode.replace(QRegExp("<key>"), m_tab->get("key"));
     lilypondCode.replace(QRegExp("<system>"), cadb);
     lilypondCode.replace(QRegExp("<fingerDisplay>"), fingerDisplay);
     lilypondCode.replace(QRegExp("<bassDisplay>"), bassDisplay);
-    lilypondCode.replace(QRegExp("<firstVerse>"), tab->firstVerse);
-    lilypondCode.replace(QRegExp("<leftLyrics>"), tab->leftVerses);
-    lilypondCode.replace(QRegExp("<rightLyrics>"), tab->rightVerses);
+    lilypondCode.replace(QRegExp("<firstVerse>"), m_tab->firstVerse);
+    lilypondCode.replace(QRegExp("<leftLyrics>"), m_tab->leftVerses);
+    lilypondCode.replace(QRegExp("<rightLyrics>"), m_tab->rightVerses);
 
-    tab->lilypond = lilypondCode;
+    m_tab->lilypond = lilypondCode;
+}
+
+void TabliatoProcessor::update_rhs_spanner_state(float duration)
+{
+    if (m_rhs_spanner_is_open && m_rhs_spanner_must_be_closed)
+    {
+        m_rhs_spanner_is_open = false;
+        m_rhs_spanner_must_be_closed = false;
+        m_rhs_close_spanner = true;
+    }
+    else if (m_rhs_spanner_is_open && !m_rhs_spanner_must_be_closed)
+    {
+        m_rhs_spanner_must_be_closed = true;
+        m_rhs_markup = false;
+    }
+    else
+    {
+        m_rhs_spanner_must_be_closed = true;
+    }
+
+    if (duration > 1 && !m_rhs_spanner_is_open)
+    {
+        m_rhs_spanner_is_open = true;
+        m_rhs_spanner_must_be_closed = true;
+        m_rhs_open_spanner = true;
+    }
+}
+
+
+bool TabliatoProcessor::open_rhs_spanner()
+{
+    if (m_rhs_spanner_is_open)
+    {
+        m_rhs_spanner_must_be_closed = false;
+        return false;
+    }
+    else
+    {
+        m_rhs_spanner_is_open = true;
+        m_rhs_spanner_must_be_closed = false;
+        return true;
+    }
+}
+
+bool TabliatoProcessor::close_rhs_spanner()
+{
+    if (m_rhs_spanner_is_open)
+    {
+        m_rhs_spanner_must_be_closed = false;
+        m_rhs_spanner_is_open = false;
+        m_rhs_close_spanner = true;
+        return true;
+    }
+
+    return false;
+}
+
+
+void TabliatoProcessor::update_lhs_spanner_state(float duration)
+{
+    if (m_lhs_spanner_is_open && m_lhs_spanner_must_be_closed)
+    {
+        m_lhs_spanner_is_open = false;
+        m_lhs_spanner_must_be_closed = false;
+        m_lhs_close_spanner = true;
+        m_lhs_open_spanner = false;
+    }
+    else if (m_lhs_spanner_is_open && !m_lhs_spanner_must_be_closed)
+    {
+        m_lhs_spanner_must_be_closed = true;
+        m_lhs_open_spanner = false;
+    }
+    else
+    {
+        m_lhs_spanner_must_be_closed = true;
+        m_lhs_open_spanner = false;
+    }
+
+    if (duration > 1 && !m_lhs_spanner_is_open)
+    {
+        m_lhs_spanner_is_open = true;
+        m_lhs_spanner_must_be_closed = true;
+        m_lhs_open_spanner = true;
+    }
+}
+
+
+bool TabliatoProcessor::open_lhs_spanner()
+{
+    if (m_lhs_spanner_is_open)
+    {
+        m_lhs_spanner_must_be_closed = false;
+        return false;
+    }
+    else
+    {
+        m_lhs_spanner_is_open = true;
+        m_lhs_spanner_must_be_closed = false;
+        return true;
+    }
+}
+
+bool TabliatoProcessor::close_lhs_spanner()
+{
+    if (m_lhs_spanner_is_open)
+    {
+        m_lhs_spanner_must_be_closed = false;
+        m_lhs_spanner_is_open = false;
+        m_lhs_close_spanner = true;
+        return true;
+    }
+
+    return false;
+}
+
+QString TabliatoProcessor::insert_rhs_spanners(QString str)
+{
+    if (m_rhs_close_spanner)
+        str += " \\stopTextSpan";
+
+    if (m_rhs_open_spanner)
+        str += " \\startTextSpan";
+
+    return str;
+}
+
+QString TabliatoProcessor::insert_lhs_spanners(QString str)
+{
+    qDebug() << "Insert : " + str <<  " o: " << m_lhs_open_spanner <<" c: " << m_lhs_close_spanner;
+    if (m_lhs_close_spanner)
+        str += " \\stopTextSpan";
+
+    if (m_lhs_open_spanner)
+        str += " \\startTextSpan";
+
+    qDebug() << "parsed " << str << "\n";
+    return str;
 }
 
 void TabliatoProcessor::log(QString str)
 {
-    logs.append(str);
+    m_logs.append(str);
 }

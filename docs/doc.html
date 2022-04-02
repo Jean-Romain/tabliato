@@ -235,4 +235,18 @@ p7':4 t8':8 p7':4 7' C
 
 	<p><img src="img/doc-exemple11.png" /></p>
 
+<p>Nous pouvons aussi écrire des triolets avec « \tuplet 3/2 »</p>
+
+<pre>\set Timing.beamExceptions=#'()
+\set Timing.beatStructure=1,1,1
+
+t8:4 8' 9 F
+p8:4 \tuplet 3/2 { 6':8 8 6' } \tuplet 3/2 { 7 6' 7 } E
+t7:8 5 7 6' 8 7' A
+</pre>
+
+	<p><img src="img/doc-triolet.png" /></p>
+
+
+
 			

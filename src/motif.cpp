@@ -146,9 +146,10 @@ QStringList Motif::decompact_motif(QString str)
 {
     QStringList pattern = motif.split(" ");
     bool has_duration = str.split(":").size() > 1;
+    bool has_bass_only = str.toUpper() == str;
 
     // Implicit: received something like A or C:2.
-    // It needs to be unpacked A:4 a:4 a:4 or C:2 for examples
+    // It needs to be unpacked A:4 a:4 a:4 or C:2. for examples
     if (str.split(" ").size() == 1)
     {
         // Case C:2
@@ -176,7 +177,7 @@ QStringList Motif::decompact_motif(QString str)
      }
     // Semi explicit: received A a c
     // It needs to be unpacked A:4 a:4 c:4
-    else if (!has_duration)
+    else if (!has_duration & !has_bass_only)
     {
         QStringList out;
         int j = 0;
@@ -210,6 +211,41 @@ QStringList Motif::decompact_motif(QString str)
 
         if (j != list.length())
             throw std::logic_error(QString("L'ensemble basses accords " + str.split(":").join(" ") + " n'est pas conforme au motif rythmique").toStdString());
+    }
+    // Semi explicit: received A C
+    // It needs to be unpacked A:8 a:8 C:8 c:8
+    else if (!has_duration & has_bass_only)
+    {
+        QStringList out;
+        int j = -1;
+
+        QStringList list = str.split(" ");
+
+        for(int i = 0 ; i < pattern.length() ; i++)
+        {
+            if (pattern[i] == "" || isRest(pattern[i]))
+            {
+
+            }
+            else if (j < list.length())
+            {
+                QStringList elems = pattern[i].split(":");
+                QString duration = elems[1];
+                QString letter = elems[0];
+
+                if (letter == "B")
+                    j++;
+
+                if (letter == "B")
+                    pattern[i] = list[j].toUpper() + ":" + duration;
+                else if (letter == "a")
+                    pattern[i] = list[j].toLower() + ":" + duration;
+            }
+            else
+            {
+                throw std::logic_error(QString("L'ensemble basses accords " + str.split(":").join(" ") + " n'est pas conforme au motif rythmique").toStdString());
+            }
+        }
     }
     // Explicit: received A:4 a:4 c:4
     // It needs to be kept as is but validity check

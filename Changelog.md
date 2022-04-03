@@ -1,3 +1,13 @@
+## Tabliato 1.1.0
+
+- New: Nouvelle syntaxe simplifiée pour le main gauche. Quand une mesure comporte plusieurs basse et accords différents on peut écrire uniquement les basses et ne pas écrire les accords et laisser tabliato interpréter. Par example en 6/8 avec un motif rythmique "B aB a":
+  ```ly
+  A >> A aA a
+  [C] >> C cC c
+  [A a C c] >> A a C c
+  [A C] >> A a C c % Nouvelle syntaxe simplifiée
+  ```
+
 ## Tabliato 1.0.3
 
 - New: les accords main gauche affichent une ligne de tenu si nécessaire [#14](https://github.com/Jean-Romain/tabliato/issues/14)

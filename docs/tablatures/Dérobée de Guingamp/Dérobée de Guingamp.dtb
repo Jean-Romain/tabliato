@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tabliato>
+    <propertie subtitle="" tempo="4=160" composer="Trad." tagline="Édité avec Tabliato et Lilypond" time="6/8" key="c \major" instrument="" accordion="ctl1gc" rythm="B aB a" displayFingering="auto" motif="11" system="cadb" poet="" title="Dérobée de Guingamp"/>
+    <tabulature>\repeat volta 2
+{
+t8:8 8 8 8 6' 8 A
+p 8 6' 8 7':4 7':8 [G g A a]
+t8:8 8 8 8 6' 8 [A a F f]
+p8 6' 7 t7:4. [E e A a]
+}
+
+\break
+
+\repeat volta 2
+{
+t8:8 7' 9 p7:4 8:8 [A a G g]
+8 6' 7 t8 6' 7 [G g F f]
+8 7' 9 p7:4 8:8 [D d E e]
+8 6' 7 t7:4.  [E e A a]
+}
+
+\break
+
+\repeat volta 2
+{
+p7':4 t8':8 p 7':4 t7':8 [C g C g]
+p6' 7' 8 t8 6' 7 [F f A a]
+p7':4 t8':8 p 7':4 t7':8 [C g C g]
+p6' 7 6' t7:4. [E e A a]
+}
+
+\break
+
+\repeat volta 2
+{
+t7:8 6' 8 7 6' 8 A
+p8 6' 7 t8 6' 7 [G g F f]
+p7':4 t8':8 p7':4 t7':8 [C g C g]
+}
+\alternative
+{
+  { t8:8 6' 7 p7':4. [F f E e] }
+  { p6':8 7 p6' t7:4. [F f E e] }
+}
+
+\break
+
+\repeat volta 2
+{
+ t9:8 8' 9 9:4 7':8 A
+7' 9 7' 7':4 8:8 F
+8 6' 7 p7':4 7':8 [D d E e]
+p8 6' 7 t7:4. [E e A a]
+}
+</tabulature>
+    <lyric></lyric>
+</tabliato>

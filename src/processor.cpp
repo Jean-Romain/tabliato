@@ -41,11 +41,10 @@ void TabliatoProcessor::parseMusic()
 
     // Protections préliminaires
     QString tabulature = m_tab->tabulature;
-    tabulature.replace("\t", " ");            // Remplace les m_tabulations par des espaces
-    tabulature.replace("~", " ~");            // Ajoute un espace avant les ~ des liaisons des notes
-    tabulature.replace("  ~", " ~");          // Supprime les espaces ajoutés en trop
-    tabulature.replace("\n", " \n ");         // Protection des retours chariots pour linéariser le contenu
-    tabulature.replace("volta 2", "volta:2"); // Protection d'un cas particulier
+    tabulature.replace("\t", " ");             // Remplace les m_tabulations par des espaces
+    tabulature.replace("~", " ~");             // Ajoute un espace avant les ~ des liaisons des notes
+    tabulature.replace("\n", " \n ");          // Protection des retours chariots pour linéariser le contenu
+    tabulature.replace("volta 2", "volta:2");  // Protection d'un cas particulier
     tabulature.replace("<<", " \\doubelt ");   // Protection de << pour les contre chants
     tabulature.replace(">>", " \\doubegt ");   // Protection de >> pour les contre chants
     tabulature.replace("<", "< ");
@@ -54,6 +53,7 @@ void TabliatoProcessor::parseMusic()
     tabulature.replace("]", " ] ");
     tabulature.replace("}", " } ");
     tabulature.replace("{", " { ");
+    tabulature.replace(QRegExp(" +"), " ");    // Replace multiple spaces by a single space
 
     QStringList symbols = tabulature.split(" "); // Séparation du contenu à chaque espace pour analyser les éléments un par un
     QStringList parsedSymbolsMelody;             // Certain symboles vont dans la mélodie

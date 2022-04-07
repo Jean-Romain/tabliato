@@ -1,3 +1,11 @@
+## Tabliato 1.0.5
+
+- Bug: inversion du sens des notes après avoir écrit des accords [#26](https://github.com/Jean-Romain/tabliato/issues/26)
+- Bug: barre de tenue des notes qui ne s'arrête pas après un silence [#25](https://github.com/Jean-Romain/tabliato/issues/25)
+- Bug: décalage des boutons à deux chiffres avec barre de tenue [#25](https://github.com/Jean-Romain/tabliato/issues/25)
+- Bug: crash du logiciel lorsque un silence apparait sans `:` dans un motif p.ex. `\motif [B:4 a:4 r4]`
+
+
 ## Tabliato 1.0.4
 
 - New: nouvelle syntaxe simplifiée pour la main gauche. Quand une mesure comporte plusieurs basses et accords différents on peut écrire uniquement les basses et ne pas écrire les accords et laisser tabliato interpréter. Par example en 6/8 avec un motif rythmique "B aB a":

@@ -42,38 +42,20 @@ scoreOut = g
         (substring x 0 (- l (+ n)))
     )
 )
-% Definition d'une fonction pour noter les notes tirées
-% Pour le système corgeron il suffit de rajouter un underline au markup
-%t =
-%#(define-music-function (parser location button) (string?)
-%(if cadb
-%(make-music 'TextScriptEvent 'direction 0
-%'text ( markup #:fontsize -1.5 button)
-%)
-%( make-music 'TextScriptEvent 'direction (rang button)
-%'text ( markup #:underline #:fontsize -1.5 (touchnum button)))
-%))
 
-% Définition d'une fonction pour les notes poussées
-%p =
-%#(define-music-function (parser location button) (string?)
-%(if cadb
-%  (make-music 'TextScriptEvent 'direction 1
-%  'text ( markup #:fontsize -1.5 button))
-%  ( make-music 'TextScriptEvent 'direction (rang button)
-%  'text ( markup #:fontsize -1.5 (substring button 0 1)))
-%))
 
-p =
-#(define-music-function (parser location button) (string?)
-(if cadb
-(make-music ; cadb
+make_cadb =
+#(define-music-function (parser location button push) (string? number?)
+(make-music
   'SequentialMusic
   'elements
   (list (make-music
   'SequentialMusic
   'elements
-  (list (make-music
+  (list 
+       ; Reglage de la position haut/bas des spanners
+       ; par rapport à la ligne centrale
+       (make-music
           'ContextSpeccedMusic
           'context-type
           'Bottom
@@ -85,9 +67,11 @@ p =
             'grob-property-path
             (list (quote direction))
             'grob-value
-            1
+            push
             'symbol
             'TextSpanner))
+        ; Reglage fin de la position des spanners pour 
+        ; s'aligner sur la ligne centrale
         (make-music
           'ContextSpeccedMusic
           'context-type
@@ -100,19 +84,46 @@ p =
             'grob-property-path
             (list (quote extra-offset))
             'grob-value
-            (cons 0 -0.4)
+            (cons 0 (* -0.4 push))
+            'bound-details
+            (cons 0 (* -0.4 push))
             'symbol
-            'TextSpanner))))
-
-        (make-music ; add markup
-            'TextScriptEvent 'direction 1
+            'TextSpanner))
+         ; Reglage fin de la marge gauche des spanners. Si le bouton a 
+         ; deux chiffres (10 11 12 ...) il faut laisser un peu plus de
+         ; place que pour 3 4 5
+        (make-music
+          'ContextSpeccedMusic
+          'context-type
+          'Bottom
+          'element
+          (make-music
+            'OverrideProperty
+            'pop-first
+            #t
+            'grob-value
+            1
+            'grob-property-path
+            (list 'bound-details
+                  'left
+                  'padding)
+            'grob-value (if (> (string->number (touchnum button)) 9) 2.5 2)   
+            'symbol
+            'TextSpanner))
+        )) 
+        ; Ajout du markup
+        (make-music
+            'TextScriptEvent 'direction push
             'text ( markup #:fontsize -1.5 button))))
-  
+)
+
+make_cogeron =
+#(define-music-function (parser location button) (string?)
 (if (not (eq? (rang button) 1)) ; si ce n'est pas le rang du milieux
-(make-music ;cogeron
+(make-music
   'SequentialMusic
   'elements
-  (list (make-music ; override textspanner position
+  (list (make-music 
           'ContextSpeccedMusic
           'context-type
           'Bottom
@@ -123,6 +134,24 @@ p =
             'grob-property-path
             (list (quote direction))
             'grob-value (if (< (rang button) 1) -1 1)   
+            'symbol
+            'TextSpanner))
+        (make-music
+          'ContextSpeccedMusic
+          'context-type
+          'Bottom
+          'element
+          (make-music
+            'OverrideProperty
+            'pop-first
+            #t
+            'grob-value
+            1
+            'grob-property-path
+            (list 'bound-details
+                  'left
+                  'padding)
+            'grob-value (if (> (string->number (touchnum button)) 9) 2.5 2)   
             'symbol
             'TextSpanner))
         (make-music  ; add markup
@@ -168,115 +197,21 @@ p =
          'direction (rang button)
          'text ( markup #:fontsize -1.5 (touchnum button)))))
   )
-))
+)
 
-t =
-#(define-music-function (parser location button) (string?)
-(if cadb
-(make-music ; cadb
-  'SequentialMusic
-  'elements
-  (list (make-music
-  'SequentialMusic
-  'elements
-  (list (make-music
-          'ContextSpeccedMusic
-          'context-type
-          'Bottom
-          'element
-          (make-music
-            'OverrideProperty
-            'pop-first
-            #t
-            'grob-property-path
-            (list (quote direction))
-            'grob-value
-            -1
-            'symbol
-            'TextSpanner))
-        (make-music
-          'ContextSpeccedMusic
-          'context-type
-          'Bottom
-          'element
-          (make-music
-            'OverrideProperty
-            'once #t
-            'pop-first #t
-            'grob-property-path
-            (list (quote extra-offset))
-            'grob-value
-            (cons 0 0.4)
-            'symbol
-            'TextSpanner))))
-    
-        (make-music ; add markup
-            'TextScriptEvent 'direction 0
-            'text ( markup #:fontsize -1.5 button))))
-  
-(if (not (eq? (rang button) 1)) ; si ce n'est pas le rang du milieux
-(make-music ;cogeron
-  'SequentialMusic
-  'elements
-  (list (make-music ; override textspanner position
-          'ContextSpeccedMusic
-          'context-type
-          'Bottom
-          'element
-          (make-music
-            'OverrideProperty
-            'pop-first #t
-            'grob-property-path
-            (list (quote direction))
-            'grob-value (if (< (rang button) 1) -1 1)   
-            'symbol
-            'TextSpanner))
-        (make-music  ; add markup
-            'TextScriptEvent 'direction (rang button)
-            'text ( markup #:underline #:fontsize -1.5 (touchnum button)))))
-
-  (make-music
-  'SequentialMusic
-  'elements
-  (list (make-music
-      'ContextSpeccedMusic
-      'context-type
-      'Bottom
-      'element
-      (make-music
-        'OverrideProperty
-        'pop-first
-        #t
-        'grob-property-path
-        (list (quote direction))
-        'grob-value
-        -1
-        'symbol
-        'TextSpanner))
-        (make-music ; override textspanner position
-          'ContextSpeccedMusic
-          'context-type
-          'Bottom
-          'element
-          (make-music
-            'OverrideProperty
-            'once #t
-            'pop-first #t
-            'grob-property-path
-            (list (quote direction))
-            'grob-value (if (< (rang button) 1) -1 1)
-            'grob-property-path
-            (list (quote extra-offset))
-            'grob-value (cons 0 2.9)
-            'symbol
-            'TextSpanner))
-        (make-music
-         'TextScriptEvent 
-         'direction (rang button)
-         'text ( markup #:underline #:fontsize -1.5 (touchnum button)))))
+p = #(define-music-function (parser location button) (string?)
+  (if cadb
+    (make_cadb button 1)
+    (make_cogeron button)
   )
-))
+)
 
+t = #(define-music-function (parser location button) (string?)
+  (if cadb
+    (make_cadb button -1)
+    (make_cogeron button)
+  )
+)
 
 up =
 #(define-music-function (parser location button) (string?)

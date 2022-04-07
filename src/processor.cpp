@@ -145,6 +145,7 @@ void TabliatoProcessor::parseMusic()
             {
                 currentSymbolIsBass = false;
                 close_rhs_spanner();
+                parsed = insert_rhs_spanners(symbols[i]);
                 break;
             }
 
@@ -186,6 +187,7 @@ void TabliatoProcessor::parseMusic()
                 multiButton.set_rhs_multibutton(symbol);
 
                 CURRENTDURATION = multiButton.duration();
+                CURRENTDIRECTION = multiButton.direction();
 
                 update_rhs_spanner_state(multiButton.get_duration_as_whole_note());
 

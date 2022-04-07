@@ -164,14 +164,12 @@ QStringList Motif::decompact_motif(QString str)
             if (elem != "")
             {
                 QStringList elems = elem.split(":");
-                QString duration = elems[1];
+                QString duration = (elems.size() > 1) ? elems[1] : "";
                 QString letter = elems[0];
                 if (letter == "B")
                     elem = str.replace(0, 1, str[0].toUpper()) + ":" + duration;
                 else if (letter == "a")
                     elem = str.toLower() + ":" + duration;
-                else
-                    elem = "r" + duration;
             }
         }
      }

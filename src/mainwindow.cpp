@@ -101,7 +101,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     signalMapper->setMapping(ui->actionBallone_Burini, "BalloneBurini.sf2") ;
     signalMapper->setMapping(ui->actionLoffet, "Loffet.sf2") ;
     signalMapper->setMapping(ui->actionGaillard, "Gaillard.sf2") ;
-    signalMapper->setMapping(ui->actionSalta_Bourroche, "SaltaBourroche.sf2") ;
+    signalMapper->setMapping(ui->actionSalta_Bourroche, "SaltaBourroche_Light.sf2") ;
     signalMapper->setMapping(ui->actionSerafini, "Serafini.sf2") ;
 
     connect(ui->actionBallone_Burini, SIGNAL(triggered()), signalMapper, SLOT(map())) ;
@@ -422,7 +422,9 @@ void MainWindow::open(QString filename)
 void MainWindow::openAbout()
 {
      QMessageBox msgBox;
-     msgBox.setText(File::read(HTML + "/about.html"));
+     QString html = File::read(HTML + "/about.html");
+     html.replace("[version]", qApp->applicationVersion());
+     msgBox.setText(html);
      msgBox.exec();
 }
 
@@ -618,7 +620,7 @@ void MainWindow::setIcons()
     else
        ui->actionSerafini->setIcon(check);
 
-    if (!QFile::exists(SOUNDFONTS + "/SaltaBourroche.sf2"))
+    if (!QFile::exists(SOUNDFONTS + "/SaltaBourroche_Light.sf2"))
         ui->actionSalta_Bourroche->setIcon(download);
     else
         ui->actionSalta_Bourroche->setIcon(check);
@@ -1077,7 +1079,7 @@ void MainWindow::seekMusic()
 
 void MainWindow::download_soundfonts(QString name)
 {
-    QString url = "https://media.githubusercontent.com/media/Jean-Romain/tabliato/master/soundfonts/" + name;
+    QString url = "http://jmi.ovh/DiatonicTab/SoundFonts/" + name;
     QString dest = SOUNDFONTS + "/" + name;
 
     QMessageBox::StandardButton reply;

@@ -293,6 +293,10 @@ void TabliatoProcessor::parseMusic()
                 }
                 if (symbol == "\\partial")
                 {
+                    extractRankButton.indexIn(symbols[i+1]);
+                    if (isButton(symbols[i+1]) && extractRankButton.cap(0) != "")
+                        throw std::logic_error("Symbol incorrect détecté après \\partial. Une durée est attendue.");
+
                     parsed = symbols[i] + " " + symbols[i+1];
                     i++;
                 }

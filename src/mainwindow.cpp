@@ -97,6 +97,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     connect(pdf, SIGNAL(pageChanged(int)), ui->pageSpinBox, SLOT(setValue(int)));
     connect(ui->pdfZoomSlider, SIGNAL(valueChanged(int)), this, SLOT(scaleDocument(int)));
     connect(pdf, SIGNAL(scaleChanged(int)), ui->pdfZoomSlider, SLOT(setValue(int)));
+    connect(pdf, SIGNAL(linkClicked(int)), this, SLOT(goto_line(int)));
+    connect(ui->melodie_textarea, SIGNAL(cursorPositionChanged()), this, SLOT(highlight_notes_from_current_line_in_pdf()));
 
     signalMapper->setMapping(ui->actionBallone_Burini, "BalloneBurini.sf2") ;
     signalMapper->setMapping(ui->actionLoffet, "Loffet.sf2") ;
@@ -122,6 +124,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 
     //ui->player_layout->addWidget(slider);
     ui->scrollArea->setWidget(pdf);
+
 
     ui->toolBox->setCurrentIndex(0);
     ui->toolBox_2->setCurrentIndex(0);
@@ -1103,7 +1106,28 @@ void MainWindow::download_soundfonts(QString name)
     }
 }
 
+void MainWindow::goto_line(int line)
+{
+    int offset1 = 268;
+    int offset2 = 307;
+    int nline = ui->melodie_textarea->document()->blockCount();
+    int ln = (line - offset1 <= nline) ? line - offset1 : line - offset2 - nline + 1;
+    //qDebug() << "Goto" << ln;
+    QTextCursor cursor(ui->melodie_textarea->document()->findBlockByLineNumber(ln)); // ln-1 because line number starts from 0
+    ui->melodie_textarea->setTextCursor(cursor);
+}
 
+void MainWindow::highlight_notes_from_current_line_in_pdf()
+{
+    int offset1 = 268;
+    int offset2 = 307;
+    int line = ui->melodie_textarea->textCursor().blockNumber();
+    int nline = ui->melodie_textarea->document()->blockCount();
+    int line1 = line + offset1;
+    int line2 = line + offset2 + nline - 1;
+    QVector<int> lines = {line1, line2};
+    pdf->highlight_link_from_lines(lines);
+}
 
 /*void MainWindow::printKeyboard()
 {

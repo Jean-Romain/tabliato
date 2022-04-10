@@ -59,6 +59,7 @@ class MainWindow : public QMainWindow
         void documentSavedTitleChange();
 
         void scaleDocument(int zoom);
+        void goto_line(int line);
 
         void displayDocks();
 
@@ -92,6 +93,8 @@ class MainWindow : public QMainWindow
         void initRythmComboBx();
         void initAccordionComboBox();
         void initSf2ComboBox();
+
+        void highlight_notes_from_current_line_in_pdf();
 
     private:
         Ui::MainWindow *ui;

@@ -1,126 +1,258 @@
-﻿/****************************************************************************
-**
-** Copyright (C) 2008 Nokia Corporation and/or its subsidiary(-ies).
-** Contact: Qt Software Information (qt-info@nokia.com)
-**
-** This file is part of the documentation of Qt. It was originally
-** published as part of Qt Quarterly.
-**
-** Commercial Usage
-** Licensees holding valid Qt Commercial licenses may use this file in
-** accordance with the Qt Commercial License Agreement provided with the
-** Software or, alternatively, in accordance with the terms contained in
-** a written agreement between you and Nokia.
-**
-**
-** GNU General Public License Usage
-** Alternatively, this file may be used under the terms of the GNU
-** General Public License versions 2.0 or 3.0 as published by the Free
-** Software Foundation and appearing in the file LICENSE.GPL included in
-** the packaging of this file.  Please review the following information
-** to ensure GNU General Public Licensing requirements will be met:
-** http://www.fsf.org/licensing/licenses/info/GPLv2.html and
-** http://www.gnu.org/copyleft/gpl.html.  In addition, as a special
-** exception, Nokia gives you certain additional rights. These rights
-** are described in the Nokia Qt GPL Exception version 1.3, included in
-** the file GPL_EXCEPTION.txt in this package.
-**
-** Qt for Windows(R) Licensees
-** As a special exception, Nokia, as the sole copyright holder for Qt
-** Designer, grants users of the Qt/Eclipse Integration plug-in the
-** right for the Qt/Eclipse Integration to link to functionality
-** provided by Qt Designer and its related libraries.
-**
-** If you are unsure which license is appropriate for your use, please
-** contact the sales department at qt-sales@nokia.com.
-**
-****************************************************************************/
-
-#include <QtGui>
+﻿#include <QtGui>
 #include <poppler-qt5.h>
 #include "pdfviewer.h"
 
 PdfViewer::PdfViewer(QWidget *parent): QLabel(parent)
 {
-    currentPage = -1;
-    doc = 0;
-    scaleFactor = 1.0;
+    m_current_page = -1;
+    m_doc = nullptr;
+    m_scale_factor = 1.0;
+    m_link_hovered = false;
+    m_skip_next_event = false;
     setAlignment(Qt::AlignCenter);
+    setMouseTracking(true);
 }
 
 PdfViewer::~PdfViewer()
 {
-    delete doc;
+    delete m_doc;
 }
 
 Poppler::Document *PdfViewer::document()
 {
-    return doc;
+    return m_doc;
 }
 
 qreal PdfViewer::scale() const
 {
-    return scaleFactor;
+    return m_scale_factor;
 }
 
-void PdfViewer::showPage(int page)
+void PdfViewer::show(int page)
 {
-    if (page != -1 && page != currentPage + 1)
+    if (page != -1 && page != m_current_page + 1)
     {
-        currentPage = page - 1;
+        m_current_page = page - 1;
         emit pageChanged(page);
     }
 
-    QImage image = doc->page(currentPage)->renderToImage(scaleFactor * physicalDpiX(), scaleFactor * physicalDpiY());
-
-    setPixmap(QPixmap::fromImage(image));
+    setPixmap(QPixmap::fromImage(m_image));
 }
 
 bool PdfViewer::setDocument(const QString &filePath)
 {
-    Poppler::Document *oldDocument = doc;
+    Poppler::Document *oldDocument = m_doc;
 
-    doc = Poppler::Document::load(filePath);
+    m_doc = Poppler::Document::load(filePath);
 
-    if (doc)
+    if (m_doc)
     {
         delete oldDocument;
-        doc->setRenderHint(Poppler::Document::Antialiasing);
-        doc->setRenderHint(Poppler::Document::TextAntialiasing);
-        currentPage = -1;
+        m_doc->setRenderHint(Poppler::Document::Antialiasing);
+        m_doc->setRenderHint(Poppler::Document::TextAntialiasing);
+        m_current_page = -1;
         setPage(1);
+
+        // Keep only non null area links
+        QList<Poppler::Link*> all_links = m_doc->page(m_current_page)->links();
+        m_links.clear();
+        for (int i = 0 ; i < all_links.size() ; i++)
+        {
+            if (all_links.at(i)->linkArea().width() > 0.0001)
+            {
+                m_links.append(all_links.at(i));
+            }
+        }
+
+        clean_pdf();
     }
 
-    return doc != 0;
+    return m_doc != 0;
 }
 
 void PdfViewer::setPage(int page)
 {
-    if (page != currentPage + 1)
-        showPage(page);
+    if (page != m_current_page + 1)
+    {
+        show(page);
+    }
 }
 
 void PdfViewer::setScale(qreal scale)
 {
-    if (scaleFactor != scale)
+    if (m_scale_factor != scale)
     {
-        scaleFactor = scale;
-        showPage();
+        m_scale_factor = scale;
+        clean_pdf();
+        show();
     }
 }
 
 void PdfViewer::wheelEvent ( QWheelEvent * event )
 {
-    if(event->modifiers() & Qt::ControlModifier)
+    if (event->modifiers() & Qt::ControlModifier)
     {
-        if(event->delta() >0)
-            setScale(scaleFactor + 0.05);
+        if (event->delta() >0)
+            setScale(m_scale_factor + 0.025);
         else
-            setScale(scaleFactor - 0.05);
+            setScale(m_scale_factor - 0.025);
 
-        emit scaleChanged((int) (scaleFactor*100));
+        emit scaleChanged((int) (m_scale_factor*100));
     }
     else
         QLabel::wheelEvent(event);
 }
+
+void PdfViewer::mousePressEvent(QMouseEvent * event )
+{
+    QPointF pos = to_pdf_relative(event->pos());
+
+    for (int i = 0 ; i < m_links.size() ; i++)
+    {
+        QRectF link_bbox = bbox(m_links.at(i));
+        bool cursor_in_link_area = link_bbox.contains(pos);
+
+        // If the cursor is in the link and there is no hover yet
+        // draw a rectangle
+        if (cursor_in_link_area)
+        {
+            int line = get_line(m_links.at(i));
+            m_link_hovered = true;
+            m_skip_next_event = true;
+            emit linkClicked((int) (line));
+            break;
+        }
+    }
+}
+
+void PdfViewer::mouseMoveEvent(QMouseEvent * event )
+{
+    QPointF pos = to_pdf_relative(event->pos());
+
+    for (int i = 0 ; i < m_links.size() ; i++)
+    {
+        QRectF link_bbox = bbox(m_links.at(i));
+        bool cursor_in_link_area =link_bbox.contains(pos);
+
+        // If the cursor is in the link and there is not hover yet
+        // draw a rectangle
+        if (!m_link_hovered && cursor_in_link_area)
+        {
+            QPainter qPainter(&m_image);
+            qPainter.setBrush(Qt::NoBrush);
+            qPainter.setPen(QPen(Qt::darkCyan, 2));
+            qPainter.drawRoundRect(to_img_absolute(link_bbox), 50, 50);
+            qPainter.end();
+            show();
+            m_link_hovered = true;
+            break;
+        }
+
+        // If the cursor is no in a link and there is a hover
+        // delete the rectangle
+        if (m_link_hovered && !cursor_in_link_area)
+        {
+            m_link_hovered = false;
+            clean_pdf();
+            show();
+        }
+    }
+}
+
+QPointF PdfViewer::to_pdf_relative(QPoint pos)
+{
+    QSize isize = m_image.size();
+    QSize wsize = this->size();
+    int hmargin = (wsize.width() - isize.width())/2;
+    int vmargin = (wsize.height() - isize.height())/2;
+    int imgx = pos.x() - hmargin;
+    int imgy = pos.y() - vmargin;
+    float rx = (float)imgx/isize.width();
+    float ry = (float)imgy/isize.height();
+
+    if (imgx > 0 && imgx <= isize.width() && imgy > 0 && imgy <= isize.height())
+        return QPointF(rx, ry);
+    else
+        return QPointF();
+}
+
+QRect PdfViewer::to_img_absolute(QRectF rect)
+{
+    QSize isize = m_image.size();
+    QSize wsize = this->size();
+
+    int xmin = rect.left()*isize.width();
+    int xmax = rect.right()*isize.width();
+
+    int ymin = rect.top()*isize.height();
+    int ymax = rect.bottom()*isize.height();
+
+    return QRect(QPoint(xmin, ymax), QPoint(xmax, ymin));
+}
+
+int PdfViewer::get_line(Poppler::Link* link)
+{
+    QString url = static_cast<Poppler::LinkBrowse*>(link)->url();
+    QStringList parsed_url = url.split(":");
+    int line = parsed_url.at(2).toInt();
+    //int column_start = parsed_url.at(3).toInt();
+    //int column_end = parsed_url.at(4).toInt();
+    return line;
+}
+
+QRectF PdfViewer::bbox(Poppler::Link* link)
+{
+    QRectF link_bbox = link->linkArea();
+
+    // Buffer the bbox for better feeling
+    QPointF p1 = link_bbox.topLeft();
+    QPointF p2 = link_bbox.bottomRight();
+    p1.setX(p1.x() - 0.002);
+    p1.setY(p1.y() + 0.002);
+    p2.setX(p2.x() + 0.002);
+    p2.setY(p2.y() - 0.002);
+    link_bbox.setTopLeft(p1);
+    link_bbox.setBottomRight(p2);
+
+    return link_bbox;
+}
+
+void PdfViewer::highlight_link_from_lines(QVector<int> lines)
+{
+    if (m_skip_next_event)
+    {
+        m_skip_next_event = false;
+        return;
+    }
+
+    if (m_link_hovered)
+        clean_pdf();
+
+    QPainter qPainter(&m_image);
+    for (int line : lines)
+    {
+        for (int i = 0 ; i < m_links.size() ; i++)
+        {
+           if (line == get_line(m_links.at(i)))
+           {
+               QRectF bb = bbox(m_links.at(i));
+               qPainter.setBrush(Qt::NoBrush);
+               qPainter.setPen(QPen(Qt::darkCyan, 2));
+               qPainter.fillRect(to_img_absolute(bb), QColor(255, 255,0, 100));
+               m_link_hovered = true;
+           }
+        }
+    }
+
+    qPainter.end();
+    show();
+}
+
+void PdfViewer::clean_pdf()
+{
+    if (m_doc != nullptr)
+        m_image = m_doc->page(m_current_page)->renderToImage(m_scale_factor * physicalDpiX(), m_scale_factor * physicalDpiY());
+}
+
+
 

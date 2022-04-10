@@ -1196,10 +1196,10 @@ supplémentaires</string>
           <bool>false</bool>
          </property>
          <property name="minimum">
-          <number>10</number>
+          <number>25</number>
          </property>
          <property name="maximum">
-          <number>300</number>
+          <number>150</number>
          </property>
          <property name="singleStep">
           <number>2</number>

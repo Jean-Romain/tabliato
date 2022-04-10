@@ -113,8 +113,12 @@ make_cadb =
         )) 
         ; Ajout du markup
         (make-music
-            'TextScriptEvent 'direction push
-            'text ( markup #:fontsize -1.5 button))))
+          'EventChord
+          'elements
+          (list (make-music
+              'TextScriptEvent 'direction push
+              'text ( markup #:fontsize -1.5 button))))
+          ))
 )
 
 make_cogeron =
@@ -251,6 +255,9 @@ fngr =
 
 
 \markup { \vspace #2 }
+
+\pointAndClickTypes #'(note-event post-event script-event text-script-event event)
+
 
 %=====================
 %	DATA

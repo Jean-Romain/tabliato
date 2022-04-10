@@ -93,8 +93,12 @@ void TabliatoProcessor::parseMusic()
 
             // Un commentaire % on parse et on skip jusqu'à la prochaine ligne
             case COMMENT:
-                while(i < symbols.size() && !isNewLine(symbols[i])) i++;
-                parsed = "";
+                while(i < symbols.size() && !isNewLine(symbols[i]))
+                {
+                    i++;
+                    parsed += " " + symbols[i];
+                }
+
                 line++;
                 break;
 

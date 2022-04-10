@@ -54,23 +54,37 @@ public:
     ~PdfViewer();
     Poppler::Document *document();
     qreal scale() const;
+    void highlight_link_from_lines(QVector<int> lines);
 
 public slots:
     bool setDocument(const QString &filePath);
     void setPage(int page = -1);
     void setScale(qreal scale);
-    void wheelEvent ( QWheelEvent * event );
+    void wheelEvent(QWheelEvent* event);
+    void mousePressEvent(QMouseEvent* event);
+    void mouseMoveEvent(QMouseEvent* event);
 
 signals:
-    void pageChanged(int currentPage);
-    void scaleChanged(int scale);
+    void pageChanged(int);
+    void scaleChanged(int);
+    void linkClicked(int);
 
 private:
-    void showPage(int page = -1);
+    void show(int page = -1);
+    int get_line(Poppler::Link*);
+    QPointF to_pdf_relative(QPoint);
+    QRect to_img_absolute(QRectF);
+    QRectF bbox(Poppler::Link*);
+    void clean_pdf();
 
-    Poppler::Document *doc;
-    int currentPage;
-    qreal scaleFactor;
+    int m_current_page;
+    bool m_link_hovered;
+    bool m_skip_next_event;
+    qreal m_scale_factor;
+    QImage m_image;
+    Poppler::Document *m_doc;
+    QList<Poppler::Link*> m_links;
+
 };
 
 #endif

@@ -1,3 +1,7 @@
+## Tabliato 1.1.0
+
+- New: support du "point and click" bidirectionnel. Il possible de cliquer sur la tablature pour trouver la ligne de code correspondante et inversement se mettre sur une ligne de code met en evidence la correspondance dans la tablature en surlignant en jaune les éléments.
+
 ## Tabliato 1.0.5
 
 - Bug: inversion du sens des notes après avoir écrit des accords [#26](https://github.com/Jean-Romain/tabliato/issues/26)

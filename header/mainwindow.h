@@ -7,6 +7,7 @@
 #include <QFont>
 #include <QMediaPlayer>
 
+#include "timeline.h"
 #include "file.h"
 #include "motif.h"
 #include "tabulature.h"
@@ -88,6 +89,7 @@ class MainWindow : public QMainWindow
         void stopMusic();
         void seekMusic(qint64 time);
         void seekMusic();
+        void updateMusic(QMediaPlayer::State);
 
         void updateRythmComboBx();
         void initRythmComboBx();
@@ -95,6 +97,7 @@ class MainWindow : public QMainWindow
         void initSf2ComboBox();
 
         void highlight_notes_from_current_line_in_pdf();
+        void highlight_notes_from_current_music_time_in_pdf();
 
     private:
         Ui::MainWindow *ui;
@@ -104,9 +107,11 @@ class MainWindow : public QMainWindow
         PdfViewer *pdf;
         QSignalMapper* signalMapper;
         QVector<qreal> scaleFactors;
+        QTimer *timer;
 
         QString currentOpenedFile;
         bool documentIsSaved;
+        Timeline m_timeline;
 
         QMap<QString, Motif> rythmList;
         QMap<QString, QString> accordionList;

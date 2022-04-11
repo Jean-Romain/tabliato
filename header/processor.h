@@ -6,6 +6,7 @@
 #include <QFile>
 #include <QTextStream>
 
+#include "timeline.h"
 #include "tabulature.h"
 #include "syntaxanalyser.h"
 #include "keyboard.h"
@@ -16,6 +17,7 @@ class TabliatoProcessor : public SyntaxAnalyser
     public:
         TabliatoProcessor(Tabulature &tabulature);
         QString get_logs() { return m_logs.join("\n"); }
+        Timeline m_timeline;
 
     private:
         void parseMusic();

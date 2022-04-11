@@ -1,5 +1,7 @@
 ﻿#include <QtGui>
 #include <poppler-qt5.h>
+#include <algorithm>
+
 #include "pdfviewer.h"
 
 PdfViewer::PdfViewer(QWidget *parent): QLabel(parent)
@@ -8,6 +10,7 @@ PdfViewer::PdfViewer(QWidget *parent): QLabel(parent)
     m_doc = nullptr;
     m_scale_factor = 1.0;
     m_link_hovered = false;
+    m_previous_pos = -1;
     m_skip_next_event = false;
     setAlignment(Qt::AlignCenter);
     setMouseTracking(true);
@@ -64,6 +67,11 @@ bool PdfViewer::setDocument(const QString &filePath)
             }
         }
 
+        std::sort(m_links.begin(), m_links.end(), [](Poppler::Link* a, Poppler::Link* b)
+        {
+            if (PdfViewer::get_line(a) != PdfViewer::get_line(b)) return PdfViewer::get_line(a) < PdfViewer::get_line(b);
+            return PdfViewer::get_column(a) < PdfViewer::get_column(b);
+        });
         clean_pdf();
     }
 
@@ -200,6 +208,16 @@ int PdfViewer::get_line(Poppler::Link* link)
     return line;
 }
 
+int PdfViewer::get_column(Poppler::Link* link)
+{
+    QString url = static_cast<Poppler::LinkBrowse*>(link)->url();
+    QStringList parsed_url = url.split(":");
+    //int line = parsed_url.at(2).toInt();
+    int column_start = parsed_url.at(3).toInt();
+    //int column_end = parsed_url.at(4).toInt();
+    return column_start;
+}
+
 QRectF PdfViewer::bbox(Poppler::Link* link)
 {
     QRectF link_bbox = link->linkArea();
@@ -244,6 +262,41 @@ void PdfViewer::highlight_link_from_lines(QVector<int> lines)
         }
     }
 
+    qPainter.end();
+    show();
+}
+
+void PdfViewer::highlight_note(int pos, int offset)
+{
+    if (pos == m_previous_pos)
+        return;
+
+    m_previous_pos = pos;
+
+    int j = -1;
+    int i = 0;
+    while (j != pos && i < m_links.size())
+    {
+        int line = get_line(m_links.at(i));
+        if (line < offset) // C'est une note et pas un accord
+            j++;
+
+        i++;
+    }
+
+    clean_pdf();
+
+    QRect bb = to_img_absolute(bbox(m_links.at(i-1)));
+    QPoint p0 = bb.bottomLeft();
+    QPoint p1 = bb.topLeft();
+    QPoint p2 = bb.topRight();
+    QPoint end((p1.x() + p2.x())/2, p2.y());
+    QPoint start((p1.x() + p2.x())/2, p2.y() + 3 * (p2.y() - p0.y()));
+    QLine arrow(start, end);
+
+    QPainter qPainter(&m_image);
+    qPainter.setPen(QPen(Qt::red, 3));
+    qPainter.drawLine(arrow);
     qPainter.end();
     show();
 }

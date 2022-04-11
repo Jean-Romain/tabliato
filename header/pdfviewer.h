@@ -55,6 +55,9 @@ public:
     Poppler::Document *document();
     qreal scale() const;
     void highlight_link_from_lines(QVector<int> lines);
+    void highlight_note(int pos, int offset);
+    static int get_line(Poppler::Link*);
+    static int get_column(Poppler::Link*);
 
 public slots:
     bool setDocument(const QString &filePath);
@@ -71,7 +74,6 @@ signals:
 
 private:
     void show(int page = -1);
-    int get_line(Poppler::Link*);
     QPointF to_pdf_relative(QPoint);
     QRect to_img_absolute(QRectF);
     QRectF bbox(Poppler::Link*);
@@ -80,6 +82,7 @@ private:
     int m_current_page;
     bool m_link_hovered;
     bool m_skip_next_event;
+    int  m_previous_pos;
     qreal m_scale_factor;
     QImage m_image;
     Poppler::Document *m_doc;

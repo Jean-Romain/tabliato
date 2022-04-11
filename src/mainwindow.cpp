@@ -8,6 +8,8 @@
 #include <QSettings>
 #include <QSignalMapper>
 
+#include <algorithm>
+
 #ifdef Q_WS_WIN
 #include <windows.h>
 #include <shellapi.h>
@@ -28,6 +30,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     midi2audioCall = new QProcess(this);
     pdf = new PdfViewer();
     signalMapper = new QSignalMapper(this) ;
+    timer = new QTimer(this);
 
     connect(ui->actionSave, SIGNAL(triggered()), this, SLOT(save()));
     connect(ui->actionSaveAs, SIGNAL(triggered()), this, SLOT(save_as()));
@@ -87,6 +90,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     connect(ui->stop_pushButton, SIGNAL(clicked()), this, SLOT(stopMusic()));
     connect(music, SIGNAL(positionChanged(qint64)), this, SLOT(seekMusic(qint64)));
     connect(ui->time_slider, SIGNAL(sliderReleased()), this, SLOT(seekMusic()));
+    connect(music, SIGNAL(stateChanged(QMediaPlayer::State)), this, SLOT(updateMusic(QMediaPlayer::State)));
     //connect(ui->time_slider, SIGNAL(sliderPressed()), this, SLOT(seekMusic()));
     connect(ui->showsf2ddl_pushButton, SIGNAL(clicked()), this, SLOT(openSF2About()));
 
@@ -99,6 +103,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     connect(pdf, SIGNAL(scaleChanged(int)), ui->pdfZoomSlider, SLOT(setValue(int)));
     connect(pdf, SIGNAL(linkClicked(int)), this, SLOT(goto_line(int)));
     connect(ui->melodie_textarea, SIGNAL(cursorPositionChanged()), this, SLOT(highlight_notes_from_current_line_in_pdf()));
+    connect(timer, SIGNAL(timeout()), this, SLOT(highlight_notes_from_current_music_time_in_pdf()));
 
     signalMapper->setMapping(ui->actionBallone_Burini, "BalloneBurini.sf2") ;
     signalMapper->setMapping(ui->actionLoffet, "Loffet.sf2") ;
@@ -157,6 +162,7 @@ void MainWindow::compile()
     try
     {
         TabliatoProcessor proc(tab);
+        m_timeline = proc.m_timeline;
         terminal(proc.get_logs());
     }
     catch(const std::exception &e)
@@ -660,25 +666,55 @@ void MainWindow::playMusic()
     if (music->state() == QMediaPlayer::PlayingState)
     {
         music->pause();
-
+        timer->stop();
         QIcon play(ICON + "/play.svg");
         ui->play_pushButton->setIcon(play);
     }
     else
     {
         music->play();
+        timer->start(100);
         QIcon pause(ICON + "/pause.svg");
         ui->play_pushButton->setIcon(pause);
+    }
+}
+
+void MainWindow::updateMusic(QMediaPlayer::State state)
+{
+    if (state == QMediaPlayer::StoppedState)
+    {
+        seekMusic(0);
+        timer->stop();
+        QIcon play(ICON + "/play.svg");
+        ui->play_pushButton->setIcon(play);
     }
 }
 
 void MainWindow::stopMusic()
 {
     music->stop();
-
+    timer->stop();
     QIcon play(ICON + "/play.svg");
     ui->play_pushButton->setIcon(play);
 }
+
+void MainWindow::seekMusic(qint64 time)
+{
+    QTime displayTime(0, (time / 60000) % 60, (time / 1000) % 60);
+    qint64 duration = music->duration();
+    float percentage = ((double)time/(double)duration)*100;
+    ui->time_slider->setValue(percentage);
+    ui->time_label->setText(displayTime.toString("mm:ss"));
+}
+
+void MainWindow::seekMusic()
+{
+    qint64 duration = music->duration();
+    int percentage = ui->time_slider->value();
+    qint64 time = duration*((float)percentage/100);
+    music->setPosition(time);
+}
+
 
 void MainWindow::exportFiles()
 {
@@ -1063,22 +1099,6 @@ void MainWindow::scaleDocument(int zoom)
     pdf->setScale((double) zoom/100);
 }
 
-void MainWindow::seekMusic(qint64 time)
-{
-    QTime displayTime(0, (time / 60000) % 60, (time / 1000) % 60);
-    qint64 duration = music->duration();
-    float percentage = ((double)time/(double)duration)*100;
-    ui->time_slider->setValue(percentage);
-    ui->time_label->setText(displayTime.toString("mm:ss"));
-}
-
-void MainWindow::seekMusic()
-{
-    qint64 duration = music->duration();
-    int percentage = ui->time_slider->value();
-    qint64 time = duration*((float)percentage/100);
-    music->setPosition(time);
-}
 
 void MainWindow::download_soundfonts(QString name)
 {
@@ -1127,6 +1147,22 @@ void MainWindow::highlight_notes_from_current_line_in_pdf()
     int line2 = line + offset2 + nline - 1;
     QVector<int> lines = {line1, line2};
     pdf->highlight_link_from_lines(lines);
+}
+
+void MainWindow::highlight_notes_from_current_music_time_in_pdf()
+{
+    float pos_in_second = (double)music->position()/1000;
+    int pos = m_timeline.search_note_at(pos_in_second);
+
+    qDebug() << pos_in_second << pos;
+
+    if (pos != -1)
+    {
+        int offset2 = 307;
+        int nline = ui->melodie_textarea->document()->blockCount();
+        int offset = offset2 + nline - 1;
+        pdf->highlight_note(pos, offset);
+    }
 }
 
 /*void MainWindow::printKeyboard()

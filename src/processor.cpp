@@ -33,11 +33,16 @@ void TabliatoProcessor::parseMusic()
     // A button holds the logic of parsing the notes and stores some context
     CURRENTDIRECTION = "p";
     CURRENTDURATION = "4";
+
     ButtonParser button(m_keyboard);
     MultiButtonParser multiButton(m_keyboard);
 
     // A motif holds the logic of parsing the left hand button into something that corresponds to the rythm
     Motif pattern(m_tab->get("time"), m_tab->get("motif").toInt());
+
+    // Timeline
+    Timeline timeline(m_tab->get("tempo"));
+
 
     // Protections préliminaires
     QString tabulature = m_tab->tabulature;
@@ -115,7 +120,6 @@ void TabliatoProcessor::parseMusic()
             case BUTTON:
             case NOTE:
             {
-                nnote++;
                 currentSymbolIsBass = false;
 
                 if (type == BUTTON)
@@ -126,10 +130,14 @@ void TabliatoProcessor::parseMusic()
                 CURRENTDURATION = button.duration();
                 CURRENTDIRECTION =  button.direction();
 
+                timeline.append(CURRENTDURATION, nnote);
+
                 update_rhs_spanner_state(button.get_duration_as_whole_note());
 
                 parsed = button.print(m_rhs_markup);
                 parsed = insert_rhs_spanners(parsed);
+
+                nnote++;
                 break;
             }
 
@@ -157,7 +165,7 @@ void TabliatoProcessor::parseMusic()
             // On parse jusqu'au prochain > chaque symbole est une note ou un bouton
             case OPENCHORD:
             {
-                nnote++;
+
                 currentSymbolIsBass = false;
                 QString open = symbols[i];
 
@@ -193,10 +201,14 @@ void TabliatoProcessor::parseMusic()
                 CURRENTDURATION = multiButton.duration();
                 CURRENTDIRECTION = multiButton.direction();
 
+                timeline.append(CURRENTDURATION, nnote);
+
                 update_rhs_spanner_state(multiButton.get_duration_as_whole_note());
 
                 parsed = multiButton.print(m_rhs_markup);
                 parsed = insert_rhs_spanners(parsed);
+
+                nnote++;
                 break;
             }
 
@@ -356,6 +368,8 @@ void TabliatoProcessor::parseMusic()
 
     m_tab->bass = parsedSymbolsBass.join(" ");
     m_tab->bass.replace(QRegExp(":"), "");
+
+    m_timeline = timeline;
 }
 
 void TabliatoProcessor::parseLyric()
@@ -430,6 +444,8 @@ void TabliatoProcessor::generateLilypondCode()
 
     m_tab->lilypond = lilypondCode;
 }
+
+
 
 void TabliatoProcessor::update_rhs_spanner_state(float duration)
 {

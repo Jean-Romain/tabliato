@@ -87,3 +87,4 @@ output/
 debian/*.deb
 debian/tabliato/
 public-binaries/
+docs/tablatures/*/*.ly

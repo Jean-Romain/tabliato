@@ -25,6 +25,8 @@ class SyntaxAnalyser
         bool isChord(QString str);
         bool isOpenChord(QString str);
         bool isCloseChord(QString str);
+        bool isOpenBracket(QString str);
+        bool isCloseBracket(QString str);
         bool isOpenManualBass(QString str);
         bool isCloseManualBass(QString str);
 
@@ -77,6 +79,8 @@ class SyntaxAnalyser
                           REST,
                           OPENCHORD,
                           CLOSECHORD,
+                          OPENBRACKET,
+                          CLOSEBRACKET,
                           OPENMANUALBASS,
                           CLOSEMANUALBASS,
                           TIE};

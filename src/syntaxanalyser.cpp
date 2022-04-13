@@ -89,6 +89,14 @@ bool SyntaxAnalyser::isCloseManualBass(QString str){
     return str == "]";
 }
 
+bool SyntaxAnalyser::isOpenBracket(QString str){
+    return str == "{";
+}
+
+bool SyntaxAnalyser::isCloseBracket(QString str){
+    return str == "}";
+}
+
 bool SyntaxAnalyser::isNote(QString str){
     return genericTest(note_rgx, str);
 }
@@ -139,6 +147,10 @@ int SyntaxAnalyser::getType(QString str)
         return IMPLICITBASS;
     else if (isExplicitBass(str))
         return EXPLICITBASS;
+    else if (isOpenBracket(str))
+        return OPENBRACKET;
+    else if (isCloseBracket(str))
+        return CLOSEBRACKET;
     else
         return OTHER;
 }

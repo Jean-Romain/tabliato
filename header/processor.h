@@ -33,10 +33,14 @@ class TabliatoProcessor : public SyntaxAnalyser
         QString insert_lhs_spanners(QString);
         void log(QString str);
 
+
     private:
+        enum Scope {REPEAT, ALTERNATIVE, ALTERNATIVESEQUENCE, TUPLET, NONAME};
+
         Keyboard m_keyboard;
         Tabulature *m_tab;
         QStringList m_logs;
+        QList<Scope> m_scope;
         bool m_rhs_spanner_is_open;
         bool m_lhs_spanner_is_open;
         bool m_rhs_spanner_must_be_closed;

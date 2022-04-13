@@ -161,9 +161,13 @@ void MainWindow::compile()
 
     try
     {
+        QElapsedTimer timer;
+        timer.start();
+
         TabliatoProcessor proc(tab);
         m_timeline = proc.m_timeline;
-        terminal(proc.get_logs());
+        //terminal(proc.get_logs());
+        terminal("Tablature parsée en " + QString::number(timer.elapsed()) + " milliseconds");
     }
     catch(const std::exception &e)
     {
@@ -236,6 +240,7 @@ void MainWindow::updatePreview(QString path)
 
     if (pdf->setDocument(path))
     {
+        pdf->show();
         ui->pageSpinBox->setMinimum(1);
         ui->pageSpinBox->setMaximum(pdf->document()->numPages());
         ui->pdfZoomSlider->setEnabled(true);
@@ -1154,7 +1159,7 @@ void MainWindow::highlight_notes_from_current_music_time_in_pdf()
     float pos_in_second = (double)music->position()/1000;
     int pos = m_timeline.search_note_at(pos_in_second);
 
-    qDebug() << pos_in_second << pos;
+    //qDebug() << pos_in_second << pos;
 
     if (pos != -1)
     {

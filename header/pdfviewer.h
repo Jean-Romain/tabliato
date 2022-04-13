@@ -43,8 +43,6 @@
 #include <QRectF>
 #include <poppler-qt5.h>
 
-class QRubberBand;
-
 class PdfViewer : public QLabel
 {
     Q_OBJECT
@@ -52,6 +50,7 @@ class PdfViewer : public QLabel
 public:
     PdfViewer(QWidget *parent = 0);
     ~PdfViewer();
+    void show(int page = -1);
     Poppler::Document *document();
     qreal scale() const;
     void highlight_link_from_lines(QVector<int> lines);
@@ -73,7 +72,6 @@ signals:
     void linkClicked(int);
 
 private:
-    void show(int page = -1);
     QPointF to_pdf_relative(QPoint);
     QRect to_img_absolute(QRectF);
     QRectF bbox(Poppler::Link*);

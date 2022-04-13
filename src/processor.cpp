@@ -41,8 +41,8 @@ void TabliatoProcessor::parseMusic()
     Motif pattern(m_tab->get("time"), m_tab->get("motif").toInt());
 
     // Timeline
-    Timeline timeline(m_tab->get("tempo"));
-
+    QString tempo = m_tab->get("tempo");
+    Timelines timeline(tempo);
 
     // Protections préliminaires
     QString tabulature = m_tab->tabulature;
@@ -307,7 +307,7 @@ void TabliatoProcessor::parseMusic()
                 {
                     currentSymbolIsBass = false;
                 }
-                if (symbol == "\\partial")
+                else if (symbol == "\\partial")
                 {
                     extractRankButton.indexIn(symbols[i+1]);
                     if (isButton(symbols[i+1]) && extractRankButton.cap(0) != "")
@@ -316,7 +316,7 @@ void TabliatoProcessor::parseMusic()
                     parsed = symbols[i] + " " + symbols[i+1];
                     i++;
                 }
-                if (symbol == "\\motif")
+                else if (symbol == "\\motif")
                 {
                     // \motif dans être suivit de e.g. [A:2 a:4 a:4] on parse cette sequence
                     currentSymbolIsBass = false;
@@ -333,6 +333,80 @@ void TabliatoProcessor::parseMusic()
                     }
                     pattern = Motif(tmp.join(" "));
                 }
+                else if (symbol == "\\repeat")
+                {
+                    m_scope.append(REPEAT);
+                    int repeat = symbols[i+1].split(":")[1].toInt();
+                    timeline.add_timeline();
+                    timeline.set_repetition(repeat);
+                    while(i < symbols.size()-1 && !isOpenBracket(symbols[i])) {
+                        i++;
+                        parsed += " " + symbols[i];
+                    }
+                }
+                else if (symbol == "\\alternative")
+                {
+                    m_scope.append(ALTERNATIVE);
+                    while(i < symbols.size()-1 && !isOpenBracket(symbols[i])) {
+                        i++;
+                        parsed += " " + symbols[i];
+                    }
+                }
+                else if (symbol == "\\tuplet")
+                {
+                    m_scope.append(TUPLET);
+                    timeline.set_speed_factor(symbols[i+1]);
+                    while(i < symbols.size()-1 && !isOpenBracket(symbols[i])) {
+                        i++;
+                        parsed += " " + symbols[i];
+                    }
+                }
+
+
+                //qDebug() << "command: scope =" << m_scope;
+                break;
+            }
+
+            case OPENBRACKET:
+            {
+                if (m_scope.last() == ALTERNATIVE)
+                {
+                    //qDebug() << "add alternaive";
+                    timeline.not_end_timeline();
+                    timeline.add_alternative();
+                    m_scope.append(ALTERNATIVESEQUENCE);
+                }
+                else
+                {
+                    m_scope.append(NONAME);
+                }
+
+                //qDebug() << "open: scope =" << m_scope;
+                break;
+            }
+
+            case CLOSEBRACKET:
+            {
+                if (m_scope.size() == 0)
+                    throw std::logic_error("Crochet fermant surnuméraire détecté");
+
+                Scope scope = m_scope.last();
+
+                if (scope == REPEAT)
+                {
+                    timeline.end_timeline();
+                }
+                else if (scope == ALTERNATIVE)
+                {
+                    timeline.end_timeline();
+                }
+                else if (scope == TUPLET)
+                {
+                    timeline.set_speed_factor("1/1");
+                }
+
+                m_scope.pop_back();
+                //qDebug() << "close: scope =" << m_scope;
                 break;
             }
 
@@ -349,6 +423,9 @@ void TabliatoProcessor::parseMusic()
             // logs
             if (symbol != "" && symbol != "\n") log("Symbol: " + symbol + " >> " + parsed);
         }
+
+        if (m_scope.size() > 0)
+            throw std::logic_error("Crochet ouvrant non fermé détecté");
 
         if (m_rhs_spanner_must_be_closed) parsedSymbolsMelody.append(QString("\\endSpanners \\stopTextSpan"));
         if (m_lhs_spanner_must_be_closed) parsedSymbolsBass.append(QString("\\endSpanners \\stopTextSpan"));
@@ -369,7 +446,7 @@ void TabliatoProcessor::parseMusic()
     m_tab->bass = parsedSymbolsBass.join(" ");
     m_tab->bass.replace(QRegExp(":"), "");
 
-    m_timeline = timeline;
+    m_timeline = timeline.timeline();
 }
 
 void TabliatoProcessor::parseLyric()

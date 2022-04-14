@@ -213,7 +213,9 @@ void TabliatoProcessor::parseMusic()
                 CURRENTDURATION = multiButton.duration();
                 CURRENTDIRECTION = multiButton.direction();
 
+                timeline.set_speed_factor(QString::number(multiButton.m_chord.size())+"/1");
                 timeline.append(CURRENTDURATION, nnote);
+                timeline.set_speed_factor("1/1");
 
                 update_rhs_spanner_state(multiButton.get_duration_as_whole_note());
 

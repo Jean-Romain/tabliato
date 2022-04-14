@@ -58,15 +58,23 @@ bool PdfViewer::setDocument(const QString &filePath)
 
         // Keep only non null area links
         QList<Poppler::Link*> all_links = m_doc->page(m_current_page)->links();
+        QSet<QPair<int, int>> registry;
         m_links.clear();
         for (int i = 0 ; i < all_links.size() ; i++)
         {
             if (all_links.at(i)->linkArea().width() > 0.0001)
             {
                 Poppler::Link* link = all_links.at(i);
-                if (get_line(link) != -1)
-                    m_links.append(link);
+                int row = get_line(link);
+                int col = get_column(link);
+                QPair<int, int> p(row, col);
+                if (!registry.contains(p))
+                {
+                    registry.insert(p);
 
+                    if (get_line(link) != -1)
+                        m_links.append(link);
+                }
             }
         }
 

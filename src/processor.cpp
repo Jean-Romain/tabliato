@@ -213,8 +213,13 @@ void TabliatoProcessor::parseMusic()
                 CURRENTDURATION = multiButton.duration();
                 CURRENTDIRECTION = multiButton.direction();
 
-                timeline.set_speed_factor(QString::number(multiButton.m_chord.size())+"/1");
-                timeline.append(CURRENTDURATION, nnote);
+                int n = multiButton.m_chord.size();
+                timeline.set_speed_factor(QString::number(n) +"/1");
+                for (auto k = 0 ; k < n ; k++)
+                {
+                    timeline.append(CURRENTDURATION, nnote);
+                    nnote++;
+                }
                 timeline.set_speed_factor("1/1");
 
                 update_rhs_spanner_state(multiButton.get_duration_as_whole_note());
@@ -222,7 +227,6 @@ void TabliatoProcessor::parseMusic()
                 parsed = multiButton.print(m_rhs_markup);
                 parsed = insert_rhs_spanners(parsed);
 
-                nnote++;
                 break;
             }
 
@@ -350,7 +354,11 @@ void TabliatoProcessor::parseMusic()
                 else if (symbol == "\\repeat")
                 {
                     m_scope.append(REPEAT);
-                    int repeat = symbols[i+1].split(":")[1].toInt();
+                    QStringList tmp = symbols[i+1].split(":");
+                    if (tmp.size() < 2)
+                        throw std::logic_error("Nombre de répétitions non détectée après \\repeat volta");
+
+                    int repeat = tmp[1].toInt();
                     timeline.add_timeline();
                     timeline.set_repetition(repeat);
                     while(i < symbols.size()-1 && !isOpenBracket(symbols[i])) {

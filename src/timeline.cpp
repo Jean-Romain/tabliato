@@ -221,6 +221,9 @@ void Timelines::set_repetition(int rep)
 
 void Timelines::set_speed_factor(QString fraction)
 {
+    if (m_end_signal || timelines.isEmpty())
+        add_timeline();
+
     timelines.last().set_speed_factor(fraction);
 }
 

@@ -500,6 +500,10 @@ void TabliatoProcessor::generateLilypondCode()
     lilypondCode = file.readAll();
     file.close();
 
+    QString default_tagline = "\\markup{Édité avec \\underline \\with-url #\"https://jean-romain.github.io/tabliato/index.html\" \\line {\"Tabliato\"} et \\underline \\with-url #\"http://lilypond.org/web/\" \\line {\"Lilypond\"}}";
+    if (m_tab->get("tagline") == "\\tabliato")
+        lilypondCode.replace(QRegExp("\"<tagline>\""), default_tagline);
+
     lilypondCode.replace(QRegExp("<ranks>"), QString::number(m_keyboard.ranks()));
     lilypondCode.replace(QRegExp("<basses>"), m_tab->bass);
     lilypondCode.replace(QRegExp("<tablature>"), m_tab->melody);

@@ -63,7 +63,10 @@ bool PdfViewer::setDocument(const QString &filePath)
         {
             if (all_links.at(i)->linkArea().width() > 0.0001)
             {
-                m_links.append(all_links.at(i));
+                Poppler::Link* link = all_links.at(i);
+                if (get_line(link) != -1)
+                    m_links.append(link);
+
             }
         }
 
@@ -202,20 +205,22 @@ int PdfViewer::get_line(Poppler::Link* link)
 {
     QString url = static_cast<Poppler::LinkBrowse*>(link)->url();
     QStringList parsed_url = url.split(":");
-    int line = parsed_url.at(2).toInt();
-    //int column_start = parsed_url.at(3).toInt();
-    //int column_end = parsed_url.at(4).toInt();
-    return line;
+
+    if (parsed_url.size() > 2)
+        return parsed_url.at(2).toInt();
+    else
+        return -1;
 }
 
 int PdfViewer::get_column(Poppler::Link* link)
 {
     QString url = static_cast<Poppler::LinkBrowse*>(link)->url();
     QStringList parsed_url = url.split(":");
-    //int line = parsed_url.at(2).toInt();
-    int column_start = parsed_url.at(3).toInt();
-    //int column_end = parsed_url.at(4).toInt();
-    return column_start;
+
+    if (parsed_url.size() > 3)
+        return parsed_url.at(3).toInt();
+    else
+        return -1;
 }
 
 QRectF PdfViewer::bbox(Poppler::Link* link)

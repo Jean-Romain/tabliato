@@ -180,6 +180,9 @@ void MainWindow::compile()
     File::mkdir(OUTPUT);
     File::writedtb(dtb, tab);
 
+    QElapsedTimer timer;
+    timer.start();
+
     QProcess tabliato;
     QStringList arguments;
     arguments.append("--png");
@@ -201,7 +204,7 @@ void MainWindow::compile()
     if (!tabliato.readAllStandardOutput().isEmpty())
         terminal(tabliato.readAllStandardOutput());
 
-    terminal("Compilation terminée");
+    terminal("Gravure terminée en " + QString::number(timer.elapsed()) + " milliseconds");
     updatePreview(OUTPUT + "/output.pdf");
     stopMusic();
     midi2audio();
@@ -240,6 +243,9 @@ void MainWindow::updatePreview(QString path)
 
     if (pdf->setDocument(path))
     {
+        QElapsedTimer timer;
+        timer.start();
+
         pdf->show();
         ui->pageSpinBox->setMinimum(1);
         ui->pageSpinBox->setMaximum(pdf->document()->numPages());
@@ -247,6 +253,8 @@ void MainWindow::updatePreview(QString path)
         ui->pageSpinBox->setEnabled(true);
         scaleDocument(ui->pdfZoomSlider->value());
         ui->pageSpinBox->setValue(page);
+
+        terminal("Rendu graphique terminée en " + QString::number(timer.elapsed()) + " milliseconds");
     }
     else
     {
@@ -941,6 +949,9 @@ void MainWindow::writeSettings()
     settings.setValue("exportPNG",  ui->actionExportPNG_tool->isChecked());
     settings.setValue("sf2", ui->sf2_combobox->currentText());
     settings.setValue("lastOpenedFile", currentOpenedFile);
+    settings.setValue("scalePDF", pdf->scale());
+    settings.setValue("previewWidth", ui->previewDock->width());
+    settings.setValue("editorWidth", ui->centralwidget->width());
 }
 
 void MainWindow::readSettings()
@@ -962,6 +973,12 @@ void MainWindow::readSettings()
 
         int index = ui->sf2_combobox->findText(settings.value("sf2").toString());
         if (index != -1) ui->sf2_combobox->setCurrentIndex(index);
+
+        ui->pdfZoomSlider->setValue(settings.value("scalePDF").toFloat()*100);
+        scaleDocument(settings.value("scalePDF").toFloat());
+
+        ui->centralwidget->resize(settings.value("editorWidth").toInt(), ui->centralwidget->height());
+        ui->previewDock->resize(settings.value("previewWidth").toInt(), ui->previewDock->height());
 
         restoreCheckedDock();
 
@@ -1091,8 +1108,6 @@ void MainWindow::updateRythmComboBx()
         Motif motif;
         motif = rythmList.value(list[i]);
 
-        //qDebug() << list[i];
-
         if(motif.isCompatible(ui->time_combobox->currentText()))
             ui->rythm_comboBox->addItem(list[i]);
     }
@@ -1137,7 +1152,6 @@ void MainWindow::goto_line(int line)
     int offset2 = 307;
     int nline = ui->melodie_textarea->document()->blockCount();
     int ln = (line - offset1 <= nline) ? line - offset1 : line - offset2 - nline + 1;
-    //qDebug() << "Goto" << ln;
     QTextCursor cursor(ui->melodie_textarea->document()->findBlockByLineNumber(ln)); // ln-1 because line number starts from 0
     ui->melodie_textarea->setTextCursor(cursor);
 }
@@ -1158,8 +1172,6 @@ void MainWindow::highlight_notes_from_current_music_time_in_pdf()
 {
     float pos_in_second = (double)music->position()/1000;
     int pos = m_timeline.search_note_at(pos_in_second);
-
-    //qDebug() << pos_in_second << pos;
 
     if (pos != -1)
     {

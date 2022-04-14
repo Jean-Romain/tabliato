@@ -1,12 +1,12 @@
-A;a,
-a;a e
-C;c,
-c;c g
-D;d,
-d;d a
-B;b,
-b;b fis
-F#;fis,
-f#;fis cis
-G;g,
-g;g d
+A;<a, a>
+a;<a c e>
+B;<b, b>
+b;<b fis>
+C;<c, c>
+c;<c e g>
+D;<d, d>
+d;<d fis a>
+F#;<fis, fis>
+f#;<fis cis>
+G;<g, g>
+g;<g b d>

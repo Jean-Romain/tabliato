@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tabliato>
-    <propertie key="c \major" motif="2" instrument="" title="Les filles des forges" poet="" system="cadb" accordion="ctl1gc" tagline="Édité avec Tabliato et Lilypond" displayFingering="auto" rythm="B a (binaire)" composer="Trad." time="2/4" subtitle="Pilé-menu" tempo="2=100"/>
+    <propertie time="2/4" key="c \major" tempo="2=100" instrument="" tagline="\tabliato" title="Les filles des forges" motif="2" subtitle="Pilé-menu" accordion="ctl1gc" rythm="B a (binaire)" displayFingering="auto" composer="Trad." poet="" system="cadb"/>
     <tabulature>\partial:8 t5:8 [r:8]
 
 \repeat volta 2

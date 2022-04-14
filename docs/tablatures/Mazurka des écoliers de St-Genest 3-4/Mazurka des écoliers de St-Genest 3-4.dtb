@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tabliato>
-    <propertie composer="Trad." title="Mazurka des écoliers de Saint-Genest" tempo="4=110" key="g \major" motif="3" tagline="Édité avec Tabliato et Lylipond" instrument="" displayFingering="auto" rythm="B a a " poet="" system="cadb" time="3/4" accordion="ctl1gc" subtitle=""/>
-    <tabulature>\partial:8*3 p4':8 t6 p4' [r8 d:8 r8]
+    <propertie time="3/4" key="g \major" tempo="4=110" instrument="" tagline="\tabliato" title="Mazurka des écoliers de Saint-Genest" motif="3" subtitle="" accordion="ctl1gc" rythm="B a a " displayFingering="auto" composer="Trad." poet="" system="cadb"/>
+    <tabulature>\partial:8*3 p4':8 t6 p4' [r:8 d:8 r:8]
 
 \repeat volta 2
 {

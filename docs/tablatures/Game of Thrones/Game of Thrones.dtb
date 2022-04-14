@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tabliato>
-    <propertie accordion="ctl1gc" rythm="B a a " tempo="4=200" system="cadb" tagline="" subtitle="Main theme" composer="Arrang. Roberto Capancioni" motif="3" displayFingering="auto" instrument="" poet="" key="c \major" time="3/4" title="Game of Thrones"/>
+    <propertie time="3/4" key="c \major" tempo="4=200" instrument="" tagline="\tabliato" title="Game of Thrones" motif="3" subtitle="Main theme" accordion="ctl1gc" rythm="B a a " displayFingering="auto" composer="Arrang. Roberto Capancioni" poet="" system="cadb"/>
     <tabulature>% mesure 1
 t 9:2. A
 7 A

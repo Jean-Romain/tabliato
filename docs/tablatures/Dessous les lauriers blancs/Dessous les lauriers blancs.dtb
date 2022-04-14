@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tabliato>
-    <propertie instrument="" subtitle="Hanter dro" tempo="4=150" composer="Trad." displayFingering="auto" motif="22" key="c \major" system="cadb" tagline="Édité avec Tabliato et Lilypond" time="4/4" poet="" accordion="ctl1gc" title="Dessous les lauriers blancs" rythm="B a B a "/>
+    <propertie system="cadb" instrument="" accordion="ctl1gc" composer="Trad." displayFingering="auto" motif="22" poet="" subtitle="Hanter dro" tagline="\tabliato" key="c \major" rythm="B a B a " tempo="4=150" time="4/4" title="Dessous les lauriers blancs"/>
     <tabulature>\repeat volta2 
 { 
  t7:4 6':8 8 7:4 p6:4 [A a A e]
@@ -16,16 +16,18 @@
 
 \break
  
-\repeat volta2 
+\repeat volta 2 
 { 
  t7:4 6':8 8 7:4 p7':4 [A a A e]
  p7':2 8:4 6':8 7  [C c G g]
  t7:4 6':8 8 7:4 p6 [A a A e]
 
  \break 
+
  t7:4 6':8 8 p7':4 8 [A a C G]
  p6':4 7 t7 6':8 8 [F E A a]
  p8:4 7 t7:2 [G g A a] 
-} </tabulature>
+} 
+</tabulature>
     <lyric></lyric>
 </tabliato>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tabliato>
-    <propertie accordion="ctl1gc" displayFingering="auto" system="cadb" subtitle="Trad. Italie" motif="11" tempo="4.=100" key="c \major" time="6/8" title="Tarentelle" tagline="" composer="" poet="" instrument="" rythm="B aB a"/>
+    <propertie time="6/8" key="c \major" tempo="4.=100" instrument="" tagline="\tabliato" title="Tarentelle" motif="11" subtitle="Trad. Italie" accordion="ctl1gc" rythm="B aB a" displayFingering="auto" composer="" poet="" system="cadb"/>
     <tabulature>\repeat volta 2
 {
 t5:8 7 6' 8 6' 8 A

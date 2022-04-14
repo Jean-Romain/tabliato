@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tabliato>
-    <propertie composer="Jean-Marc Siche" title="Valse des Moussaillons" tempo="2=80" key="c \major" motif="3" tagline="Édité avec tabliato et Lilypond" instrument="" displayFingering="auto" rythm="B a a " poet="" system="cadb" time="3/4" accordion="ctl1gc" subtitle=""/>
+    <propertie time="3/4" key="c \major" tempo="2=80" instrument="" tagline="\tabliato" title="Valse des Moussaillons" motif="3" subtitle="" accordion="ctl1gc" rythm="B a a " displayFingering="auto" composer="Jean-Marc Siche" poet="" system="cadb"/>
     <tabulature>\repeat volta 2
 {
 t7:2.

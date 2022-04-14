@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tabliato>
-    <propertie composer="Trad." subtitle="" instrument="" tempo="2=100" displayFingering="auto" key="c \major" tagline="Édité avec Tabliato et Lilypond" motif="3" accordion="ctl1gc" poet="" rythm="B a a " system="cadb" time="3/4" title="En avant blonde"/>
+    <propertie rythm="B a a " time="3/4" tempo="2=100" accordion="ctl1gc" composer="Trad." title="En avant blonde" displayFingering="auto" system="cadb" tagline="\tabliato" motif="3" instrument="" key="c \major" subtitle="" poet=""/>
     <tabulature>\repeat volta 2
 {
   t7:4 8 7'

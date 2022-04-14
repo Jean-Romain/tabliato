@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tabliato>
-    <propertie accordion="ctl4gc" tempo="4=130" poet="" time="7/8" displayFingering="auto" key="c \major" subtitle="Traditionnel bulgare" tagline="" motif="-1" system="cadb" instrument="" rythm="Manuel" composer="" title="Liliano momé"/>
+    <propertie tagline="\tabliato" subtitle="Traditionnel bulgare" system="cadb" title="Liliano momé" instrument="Accodéon 3 rangs Sol/Do" key="c \major" poet="" displayFingering="auto" composer="" accordion="ctl4gc" motif="-1" time="7/8" rythm="Manuel" tempo="4=130"/>
     <tabulature>\motif [B:4. a:4 a:4]
 
 \set Timing.beatStructure=3,3,2

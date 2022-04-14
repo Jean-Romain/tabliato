@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tabliato>
-    <propertie composer="Yann Tiersen" title="Valse d'Amélie Poulain" tempo="4=200" key="c \major" motif="3" tagline="Édité avec Tabliato et Lilypond" instrument="" displayFingering="auto" rythm="B a a " poet="" system="cadb" time="3/4" accordion="ctl1gc" subtitle=""/>
-    <tabulature>\partial 4*5 t7:4 6' 8 6' 8 [a:8 r a:8 r] A
+    <propertie time="3/4" key="c \major" tempo="4=200" instrument="" tagline="\tabliato" title="Valse d'Amélie Poulain" motif="3" subtitle="" accordion="ctl1gc" rythm="B a a " displayFingering="auto" composer="Yann Tiersen" poet="" system="cadb"/>
+    <tabulature>\partial 4*5 t7:4 6' 8 6' 8 [a:8 r:8 a:8 r:8] A
 
 \bar ".|" 
 

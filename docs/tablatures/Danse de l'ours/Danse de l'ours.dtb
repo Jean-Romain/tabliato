@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tabliato>
-    <propertie poet="" subtitle="" system="cadb" displayFingering="auto" instrument="" motif="22" rythm="B a B a " tagline="Édité avec Tabliato et Lilypond" time="2/4" tempo="4=110" accordion="ctl1gc" key="c \major" composer="Trad." title="Danse de l'ours"/>
+    <propertie poet="" key="c \major" tagline="\tabliato" displayFingering="auto" tempo="4=110" subtitle="" rythm="B a B a " composer="Trad." instrument="" system="cadb" title="Danse de l'ours" time="2/4" motif="22" accordion="ctl1gc"/>
     <tabulature>\repeat volta 2 
 {
     t9:8 7 7:16 6' 8 7'

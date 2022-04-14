@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tabliato>
-    <propertie subtitle="" poet="" tempo="4=130" title="Valse Israëlienne" composer="" displayFingering="auto" motif="3" rythm="B a a " tagline="" key="c \major" time="3/4" accordion="ctl1gc" system="cadb" instrument=""/>
+    <propertie time="3/4" key="c \major" tempo="4=130" instrument="" tagline="\tabliato" title="Valse Israëlienne" motif="3" subtitle="" accordion="ctl1gc" rythm="B a a " displayFingering="auto" composer="" poet="" system="cadb"/>
     <tabulature>\repeat volta 2
 {
 t9:4. 8':8 9 8

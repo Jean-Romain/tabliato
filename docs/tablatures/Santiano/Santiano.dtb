@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tabliato>
-    <propertie composer="Hugues Aufray" title="Santiano" tempo="4=110" key="c \major" motif="22" tagline="Édité avec Tabliato et Lilypond" instrument="" displayFingering="auto" rythm="B a B a " poet="" system="cadb" time="2/4" accordion="2 rangs 8 basses sol/do" subtitle="Folksong"/>
-    <tabulature>\partial:4 t9:4 [A:16 r16 a:16 r16]
+    <propertie time="2/4" key="c \major" tempo="4=110" instrument="" tagline="\tabliato" title="Santiano" motif="22" subtitle="Folksong" accordion="ctl1gc" rythm="B a B a " displayFingering="auto" composer="Hugues Aufray" poet="" system="cadb"/>
+    <tabulature>\partial:4 t9:4 [A:16 r:16 a:16 r:16]
 
 \repeat volta 2
 {

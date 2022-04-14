@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tabliato>
-    <propertie composer="" subtitle="Scottish" instrument="" tempo="4=140" displayFingering="auto" key="c \major" tagline="Édité avec Tabliato et Lilypond" motif="22" accordion="ctl1gc" poet="" rythm="B a B a " system="cadb" time="4/4" title="Esperanza"/>
+    <propertie motif="22" rythm="B a B a " displayFingering="auto" title="Esperanza" instrument="" accordion="ctl1gc" key="c \major" time="4/4" tempo="4=140" composer="" poet="" tagline="\tabliato" subtitle="Scottish" system="cadb"/>
     <tabulature>\repeat volta 2
 {
  t7:8 7 7 8 9:4 9:8 8

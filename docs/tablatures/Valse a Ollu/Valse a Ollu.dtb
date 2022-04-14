@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tabliato>
-    <propertie instrument="" tagline="" time="3/4" key="c \major" motif="3" subtitle="" rythm="B a a " composer="Alain Ollu" title="Valse à Ollu" displayFingering="auto" poet="" accordion="ctl1gc" tempo="4=120" system="cadb"/>
-    <tabulature>\set Timing.beamExceptions = #'() 
+    <propertie rythm="B a a " tempo="4=120" accordion="ctl1gc" system="cadb" composer="Alain Ollu" subtitle="" time="3/4" title="Valse à Ollu" motif="3" key="c \major" poet="" tagline="\tabliato" instrument="" displayFingering="auto"/>
+    <tabulature>\set Timing.beamExceptions=#'() 
 
  % Partie normale
 
@@ -49,10 +49,10 @@ A F G E
 
 \break
 
-r:4 t 9,8,7 9,8,7
-r t 8',8,7 8',8,7
-r p 8,7,6 8,7,6
-r p 7',7,6 7',7,6
+r:4 t &lt;9 8 7> &lt;9 8 7>
+r t &lt;8' 8 7> &lt;8' 8 7>
+r p &lt;8 7 6> &lt;8 7 6>
+r p &lt;7' 7 6> &lt;7' 7 6>
 
 A F G E
 

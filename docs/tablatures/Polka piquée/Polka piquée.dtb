@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tabliato>
-    <propertie composer="Trad." title="Polka piquée" tempo="4=130" key="g \major" motif="22" tagline="Édité avec Tabliato et Lilypond" instrument="" displayFingering="auto" rythm="B a B a " poet="" system="cadb" time="2/4" accordion="ctl1gc" subtitle="Polka piquée - Débutant"/>
+    <propertie time="2/4" key="g \major" tempo="4=130" instrument="" tagline="\tabliato" title="Polka piquée" motif="22" subtitle="Polka piquée - Débutant" accordion="ctl1gc" rythm="B a B a " displayFingering="auto" composer="Trad." poet="" system="cadb"/>
     <tabulature>\repeat volta 2 
 {
     p5:8 6 7 6

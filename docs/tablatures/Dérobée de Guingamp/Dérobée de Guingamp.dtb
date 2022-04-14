@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tabliato>
-    <propertie time="6/8" poet="" composer="Trad." motif="11" instrument="" key="c \major" displayFingering="auto" tagline="Édité avec Tabliato et Lilypond" rythm="B aB a" tempo="4=160" accordion="ctl1gc" subtitle="" system="cadb" title="Dérobée de Guingamp"/>
+    <propertie composer="Trad." key="c \major" rythm="B aB a" accordion="ctl1gc" poet="" tagline="\tabliato" displayFingering="auto" instrument="" system="cadb" subtitle="" tempo="4=160" motif="11" time="6/8" title="Dérobée de Guingamp"/>
     <tabulature>\repeat volta 2
 {
 t8:8 8 8 8 6' 8 A

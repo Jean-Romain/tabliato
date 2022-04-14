@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tabliato>
-    <propertie instrument="" tagline="" time="6/8" key="c \major" motif="11" subtitle="" rythm="B aB a" composer="Trad." title="Cock of the North" displayFingering="auto" poet="" accordion="ctl1gc" tempo="4.=100" system="cadb"/>
+    <propertie tagline="\tabliato" key="c \major" time="6/8" accordion="ctl1gc" poet="" tempo="4.=100" composer="Trad." displayFingering="auto" title="Cock of the North" rythm="B aB a" system="cadb" instrument="" motif="11" subtitle=""/>
     <tabulature>\partial:8 p5':8 [r:8]
 
 \repeat volta 2 

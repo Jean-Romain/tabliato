@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tabliato>
-    <propertie subtitle="" poet="" instrument="" system="cadb" title="Tripping upstair" time="6/8" key="c \major" tagline="Édité avec Tabliato et Lilypond" tempo="4.=110" motif="11" displayFingering="auto" rythm="B aB a" accordion="ctl1gc" composer="Trad."/>
+    <propertie time="6/8" key="c \major" tempo="4.=110" instrument="" tagline="\tabliato" title="Tripping upstair" motif="11" subtitle="" accordion="ctl1gc" rythm="B aB a" displayFingering="auto" composer="Trad." poet="" system="cadb"/>
     <tabulature>\repeat volta 2
 {
  p4':8 5' 6' t4' 7 8 

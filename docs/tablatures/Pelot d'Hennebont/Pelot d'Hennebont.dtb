@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tabliato>
-    <propertie accordion="ctl1gc" displayFingering="auto" composer="" poet="" instrument="" motif="22" tagline="Édité avec Tabliato et Lilypond" tempo="4=130" key="c \major" system="cadb" subtitle="An dro" time="4/4" rythm="B a B a " title="Pelot d'Hennebont"/>
+    <propertie time="4/4" key="c \major" tempo="4=130" instrument="" tagline="\tabliato" title="Pelot d'Hennebont" motif="22" subtitle="An dro" accordion="ctl1gc" rythm="B a B a " displayFingering="auto" composer="" poet="" system="cadb"/>
     <tabulature>\partial:8 t7:8 [r8]
 
 \repeat volta 2

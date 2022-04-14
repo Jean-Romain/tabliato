@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tabliato>
-    <propertie displayFingering="auto" subtitle="Andro" rythm="B a B a " poet="" key="c \major" time="4/4" instrument="" system="cadb" tagline="Édité avec Tabliato et Lilypond" tempo="4=150" title="Bonsoir, maître de maison" accordion="ctl1gc" composer="Trad." motif="22"/>
+    <propertie displayFingering="auto" title="Bonsoir, maître de maison" rythm="B a B a " system="cadb" poet="" composer="Trad." tagline="\tabliato" instrument="" key="c \major" motif="22" tempo="4=150" accordion="ctl1gc" subtitle="Andro" time="4/4"/>
     <tabulature>t8:4 8:8 8 p7:4 7:8 6':8 [A a G g]
 7:4 6 t7:2 [G g A a]
 8:4 8:8 8 p7:4 7:8 6':8 [A a G g]

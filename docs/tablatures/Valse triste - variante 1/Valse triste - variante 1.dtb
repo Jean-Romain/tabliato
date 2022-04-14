@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tabliato>
-    <propertie composer="Trad." title="Valse triste" tempo="4=130" key="c \major" motif="3" tagline="Édité avec Tabliato et Lilypond" instrument="" displayFingering="auto" rythm="B a a " poet="" system="cadb" time="3/4" accordion="ctl1gc" subtitle="Variante"/>
+    <propertie time="3/4" key="c \major" tempo="4=130" instrument="" tagline="\tabliato" title="Valse triste" motif="3" subtitle="Variante" accordion="ctl1gc" rythm="B a a " displayFingering="auto" composer="Trad." poet="" system="cadb"/>
     <tabulature>\repeat volta 2 
 {
   t5:2. 4' 5

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tabliato>
-    <propertie displayFingering="auto" time="9/8" key="c \major" subtitle="" poet="" tagline="Édité avec Tabliato et Lilypond" accordion="ctl1gc" motif="3" composer="Trad." rythm="B a a " system="cadb" title="Gavotte ton doubl" instrument="" tempo="4=225"/>
+    <propertie time="9/8" key="c \major" tempo="4=225" instrument="" tagline="\tabliato" title="Gavotte ton doubl" motif="3" subtitle="" accordion="ctl1gc" rythm="B a a " displayFingering="auto" composer="Trad." poet="" system="cadb"/>
     <tabulature>\time 9/8
 
 p6':4 7:8 6':4 8:8 7':4 t8':8 C

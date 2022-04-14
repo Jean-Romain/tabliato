@@ -256,7 +256,7 @@ fngr =
 
 \markup { \vspace #2 }
 
-\pointAndClickTypes #'(note-event post-event script-event text-script-event event)
+\pointAndClickTypes #'(note-event post-event script-event text-script-event event rest-event)
 
 
 %=====================

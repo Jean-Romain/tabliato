@@ -7,7 +7,7 @@ SyntaxAnalyser::SyntaxAnalyser()
     direction_rgx.setPattern("[ptPT]");                                                         // matches a push/pull directive e.g. p, P, T
     impliciteBass_rgx.setPattern("^[a-gA-G]{1}[mb#]?$");                                        // matches a left hand implicit pattern e.g. A, Am, G, Gb
     expliciteBass_rgx.setPattern("[a-gA-G]{1}[mb#]?:?\\d{1,2}.?~?");                            // matches a left hand explicit pattern e.g. A:4 g:4 g:4
-    rest_rgx.setPattern("r(:?\\d{1,2}\\.?)?");                                                  // matches a rest symbol e.g. r, r:4, r:4.
+    rest_rgx.setPattern("r(:?\\d{1,2}\\.?)?");                                                  // matches a rest symbol e.g. r, r4 r:4, r:4.
     pushed_rgx.setPattern("^([pP]).*$");                                                        // matches a p or P at the begining
     command_rgx.setPattern("\\\\\\w+");                                                         // matches \blabla
     fingering_rgx.setPattern("/([a-zA-Z]+|\\d)");

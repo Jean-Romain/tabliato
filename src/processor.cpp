@@ -158,6 +158,18 @@ void TabliatoProcessor::parseMusic()
                 currentSymbolIsBass = false;
                 close_rhs_spanner();
                 parsed = insert_rhs_spanners(symbols[i]);
+
+                if (extractDuration.indexIn(symbols[i]) >= 0)
+                    CURRENTDURATION = extractDuration.cap(1);
+                else
+                {
+                    symbols[i].remove(0,1).size();
+                    if (symbols[i].size() > 0)
+                        CURRENTDURATION = symbols[i];
+                }
+
+                timeline.append(CURRENTDURATION, nnote);
+                nnote++;
                 break;
             }
 

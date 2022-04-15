@@ -66,25 +66,6 @@ class MainWindow : public QMainWindow
 
         //void printKeyboard();
 
-        void insertBreak();
-        void insertAlternative();
-        void insertRest();
-        void insertRest1();
-        void insertRest2();
-        void insertRest4();
-        void insertRest8();
-        void insertRest16();
-        void insertRest32();
-        void insertRest64();
-        void insertRest128();
-        void insertBeginBar();
-        void insertEndBar();
-        void insertBeginRepeatBar();
-        void insertEndRepeatBar();
-        void insertRepeat();
-        void insertTie();
-        void insertSlurs();
-
         void playMusic();
         void stopMusic();
         void seekMusic(qint64 time);
@@ -117,31 +98,6 @@ class MainWindow : public QMainWindow
         QMap<QString, QString> accordionList;
         QMap<QString, QString> accordionListReverted;
 
-        enum InsertText
-        {
-            REPEAT,
-            BREAK,
-            ALTERNATIVE,
-
-            REST,
-            REST1,
-            REST2,
-            REST4,
-            REST8,
-            REST16,
-            REST32,
-            REST64,
-            REST128,
-
-            ENDBAR,
-            BEGINBAR,
-            BEGINREPEATBAR,
-            ENDREPEATBAR,
-
-            TIE,
-            SLURS
-        };
-
     private:
         Tabulature readMusicFromUI();
 
@@ -149,7 +105,6 @@ class MainWindow : public QMainWindow
         void updateCode(QString bass, QString tabulature, QString staff, QString lilypondCode);
         void terminal(QString str);
         void open(QString filename);
-        void insertText(int text);
         void setIcons();
         void updatePreview(QString);
         void exportFiles();

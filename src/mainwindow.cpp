@@ -64,27 +64,24 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     connect(ui->melodie_textarea, SIGNAL(textChanged()), this, SLOT(documentSavedTitleChange()));
     //connect(ui->basse_textarea, SIGNAL(textChanged()), this, SLOT(documentSavedTitleChange()));
 
-    connect(ui->actionInsertRepeat, SIGNAL(triggered()), this, SLOT(insertRepeat()));
-    connect(ui->actionInsertBreak, SIGNAL(triggered()), this, SLOT(insertBreak()));
-    connect(ui->actionInsertAlternative, SIGNAL(triggered()), this, SLOT(insertAlternative()));
-    connect(ui->actionInsertEndBar, SIGNAL(triggered()), this, SLOT(insertEndBar()));
-
-    //connect(ui->infoButton_accordion, SIGNAL(clicked()), this, SLOT(printKeyboard()));
-
-    connect(ui->endbar, SIGNAL(clicked()), this, SLOT(insertEndBar()));
-    connect(ui->beginbar, SIGNAL(clicked()), this, SLOT(insertBeginBar()));
-    connect(ui->beginrepaeat, SIGNAL(clicked()), this, SLOT(insertEndRepeatBar()));
-    connect(ui->endrepeat, SIGNAL(clicked()), this, SLOT(insertEndRepeatBar()));
-    connect(ui->rest1, SIGNAL(clicked()), this, SLOT(insertRest1()));
-    connect(ui->rest2, SIGNAL(clicked()), this, SLOT(insertRest2()));
-    connect(ui->rest4, SIGNAL(clicked()), this, SLOT(insertRest4()));
-    connect(ui->rest8, SIGNAL(clicked()), this, SLOT(insertRest8()));
-    connect(ui->rest16, SIGNAL(clicked()), this, SLOT(insertRest16()));
-    connect(ui->rest32, SIGNAL(clicked()), this, SLOT(insertRest32()));
-    connect(ui->rest64, SIGNAL(clicked()), this, SLOT(insertRest64()));
-    connect(ui->rest128, SIGNAL(clicked()), this, SLOT(insertRest128()));
-    connect(ui->tie, SIGNAL(clicked()), this, SLOT(insertTie()));
-    connect(ui->slurs, SIGNAL(clicked()), this, SLOT(insertSlurs()));
+    connect(ui->actionInsertRepeat,      &QAction::triggered,   [=]() { this->ui->melodie_textarea->insertPlainText("\\repeat volta 2\n{\n\n}\n"); });
+    connect(ui->actionInsertBreak,       &QAction::triggered,   [=]() { this->ui->melodie_textarea->insertPlainText("\\break"); });
+    connect(ui->actionInsertAlternative, &QAction::triggered,   [=]() { this->ui->melodie_textarea->insertPlainText("\\alternative\n{\n  {  }\n  {  }\n}"); });
+    connect(ui->actionInsertEndBar,      &QAction::triggered,   [=]() { this->ui->melodie_textarea->insertPlainText("\\bar \"|.\" "); });
+    connect(ui->endbar,                  &QPushButton::clicked, [=]() { this->ui->melodie_textarea->insertPlainText("\\bar \"|.\" "); });
+    connect(ui->beginbar,                &QPushButton::clicked, [=]() { this->ui->melodie_textarea->insertPlainText("\\bar \".|\" "); });
+    connect(ui->beginrepaeat,            &QPushButton::clicked, [=]() { this->ui->melodie_textarea->insertPlainText("\\bar \".|:\" "); });
+    connect(ui->endrepeat,               &QPushButton::clicked, [=]() { this->ui->melodie_textarea->insertPlainText("\\bar \":|.\" "); });
+    connect(ui->rest1,                   &QPushButton::clicked, [=]() { this->ui->melodie_textarea->insertPlainText("r1 "); });
+    connect(ui->rest2,                   &QPushButton::clicked, [=]() { this->ui->melodie_textarea->insertPlainText("r2 "); });
+    connect(ui->rest4,                   &QPushButton::clicked, [=]() { this->ui->melodie_textarea->insertPlainText("r4 "); });
+    connect(ui->rest8,                   &QPushButton::clicked, [=]() { this->ui->melodie_textarea->insertPlainText("r8 "); });
+    connect(ui->rest16,                  &QPushButton::clicked, [=]() { this->ui->melodie_textarea->insertPlainText("r16 "); });
+    connect(ui->rest32,                  &QPushButton::clicked, [=]() { this->ui->melodie_textarea->insertPlainText("r32 "); });
+    connect(ui->rest64,                  &QPushButton::clicked, [=]() { this->ui->melodie_textarea->insertPlainText("r64 "); });
+    connect(ui->rest128,                 &QPushButton::clicked, [=]() { this->ui->melodie_textarea->insertPlainText("r128"); });
+    connect(ui->tie,                     &QPushButton::clicked, [=]() { this->ui->melodie_textarea->insertPlainText("~ "); });
+    connect(ui->slurs,                   &QPushButton::clicked, [=]() { this->ui->melodie_textarea->insertPlainText("( ) "); });
 
     connect(ui->play_pushButton, SIGNAL(clicked()), this, SLOT(playMusic()));
     connect(ui->stop_pushButton, SIGNAL(clicked()), this, SLOT(stopMusic()));
@@ -853,98 +850,6 @@ void MainWindow::displayDocks()
     if(!ui->actionDisplayInsertFast->isChecked() && !ui->insertTextDock->isHidden())
         ui->insertTextDock->hide();
 }
-
-void MainWindow::insertText(int text)
-{
-    QPlainTextEdit *textarea;
-
-    //if(ui->basse_textarea->hasFocus())
-    //    textarea = ui->basse_textarea;
-    //else
-        textarea = ui->melodie_textarea;
-
-    switch (text)
-    {
-    case REPEAT:
-        textarea->insertPlainText("\\repeat volta 2\n{\n\n}\n");
-        break;
-    case ALTERNATIVE:
-        textarea->insertPlainText("\\alternative\n{\n  {  }\n  {  }\n}");
-        break;
-    case ENDBAR:
-        textarea->insertPlainText("\\bar \"|.\" ");
-        break;
-    case BEGINBAR:
-        textarea->insertPlainText("\\bar \".|\" ");
-        break;
-    case ENDREPEATBAR:
-        textarea->insertPlainText("\\bar \":|.\" ");
-        break;
-    case BEGINREPEATBAR:
-        textarea->insertPlainText("\\bar \".|:\" ");
-        break;
-    case BREAK:
-        textarea->insertPlainText("\\break");
-        break;
-    case REST:
-        textarea->insertPlainText("r:");
-        break;
-    case REST1:
-        textarea->insertPlainText("r1 ");
-        break;
-    case REST2:
-        textarea->insertPlainText("r2 ");
-        break;
-    case REST4:
-        textarea->insertPlainText("r4 ");
-        break;
-    case REST8:
-        textarea->insertPlainText("r8 ");
-        break;
-    case REST16:
-        textarea->insertPlainText("r16 ");
-        break;
-    case REST32:
-        textarea->insertPlainText("r32 ");
-        break;
-    case REST64:
-        textarea->insertPlainText("r64 ");
-        break;
-    case REST128:
-        textarea->insertPlainText("r128 ");
-        break;
-    case TIE:
-        textarea->insertPlainText("~ ");
-        break;
-    case SLURS:
-        textarea->insertPlainText("( ) ");
-        break;
-    default:
-        break;
-    }
-}
-
-void MainWindow::insertRepeat(){insertText(REPEAT);}
-void MainWindow::insertBreak(){insertText(BREAK);}
-void MainWindow::insertAlternative(){insertText(ALTERNATIVE);}
-
-void MainWindow::insertRest(){insertText(REST);}
-void MainWindow::insertRest1(){insertText(REST1);}
-void MainWindow::insertRest2(){insertText(REST2);}
-void MainWindow::insertRest4(){insertText(REST4);}
-void MainWindow::insertRest8(){insertText(REST8);}
-void MainWindow::insertRest16(){insertText(REST16);}
-void MainWindow::insertRest32(){insertText(REST32);}
-void MainWindow::insertRest64(){insertText(REST64);}
-void MainWindow::insertRest128(){insertText(REST128);}
-
-void MainWindow::insertBeginBar(){insertText(BEGINBAR);}
-void MainWindow::insertEndBar(){insertText(ENDBAR);}
-void MainWindow::insertBeginRepeatBar(){insertText(BEGINREPEATBAR);}
-void MainWindow::insertEndRepeatBar(){insertText(ENDREPEATBAR);}
-
-void MainWindow::insertTie(){insertText(TIE);}
-void MainWindow::insertSlurs(){insertText(SLURS);}
 
 void MainWindow::writeSettings()
 {

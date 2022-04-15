@@ -91,7 +91,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     connect(music, SIGNAL(positionChanged(qint64)), this, SLOT(seekMusic(qint64)));
     connect(ui->time_slider, SIGNAL(sliderReleased()), this, SLOT(seekMusic()));
     connect(music, SIGNAL(stateChanged(QMediaPlayer::State)), this, SLOT(updateMusic(QMediaPlayer::State)));
-    //connect(ui->time_slider, SIGNAL(sliderPressed()), this, SLOT(seekMusic()));
     connect(ui->showsf2ddl_pushButton, SIGNAL(clicked()), this, SLOT(openSF2About()));
 
     connect(midi2audioCall,SIGNAL(readyReadStandardOutput()),this,SLOT(midi2audioReadyRead()));
@@ -431,6 +430,18 @@ void MainWindow::open(QString filename)
             music->setMedia(QMediaContent());
             music->setMedia(QUrl::fromLocalFile(audio));
         }
+
+        try
+        {
+            TabliatoProcessor proc(tab);
+            m_timeline = proc.m_timeline;
+        }
+        catch(const std::exception &e)
+        {
+            QMessageBox::critical(this, "Erreur", QString(e.what()));
+            terminal(e.what());
+            return;
+        }
      }
     catch(const std::exception &e)
     {
@@ -686,7 +697,7 @@ void MainWindow::playMusic()
     else
     {
         music->play();
-        timer->start(100);
+        timer->start(50);
         QIcon pause(ICON + "/pause.svg");
         ui->play_pushButton->setIcon(pause);
     }

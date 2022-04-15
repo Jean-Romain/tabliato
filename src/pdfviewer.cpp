@@ -36,6 +36,8 @@ void PdfViewer::show(int page)
     if (page != -1 && page != m_current_page + 1)
     {
         m_current_page = page - 1;
+        clean_pdf();
+        init_links();
         emit pageChanged(page);
     }
 
@@ -55,34 +57,7 @@ bool PdfViewer::setDocument(const QString &filePath)
         m_doc->setRenderHint(Poppler::Document::TextAntialiasing);
         m_current_page = -1;
         setPage(1);
-
-        // Keep only non null area links
-        QList<Poppler::Link*> all_links = m_doc->page(m_current_page)->links();
-        QSet<QPair<int, int>> registry;
-        m_links.clear();
-        for (int i = 0 ; i < all_links.size() ; i++)
-        {
-            if (all_links.at(i)->linkArea().width() > 0.0001)
-            {
-                Poppler::Link* link = all_links.at(i);
-                int row = get_line(link);
-                int col = get_column(link);
-                QPair<int, int> p(row, col);
-                if (!registry.contains(p))
-                {
-                    registry.insert(p);
-
-                    if (get_line(link) != -1)
-                        m_links.append(link);
-                }
-            }
-        }
-
-        std::sort(m_links.begin(), m_links.end(), [](Poppler::Link* a, Poppler::Link* b)
-        {
-            if (PdfViewer::get_line(a) != PdfViewer::get_line(b)) return PdfViewer::get_line(a) < PdfViewer::get_line(b);
-            return PdfViewer::get_column(a) < PdfViewer::get_column(b);
-        });
+        init_links();
         clean_pdf();
     }
 
@@ -275,6 +250,12 @@ void PdfViewer::highlight_link_from_lines(QVector<int> lines)
         }
     }
 
+    /*if (!m_link_hovered)
+    {
+        int newpage = (m_current_page == 0) ? m_current_page+1 : m_current_page-1;
+        setPage(newpage);
+    }*/
+
     qPainter.end();
     show();
 }
@@ -320,5 +301,35 @@ void PdfViewer::clean_pdf()
         m_image = m_doc->page(m_current_page)->renderToImage(m_scale_factor * physicalDpiX(), m_scale_factor * physicalDpiY());
 }
 
+void PdfViewer::init_links()
+{
+    // Keep only non null area links
+    QList<Poppler::Link*> all_links = m_doc->page(m_current_page)->links();
+    QSet<QPair<int, int>> registry;
+    m_links.clear();
+    for (int i = 0 ; i < all_links.size() ; i++)
+    {
+        if (all_links.at(i)->linkArea().width() > 0.0001)
+        {
+            Poppler::Link* link = all_links.at(i);
+            int row = get_line(link);
+            int col = get_column(link);
+            QPair<int, int> p(row, col);
+            if (!registry.contains(p))
+            {
+                registry.insert(p);
+
+                if (get_line(link) != -1)
+                    m_links.append(link);
+            }
+        }
+    }
+
+    std::sort(m_links.begin(), m_links.end(), [](Poppler::Link* a, Poppler::Link* b)
+    {
+        if (PdfViewer::get_line(a) != PdfViewer::get_line(b)) return PdfViewer::get_line(a) < PdfViewer::get_line(b);
+        return PdfViewer::get_column(a) < PdfViewer::get_column(b);
+    });
+}
 
 

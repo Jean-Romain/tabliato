@@ -76,6 +76,7 @@ private:
     QRect to_img_absolute(QRectF);
     QRectF bbox(Poppler::Link*);
     void clean_pdf();
+    void init_links();
 
     int m_current_page;
     bool m_link_hovered;

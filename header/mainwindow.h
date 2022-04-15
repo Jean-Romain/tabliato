@@ -49,12 +49,7 @@ class MainWindow : public QMainWindow
         void open_example();
 
         void openAbout();
-        void openSF2About();
-        void openHelpTabliato();
-        void openHelpSyntax();
-        void openHelpLilypond();
         void checkVersion();
-        void openContactWebPage();
         void download_soundfonts(QString name);
 
         void documentSavedTitleChange();
@@ -73,9 +68,6 @@ class MainWindow : public QMainWindow
         void updateMusic(QMediaPlayer::State);
 
         void updateRythmComboBx();
-        void initRythmComboBx();
-        void initAccordionComboBox();
-        void initSf2ComboBox();
 
         void highlight_notes_from_current_line_in_pdf();
         void highlight_notes_from_current_music_time_in_pdf();
@@ -99,9 +91,10 @@ class MainWindow : public QMainWindow
 
     private:
         Tabulature readMusicFromUI();
-
+        void initRythmComboBx();
+        void initAccordionComboBox();
+        void initSf2ComboBox();
         void updateUIFromMusic(Tabulature tab);
-        void updateCode(QString bass, QString tabulature, QString staff, QString lilypondCode);
         void terminal(QString str);
         void open(QString filename);
         void setIcons();
@@ -111,6 +104,7 @@ class MainWindow : public QMainWindow
         void readSettings();
         void restoreCheckedDock();
         bool maybeSave();
+
 
 /*private slots:
 //    void checkSearchText(const QString &text);

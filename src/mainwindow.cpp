@@ -49,14 +49,16 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     connect(ui->actionUndo_tool, SIGNAL(triggered()), ui->melodie_textarea, SLOT(undo()));
     connect(ui->actionRedo_tool, SIGNAL(triggered()), ui->melodie_textarea, SLOT(redo()));
 
-    // ==== Various opening ====
-    connect(ui->actionHelpTabliato, SIGNAL(triggered()), this, SLOT(openHelpTabliato()));
-    connect(ui->actionHelpSyntax, SIGNAL(triggered()), this, SLOT(openHelpSyntax()));
-    connect(ui->actionHelpLilypond, SIGNAL(triggered()), this, SLOT(openHelpLilypond()));
+    // ==== Various exernal opening ====
+    connect(ui->actionHelpTabliato,  &QAction::triggered, [=]() { QDesktopServices::openUrl(QUrl("https://jean-romain.github.io/tabliato/doc.html")); });
+    connect(ui->actionHelpSyntax,    &QAction::triggered, [=]() { QDesktopServices::openUrl(QUrl("https://jean-romain.github.io/tabliato/doc.html")); });
+    connect(ui->actionHelpLilypond,  &QAction::triggered, [=]() { QDesktopServices::openUrl(QUrl("http://www.lilypond.org/introduction.fr.html")); });
+    connect(ui->actionBug,           &QAction::triggered, [=]() { QDesktopServices::openUrl(QUrl("https://github.com/Jean-Romain/tabliato/issues")); });
+    connect(ui->actionSuggesstions,  &QAction::triggered, [=]() { QDesktopServices::openUrl(QUrl("https://github.com/Jean-Romain/tabliato/issues")); });
+
+     // ==== Various internal opening ====
     connect(ui->actionAbout, SIGNAL(triggered()), this, SLOT(openAbout()));
     connect(ui->actionCheckUpdate, SIGNAL(triggered()), this, SLOT(checkVersion()));
-    connect(ui->actionBug, SIGNAL(triggered()), this, SLOT(openContactWebPage()));
-    connect(ui->actionSuggesstions, SIGNAL(triggered()), this, SLOT(openContactWebPage()));
 
     // ==== Show/hide dock widget ====
     connect(ui->actionDisplayToolBar, SIGNAL(triggered()), this, SLOT(displayDocks()));
@@ -95,7 +97,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     connect(music, SIGNAL(positionChanged(qint64)), this, SLOT(seekMusic(qint64)));
     connect(ui->time_slider, SIGNAL(sliderReleased()), this, SLOT(seekMusic()));
     connect(music, SIGNAL(stateChanged(QMediaPlayer::State)), this, SLOT(updateMusic(QMediaPlayer::State)));
-    connect(ui->showsf2ddl_pushButton, SIGNAL(clicked()), this, SLOT(openSF2About()));
 
     // ==== Music renderer ====
     connect(midi2audioCall,SIGNAL(readyReadStandardOutput()),this,SLOT(midi2audioReadyRead()));
@@ -107,6 +108,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     connect(ui->actionGaillard,        &QAction::triggered, [=]() { this->download_soundfonts("Gaillard.sf2"); });
     connect(ui->actionSalta_Bourroche, &QAction::triggered, [=]() { this->download_soundfonts("SaltaBourroche_Light.sf2"); });
     connect(ui->actionSerafini,        &QAction::triggered, [=]() { this->download_soundfonts("Serafini.sf2"); });
+    connect(ui->showsf2ddl_pushButton, &QPushButton::clicked, [=]() { QMessageBox::information(this, "Soundfonts", "Pour télécharger d'autres fichiers de rendu audio allez dans: Audio > Installer des fontes sonores"); });
 
     // ==== PDF interaction between ui and rendering ====
     connect(ui->pageSpinBox, SIGNAL(valueChanged(int)), pdf, SLOT(setPage(int)));
@@ -241,25 +243,24 @@ void MainWindow::updatePreview(QString path)
 {
     int page = ui->pageSpinBox->value();
 
-    if (pdf->setDocument(path))
-    {
-        QElapsedTimer timer;
-        timer.start();
-
-        pdf->show();
-        ui->pageSpinBox->setMinimum(1);
-        ui->pageSpinBox->setMaximum(pdf->document()->numPages());
-        ui->pdfZoomSlider->setEnabled(true);
-        ui->pageSpinBox->setEnabled(true);
-        scaleDocument(ui->pdfZoomSlider->value());
-        ui->pageSpinBox->setValue(page);
-
-        terminal("Rendu graphique terminée en " + QString::number(timer.elapsed()) + " milliseconds");
-    }
-    else
+    if (!pdf->setDocument(path))
     {
         QMessageBox::warning(this, "PDF Viewer - Failed to Open File", "The specified file could not be opened.");
+        return;
     }
+
+    QElapsedTimer timer;
+    timer.start();
+
+    pdf->show();
+    ui->pageSpinBox->setMinimum(1);
+    ui->pageSpinBox->setMaximum(pdf->document()->numPages());
+    ui->pdfZoomSlider->setEnabled(true);
+    ui->pageSpinBox->setEnabled(true);
+    scaleDocument(ui->pdfZoomSlider->value());
+    ui->pageSpinBox->setValue(page);
+
+    terminal("Rendu graphique terminée en " + QString::number(timer.elapsed()) + " milliseconds");
 }
 
 void MainWindow::updateUIFromMusic(Tabulature tab)
@@ -462,22 +463,12 @@ void MainWindow::openAbout()
      msgBox.exec();
 }
 
-void MainWindow::openSF2About()
-{
-    QMessageBox::information(this, "Soundfonts", "Pour télécharger d'autres fichiers de rendu audio allez dans: Audio > Installer des fontes sonores");
-}
-
 void MainWindow::checkVersion()
 {
      VersionDialog *verDlg = new VersionDialog(this);
      verDlg->exec();
      delete verDlg;
 }
-
-void MainWindow::openHelpLilypond(){ QDesktopServices::openUrl(QUrl("http://www.lilypond.org/introduction.fr.html"));}
-void MainWindow::openHelpTabliato(){ QDesktopServices::openUrl(QUrl("https://jean-romain.github.io/tabliato/doc.html"));}
-void MainWindow::openHelpSyntax(){ QDesktopServices::openUrl(QUrl("https://jean-romain.github.io/tabliato/doc.html"));}
-void MainWindow::openContactWebPage(){ QDesktopServices::openUrl(QUrl("https://github.com/Jean-Romain/tabliato/issues"));}
 
 void MainWindow::openNew()
 {
@@ -823,7 +814,6 @@ bool MainWindow::maybeSave()
 
 void MainWindow::displayDocks()
 {
-
     if(ui->actionDisplayToolBar->isChecked() && ui->toolBar->isHidden())
         ui->toolBar->show();
     if(!ui->actionDisplayToolBar->isChecked() && !ui->toolBar->isHidden())
@@ -976,28 +966,31 @@ void MainWindow::initRythmComboBx()
 void MainWindow::initAccordionComboBox()
 {
     QFile file(KEYBOARDS +  "/assemblages.csv");
+
+    if(!file.open(QIODevice::ReadOnly | QIODevice::Text))
+    {
+        QMessageBox::critical(this, "Erreur", "Impossible de lire le fichier de configuration des claviers : " + KEYBOARDS + "/assemblages.csv");
+        return;
+    }
+
+    QTextStream stream(&file);
+    stream.setCodec("UTF-8");
+
     ui->accordion_comboBox->clear();
     accordionList.clear();
 
-    if(!file.open(QIODevice::ReadOnly | QIODevice::Text))
-        QMessageBox::critical(this, "Erreur", "Impossible de lire le fichier de configuration des claviers : " + KEYBOARDS + "/assemblages.csv");
-    else
+    while (!stream.atEnd())
     {
-        QTextStream stream(&file);
-        stream.setCodec("UTF-8");
+        QString line = stream.readLine();
+        QStringList list = line.split(";");
 
-        while (!stream.atEnd())
-        {
-            QString line = stream.readLine();
-            QStringList list = line.split(";");
-
-            accordionList.insert(list[1], list[0]);
-            accordionListReverted.insert(list[0], list[1]);
-            ui->accordion_comboBox->addItem(list[1]);
-        }
-
-        file.close();
+        accordionList.insert(list[1], list[0]);
+        accordionListReverted.insert(list[0], list[1]);
+        ui->accordion_comboBox->addItem(list[1]);
     }
+
+    file.close();
+
 }
 
 void MainWindow::initSf2ComboBox()
@@ -1012,10 +1005,8 @@ void MainWindow::initSf2ComboBox()
     QStringList sf2 = directory.entryList(QStringList() << "*.sf2", QDir::Files);
 
     ui->sf2_combobox->clear();
-    foreach(QString f, sf2)
-    {
+    for(auto f : sf2)
        ui->sf2_combobox->addItem(f);
-    }
 }
 
 void MainWindow::updateRythmComboBx()

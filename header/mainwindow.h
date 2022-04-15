@@ -86,7 +86,6 @@ class MainWindow : public QMainWindow
         QMediaPlayer *music;
         QProcess *midi2audioCall;
         PdfViewer *pdf;
-        QSignalMapper* signalMapper;
         QVector<qreal> scaleFactors;
         QTimer *timer;
 

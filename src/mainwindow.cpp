@@ -29,23 +29,27 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     music = new QMediaPlayer(this);
     midi2audioCall = new QProcess(this);
     pdf = new PdfViewer();
-    signalMapper = new QSignalMapper(this) ;
     timer = new QTimer(this);
 
+    // ==== Basic stuff such as open/save ====
     connect(ui->actionSave, SIGNAL(triggered()), this, SLOT(save()));
     connect(ui->actionSaveAs, SIGNAL(triggered()), this, SLOT(save_as()));
     connect(ui->actionOpen, SIGNAL(triggered()), this, SLOT(open()));
     connect(ui->actionNew, SIGNAL(triggered()), this, SLOT(openNew()));
     connect(ui->actionOpenExample, SIGNAL(triggered()), this, SLOT(open_example()));
-    connect(ui->actionCompile, SIGNAL(triggered()), this, SLOT(compile()));
-
     connect(ui->actionSave_tool, SIGNAL(triggered()), this, SLOT(save()));
     connect(ui->actionOpen_tool, SIGNAL(triggered()), this, SLOT(open()));
     connect(ui->actionNew_tool, SIGNAL(triggered()), this, SLOT(openNew()));
-    connect(ui->actionUndo_tool, SIGNAL(triggered()), ui->melodie_textarea, SLOT(undo()));
-    connect(ui->actionRedo_tool, SIGNAL(triggered()), ui->melodie_textarea, SLOT(redo()));
+
+    // ==== Trigger rendering ====
+    connect(ui->actionCompile, SIGNAL(triggered()), this, SLOT(compile()));
     connect(ui->actionCompile_tool, SIGNAL(triggered()), this, SLOT(compile()));
 
+    // ==== Undo/Redo ====
+    connect(ui->actionUndo_tool, SIGNAL(triggered()), ui->melodie_textarea, SLOT(undo()));
+    connect(ui->actionRedo_tool, SIGNAL(triggered()), ui->melodie_textarea, SLOT(redo()));
+
+    // ==== Various opening ====
     connect(ui->actionHelpTabliato, SIGNAL(triggered()), this, SLOT(openHelpTabliato()));
     connect(ui->actionHelpSyntax, SIGNAL(triggered()), this, SLOT(openHelpSyntax()));
     connect(ui->actionHelpLilypond, SIGNAL(triggered()), this, SLOT(openHelpLilypond()));
@@ -54,6 +58,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     connect(ui->actionBug, SIGNAL(triggered()), this, SLOT(openContactWebPage()));
     connect(ui->actionSuggesstions, SIGNAL(triggered()), this, SLOT(openContactWebPage()));
 
+    // ==== Show/hide dock widget ====
     connect(ui->actionDisplayToolBar, SIGNAL(triggered()), this, SLOT(displayDocks()));
     connect(ui->actionDisplayPlayer, SIGNAL(triggered()), this, SLOT(displayDocks()));
     connect(ui->actionDisplayInformations, SIGNAL(triggered()), this, SLOT(displayDocks()));
@@ -61,9 +66,10 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     connect(ui->actionDisplayInsertFast, SIGNAL(triggered()), this, SLOT(displayDocks()));
     connect(ui->actionDisplayPreview, SIGNAL(triggered()), this, SLOT(displayDocks()));
 
+    // ==== When the text changed the document is no longer saved =====
     connect(ui->melodie_textarea, SIGNAL(textChanged()), this, SLOT(documentSavedTitleChange()));
-    //connect(ui->basse_textarea, SIGNAL(textChanged()), this, SLOT(documentSavedTitleChange()));
 
+    // ==== Insertion rapide ====
     connect(ui->actionInsertRepeat,      &QAction::triggered,   [=]() { this->ui->melodie_textarea->insertPlainText("\\repeat volta 2\n{\n\n}\n"); });
     connect(ui->actionInsertBreak,       &QAction::triggered,   [=]() { this->ui->melodie_textarea->insertPlainText("\\break"); });
     connect(ui->actionInsertAlternative, &QAction::triggered,   [=]() { this->ui->melodie_textarea->insertPlainText("\\alternative\n{\n  {  }\n  {  }\n}"); });
@@ -83,6 +89,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     connect(ui->tie,                     &QPushButton::clicked, [=]() { this->ui->melodie_textarea->insertPlainText("~ "); });
     connect(ui->slurs,                   &QPushButton::clicked, [=]() { this->ui->melodie_textarea->insertPlainText("( ) "); });
 
+    // ==== Music player ====
     connect(ui->play_pushButton, SIGNAL(clicked()), this, SLOT(playMusic()));
     connect(ui->stop_pushButton, SIGNAL(clicked()), this, SLOT(stopMusic()));
     connect(music, SIGNAL(positionChanged(qint64)), this, SLOT(seekMusic(qint64)));
@@ -90,30 +97,31 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     connect(music, SIGNAL(stateChanged(QMediaPlayer::State)), this, SLOT(updateMusic(QMediaPlayer::State)));
     connect(ui->showsf2ddl_pushButton, SIGNAL(clicked()), this, SLOT(openSF2About()));
 
+    // ==== Music renderer ====
     connect(midi2audioCall,SIGNAL(readyReadStandardOutput()),this,SLOT(midi2audioReadyRead()));
     connect(midi2audioCall,SIGNAL(finished(int)),this,SLOT(midi2audioFinished(int)));
 
+    // ===- Music download soundfonts ====
+    connect(ui->actionBallone_Burini,  &QAction::triggered, [=]() { this->download_soundfonts("BalloneBurini.sf2"); });
+    connect(ui->actionLoffet,          &QAction::triggered, [=]() { this->download_soundfonts("Loffet.sf2"); });
+    connect(ui->actionGaillard,        &QAction::triggered, [=]() { this->download_soundfonts("Gaillard.sf2"); });
+    connect(ui->actionSalta_Bourroche, &QAction::triggered, [=]() { this->download_soundfonts("SaltaBourroche_Light.sf2"); });
+    connect(ui->actionSerafini,        &QAction::triggered, [=]() { this->download_soundfonts("Serafini.sf2"); });
+
+    // ==== PDF interaction between ui and rendering ====
     connect(ui->pageSpinBox, SIGNAL(valueChanged(int)), pdf, SLOT(setPage(int)));
     connect(pdf, SIGNAL(pageChanged(int)), ui->pageSpinBox, SLOT(setValue(int)));
     connect(ui->pdfZoomSlider, SIGNAL(valueChanged(int)), this, SLOT(scaleDocument(int)));
     connect(pdf, SIGNAL(scaleChanged(int)), ui->pdfZoomSlider, SLOT(setValue(int)));
+
+    // === PDF interaction between code and rendering ===
     connect(pdf, SIGNAL(linkClicked(int)), this, SLOT(goto_line(int)));
     connect(ui->melodie_textarea, SIGNAL(cursorPositionChanged()), this, SLOT(highlight_notes_from_current_line_in_pdf()));
+
+    // === PDF interaction between music player and rendering ===
     connect(timer, SIGNAL(timeout()), this, SLOT(highlight_notes_from_current_music_time_in_pdf()));
 
-    signalMapper->setMapping(ui->actionBallone_Burini, "BalloneBurini.sf2") ;
-    signalMapper->setMapping(ui->actionLoffet, "Loffet.sf2") ;
-    signalMapper->setMapping(ui->actionGaillard, "Gaillard.sf2") ;
-    signalMapper->setMapping(ui->actionSalta_Bourroche, "SaltaBourroche_Light.sf2") ;
-    signalMapper->setMapping(ui->actionSerafini, "Serafini.sf2") ;
-
-    connect(ui->actionBallone_Burini, SIGNAL(triggered()), signalMapper, SLOT(map())) ;
-    connect(ui->actionLoffet, SIGNAL(triggered()), signalMapper, SLOT(map())) ;
-    connect(ui->actionGaillard, SIGNAL(triggered()), signalMapper, SLOT(map())) ;
-    connect(ui->actionSalta_Bourroche, SIGNAL(triggered()), signalMapper, SLOT(map())) ;
-    connect(ui->actionSerafini, SIGNAL(triggered()), signalMapper, SLOT(map())) ;
-    connect(signalMapper, SIGNAL(mapped(QString)), this, SLOT(download_soundfonts(QString))) ;
-
+    // === Misc ====
     connect(ui->time_combobox,SIGNAL(currentIndexChanged(int)),this,SLOT(updateRythmComboBx()));
 
     // Fix #19 window only. This works natively on linux
@@ -123,10 +131,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     ui->accordion_comboBox->setStyleSheet("QComboBox QAbstractItemView {min-width: 300;}");
     #endif
 
-    //ui->player_layout->addWidget(slider);
     ui->scrollArea->setWidget(pdf);
-
-
     ui->toolBox->setCurrentIndex(0);
     ui->toolBox_2->setCurrentIndex(0);
 
@@ -144,7 +149,6 @@ MainWindow::~MainWindow()
     delete music;
     delete midi2audioCall;
     delete pdf;
-    delete signalMapper;
 }
 
 void MainWindow::compile()

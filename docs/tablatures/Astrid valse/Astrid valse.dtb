@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tabliato>
+    <propertie motif="3" system="cadb" accordion="ctl1gc" key="c \major" tempo="4=130" title="Astrid valse" poet="" rythm="B a a " tagline="\tabliato" instrument="" displayFingering="auto" time="3/4" composer="" subtitle=""/>
+    <tabulature>\set Timing.beamExceptions=#'()
+\set Timing.beatStructure=1,1,1
+
+\partial 4 p4' [e:8 r:8]
+
+t7:2 6':4 A
+8:2 7':4 A
+8:4 8:8 7' 8 6' A
+7:4 8 9 A
+t9':4. p9:8 t 8' 9 F
+7':4 8' 9' G
+p7':2. ~ C
+7':2 4':4 E
+
+\break
+
+
+t7:2 6':4 A
+p6':2 8:4 E
+6':4 6':8 8 6' 7 E
+t7:4 8 9 A
+t9':4. p9:8 t 8' 9 F
+7':4 8' 11 G
+p7':2. ~ C
+7':2. E 
+
+\break
+
+t9':4. p8':8 t8' p7' F
+t7':4 8' 9' G
+p7':4. t8':8 9 8 [C c g]
+t7:2 7:8 6' A
+8:2 7:4 A
+p7:2 6:4 E
+t7:4 7:8 6' 8 7' A
+p 7':2. C
+
+\break
+
+t9':4. p9:8 t 8' 9 F
+7':4 8' 9' G
+p7':4. t8':8 9 8 [C c g]
+7:2 7:8 6' A
+8:2 7:4 F
+p7:2 6:4 E
+t7:2. ~ A
+t7:2 p4':4 [A a e]
+
+\bar ":|." 
+
+</tabulature>
+    <lyric></lyric>
+</tabliato>

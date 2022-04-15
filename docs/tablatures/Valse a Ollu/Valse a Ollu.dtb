@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tabliato>
-    <propertie rythm="B a a " tempo="4=120" accordion="ctl1gc" system="cadb" composer="Alain Ollu" subtitle="" time="3/4" title="Valse à Ollu" motif="3" key="c \major" poet="" tagline="\tabliato" instrument="" displayFingering="auto"/>
+    <propertie poet="" time="3/4" motif="3" system="cadb" title="Valse à Ollu" tagline="\tabliato" key="c \major" tempo="4=120" accordion="ctl1gc" displayFingering="auto" instrument="" subtitle="" composer="Alain Ollu" rythm="B a a "/>
     <tabulature>\set Timing.beamExceptions=#'() 
 
  % Partie normale

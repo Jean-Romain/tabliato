@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tabliato>
-    <propertie motif="3" system="cadb" accordion="ctl1gc" key="c \major" tempo="4=130" title="Astrid valse" poet="" rythm="B a a " tagline="\tabliato" instrument="" displayFingering="auto" time="3/4" composer="" subtitle=""/>
+    <propertie accordion="ctl1gc" subtitle="" system="cadb" instrument="" poet="" time="3/4" motif="3" composer="" key="c \major" rythm="B a a " tempo="4=130" title="Astrid valse" displayFingering="auto" tagline="\tabliato"/>
     <tabulature>\set Timing.beamExceptions=#'()
 \set Timing.beatStructure=1,1,1
 

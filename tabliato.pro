@@ -35,8 +35,11 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 
-HEADERS += header/*.h \
+HEADERS += header/*.h
 FORMS += ui/*.ui
-SOURCES += src/*.cpp \
+SOURCES += src/*.cpp
 
 QT_LOGGING_RULES=*.debug=true qt-creator
+
+RESOURCES += \
+    Ressources.qrc

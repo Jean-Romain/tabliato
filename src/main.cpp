@@ -29,16 +29,13 @@ int main(int argc, char *argv[])
 
     APPDIR = QApplication::applicationDirPath();
     APPPATH = QApplication::applicationFilePath();
-    SHARE = (APPDIR == "/usr/bin") ? "/usr/share/tabliato" : APPDIR + "/share";
     LOCAL = QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation);
-    TEMPLATE = SHARE + "/templates";
-    KEYBOARDS = SHARE + "/keyboards";
-    SOUNDFONTS = LOCAL + "/soundfonts";
-    ICON = SHARE + "/icon";
-    DOC = SHARE + "/doc";
-    HTML = SHARE + "/html";
-    EXAMPLE = SHARE + "/exemples";
+    TEMPLATE = ":/templates/ressources/templates";
+    KEYBOARDS = ":/keyboards/ressources/keyboards";
+    ICON = ":/icons/ressources/icons";
+    HTML = ":/html/ressources/html";
     OUTPUT = LOCAL + "/output";
+    SOUNDFONTS = LOCAL + "/soundfonts";
 
     #ifdef Q_OS_WINDOWS
     MIDIEXT = ".mid";

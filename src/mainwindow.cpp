@@ -36,18 +36,22 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     connect(ui->actionSaveAs, SIGNAL(triggered()), this, SLOT(save_as()));
     connect(ui->actionOpen, SIGNAL(triggered()), this, SLOT(open()));
     connect(ui->actionNew, SIGNAL(triggered()), this, SLOT(openNew()));
-    connect(ui->actionOpenExample, SIGNAL(triggered()), this, SLOT(open_example()));
     connect(ui->actionSave_tool, SIGNAL(triggered()), this, SLOT(save()));
     connect(ui->actionOpen_tool, SIGNAL(triggered()), this, SLOT(open()));
     connect(ui->actionNew_tool, SIGNAL(triggered()), this, SLOT(openNew()));
+    connect(ui->actionUndo_tool, SIGNAL(triggered()), ui->melodie_textarea, SLOT(undo()));
+    connect(ui->actionRedo_tool, SIGNAL(triggered()), ui->melodie_textarea, SLOT(redo()));
+
+    // ==== Fichier d'exemples ====
+    connect(ui->actionOpenExBase,      &QAction::triggered,  [=]() { this->open(":/examples/ressources/exemples/Exemple - basique.dtb"); currentOpenedFile = ""; });
+    connect(ui->actionOpenExAnacrouse, &QAction::triggered,  [=]() { this->open(":/examples/ressources/exemples/Exemple - anacrouse.dtb"); currentOpenedFile = ""; });
+    connect(ui->actionOpenExAccords,   &QAction::triggered,  [=]() { this->open(":/examples/ressources/exemples/Exemple - accord main droite.dtb"); currentOpenedFile = ""; });
+    connect(ui->actionOpenExNotes,     &QAction::triggered,  [=]() { this->open(":/examples/ressources/exemples/Exemple - boutons ou notes.dtb"); currentOpenedFile = ""; });
+    connect(ui->actionOpenExRythme,    &QAction::triggered,  [=]() { this->open(":/examples/ressources/exemples/Exemple - rythme special.dtb");  currentOpenedFile = "";});
 
     // ==== Trigger rendering ====
     connect(ui->actionCompile, SIGNAL(triggered()), this, SLOT(compile()));
     connect(ui->actionCompile_tool, SIGNAL(triggered()), this, SLOT(compile()));
-
-    // ==== Undo/Redo ====
-    connect(ui->actionUndo_tool, SIGNAL(triggered()), ui->melodie_textarea, SLOT(undo()));
-    connect(ui->actionRedo_tool, SIGNAL(triggered()), ui->melodie_textarea, SLOT(redo()));
 
     // ==== Various exernal opening ====
     connect(ui->actionHelpTabliato,  &QAction::triggered, [=]() { QDesktopServices::openUrl(QUrl("https://jean-romain.github.io/tabliato/doc.html")); });
@@ -342,16 +346,23 @@ void MainWindow::terminal(QString str)
 void MainWindow::save()
 {
     if (currentOpenedFile.isEmpty())
-        save_as();
-    else
     {
-        QFileInfo fi(currentOpenedFile);
-        File::writedtb(currentOpenedFile, readMusicFromUI());
+        save_as();
+        return;
+    }
 
+    QFileInfo fi(currentOpenedFile);
+
+    try
+    {
+        File::writedtb(currentOpenedFile, readMusicFromUI());
         documentIsSaved = true;
         setWindowTitle("Tabliato - " + fi.baseName());
-
         terminal("Sauvegarde de : " + currentOpenedFile);
+    }
+    catch (std::exception &e)
+    {
+        QMessageBox::critical(this, "Erreur", e.what());
     }
 }
 
@@ -376,12 +387,6 @@ void MainWindow::save_as()
     }
 }
 
-void MainWindow::open_example()
-{
-    QString filename = QFileDialog::getOpenFileName(this, tr("Ouvrir une tablature"), EXAMPLE, tr("Tabliato Files (*.dtb)"));
-    open(filename);
-}
-
 void MainWindow::open()
 {
     QString path;
@@ -397,12 +402,14 @@ void MainWindow::open()
 
 void MainWindow::open(QString filename)
 {
-    if (filename.isEmpty())return;
+    if (filename.isEmpty()) return;
 
     QFile file(filename);
     QFileInfo fileinfo(filename);
 
     stopMusic();
+    qDebug() << "open" << filename;
+    pdf->setPixmap(QPixmap());
 
     if(!file.exists()) return;
 
@@ -444,7 +451,7 @@ void MainWindow::open(QString filename)
             terminal(e.what());
             return;
         }
-     }
+    }
     catch(const std::exception &e)
     {
         QString err("Un problème est survenu. Le logiciel renvoie l'erreur suivante :\n ");
@@ -496,139 +503,9 @@ void MainWindow::openNew()
 
 void MainWindow::setIcons()
 {
-    // Actions icons
-
-    QIcon save(ICON + "/save.svg");
-    QIcon file(ICON + "/new.svg");
-    QIcon open(ICON + "/open.svg");
-    QIcon compile(ICON + "/compile.svg");
-
-    QIcon undo(ICON + "/undo.svg");
-    QIcon redo(ICON + "/redo.svg");
-
-    QIcon repeat(ICON + "/repeat.svg");
-    QIcon question(ICON + "/question.svg");
-    QIcon information(ICON + "/information.svg");
-    QIcon update(ICON + "/update.svg");
-    QIcon bug(ICON + "/bug.svg");
-    QIcon request(ICON + "/request.svg");
-
-    QIcon play(ICON + "/play.svg");
-    QIcon stop(ICON + "/stop.svg");
-    QIcon more(ICON + "/more.svg");
-
     QIcon download(ICON + "/download.svg");
     QIcon check(ICON + "/check.svg");
-
-    // Files icons
-
-    QIcon pdf(ICON + "/pdf.svg");
-    QIcon midi(ICON + "/midi.svg");
-    QIcon png(ICON + "/png.svg");
-    QIcon ly(ICON + "/ly.svg");
-    QIcon wav(ICON + "/wav.svg");
-
-    // Solfège icons
-
-    QIcon croche(ICON + "/croche.svg");
-    QIcon crochedot(ICON + "/crochedot.svg");
-    QIcon noire(ICON + "/noire.svg");
-    QIcon blanche(ICON + "/blanche.svg");
-    QIcon noiredot(ICON + "/noire-dot.svg");
-    QIcon blanchedot(ICON + "/blanche-dot.svg");
-    QIcon ronde(ICON + "/ronde.svg");
-
-    QIcon rest1(ICON + "/rest1.svg");
-    QIcon rest2(ICON + "/rest2.svg");
-    QIcon soupir(ICON + "/rest4.svg");
-    QIcon rest8(ICON + "/rest8.svg");
-    QIcon rest16(ICON + "/rest16.svg");
-    QIcon rest32(ICON + "/rest32.svg");
-    QIcon rest64(ICON + "/rest64.svg");
-    QIcon rest128(ICON + "/rest128.svg");
-
-    QIcon beginbar(ICON + "/beginbar.svg");
-    QIcon endbar(ICON + "/endbar.svg");
-    QIcon beginrepeat(ICON + "/beginrepeat.svg");
-    QIcon endrepeat(ICON + "/endrepeat.svg");
-
-    QIcon tie(ICON + "/tie.svg");
-    QIcon slurs(ICON + "/slurs.svg");
-
-    QIcon amajor(ICON + "/A-major.svg");
-    QIcon bmajor(ICON + "/B-major.svg");
-    QIcon cmajor(ICON + "/C-major.svg");
-    QIcon cismajor(ICON + "/C-sharp-major.svg");
-    QIcon dmajor(ICON + "/D-major.svg");
-    QIcon emajor(ICON + "/E-major.svg");
-    QIcon fismajor(ICON + "/F-sharp-major.svg");
-    QIcon gmajor(ICON + "/G-major.svg");
-
     QIcon logo(ICON + "/tabliato.svg");
-
-    ui->actionNew_tool->setIcon(file);
-    ui->actionOpen_tool->setIcon(open);
-    ui->actionSave_tool->setIcon(save);
-    ui->actionUndo_tool->setIcon(undo);
-    ui->actionRedo_tool->setIcon(redo);
-
-    ui->actionCompile_tool->setIcon(compile);
-    ui->actionExportPDF_tool->setIcon(pdf);
-    ui->actionExportPNG_tool->setIcon(png);
-    ui->actionExportMIDI_tool->setIcon(midi);
-    ui->actionExportLY_tool->setIcon(ly);
-    ui->actionExportWAV_tool->setIcon(wav);
-
-    ui->actionNew->setIcon(file);
-    ui->actionOpen->setIcon(open);
-    ui->actionSave->setIcon(save);
-
-    ui->actionInsertRepeat->setIcon(repeat);
-    ui->actionHelpSyntax->setIcon(question);
-    ui->actionHelpTabliato->setIcon(question);
-    ui->actionHelpLilypond->setIcon(question);
-    ui->actionAbout->setIcon(information);
-    ui->actionCheckUpdate->setIcon(update);
-    ui->actionBug->setIcon(bug);
-    ui->actionSuggesstions->setIcon(request);
-
-    ui->actionCompile->setIcon(compile);
-
-    ui->tempo_comboBox->setItemIcon(0, ronde);
-    ui->tempo_comboBox->setItemIcon(1, blanche);
-    ui->tempo_comboBox->setItemIcon(2, noire);
-    ui->tempo_comboBox->setItemIcon(3, noiredot);
-    ui->tempo_comboBox->setItemIcon(4, croche);
-    ui->tempo_comboBox->setItemIcon(5, crochedot);
-
-    ui->key_combobox->setItemIcon(0, cmajor);
-    ui->key_combobox->setItemIcon(1, gmajor);
-    ui->key_combobox->setItemIcon(2, dmajor);
-    ui->key_combobox->setItemIcon(3, amajor);
-    ui->key_combobox->setItemIcon(4, emajor);
-    ui->key_combobox->setItemIcon(5, bmajor);
-    ui->key_combobox->setItemIcon(6, fismajor);
-    ui->key_combobox->setItemIcon(7, cismajor);
-
-    ui->rest1->setIcon(rest1);
-    ui->rest2->setIcon(rest2);
-    ui->rest4->setIcon(soupir);
-    ui->rest8->setIcon(rest8);
-    ui->rest16->setIcon(rest16);
-    ui->rest32->setIcon(rest32);
-    ui->rest64->setIcon(rest64);
-    ui->rest128->setIcon(rest128);
-
-    ui->tie->setIcon(tie);
-    ui->slurs->setIcon(slurs);
-
-    ui->endbar->setIcon(endbar);
-    ui->beginbar->setIcon(beginbar);
-    ui->endrepeat->setIcon(endrepeat);
-    ui->beginrepaeat->setIcon(beginrepeat);
-
-    ui->play_pushButton->setIcon(play);
-    ui->stop_pushButton->setIcon(stop);
 
     if (!QFile::exists(SOUNDFONTS + "/Gaillard.sf2"))
         ui->actionGaillard->setIcon(download);
@@ -654,8 +531,6 @@ void MainWindow::setIcons()
         ui->actionBallone_Burini->setIcon(download);
     else
         ui->actionBallone_Burini->setIcon(check);
-
-    ui->showsf2ddl_pushButton->setIcon(more);
 
     this->setWindowIcon(logo);
 }
@@ -999,7 +874,7 @@ void MainWindow::initSf2ComboBox()
     if (!directory.exists())
     {
       QDir().mkpath(SOUNDFONTS);
-      QFile::copy(SHARE + "/soundfonts/Accordion.sf2",  SOUNDFONTS + "/Accordion.sf2");
+      QFile::copy(":/soundfonts/ressources/soundfonts/Accordion.sf2",  SOUNDFONTS + "/Accordion.sf2");
     }
 
     QStringList sf2 = directory.entryList(QStringList() << "*.sf2", QDir::Files);

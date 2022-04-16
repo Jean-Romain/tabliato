@@ -3,14 +3,12 @@
 QString APPDIR = "";
 QString APPPATH = "";
 
-QString SHARE = "";
 QString TEMP = "";
 QString LOCAL = "";
 
 QString OUTPUT = "";
 QString ICON = "";
 QString TEMPLATE = "";
-QString DOC = "";
 QString EXAMPLE = "";
 QString KEYBOARDS = "";
 QString SOUNDFONTS = "";

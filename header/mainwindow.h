@@ -46,7 +46,6 @@ class MainWindow : public QMainWindow
         void save_as();
         void open();
         void openNew();
-        void open_example();
 
         void openAbout();
         void checkVersion();

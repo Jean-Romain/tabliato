@@ -1,0 +1,97 @@
+<RCC>
+    <qresource prefix="/icons">
+        <file>ressources/icons/A-major.svg</file>
+        <file>ressources/icons/B-major.svg</file>
+        <file>ressources/icons/beginbar.svg</file>
+        <file>ressources/icons/beginrepeat.svg</file>
+        <file>ressources/icons/blanche-dot.svg</file>
+        <file>ressources/icons/blanche.svg</file>
+        <file>ressources/icons/bug.svg</file>
+        <file>ressources/icons/C-major.svg</file>
+        <file>ressources/icons/C-sharp-major.svg</file>
+        <file>ressources/icons/CClef.svg</file>
+        <file>ressources/icons/check.svg</file>
+        <file>ressources/icons/compile.svg</file>
+        <file>ressources/icons/croche.svg</file>
+        <file>ressources/icons/crochedot.svg</file>
+        <file>ressources/icons/D-major.svg</file>
+        <file>ressources/icons/download.svg</file>
+        <file>ressources/icons/E-major.svg</file>
+        <file>ressources/icons/endbar.svg</file>
+        <file>ressources/icons/endrepeat.svg</file>
+        <file>ressources/icons/F-sharp-major.svg</file>
+        <file>ressources/icons/FClef.svg</file>
+        <file>ressources/icons/G-major.svg</file>
+        <file>ressources/icons/GClef.svg</file>
+        <file>ressources/icons/information.svg</file>
+        <file>ressources/icons/ly.svg</file>
+        <file>ressources/icons/midi.svg</file>
+        <file>ressources/icons/more.svg</file>
+        <file>ressources/icons/new.svg</file>
+        <file>ressources/icons/next.svg</file>
+        <file>ressources/icons/noire-dot.svg</file>
+        <file>ressources/icons/noire.svg</file>
+        <file>ressources/icons/open.svg</file>
+        <file>ressources/icons/pause.svg</file>
+        <file>ressources/icons/pdf.svg</file>
+        <file>ressources/icons/play.svg</file>
+        <file>ressources/icons/png.svg</file>
+        <file>ressources/icons/previous.svg</file>
+        <file>ressources/icons/question.svg</file>
+        <file>ressources/icons/redo.svg</file>
+        <file>ressources/icons/repeat.svg</file>
+        <file>ressources/icons/request.svg</file>
+        <file>ressources/icons/rest1.svg</file>
+        <file>ressources/icons/rest2.svg</file>
+        <file>ressources/icons/rest4.svg</file>
+        <file>ressources/icons/rest8.svg</file>
+        <file>ressources/icons/rest16.svg</file>
+        <file>ressources/icons/rest32.svg</file>
+        <file>ressources/icons/rest64.svg</file>
+        <file>ressources/icons/rest128.svg</file>
+        <file>ressources/icons/ronde.svg</file>
+        <file>ressources/icons/save.svg</file>
+        <file>ressources/icons/slurs.svg</file>
+        <file>ressources/icons/stop.svg</file>
+        <file>ressources/icons/tabliato.ico</file>
+        <file>ressources/icons/tabliato.svg</file>
+        <file>ressources/icons/tie.svg</file>
+        <file>ressources/icons/undo.svg</file>
+        <file>ressources/icons/update.svg</file>
+        <file>ressources/icons/waiting.gif</file>
+        <file>ressources/icons/wav.svg</file>
+    </qresource>
+    <qresource prefix="/templates">
+        <file>ressources/templates/tabliato.ly</file>
+    </qresource>
+    <qresource prefix="/keyboards">
+        <file>ressources/keyboards/assemblages.csv</file>
+        <file>ressources/keyboards/cog_ranks_1_2_3_GC.csv</file>
+        <file>ressources/keyboards/ctl_1st_rank_2sd_rank_AD.csv</file>
+        <file>ressources/keyboards/ctl_1st_rank_2sd_rank_GC.csv</file>
+        <file>ressources/keyboards/ctl_3rd_rank_+2_GC.csv</file>
+        <file>ressources/keyboards/ctl_3rd_rank_GC.csv</file>
+        <file>ressources/keyboards/ctl_8bass_AD.csv</file>
+        <file>ressources/keyboards/ctl_8bass_GC.csv</file>
+        <file>ressources/keyboards/ctl_12bass_GC.csv</file>
+        <file>ressources/keyboards/lry_+6bass_GC.csv</file>
+        <file>ressources/keyboards/lry_12bass_GC.csv</file>
+        <file>ressources/keyboards/lry_ranks_1_2_3_GC.csv</file>
+        <file>ressources/keyboards/mel_C.csv</file>
+        <file>ressources/keyboards/mel_D.csv</file>
+        <file>ressources/keyboards/mel_G.csv</file>
+    </qresource>
+    <qresource prefix="/html">
+        <file>ressources/html/about.html</file>
+    </qresource>
+    <qresource prefix="/soundfonts">
+        <file>ressources/soundfonts/Accordion.sf2</file>
+    </qresource>
+    <qresource prefix="/examples">
+        <file>ressources/exemples/Exemple - accord main droite.dtb</file>
+        <file>ressources/exemples/Exemple - rythme special.dtb</file>
+        <file>ressources/exemples/Exemple - basique.dtb</file>
+        <file>ressources/exemples/Exemple - boutons ou notes.dtb</file>
+        <file>ressources/exemples/Exemple - anacrouse.dtb</file>
+    </qresource>
+</RCC>

@@ -126,9 +126,19 @@
     <property name="title">
      <string>Fichier</string>
     </property>
+    <widget class="QMenu" name="menuOuvrir_un_exemple">
+     <property name="title">
+      <string>Ouvrir un exemple</string>
+     </property>
+     <addaction name="actionOpenExBase"/>
+     <addaction name="actionOpenExAnacrouse"/>
+     <addaction name="actionOpenExAccords"/>
+     <addaction name="actionOpenExNotes"/>
+     <addaction name="actionOpenExRythme"/>
+    </widget>
     <addaction name="actionNew"/>
     <addaction name="actionOpen"/>
-    <addaction name="actionOpenExample"/>
+    <addaction name="menuOuvrir_un_exemple"/>
     <addaction name="actionSave"/>
     <addaction name="actionSaveAs"/>
     <addaction name="separator"/>
@@ -280,9 +290,9 @@
         <property name="geometry">
          <rect>
           <x>0</x>
-          <y>-149</y>
+          <y>0</y>
           <width>374</width>
-          <height>277</height>
+          <height>276</height>
          </rect>
         </property>
         <attribute name="label">
@@ -440,8 +450,8 @@
              <string>c \major</string>
             </property>
             <property name="icon">
-             <iconset>
-              <normaloff>../share/icon/C-major.svg</normaloff>../share/icon/C-major.svg</iconset>
+             <iconset resource="../Ressources.qrc">
+              <normaloff>:/icons/ressources/icons/C-major.svg</normaloff>:/icons/ressources/icons/C-major.svg</iconset>
             </property>
            </item>
            <item>
@@ -449,8 +459,8 @@
              <string>g \major</string>
             </property>
             <property name="icon">
-             <iconset>
-              <normaloff>../share/icon/G-major.svg</normaloff>../share/icon/G-major.svg</iconset>
+             <iconset resource="../Ressources.qrc">
+              <normaloff>:/icons/ressources/icons/G-major.svg</normaloff>:/icons/ressources/icons/G-major.svg</iconset>
             </property>
            </item>
            <item>
@@ -458,8 +468,8 @@
              <string>d \major</string>
             </property>
             <property name="icon">
-             <iconset>
-              <normaloff>../share/icon/D-major.svg</normaloff>../share/icon/D-major.svg</iconset>
+             <iconset resource="../Ressources.qrc">
+              <normaloff>:/icons/ressources/icons/D-major.svg</normaloff>:/icons/ressources/icons/D-major.svg</iconset>
             </property>
            </item>
            <item>
@@ -467,8 +477,8 @@
              <string>a \major</string>
             </property>
             <property name="icon">
-             <iconset>
-              <normaloff>../share/icon/A-major.svg</normaloff>../share/icon/A-major.svg</iconset>
+             <iconset resource="../Ressources.qrc">
+              <normaloff>:/icons/ressources/icons/A-major.svg</normaloff>:/icons/ressources/icons/A-major.svg</iconset>
             </property>
            </item>
            <item>
@@ -476,8 +486,8 @@
              <string>e \major</string>
             </property>
             <property name="icon">
-             <iconset>
-              <normaloff>../share/icon/E-major.svg</normaloff>../share/icon/E-major.svg</iconset>
+             <iconset resource="../Ressources.qrc">
+              <normaloff>:/icons/ressources/icons/E-major.svg</normaloff>:/icons/ressources/icons/E-major.svg</iconset>
             </property>
            </item>
            <item>
@@ -485,8 +495,8 @@
              <string>b \major</string>
             </property>
             <property name="icon">
-             <iconset>
-              <normaloff>../share/icon/B-major.svg</normaloff>../share/icon/B-major.svg</iconset>
+             <iconset resource="../Ressources.qrc">
+              <normaloff>:/icons/ressources/icons/B-major.svg</normaloff>:/icons/ressources/icons/B-major.svg</iconset>
             </property>
            </item>
            <item>
@@ -494,8 +504,8 @@
              <string>fis \major</string>
             </property>
             <property name="icon">
-             <iconset>
-              <normaloff>../share/icon/F-sharp-major.svg</normaloff>../share/icon/F-sharp-major.svg</iconset>
+             <iconset resource="../Ressources.qrc">
+              <normaloff>:/icons/ressources/icons/F-sharp-major.svg</normaloff>:/icons/ressources/icons/F-sharp-major.svg</iconset>
             </property>
            </item>
            <item>
@@ -503,8 +513,8 @@
              <string>cis \major</string>
             </property>
             <property name="icon">
-             <iconset>
-              <normaloff>../share/icon/C-sharp-major.svg</normaloff>../share/icon/C-sharp-major.svg</iconset>
+             <iconset resource="../Ressources.qrc">
+              <normaloff>:/icons/ressources/icons/C-sharp-major.svg</normaloff>:/icons/ressources/icons/C-sharp-major.svg</iconset>
             </property>
            </item>
           </widget>
@@ -530,7 +540,7 @@
               </size>
              </property>
              <property name="currentIndex">
-              <number>2</number>
+              <number>0</number>
              </property>
              <property name="iconSize">
               <size>
@@ -543,8 +553,8 @@
                <string>1</string>
               </property>
               <property name="icon">
-               <iconset>
-                <normaloff>../share/icon/ronde.svg</normaloff>../share/icon/ronde.svg</iconset>
+               <iconset resource="../Ressources.qrc">
+                <normaloff>:/icons/ressources/icons/ronde.svg</normaloff>:/icons/ressources/icons/ronde.svg</iconset>
               </property>
              </item>
              <item>
@@ -552,8 +562,8 @@
                <string>2</string>
               </property>
               <property name="icon">
-               <iconset>
-                <normaloff>../share/icon/blanche.svg</normaloff>../share/icon/blanche.svg</iconset>
+               <iconset resource="../Ressources.qrc">
+                <normaloff>:/icons/ressources/icons/blanche.svg</normaloff>:/icons/ressources/icons/blanche.svg</iconset>
               </property>
              </item>
              <item>
@@ -561,8 +571,8 @@
                <string>4</string>
               </property>
               <property name="icon">
-               <iconset>
-                <normaloff>../share/icon/noire-dot.svg</normaloff>../share/icon/noire-dot.svg</iconset>
+               <iconset resource="../Ressources.qrc">
+                <normaloff>:/icons/ressources/icons/noire.svg</normaloff>:/icons/ressources/icons/noire.svg</iconset>
               </property>
              </item>
              <item>
@@ -570,8 +580,8 @@
                <string>4.</string>
               </property>
               <property name="icon">
-               <iconset>
-                <normaloff>../share/icon/noire.svg</normaloff>../share/icon/noire.svg</iconset>
+               <iconset resource="../Ressources.qrc">
+                <normaloff>:/icons/ressources/icons/noire-dot.svg</normaloff>:/icons/ressources/icons/noire-dot.svg</iconset>
               </property>
              </item>
              <item>
@@ -579,13 +589,17 @@
                <string>8</string>
               </property>
               <property name="icon">
-               <iconset>
-                <normaloff>../share/icon/croche.svg</normaloff>../share/icon/croche.svg</iconset>
+               <iconset resource="../Ressources.qrc">
+                <normaloff>:/icons/ressources/icons/croche.svg</normaloff>:/icons/ressources/icons/croche.svg</iconset>
               </property>
              </item>
              <item>
               <property name="text">
                <string>8.</string>
+              </property>
+              <property name="icon">
+               <iconset resource="../Ressources.qrc">
+                <normaloff>:/icons/ressources/icons/crochedot.svg</normaloff>:/icons/ressources/icons/crochedot.svg</iconset>
               </property>
              </item>
             </widget>
@@ -729,8 +743,8 @@
               <string/>
              </property>
              <property name="icon">
-              <iconset>
-               <normaloff>../share/icon/question.svg</normaloff>../share/icon/question.svg</iconset>
+              <iconset resource="../Ressources.qrc">
+               <normaloff>:/icons/ressources/icons/question.svg</normaloff>:/icons/ressources/icons/question.svg</iconset>
              </property>
              <property name="iconSize">
               <size>
@@ -891,8 +905,8 @@ supplémentaires</string>
               <string/>
              </property>
              <property name="icon">
-              <iconset>
-               <normaloff>../share/icon/question.svg</normaloff>../share/icon/question.svg</iconset>
+              <iconset resource="../Ressources.qrc">
+               <normaloff>:/icons/ressources/icons/question.svg</normaloff>:/icons/ressources/icons/question.svg</iconset>
              </property>
              <property name="iconSize">
               <size>
@@ -926,7 +940,7 @@ supplémentaires</string>
         <property name="geometry">
          <rect>
           <x>0</x>
-          <y>-55</y>
+          <y>0</y>
           <width>301</width>
           <height>183</height>
          </rect>
@@ -1308,8 +1322,8 @@ supplémentaires</string>
             <string/>
            </property>
            <property name="icon">
-            <iconset>
-             <normaloff>../share/icon/play.svg</normaloff>../share/icon/play.svg</iconset>
+            <iconset resource="../Ressources.qrc">
+             <normaloff>:/icons/ressources/icons/play.svg</normaloff>:/icons/ressources/icons/play.svg</iconset>
            </property>
           </widget>
          </item>
@@ -1334,8 +1348,8 @@ supplémentaires</string>
             <string/>
            </property>
            <property name="icon">
-            <iconset>
-             <normaloff>../share/icon/stop.svg</normaloff>../share/icon/stop.svg</iconset>
+            <iconset resource="../Ressources.qrc">
+             <normaloff>:/icons/ressources/icons/stop.svg</normaloff>:/icons/ressources/icons/stop.svg</iconset>
            </property>
           </widget>
          </item>
@@ -1380,8 +1394,8 @@ supplémentaires</string>
             <string/>
            </property>
            <property name="icon">
-            <iconset>
-             <normaloff>../share/icon/more.svg</normaloff>../share/icon/more.svg</iconset>
+            <iconset resource="../Ressources.qrc">
+             <normaloff>:/icons/ressources/icons/more.svg</normaloff>:/icons/ressources/icons/more.svg</iconset>
            </property>
            <property name="flat">
             <bool>true</bool>
@@ -1505,8 +1519,8 @@ color: rgb(255, 255, 255);</string>
         <string/>
        </property>
        <property name="icon">
-        <iconset>
-         <normaloff>../share/icon/rest128.svg</normaloff>../share/icon/rest128.svg</iconset>
+        <iconset resource="../Ressources.qrc">
+         <normaloff>:/icons/ressources/icons/rest128.svg</normaloff>:/icons/ressources/icons/rest128.svg</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -1543,8 +1557,8 @@ color: rgb(255, 255, 255);</string>
         <string/>
        </property>
        <property name="icon">
-        <iconset>
-         <normaloff>../share/icon/rest1.svg</normaloff>../share/icon/rest1.svg</iconset>
+        <iconset resource="../Ressources.qrc">
+         <normaloff>:/icons/ressources/icons/rest1.svg</normaloff>:/icons/ressources/icons/rest1.svg</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -1581,8 +1595,8 @@ color: rgb(255, 255, 255);</string>
         <string/>
        </property>
        <property name="icon">
-        <iconset>
-         <normaloff>../share/icon/rest16.svg</normaloff>../share/icon/rest16.svg</iconset>
+        <iconset resource="../Ressources.qrc">
+         <normaloff>:/icons/ressources/icons/rest16.svg</normaloff>:/icons/ressources/icons/rest16.svg</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -1619,8 +1633,8 @@ color: rgb(255, 255, 255);</string>
         <string/>
        </property>
        <property name="icon">
-        <iconset>
-         <normaloff>../share/icon/rest2.svg</normaloff>../share/icon/rest2.svg</iconset>
+        <iconset resource="../Ressources.qrc">
+         <normaloff>:/icons/ressources/icons/rest2.svg</normaloff>:/icons/ressources/icons/rest2.svg</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -1657,8 +1671,8 @@ color: rgb(255, 255, 255);</string>
         <string/>
        </property>
        <property name="icon">
-        <iconset>
-         <normaloff>../share/icon/endrepeat.svg</normaloff>../share/icon/endrepeat.svg</iconset>
+        <iconset resource="../Ressources.qrc">
+         <normaloff>:/icons/ressources/icons/endrepeat.svg</normaloff>:/icons/ressources/icons/endrepeat.svg</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -1698,8 +1712,8 @@ color: rgb(255, 255, 255);</string>
         <string/>
        </property>
        <property name="icon">
-        <iconset>
-         <normaloff>../share/icon/beginbar.svg</normaloff>../share/icon/beginbar.svg</iconset>
+        <iconset resource="../Ressources.qrc">
+         <normaloff>:/icons/ressources/icons/beginbar.svg</normaloff>:/icons/ressources/icons/beginbar.svg</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -1736,8 +1750,8 @@ color: rgb(255, 255, 255);</string>
         <string/>
        </property>
        <property name="icon">
-        <iconset>
-         <normaloff>../share/icon/rest32.svg</normaloff>../share/icon/rest32.svg</iconset>
+        <iconset resource="../Ressources.qrc">
+         <normaloff>:/icons/ressources/icons/rest32.svg</normaloff>:/icons/ressources/icons/rest32.svg</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -1774,8 +1788,8 @@ color: rgb(255, 255, 255);</string>
         <string/>
        </property>
        <property name="icon">
-        <iconset>
-         <normaloff>../share/icon/rest64.svg</normaloff>../share/icon/rest64.svg</iconset>
+        <iconset resource="../Ressources.qrc">
+         <normaloff>:/icons/ressources/icons/rest64.svg</normaloff>:/icons/ressources/icons/rest64.svg</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -1812,8 +1826,8 @@ color: rgb(255, 255, 255);</string>
         <string/>
        </property>
        <property name="icon">
-        <iconset>
-         <normaloff>../share/icon/rest8.svg</normaloff>../share/icon/rest8.svg</iconset>
+        <iconset resource="../Ressources.qrc">
+         <normaloff>:/icons/ressources/icons/rest8.svg</normaloff>:/icons/ressources/icons/rest8.svg</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -1850,8 +1864,8 @@ color: rgb(255, 255, 255);</string>
         <string/>
        </property>
        <property name="icon">
-        <iconset>
-         <normaloff>../share/icon/beginrepeat.svg</normaloff>../share/icon/beginrepeat.svg</iconset>
+        <iconset resource="../Ressources.qrc">
+         <normaloff>:/icons/ressources/icons/beginrepeat.svg</normaloff>:/icons/ressources/icons/beginrepeat.svg</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -1901,8 +1915,8 @@ color: rgb(255, 255, 255);</string>
         <string/>
        </property>
        <property name="icon">
-        <iconset>
-         <normaloff>../share/icon/rest4.svg</normaloff>../share/icon/rest4.svg</iconset>
+        <iconset resource="../Ressources.qrc">
+         <normaloff>:/icons/ressources/icons/rest4.svg</normaloff>:/icons/ressources/icons/rest4.svg</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -1945,8 +1959,8 @@ color: rgb(255, 255, 255);</string>
         <string/>
        </property>
        <property name="icon">
-        <iconset>
-         <normaloff>../share/icon/endbar.svg</normaloff>../share/icon/endbar.svg</iconset>
+        <iconset resource="../Ressources.qrc">
+         <normaloff>:/icons/ressources/icons/endbar.svg</normaloff>:/icons/ressources/icons/endbar.svg</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -1983,8 +1997,8 @@ color: rgb(255, 255, 255);</string>
         <string/>
        </property>
        <property name="icon">
-        <iconset>
-         <normaloff>../share/icon/tie.svg</normaloff>../share/icon/tie.svg</iconset>
+        <iconset resource="../Ressources.qrc">
+         <normaloff>:/icons/ressources/icons/tie.svg</normaloff>:/icons/ressources/icons/tie.svg</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -2021,8 +2035,8 @@ color: rgb(255, 255, 255);</string>
         <string/>
        </property>
        <property name="icon">
-        <iconset>
-         <normaloff>../share/icon/tie.svg</normaloff>../share/icon/tie.svg</iconset>
+        <iconset resource="../Ressources.qrc">
+         <normaloff>:/icons/ressources/icons/slurs.svg</normaloff>:/icons/ressources/icons/slurs.svg</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -2039,14 +2053,18 @@ color: rgb(255, 255, 255);</string>
    </widget>
   </widget>
   <action name="actionAbout">
+   <property name="icon">
+    <iconset resource="../Ressources.qrc">
+     <normaloff>:/icons/ressources/icons/information.svg</normaloff>:/icons/ressources/icons/information.svg</iconset>
+   </property>
    <property name="text">
     <string>À propos</string>
    </property>
   </action>
   <action name="actionOpen">
    <property name="icon">
-    <iconset>
-     <normaloff>../share/icon/open.svg</normaloff>../share/icon/open.svg</iconset>
+    <iconset resource="../Ressources.qrc">
+     <normaloff>:/icons/ressources/icons/open.svg</normaloff>:/icons/ressources/icons/open.svg</iconset>
    </property>
    <property name="text">
     <string>Ouvrir</string>
@@ -2057,8 +2075,8 @@ color: rgb(255, 255, 255);</string>
   </action>
   <action name="actionSave">
    <property name="icon">
-    <iconset>
-     <normaloff>../share/icon/save.svg</normaloff>../share/icon/save.svg</iconset>
+    <iconset resource="../Ressources.qrc">
+     <normaloff>:/icons/ressources/icons/save.svg</normaloff>:/icons/ressources/icons/save.svg</iconset>
    </property>
    <property name="text">
     <string>Enregister</string>
@@ -2069,8 +2087,8 @@ color: rgb(255, 255, 255);</string>
   </action>
   <action name="actionCompile">
    <property name="icon">
-    <iconset>
-     <normaloff>../share/icon/compile.svg</normaloff>../share/icon/compile.svg</iconset>
+    <iconset resource="../Ressources.qrc">
+     <normaloff>:/icons/ressources/icons/compile.svg</normaloff>:/icons/ressources/icons/compile.svg</iconset>
    </property>
    <property name="text">
     <string>Compiler</string>
@@ -2083,6 +2101,10 @@ color: rgb(255, 255, 255);</string>
    <property name="enabled">
     <bool>true</bool>
    </property>
+   <property name="icon">
+    <iconset resource="../Ressources.qrc">
+     <normaloff>:/icons/ressources/icons/bug.svg</normaloff>:/icons/ressources/icons/bug.svg</iconset>
+   </property>
    <property name="text">
     <string>Signaler un bug</string>
    </property>
@@ -2091,16 +2113,12 @@ color: rgb(255, 255, 255);</string>
    <property name="enabled">
     <bool>true</bool>
    </property>
+   <property name="icon">
+    <iconset resource="../Ressources.qrc">
+     <normaloff>:/icons/ressources/icons/information.svg</normaloff>:/icons/ressources/icons/information.svg</iconset>
+   </property>
    <property name="text">
     <string>Manuel de Lilypond</string>
-   </property>
-  </action>
-  <action name="actionOpenExample">
-   <property name="text">
-    <string>Ouvrir un exemple</string>
-   </property>
-   <property name="shortcut">
-    <string>Ctrl+Shift+O</string>
    </property>
   </action>
   <action name="actionSaveAs">
@@ -2113,8 +2131,8 @@ color: rgb(255, 255, 255);</string>
   </action>
   <action name="actionNew">
    <property name="icon">
-    <iconset>
-     <normaloff>../share/icon/new.svg</normaloff>../share/icon/new.svg</iconset>
+    <iconset resource="../Ressources.qrc">
+     <normaloff>:/icons/ressources/icons/new.svg</normaloff>:/icons/ressources/icons/new.svg</iconset>
    </property>
    <property name="text">
     <string>Nouveau</string>
@@ -2127,14 +2145,18 @@ color: rgb(255, 255, 255);</string>
    <property name="enabled">
     <bool>true</bool>
    </property>
+   <property name="icon">
+    <iconset resource="../Ressources.qrc">
+     <normaloff>:/icons/ressources/icons/request.svg</normaloff>:/icons/ressources/icons/request.svg</iconset>
+   </property>
    <property name="text">
     <string>Suggestions</string>
    </property>
   </action>
   <action name="actionCompile_tool">
    <property name="icon">
-    <iconset>
-     <normaloff>../share/icon/compile.svg</normaloff>../share/icon/compile.svg</iconset>
+    <iconset resource="../Ressources.qrc">
+     <normaloff>:/icons/ressources/icons/compile.svg</normaloff>:/icons/ressources/icons/compile.svg</iconset>
    </property>
    <property name="text">
     <string>Compiler</string>
@@ -2142,8 +2164,8 @@ color: rgb(255, 255, 255);</string>
   </action>
   <action name="actionSave_tool">
    <property name="icon">
-    <iconset>
-     <normaloff>../share/icon/save.svg</normaloff>../share/icon/save.svg</iconset>
+    <iconset resource="../Ressources.qrc">
+     <normaloff>:/icons/ressources/icons/save.svg</normaloff>:/icons/ressources/icons/save.svg</iconset>
    </property>
    <property name="text">
     <string>Sauvegarder</string>
@@ -2151,8 +2173,8 @@ color: rgb(255, 255, 255);</string>
   </action>
   <action name="actionOpen_tool">
    <property name="icon">
-    <iconset>
-     <normaloff>../share/icon/open.svg</normaloff>../share/icon/open.svg</iconset>
+    <iconset resource="../Ressources.qrc">
+     <normaloff>:/icons/ressources/icons/open.svg</normaloff>:/icons/ressources/icons/open.svg</iconset>
    </property>
    <property name="text">
     <string>Ouvrir</string>
@@ -2160,8 +2182,8 @@ color: rgb(255, 255, 255);</string>
   </action>
   <action name="actionNew_tool">
    <property name="icon">
-    <iconset>
-     <normaloff>../share/icon/new.svg</normaloff>../share/icon/new.svg</iconset>
+    <iconset resource="../Ressources.qrc">
+     <normaloff>:/icons/ressources/icons/new.svg</normaloff>:/icons/ressources/icons/new.svg</iconset>
    </property>
    <property name="text">
     <string>Nouveau document</string>
@@ -2169,8 +2191,8 @@ color: rgb(255, 255, 255);</string>
   </action>
   <action name="actionUndo_tool">
    <property name="icon">
-    <iconset>
-     <normaloff>../share/icon/undo.svg</normaloff>../share/icon/undo.svg</iconset>
+    <iconset resource="../Ressources.qrc">
+     <normaloff>:/icons/ressources/icons/undo.svg</normaloff>:/icons/ressources/icons/undo.svg</iconset>
    </property>
    <property name="text">
     <string>Undo</string>
@@ -2178,8 +2200,8 @@ color: rgb(255, 255, 255);</string>
   </action>
   <action name="actionRedo_tool">
    <property name="icon">
-    <iconset>
-     <normaloff>../share/icon/redo.svg</normaloff>../share/icon/redo.svg</iconset>
+    <iconset resource="../Ressources.qrc">
+     <normaloff>:/icons/ressources/icons/redo.svg</normaloff>:/icons/ressources/icons/redo.svg</iconset>
    </property>
    <property name="text">
     <string>Redo</string>
@@ -2193,8 +2215,8 @@ color: rgb(255, 255, 255);</string>
     <bool>true</bool>
    </property>
    <property name="icon">
-    <iconset>
-     <normaloff>../share/icon/pdf.svg</normaloff>../share/icon/pdf.svg</iconset>
+    <iconset resource="../Ressources.qrc">
+     <normaloff>:/icons/ressources/icons/pdf.svg</normaloff>:/icons/ressources/icons/pdf.svg</iconset>
    </property>
    <property name="text">
     <string>Exporter au format pdf</string>
@@ -2205,8 +2227,8 @@ color: rgb(255, 255, 255);</string>
     <bool>true</bool>
    </property>
    <property name="icon">
-    <iconset>
-     <normaloff>../share/icon/png.svg</normaloff>../share/icon/png.svg</iconset>
+    <iconset resource="../Ressources.qrc">
+     <normaloff>:/icons/ressources/icons/png.svg</normaloff>:/icons/ressources/icons/png.svg</iconset>
    </property>
    <property name="text">
     <string>Exporter au format png</string>
@@ -2217,8 +2239,8 @@ color: rgb(255, 255, 255);</string>
     <bool>true</bool>
    </property>
    <property name="icon">
-    <iconset>
-     <normaloff>../share/icon/midi.svg</normaloff>../share/icon/midi.svg</iconset>
+    <iconset resource="../Ressources.qrc">
+     <normaloff>:/icons/ressources/icons/midi.svg</normaloff>:/icons/ressources/icons/midi.svg</iconset>
    </property>
    <property name="text">
     <string>Exporter au format midi</string>
@@ -2229,8 +2251,8 @@ color: rgb(255, 255, 255);</string>
     <bool>true</bool>
    </property>
    <property name="icon">
-    <iconset>
-     <normaloff>../share/icon/ly.svg</normaloff>../share/icon/ly.svg</iconset>
+    <iconset resource="../Ressources.qrc">
+     <normaloff>:/icons/ressources/icons/ly.svg</normaloff>:/icons/ressources/icons/ly.svg</iconset>
    </property>
    <property name="text">
     <string>Exporter au format Lilypond</string>
@@ -2238,8 +2260,8 @@ color: rgb(255, 255, 255);</string>
   </action>
   <action name="actionInsertRepeat">
    <property name="icon">
-    <iconset>
-     <normaloff>../share/icon/repeat.svg</normaloff>../share/icon/repeat.svg</iconset>
+    <iconset resource="../Ressources.qrc">
+     <normaloff>:/icons/ressources/icons/repeat.svg</normaloff>:/icons/ressources/icons/repeat.svg</iconset>
    </property>
    <property name="text">
     <string>Insérer une reprise</string>
@@ -2257,11 +2279,19 @@ color: rgb(255, 255, 255);</string>
    </property>
   </action>
   <action name="actionCheckUpdate">
+   <property name="icon">
+    <iconset resource="../Ressources.qrc">
+     <normaloff>:/icons/ressources/icons/update.svg</normaloff>:/icons/ressources/icons/update.svg</iconset>
+   </property>
    <property name="text">
     <string>Mises à jours</string>
    </property>
   </action>
   <action name="actionInsertAlternative">
+   <property name="icon">
+    <iconset resource="../Ressources.qrc">
+     <normaloff>:/icons/ressources/icons/endrepeat.svg</normaloff>:/icons/ressources/icons/endrepeat.svg</iconset>
+   </property>
    <property name="text">
     <string>Insérer une alternative</string>
    </property>
@@ -2275,11 +2305,19 @@ color: rgb(255, 255, 255);</string>
    </property>
   </action>
   <action name="actionHelpSyntax">
+   <property name="icon">
+    <iconset resource="../Ressources.qrc">
+     <normaloff>:/icons/ressources/icons/information.svg</normaloff>:/icons/ressources/icons/information.svg</iconset>
+   </property>
    <property name="text">
     <string>Manuel de Tabliato</string>
    </property>
   </action>
   <action name="actionInsertEndBar">
+   <property name="icon">
+    <iconset resource="../Ressources.qrc">
+     <normaloff>:/icons/ressources/icons/endbar.svg</normaloff>:/icons/ressources/icons/endbar.svg</iconset>
+   </property>
    <property name="text">
     <string>Insérer une barre de fin</string>
    </property>
@@ -2292,8 +2330,8 @@ color: rgb(255, 255, 255);</string>
     <bool>true</bool>
    </property>
    <property name="icon">
-    <iconset>
-     <normaloff>../share/icon/wav.svg</normaloff>../share/icon/wav.svg</iconset>
+    <iconset resource="../Ressources.qrc">
+     <normaloff>:/icons/ressources/icons/wav.svg</normaloff>:/icons/ressources/icons/wav.svg</iconset>
    </property>
    <property name="text">
     <string>Exporter au format audio</string>
@@ -2352,31 +2390,72 @@ color: rgb(255, 255, 255);</string>
   </action>
   <action name="actionBallone_Burini">
    <property name="icon">
-    <iconset>
-     <normaloff>../share/icon/download.svg</normaloff>../share/icon/download.svg</iconset>
+    <iconset resource="../Ressources.qrc">
+     <normaloff>:/icons/ressources/icons/download.svg</normaloff>:/icons/ressources/icons/download.svg</iconset>
    </property>
    <property name="text">
     <string>Ballone Burini </string>
    </property>
   </action>
   <action name="actionGaillard">
+   <property name="icon">
+    <iconset resource="../Ressources.qrc">
+     <normaloff>:/icons/ressources/icons/download.svg</normaloff>:/icons/ressources/icons/download.svg</iconset>
+   </property>
    <property name="text">
     <string>Gaillard</string>
    </property>
   </action>
   <action name="actionLoffet">
+   <property name="icon">
+    <iconset resource="../Ressources.qrc">
+     <normaloff>:/icons/ressources/icons/download.svg</normaloff>:/icons/ressources/icons/download.svg</iconset>
+   </property>
    <property name="text">
-    <string>Loffet</string>
+    <string>Loffet (recommandée)</string>
    </property>
   </action>
   <action name="actionSalta_Bourroche">
+   <property name="icon">
+    <iconset resource="../Ressources.qrc">
+     <normaloff>:/icons/ressources/icons/download.svg</normaloff>:/icons/ressources/icons/download.svg</iconset>
+   </property>
    <property name="text">
     <string>Salta Bourroche </string>
    </property>
   </action>
   <action name="actionSerafini">
+   <property name="icon">
+    <iconset resource="../Ressources.qrc">
+     <normaloff>:/icons/ressources/icons/download.svg</normaloff>:/icons/ressources/icons/download.svg</iconset>
+   </property>
    <property name="text">
     <string>Serafini</string>
+   </property>
+  </action>
+  <action name="actionOpenExBase">
+   <property name="text">
+    <string>Base</string>
+   </property>
+  </action>
+  <action name="actionOpenExAnacrouse">
+   <property name="text">
+    <string>Anacrouse</string>
+   </property>
+  </action>
+  <action name="actionOpenExAccords">
+   <property name="text">
+    <string>Accords</string>
+   </property>
+  </action>
+  <action name="actionOpenExNotes">
+   <property name="text">
+    <string>Notes et boutons</string>
+   </property>
+  </action>
+  <action name="actionOpenExRythme">
+   <property name="text">
+    <string>Rythme spécial</string>
    </property>
   </action>
   <zorder>playerDock</zorder>
@@ -2390,6 +2469,8 @@ color: rgb(255, 255, 255);</string>
    <header location="global">codeeditor.h</header>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="../Ressources.qrc"/>
+ </resources>
  <connections/>
 </ui>

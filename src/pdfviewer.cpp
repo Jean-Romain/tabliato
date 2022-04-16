@@ -36,9 +36,8 @@ void PdfViewer::show(int page)
     if (page != -1 && page != m_current_page + 1)
     {
         m_current_page = page - 1;
+        emit pageChanged(m_current_page+1);
         clean_pdf();
-        init_links();
-        emit pageChanged(page);
     }
 
     setPixmap(QPixmap::fromImage(m_image));
@@ -103,14 +102,14 @@ void PdfViewer::mousePressEvent(QMouseEvent * event )
 
     for (int i = 0 ; i < m_links.size() ; i++)
     {
-        QRectF link_bbox = bbox(m_links.at(i));
+        QRectF link_bbox = m_links[i].bbox();
         bool cursor_in_link_area = link_bbox.contains(pos);
 
         // If the cursor is in the link and there is no hover yet
         // draw a rectangle
         if (cursor_in_link_area)
         {
-            int line = get_line(m_links.at(i));
+            int line = m_links[i].code_line();
             m_link_hovered = true;
             m_skip_next_event = true;
             emit linkClicked((int) (line));
@@ -125,7 +124,10 @@ void PdfViewer::mouseMoveEvent(QMouseEvent * event )
 
     for (int i = 0 ; i < m_links.size() ; i++)
     {
-        QRectF link_bbox = bbox(m_links.at(i));
+        if (m_links[i].page() != m_current_page)
+            continue;
+
+        QRectF link_bbox = m_links[i].bbox();
         bool cursor_in_link_area =link_bbox.contains(pos);
 
         // If the cursor is in the link and there is not hover yet
@@ -173,7 +175,6 @@ QPointF PdfViewer::to_pdf_relative(QPoint pos)
 QRect PdfViewer::to_img_absolute(QRectF rect)
 {
     QSize isize = m_image.size();
-    QSize wsize = this->size();
 
     int xmin = rect.left()*isize.width();
     int xmax = rect.right()*isize.width();
@@ -182,45 +183,6 @@ QRect PdfViewer::to_img_absolute(QRectF rect)
     int ymax = rect.bottom()*isize.height();
 
     return QRect(QPoint(xmin, ymax), QPoint(xmax, ymin));
-}
-
-int PdfViewer::get_line(Poppler::Link* link)
-{
-    QString url = static_cast<Poppler::LinkBrowse*>(link)->url();
-    QStringList parsed_url = url.split(":");
-
-    if (parsed_url.size() > 2)
-        return parsed_url.at(2).toInt();
-    else
-        return -1;
-}
-
-int PdfViewer::get_column(Poppler::Link* link)
-{
-    QString url = static_cast<Poppler::LinkBrowse*>(link)->url();
-    QStringList parsed_url = url.split(":");
-
-    if (parsed_url.size() > 3)
-        return parsed_url.at(3).toInt();
-    else
-        return -1;
-}
-
-QRectF PdfViewer::bbox(Poppler::Link* link)
-{
-    QRectF link_bbox = link->linkArea();
-
-    // Buffer the bbox for better feeling
-    QPointF p1 = link_bbox.topLeft();
-    QPointF p2 = link_bbox.bottomRight();
-    p1.setX(p1.x() - 0.002);
-    p1.setY(p1.y() + 0.002);
-    p2.setX(p2.x() + 0.002);
-    p2.setY(p2.y() - 0.002);
-    link_bbox.setTopLeft(p1);
-    link_bbox.setBottomRight(p2);
-
-    return link_bbox;
 }
 
 void PdfViewer::highlight_link_from_lines(QVector<int> lines)
@@ -234,29 +196,29 @@ void PdfViewer::highlight_link_from_lines(QVector<int> lines)
     if (m_link_hovered)
         clean_pdf();
 
-    QPainter qPainter(&m_image);
     for (int line : lines)
     {
         for (int i = 0 ; i < m_links.size() ; i++)
         {
-           if (line == get_line(m_links.at(i)))
+           if (line == m_links[i].code_line())
            {
-               QRectF bb = bbox(m_links.at(i));
+               if (m_links[i].page() != m_current_page)
+               {
+                   qDebug() << m_current_page << m_links[i].page();
+                   show(m_links[i].page()+1);
+               }
+
+               QPainter qPainter(&m_image);
+               QRectF bb = m_links[i].bbox();
                qPainter.setBrush(Qt::NoBrush);
                qPainter.setPen(QPen(Qt::darkCyan, 2));
                qPainter.fillRect(to_img_absolute(bb), QColor(255, 255,0, 100));
+               qPainter.end();
                m_link_hovered = true;
            }
         }
     }
 
-    /*if (!m_link_hovered)
-    {
-        int newpage = (m_current_page == 0) ? m_current_page+1 : m_current_page-1;
-        setPage(newpage);
-    }*/
-
-    qPainter.end();
     show();
 }
 
@@ -271,7 +233,7 @@ void PdfViewer::highlight_note(int pos, int offset)
     int i = 0;
     while (j != pos && i < m_links.size())
     {
-        int line = get_line(m_links.at(i));
+        int line = (m_links[i].code_line());
         if (line < offset) // C'est une note et pas un accord
             j++;
 
@@ -280,7 +242,11 @@ void PdfViewer::highlight_note(int pos, int offset)
 
     clean_pdf();
 
-    QRect bb = to_img_absolute(bbox(m_links.at(i-1)));
+    int page = m_links[i-1].page();
+    if (page != m_current_page)
+        show(page+1);
+
+    QRect bb = to_img_absolute(m_links[i-1].bbox());
     QPoint p0 = bb.bottomLeft();
     QPoint p1 = bb.topLeft();
     QPoint p2 = bb.topRight();
@@ -303,34 +269,80 @@ void PdfViewer::clean_pdf()
 
 void PdfViewer::init_links()
 {
-    // Keep only non null area links
-    QList<Poppler::Link*> all_links = m_doc->page(m_current_page)->links();
     QSet<QPair<int, int>> registry;
     m_links.clear();
-    for (int i = 0 ; i < all_links.size() ; i++)
-    {
-        if (all_links.at(i)->linkArea().width() > 0.0001)
-        {
-            Poppler::Link* link = all_links.at(i);
-            int row = get_line(link);
-            int col = get_column(link);
-            QPair<int, int> p(row, col);
-            if (!registry.contains(p))
-            {
-                registry.insert(p);
 
-                if (get_line(link) != -1)
-                    m_links.append(link);
+    for (int i = 0 ; i < m_doc->numPages() ; i++)
+    {
+        QList<Poppler::Link*> all_links = m_doc->page(i)->links();
+
+        // Check each link to determine whether or not we record it
+        for (int j = 0 ; j < all_links.size() ; j++)
+        {
+            // Keep only non null area links
+            if (all_links.at(j)->linkArea().width() > 0.0001)
+            {
+                Poppler::Link* link = all_links.at(j);
+                ClickableNote lk(link, i);
+
+                // We keep a single link per row/colum in the code
+                QPair<int, int> p(lk.code_line(), lk.code_column());
+                if (!registry.contains(p))
+                {
+                    registry.insert(p);
+
+                    if (lk.code_line() != -1)
+                        m_links.append(lk);
+                }
             }
         }
-    }
 
-    std::sort(m_links.begin(), m_links.end(), [](Poppler::Link* a, Poppler::Link* b)
-    {
-        if (PdfViewer::get_line(a) != PdfViewer::get_line(b)) return PdfViewer::get_line(a) < PdfViewer::get_line(b);
-        return PdfViewer::get_column(a) < PdfViewer::get_column(b);
-    });
+
+        std::sort(m_links.begin(), m_links.end(), [](ClickableNote a, ClickableNote b)
+        {
+            if (a.page() != b.page()) return a.page() < b.page();
+            if (a.code_line() != b.code_line()) return a.code_line() < b.code_line();
+            return a.code_column() < b.code_column();
+        });
+    }
 }
 
+ClickableNote::ClickableNote() {}
+
+ClickableNote::ClickableNote(Poppler::Link* link, int page)
+{
+    m_link = link;
+    m_page = page;
+    m_line = -1;
+    m_column = -1;
+    m_bbox = QRectF();
+
+    QString url = static_cast<Poppler::LinkBrowse*>(link)->url();
+    QStringList parsed_url = url.split(":");
+    QRectF link_bbox = link->linkArea();
+
+    if (parsed_url.size() > 2)
+        m_line = parsed_url.at(2).toInt();
+
+    if (parsed_url.size() > 3)
+        m_column = parsed_url.at(3).toInt();
+
+    // Buffer the bbox for better feeling
+    QPointF p1 = link_bbox.topLeft();
+    QPointF p2 = link_bbox.bottomRight();
+    p1.setX(p1.x() - 0.002);
+    p1.setY(p1.y() + 0.002);
+    p2.setX(p2.x() + 0.002);
+    p2.setY(p2.y() - 0.002);
+    link_bbox.setTopLeft(p1);
+    link_bbox.setBottomRight(p2);
+
+    m_bbox = link_bbox;
+}
+
+int ClickableNote::page() { return m_page; }
+int ClickableNote::code_line() { return m_line; }
+int ClickableNote::code_column() { return m_column; }
+QRectF ClickableNote::bbox() { return m_bbox; }
 
 

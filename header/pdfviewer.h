@@ -43,6 +43,24 @@
 #include <QRectF>
 #include <poppler-qt5.h>
 
+class ClickableNote
+{
+public:
+    ClickableNote();
+    ClickableNote(Poppler::Link*, int);
+    int page();
+    int code_line();
+    int code_column();
+    QRectF bbox();
+
+private:
+    int m_page;
+    int m_line;
+    int m_column;
+    QRectF m_bbox;
+    Poppler::Link* m_link;
+};
+
 class PdfViewer : public QLabel
 {
     Q_OBJECT
@@ -55,8 +73,6 @@ public:
     qreal scale() const;
     void highlight_link_from_lines(QVector<int> lines);
     void highlight_note(int pos, int offset);
-    static int get_line(Poppler::Link*);
-    static int get_column(Poppler::Link*);
 
 public slots:
     bool setDocument(const QString &filePath);
@@ -74,7 +90,6 @@ signals:
 private:
     QPointF to_pdf_relative(QPoint);
     QRect to_img_absolute(QRectF);
-    QRectF bbox(Poppler::Link*);
     void clean_pdf();
     void init_links();
 
@@ -85,8 +100,7 @@ private:
     qreal m_scale_factor;
     QImage m_image;
     Poppler::Document *m_doc;
-    QList<Poppler::Link*> m_links;
-
+    QVector<ClickableNote> m_links;
 };
 
 #endif

@@ -951,7 +951,9 @@ void MainWindow::highlight_notes_from_current_line_in_pdf()
     int line1 = line + offset1;
     int line2 = line + offset2 + nline - 1;
     QVector<int> lines = {line1, line2};
+    qDebug() << "AA";
     pdf->highlight_link_from_lines(lines);
+    qDebug() << "BB";
 }
 
 void MainWindow::highlight_notes_from_current_music_time_in_pdf()

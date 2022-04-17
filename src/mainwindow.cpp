@@ -735,13 +735,14 @@ void MainWindow::writeSettings()
     settings.setValue("scalePDF", pdf->scale());
     settings.setValue("previewWidth", ui->previewDock->width());
     settings.setValue("editorWidth", ui->centralwidget->width());
+    settings.setValue("v110", 0);
 }
 
 void MainWindow::readSettings()
 {
     QSettings settings(qApp->organizationName(), qApp->applicationName());
 
-    if (settings.contains("geometry"))
+    if (settings.contains("v110"))
     {
         terminal("Restoration des parametres de session");
 

@@ -58,7 +58,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>449</width>
+         <width>330</width>
          <height>564</height>
         </rect>
        </property>
@@ -89,7 +89,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>449</width>
+         <width>330</width>
          <height>564</height>
         </rect>
        </property>
@@ -1126,8 +1126,8 @@ supplémentaires</string>
    </property>
    <property name="minimumSize">
     <size>
-     <width>263</width>
-     <height>153</height>
+     <width>484</width>
+     <height>171</height>
     </size>
    </property>
    <property name="sizeIncrement">
@@ -1172,8 +1172,8 @@ supplémentaires</string>
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>345</width>
-          <height>574</height>
+          <width>464</width>
+          <height>575</height>
          </rect>
         </property>
        </widget>
@@ -1198,9 +1198,22 @@ supplémentaires</string>
         </spacer>
        </item>
        <item>
-        <widget class="QLabel" name="label_2">
+        <widget class="QPushButton" name="zoomOutPushButton">
+         <property name="toolTip">
+          <string>Zoom Out</string>
+         </property>
          <property name="text">
-          <string>Échelle</string>
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="../Ressources.qrc">
+           <normaloff>:/icons/ressources/icons/zoom-out.svg</normaloff>:/icons/ressources/icons/zoom-out.svg</iconset>
+         </property>
+         <property name="default">
+          <bool>false</bool>
+         </property>
+         <property name="flat">
+          <bool>true</bool>
          </property>
         </widget>
        </item>
@@ -1209,11 +1222,17 @@ supplémentaires</string>
          <property name="enabled">
           <bool>false</bool>
          </property>
+         <property name="maximumSize">
+          <size>
+           <width>100</width>
+           <height>16777215</height>
+          </size>
+         </property>
          <property name="minimum">
-          <number>25</number>
+          <number>10</number>
          </property>
          <property name="maximum">
-          <number>150</number>
+          <number>200</number>
          </property>
          <property name="singleStep">
           <number>2</number>
@@ -1227,22 +1246,73 @@ supplémentaires</string>
         </widget>
        </item>
        <item>
-        <widget class="QLabel" name="label">
+        <widget class="QPushButton" name="zoomInPushButton">
+         <property name="toolTip">
+          <string>Zoom In</string>
+         </property>
          <property name="text">
-          <string>Page</string>
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="../Ressources.qrc">
+           <normaloff>:/icons/ressources/icons/zoom-in.svg</normaloff>:/icons/ressources/icons/zoom-in.svg</iconset>
+         </property>
+         <property name="flat">
+          <bool>true</bool>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QSpinBox" name="pageSpinBox">
+        <widget class="QPushButton" name="zoomFitPushButton">
          <property name="enabled">
-          <bool>false</bool>
+          <bool>true</bool>
          </property>
-         <property name="maximumSize">
-          <size>
-           <width>16777215</width>
-           <height>25</height>
-          </size>
+         <property name="toolTip">
+          <string>Ajustement</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="../Ressources.qrc">
+           <normaloff>:/icons/ressources/icons/zoom-fit-best.svg</normaloff>:/icons/ressources/icons/zoom-fit-best.svg</iconset>
+         </property>
+         <property name="flat">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="previousPagePushButton">
+         <property name="toolTip">
+          <string>Page précédente</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="../Ressources.qrc">
+           <normaloff>:/icons/ressources/icons/go-previous.svg</normaloff>:/icons/ressources/icons/go-previous.svg</iconset>
+         </property>
+         <property name="flat">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="nextPagePushButton">
+         <property name="toolTip">
+          <string>Page suivante</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="../Ressources.qrc">
+           <normaloff>:/icons/ressources/icons/go-next.svg</normaloff>:/icons/ressources/icons/go-next.svg</iconset>
+         </property>
+         <property name="flat">
+          <bool>true</bool>
          </property>
         </widget>
        </item>

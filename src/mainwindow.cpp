@@ -115,9 +115,15 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     connect(ui->showsf2ddl_pushButton, &QPushButton::clicked, [=]() { QMessageBox::information(this, "Soundfonts", "Pour télécharger d'autres fichiers de rendu audio allez dans: Audio > Installer des fontes sonores"); });
 
     // ==== PDF interaction between ui and rendering ====
-    connect(ui->pageSpinBox, SIGNAL(valueChanged(int)), pdf, SLOT(setPage(int)));
-    connect(pdf, SIGNAL(pageChanged(int)), ui->pageSpinBox, SLOT(setValue(int)));
-    connect(ui->pdfZoomSlider, SIGNAL(valueChanged(int)), this, SLOT(scaleDocument(int)));
+    connect(ui->nextPagePushButton, &QPushButton::clicked, [=]() { pdf->nextPage(); });
+    connect(ui->previousPagePushButton, &QPushButton::clicked, [=]() { pdf->previousPage(); });
+    connect(pdf, &PdfViewer::pageChanged, [=]() { ui->nextPagePushButton->setDisabled(false);  ui->previousPagePushButton->setDisabled(false); });
+    connect(pdf, &PdfViewer::firstPage, [=]() { ui->previousPagePushButton->setDisabled(true); });
+    connect(pdf, &PdfViewer::lastPage, [=]() { ui->nextPagePushButton->setDisabled(true); });
+    connect(ui->zoomInPushButton, &QPushButton::clicked, [=]() { pdf->zoomIn(); });
+    connect(ui->zoomOutPushButton, &QPushButton::clicked, [=]() { pdf->zoomOut(); });
+    connect(ui->zoomFitPushButton, &QPushButton::clicked, [=]() { pdf->zoomFit(); });
+    connect(ui->pdfZoomSlider, &QSlider::valueChanged, [=]() { pdf->setScale((float)ui->pdfZoomSlider->value()/100.0); });
     connect(pdf, SIGNAL(scaleChanged(int)), ui->pdfZoomSlider, SLOT(setValue(int)));
 
     // === PDF interaction between code and rendering ===
@@ -245,8 +251,6 @@ void MainWindow::midi2audioFinished(int exit)
 
 void MainWindow::updatePreview(QString path)
 {
-    int page = ui->pageSpinBox->value();
-
     if (!pdf->setDocument(path))
     {
         QMessageBox::warning(this, "PDF Viewer - Failed to Open File", "The specified file could not be opened.");
@@ -255,16 +259,9 @@ void MainWindow::updatePreview(QString path)
 
     QElapsedTimer timer;
     timer.start();
-
     pdf->show();
-    ui->pageSpinBox->setMinimum(1);
-    ui->pageSpinBox->setMaximum(pdf->document()->numPages());
-    ui->pdfZoomSlider->setEnabled(true);
-    ui->pageSpinBox->setEnabled(true);
-    scaleDocument(ui->pdfZoomSlider->value());
-    ui->pageSpinBox->setValue(page);
-
     terminal("Rendu graphique terminée en " + QString::number(timer.elapsed()) + " milliseconds");
+    ui->pdfZoomSlider->setEnabled(true);
 }
 
 void MainWindow::updateUIFromMusic(Tabulature tab)
@@ -408,8 +405,6 @@ void MainWindow::open(QString filename)
     QFileInfo fileinfo(filename);
 
     stopMusic();
-    qDebug() << "open" << filename;
-    pdf->setPixmap(QPixmap());
 
     if(!file.exists()) return;
 
@@ -760,7 +755,7 @@ void MainWindow::readSettings()
         if (index != -1) ui->sf2_combobox->setCurrentIndex(index);
 
         ui->pdfZoomSlider->setValue(settings.value("scalePDF").toFloat()*100);
-        scaleDocument(settings.value("scalePDF").toFloat());
+        pdf->setScale(settings.value("scalePDF").toFloat());
 
         ui->centralwidget->resize(settings.value("editorWidth").toInt(), ui->centralwidget->height());
         ui->previewDock->resize(settings.value("previewWidth").toInt(), ui->previewDock->height());
@@ -789,9 +784,9 @@ void MainWindow::readSettings()
         ui->actionDisplayInsertFast->setChecked(false);
         displayDocks();
 
-        tabifyDockWidget(ui->previewDock, ui->consoleDock);
-        ui->previewDock->raise();
-        ui->insertTextDock->close();
+        //tabifyDockWidget(ui->previewDock, ui->consoleDock);
+        //ui->previewDock->raise();
+        //ui->insertTextDock->close();
 
         documentIsSaved = true;
         currentOpenedFile = "";
@@ -900,12 +895,6 @@ void MainWindow::updateRythmComboBx()
 
 }
 
-void MainWindow::scaleDocument(int zoom)
-{
-    pdf->setScale((double) zoom/100);
-}
-
-
 void MainWindow::download_soundfonts(QString name)
 {
     QString url = "http://jmi.ovh/DiatonicTab/SoundFonts/" + name;
@@ -951,9 +940,7 @@ void MainWindow::highlight_notes_from_current_line_in_pdf()
     int line1 = line + offset1;
     int line2 = line + offset2 + nline - 1;
     QVector<int> lines = {line1, line2};
-    qDebug() << "AA";
     pdf->highlight_link_from_lines(lines);
-    qDebug() << "BB";
 }
 
 void MainWindow::highlight_notes_from_current_music_time_in_pdf()

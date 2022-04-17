@@ -68,29 +68,36 @@ class PdfViewer : public QLabel
 public:
     PdfViewer(QWidget *parent = 0);
     ~PdfViewer();
-    void show(int page = -1);
+    void show();
     Poppler::Document *document();
-    qreal scale() const;
+    qreal scale();
     void highlight_link_from_lines(QVector<int> lines);
     void highlight_note(int pos, int offset);
 
 public slots:
     bool setDocument(const QString &filePath);
-    void setPage(int page = -1);
+    void setPage(int);
+    void nextPage();
+    void previousPage();
+    void zoomIn();
+    void zoomOut();
+    void zoomFit();
     void setScale(qreal scale);
     void wheelEvent(QWheelEvent* event);
     void mousePressEvent(QMouseEvent* event);
     void mouseMoveEvent(QMouseEvent* event);
 
 signals:
-    void pageChanged(int);
+    void lastPage();
+    void firstPage();
+    void pageChanged();
     void scaleChanged(int);
     void linkClicked(int);
 
 private:
     QPointF to_pdf_relative(QPoint);
     QRect to_img_absolute(QRectF);
-    void clean_pdf();
+    void render_pdf_as_image();
     void init_links();
 
     int m_current_page;

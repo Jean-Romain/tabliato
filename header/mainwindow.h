@@ -52,8 +52,6 @@ class MainWindow : public QMainWindow
         void download_soundfonts(QString name);
 
         void documentSavedTitleChange();
-
-        void scaleDocument(int zoom);
         void goto_line(int line);
 
         void displayDocks();

@@ -6,7 +6,7 @@
 
 PdfViewer::PdfViewer(QWidget *parent): QLabel(parent)
 {
-    m_current_page = -1;
+    m_current_page = 0;
     m_doc = nullptr;
     m_scale_factor = 1.0;
     m_link_hovered = false;
@@ -16,32 +16,9 @@ PdfViewer::PdfViewer(QWidget *parent): QLabel(parent)
     setMouseTracking(true);
 }
 
-PdfViewer::~PdfViewer()
-{
-    delete m_doc;
-}
-
-Poppler::Document *PdfViewer::document()
-{
-    return m_doc;
-}
-
-qreal PdfViewer::scale() const
-{
-    return m_scale_factor;
-}
-
-void PdfViewer::show(int page)
-{
-    if (page != -1 && page != m_current_page + 1)
-    {
-        m_current_page = page - 1;
-        emit pageChanged(m_current_page+1);
-        clean_pdf();
-    }
-
-    setPixmap(QPixmap::fromImage(m_image));
-}
+PdfViewer::~PdfViewer(){ delete m_doc; }
+Poppler::Document *PdfViewer::document() { return m_doc; }
+qreal PdfViewer::scale() { return m_scale_factor; }
 
 bool PdfViewer::setDocument(const QString &filePath)
 {
@@ -49,46 +26,102 @@ bool PdfViewer::setDocument(const QString &filePath)
 
     m_doc = Poppler::Document::load(filePath);
 
-    if (m_doc)
-    {
-        delete oldDocument;
-        m_doc->setRenderHint(Poppler::Document::Antialiasing);
-        m_doc->setRenderHint(Poppler::Document::TextAntialiasing);
-        m_current_page = -1;
-        setPage(1);
-        init_links();
-        clean_pdf();
-    }
+    if (!m_doc)
+        return false;
 
-    return m_doc != 0;
+    delete oldDocument;
+    m_doc->setRenderHint(Poppler::Document::Antialiasing);
+    m_doc->setRenderHint(Poppler::Document::TextAntialiasing);
+    m_current_page = 0;
+    render_pdf_as_image();
+    init_links();
+
+    emit firstPage();
+    if (m_doc->numPages() == 1)
+        emit lastPage();
+
+    return true;
+}
+
+void PdfViewer::render_pdf_as_image()
+{
+    if (m_doc != nullptr)
+        m_image = m_doc->page(m_current_page)->renderToImage(m_scale_factor * physicalDpiX(), m_scale_factor * physicalDpiY());
+}
+
+void PdfViewer::show()
+{
+    setPixmap(QPixmap::fromImage(m_image));
 }
 
 void PdfViewer::setPage(int page)
 {
-    if (page != m_current_page + 1)
-    {
-        show(page);
-    }
+    if (page < 0 || page >= m_doc->numPages()) return;
+
+    m_current_page = page;
+    render_pdf_as_image();
+    show();
+
+    emit pageChanged();
+
+    if (m_current_page == 0)
+        emit firstPage();
+
+    if (m_current_page == m_doc->numPages() - 1)
+        emit lastPage();
+}
+
+void PdfViewer::nextPage()
+{
+    setPage(m_current_page+1);
+}
+
+void PdfViewer::previousPage()
+{
+    setPage(m_current_page-1);
 }
 
 void PdfViewer::setScale(qreal scale)
 {
-    if (m_scale_factor != scale)
+    if (scale < 2 && scale > 0.1)
     {
         m_scale_factor = scale;
-        clean_pdf();
+        render_pdf_as_image();
         show();
     }
 }
 
-void PdfViewer::wheelEvent ( QWheelEvent * event )
+void PdfViewer::zoomIn()
+{
+    setScale(m_scale_factor + 0.1);
+    emit scaleChanged((int) (m_scale_factor*100));
+}
+
+void PdfViewer::zoomOut()
+{
+    setScale(m_scale_factor - 0.1);
+    emit scaleChanged((int) (m_scale_factor*100));
+}
+
+void PdfViewer::zoomFit()
+{
+    setScale(0.1);
+    float ih = m_image.height();
+    float wh = height();
+    float dpi = physicalDpiY();
+    float invariant = (m_scale_factor*dpi*dpi)/ih;
+    float scale = (wh*invariant)/(dpi*dpi);
+    setScale(scale);
+}
+
+void PdfViewer::wheelEvent(QWheelEvent* event)
 {
     if (event->modifiers() & Qt::ControlModifier)
     {
         if (event->delta() >0)
-            setScale(m_scale_factor + 0.025);
+            setScale(m_scale_factor + 0.05);
         else
-            setScale(m_scale_factor - 0.025);
+            setScale(m_scale_factor - 0.05);
 
         emit scaleChanged((int) (m_scale_factor*100));
     }
@@ -96,7 +129,7 @@ void PdfViewer::wheelEvent ( QWheelEvent * event )
         QLabel::wheelEvent(event);
 }
 
-void PdfViewer::mousePressEvent(QMouseEvent * event )
+void PdfViewer::mousePressEvent(QMouseEvent* event)
 {
     QPointF pos = to_pdf_relative(event->pos());
 
@@ -118,7 +151,7 @@ void PdfViewer::mousePressEvent(QMouseEvent * event )
     }
 }
 
-void PdfViewer::mouseMoveEvent(QMouseEvent * event )
+void PdfViewer::mouseMoveEvent(QMouseEvent* event)
 {
     QPointF pos = to_pdf_relative(event->pos());
 
@@ -144,12 +177,12 @@ void PdfViewer::mouseMoveEvent(QMouseEvent * event )
             break;
         }
 
-        // If the cursor is no in a link and there is a hover
+        // If the cursor is not in a link and there is a hover
         // delete the rectangle
         if (m_link_hovered && !cursor_in_link_area)
         {
             m_link_hovered = false;
-            clean_pdf();
+            render_pdf_as_image();
             show();
         }
     }
@@ -194,7 +227,7 @@ void PdfViewer::highlight_link_from_lines(QVector<int> lines)
     }
 
     if (m_link_hovered)
-        clean_pdf();
+        render_pdf_as_image();
 
     for (int line : lines)
     {
@@ -203,10 +236,7 @@ void PdfViewer::highlight_link_from_lines(QVector<int> lines)
            if (line == m_links[i].code_line())
            {
                if (m_links[i].page() != m_current_page)
-               {
-                   qDebug() << m_current_page << m_links[i].page();
-                   show(m_links[i].page()+1);
-               }
+                  setPage(m_links[i].page());
 
                QPainter qPainter(&m_image);
                QRectF bb = m_links[i].bbox();
@@ -240,11 +270,11 @@ void PdfViewer::highlight_note(int pos, int offset)
         i++;
     }
 
-    clean_pdf();
+    render_pdf_as_image();
 
     int page = m_links[i-1].page();
     if (page != m_current_page)
-        show(page+1);
+        setPage(page);
 
     QRect bb = to_img_absolute(m_links[i-1].bbox());
     QPoint p0 = bb.bottomLeft();
@@ -261,11 +291,6 @@ void PdfViewer::highlight_note(int pos, int offset)
     show();
 }
 
-void PdfViewer::clean_pdf()
-{
-    if (m_doc != nullptr)
-        m_image = m_doc->page(m_current_page)->renderToImage(m_scale_factor * physicalDpiX(), m_scale_factor * physicalDpiY());
-}
 
 void PdfViewer::init_links()
 {

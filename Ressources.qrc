@@ -60,6 +60,13 @@
         <file>ressources/icons/update.svg</file>
         <file>ressources/icons/waiting.gif</file>
         <file>ressources/icons/wav.svg</file>
+        <file>ressources/icons/zoom-fit-best.svg</file>
+        <file>ressources/icons/zoom-in.svg</file>
+        <file>ressources/icons/zoom-original.svg</file>
+        <file>ressources/icons/zoom-out.svg</file>
+        <file>ressources/icons/go-bottom.svg</file>
+        <file>ressources/icons/go-next.svg</file>
+        <file>ressources/icons/go-previous.svg</file>
     </qresource>
     <qresource prefix="/templates">
         <file>ressources/templates/tabliato.ly</file>

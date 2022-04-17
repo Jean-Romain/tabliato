@@ -1,6 +1,10 @@
 ## Tabliato 1.1.0
 
 - New: support du "point and click" bidirectionnel. Il possible de cliquer sur la tablature pour trouver la ligne de code correspondante et inversement se mettre sur une ligne de code met en evidence la correspondance dans la tablature en surlignant en jaune les éléments.
+- New: tracking de la musique. Lorsque la pièce est jouée un curseur suit la musique en directe sur le rendu graphique
+- New: Changement de l'interface pour zoomer et changer de page sur le rendu graphique.
+- Change: Les soundfonts sont maintenant téléchargées depuis leur origine sur http://jmi.ovh/DiatonicTab/SoundFonts/
+- Bug: nombreux bugs corrigés
 
 ## Tabliato 1.0.5
 

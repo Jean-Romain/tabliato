@@ -776,7 +776,7 @@ void MainWindow::readSettings()
 
         ui->tempo_spinBox->setValue(130);
 
-        ui->actionDisplayConsole->setChecked(true);
+        ui->actionDisplayConsole->setChecked(false);
         ui->actionDisplayToolBar->setChecked(true);
         ui->actionDisplayPlayer->setChecked(true);
         ui->actionDisplayPreview->setChecked(true);
@@ -784,9 +784,9 @@ void MainWindow::readSettings()
         ui->actionDisplayInsertFast->setChecked(false);
         displayDocks();
 
-        //tabifyDockWidget(ui->previewDock, ui->consoleDock);
-        //ui->previewDock->raise();
-        //ui->insertTextDock->close();
+        tabifyDockWidget(ui->previewDock, ui->consoleDock);
+        ui->previewDock->raise();
+        ui->insertTextDock->close();
 
         documentIsSaved = true;
         currentOpenedFile = "";

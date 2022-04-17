@@ -83,7 +83,7 @@ void PdfViewer::previousPage()
 
 void PdfViewer::setScale(qreal scale)
 {
-    if (scale < 2 && scale > 0.1)
+    if (scale < 1.5 && scale > 0.1)
     {
         m_scale_factor = scale;
         render_pdf_as_image();

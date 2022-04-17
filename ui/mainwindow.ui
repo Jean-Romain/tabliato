@@ -58,7 +58,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>330</width>
+         <width>379</width>
          <height>564</height>
         </rect>
        </property>
@@ -78,7 +78,7 @@
            <string notr="true"/>
           </property>
           <property name="plainText">
-           <string>% Fichier -&gt; Ouvrir un example pour charger une tablature d'exemple</string>
+           <string/>
           </property>
          </widget>
         </item>
@@ -89,7 +89,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>330</width>
+         <width>379</width>
          <height>564</height>
         </rect>
        </property>
@@ -312,7 +312,7 @@
          <item row="0" column="1">
           <widget class="QLineEdit" name="title_LineEdit">
            <property name="text">
-            <string>Valse triste</string>
+            <string/>
            </property>
           </widget>
          </item>
@@ -940,8 +940,8 @@ supplémentaires</string>
         <property name="geometry">
          <rect>
           <x>0</x>
-          <y>0</y>
-          <width>301</width>
+          <y>-55</y>
+          <width>374</width>
           <height>183</height>
          </rect>
         </property>
@@ -955,14 +955,14 @@ supplémentaires</string>
          <item row="2" column="1">
           <widget class="QLineEdit" name="composer_LineEdit">
            <property name="text">
-            <string>Trad.</string>
+            <string/>
            </property>
           </widget>
          </item>
          <item row="1" column="1">
           <widget class="QLineEdit" name="subtitle_LineEdit">
            <property name="text">
-            <string>Valse à trois temps - débutant</string>
+            <string/>
            </property>
           </widget>
          </item>
@@ -1028,7 +1028,7 @@ supplémentaires</string>
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>301</width>
+          <width>374</width>
           <height>208</height>
          </rect>
         </property>
@@ -1126,8 +1126,8 @@ supplémentaires</string>
    </property>
    <property name="minimumSize">
     <size>
-     <width>484</width>
-     <height>171</height>
+     <width>217</width>
+     <height>141</height>
     </size>
    </property>
    <property name="sizeIncrement">
@@ -1172,7 +1172,7 @@ supplémentaires</string>
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>464</width>
+          <width>415</width>
           <height>575</height>
          </rect>
         </property>
@@ -1354,7 +1354,7 @@ supplémentaires</string>
     </size>
    </property>
    <property name="floating">
-    <bool>true</bool>
+    <bool>false</bool>
    </property>
    <property name="features">
     <set>QDockWidget::DockWidgetFloatable|QDockWidget::DockWidgetMovable</set>

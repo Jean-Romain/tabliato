@@ -100,5 +100,6 @@
         <file>ressources/exemples/Exemple - basique.dtb</file>
         <file>ressources/exemples/Exemple - boutons ou notes.dtb</file>
         <file>ressources/exemples/Exemple - anacrouse.dtb</file>
+        <file>ressources/exemples/Polka piquée.dtb</file>
     </qresource>
 </RCC>

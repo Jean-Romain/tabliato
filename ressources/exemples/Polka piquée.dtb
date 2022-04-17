@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tabliato>
+    <propertie time="2/4" key="g \major" tempo="4=130" instrument="" tagline="\tabliato" title="Polka piquée" motif="22" subtitle="Polka piquée - Débutant" accordion="ctl1gc" rythm="B a B a " displayFingering="auto" composer="Trad." poet="" system="cadb"/>
+<tabulature>% Fichier -> Ouvrir un example pour charger une tablature d'exemple
+
+% Bouton graver pour produire le rendu de cette tablature d'exemple
+
+\repeat volta 2 
+{
+    p5:8 6 7 6 G
+    5 6 t6:4 [G D]
+    5:8 6 7 6 D
+}
+\alternative
+{
+   { t5:8 6 p5:4 [D G] }
+   { t5:8 t6 p6:4 [D G] }
+}
+
+\break
+ 
+\repeat volta 2 
+{
+    p7:4 6 G
+    5:8 6 t6:4 [G D]
+    7:4 6 D
+}
+\alternative
+{
+   { t5:8 6 p5:4 [D G] }
+   { t5:8 t6 p6:4 [D G] }
+}</tabulature>
+    <lyric></lyric>
+</tabliato>

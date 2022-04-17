@@ -251,6 +251,9 @@ void MainWindow::midi2audioFinished(int exit)
 
 void MainWindow::updatePreview(QString path)
 {
+    ui->previousPagePushButton->setDisabled(false);
+    ui->nextPagePushButton->setDisabled(false);
+
     if (!pdf->setDocument(path))
     {
         QMessageBox::warning(this, "PDF Viewer - Failed to Open File", "The specified file could not be opened.");
@@ -772,9 +775,8 @@ void MainWindow::readSettings()
         font.setFamily("Courier");
         font.setStyleHint(QFont::Monospace);
         font.setFixedPitch(true);
-        ui->melodie_textarea->setFont(font);
 
-        ui->tempo_spinBox->setValue(130);
+        ui->melodie_textarea->setFont(font);
 
         ui->actionDisplayConsole->setChecked(false);
         ui->actionDisplayToolBar->setChecked(true);
@@ -783,6 +785,13 @@ void MainWindow::readSettings()
         ui->actionDisplayInformations->setChecked(true);
         ui->actionDisplayInsertFast->setChecked(false);
         displayDocks();
+
+        ui->tempo_spinBox->setValue(130);
+        ui->tempo_comboBox->setCurrentIndex(2);
+        ui->time_combobox->setCurrentIndex(1);
+        ui->rythm_comboBox->setCurrentIndex(4);
+
+        pdf->setScale(0.5);
 
         tabifyDockWidget(ui->previewDock, ui->consoleDock);
         ui->previewDock->raise();
@@ -794,9 +803,8 @@ void MainWindow::readSettings()
         this->setWindowTitle("Tabliato - Sans titre");
 
         File::mkdir(OUTPUT);
-
-        open(EXAMPLE + "/exemple.dtb");
-
+        open(":/examples/ressources/exemples/Polka piquée.dtb");
+        currentOpenedFile = "";
         terminal("Premiere utilisation de tabliato");
     }
 }

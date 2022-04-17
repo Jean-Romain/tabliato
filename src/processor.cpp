@@ -384,16 +384,14 @@ void TabliatoProcessor::parseMusic()
                     }
                 }
 
-
-                //qDebug() << "command: scope =" << m_scope;
                 break;
             }
 
             case OPENBRACKET:
             {
-                if (m_scope.last() == ALTERNATIVE)
+
+                if (m_scope.size() > 0 && m_scope.last() == ALTERNATIVE)
                 {
-                    //qDebug() << "add alternaive";
                     timeline.not_end_timeline();
                     timeline.add_alternative();
                     m_scope.append(ALTERNATIVESEQUENCE);
@@ -403,7 +401,6 @@ void TabliatoProcessor::parseMusic()
                     m_scope.append(NONAME);
                 }
 
-                //qDebug() << "open: scope =" << m_scope;
                 break;
             }
 
@@ -428,7 +425,6 @@ void TabliatoProcessor::parseMusic()
                 }
 
                 m_scope.pop_back();
-                //qDebug() << "close: scope =" << m_scope;
                 break;
             }
 

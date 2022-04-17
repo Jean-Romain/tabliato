@@ -75,9 +75,6 @@ void Timeline::append(Timeline line)
     int n2 = line.main.size();
     int n = n1 + n2;
 
-
-    //qDebug() << "append n1=" << n1 << "n2 =" << n2;
-
     TimeUnits units;
     units.reserve(n);
 
@@ -99,6 +96,9 @@ void Timeline::append(Timeline line)
 
 void Timeline::add_alternative()
 {
+    if (m_repeat == 1)
+        throw std::logic_error("Détection d'une alternative sans répétition.");
+
     alternatives.append(TimeUnits());
 }
 

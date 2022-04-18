@@ -304,12 +304,12 @@ void PdfViewer::init_links()
         // Check each link to determine whether or not we record it
         for (int j = 0 ; j < all_links.size() ; j++)
         {
-            // Keep only non null area links
-            if (all_links.at(j)->linkArea().width() > 0.0001)
-            {
-                Poppler::Link* link = all_links.at(j);
-                ClickableNote lk(link, i);
+            Poppler::Link* link = all_links.at(j);
+            ClickableNote lk(link, i);
 
+            // Keep only non null area links
+            if (link->linkArea().width() > 0.0001)
+            {
                 // We keep a single link per row/colum in the code
                 QPair<int, int> p(lk.code_line(), lk.code_column());
                 if (!registry.contains(p))
@@ -346,11 +346,21 @@ ClickableNote::ClickableNote(Poppler::Link* link, int page)
     QStringList parsed_url = url.split(":");
     QRectF link_bbox = link->linkArea();
 
-    if (parsed_url.size() > 2)
-        m_line = parsed_url.at(2).toInt();
+    #ifdef Q_OS_WINDOWS
+    int lineidx = 3;
+    int columnidx = 4;
+    #endif
 
-    if (parsed_url.size() > 3)
-        m_column = parsed_url.at(3).toInt();
+    #ifdef Q_OS_LINUX
+    int lineidx = 2;
+    int columnidx = 3;
+    #endif
+
+    if (parsed_url.size() > lineidx)
+        m_line = parsed_url.at(lineidx).toInt();
+
+    if (parsed_url.size() > columnidx)
+        m_column = parsed_url.at(columnidx).toInt();
 
     // Buffer the bbox for better feeling
     QPointF p1 = link_bbox.topLeft();

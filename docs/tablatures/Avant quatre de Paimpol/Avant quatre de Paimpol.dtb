@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tabliato>
-    <propertie key="c \major" title="Avant quatre de Paimpol" accordion="ctl1gc" composer="Trad." time="6/8" displayFingering="auto" tagline="\tabliato" motif="11" subtitle="" poet="" rythm="B aB a" system="cadb" tempo="4=140" instrument=""/>
+    <propertie composer="Trad." poet="" instrument="" time="6/8" rythm="B aB a" tagline="\tabliato" tempo="4=140" displayFingering="auto" key="g \major" subtitle="" accordion="ctl1gc" system="cadb" motif="11" title="Avant quatre de Paimpol"/>
     <tabulature>\repeat volta 2
 {
 p7 6':8 8:4 6:8 G

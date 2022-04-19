@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tabliato>
-    <propertie composer="" system="cadb" key="c \major" displayFingering="auto" instrument="" motif="22" time="2/4" accordion="ctl1gc" title="Al lutun" subtitle="Polka-plinn - trad. pays plinn" tagline="\tabliato" tempo="4=90" poet="" rythm="B a B a "/>
+    <propertie composer="" poet="" instrument="" time="2/4" rythm="B a B a " tagline="\tabliato" tempo="4=90" displayFingering="auto" key="g \major" subtitle="Polka-plinn - trad. pays plinn" accordion="ctl1gc" system="cadb" motif="22" title="Al lutun"/>
     <tabulature>\repeat volta 2
 {
 p4':8 7:16 7 7:8. 7:16 E

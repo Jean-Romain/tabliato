@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tabliato>
+    <propertie key="c \major" title="Avant quatre de Paimpol" accordion="ctl1gc" composer="Trad." time="6/8" displayFingering="auto" tagline="\tabliato" motif="11" subtitle="" poet="" rythm="B aB a" system="cadb" tempo="4=140" instrument=""/>
+    <tabulature>\repeat volta 2
+{
+p7 6':8 8:4 6:8 G
+p6:8 t6 p4' t6:4. [C D]
+7:4 6':8 8:4 8:8 A
+}
+\alternative
+{
+  { 8:8 6' 7 p7:4. [D G] }
+  { t8:8 6' 7 p6:4. [D G]  }
+}
+
+\break
+
+\repeat volta 2
+{
+p6':4 6':8 6':4 7':8 C
+t7':4 8:8 p7:4. [D G]
+p7:4 7:8 7:4 8:8 E
+6':4 7:8 t7:4. [E A]
+} 
+
+\break
+
+\repeat volta 2
+{
+p6:8 t6 p6 t7:4 7:8 [G D]
+t7':8 8 6' 7:4 7:8 [G D]
+p6:8 t6 p6 t7:4 7:8 [G D]
+}
+\alternative
+{
+  { t8:8 6' 7 p7:4. [D G] }
+  { t8:8 6' 7 p6:4. [D G] }
+}</tabulature>
+    <lyric></lyric>
+</tabliato>

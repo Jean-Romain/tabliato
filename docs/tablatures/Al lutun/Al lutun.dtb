@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tabliato>
+    <propertie composer="" system="cadb" key="c \major" displayFingering="auto" instrument="" motif="22" time="2/4" accordion="ctl1gc" title="Al lutun" subtitle="Polka-plinn - trad. pays plinn" tagline="\tabliato" tempo="4=90" poet="" rythm="B a B a "/>
+    <tabulature>\repeat volta 2
+{
+p4':8 7:16 7 7:8. 7:16 E
+7:8 7 7 6 E
+t7 6' 8 8:16 8 A
+p7:8 t7 p6:4 [E a E e]
+}
+
+\break
+
+\repeat volta 2
+{
+p4':8 6:16 6 6:8 6:16 6 E
+6:8 7 7 t7 [E e E a]
+7 p6 t6 7:16 7 [A e A a]
+t7:8 p6 4':4 [A e E e]
+}
+
+</tabulature>
+    <lyric></lyric>
+</tabliato>

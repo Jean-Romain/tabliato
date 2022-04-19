@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tabliato>
+    <propertie composer="" accordion="ctl1gc" key="g \major" motif="22" rythm="B a B a " poet="" instrument="" subtitle="" tempo="4=240" system="cadb" tagline="\tabliato" displayFingering="auto" time="4/4" title="Môsieur l'curé n'veut pas"/>
+    <tabulature>\repeat volta 2
+{
+p7:2 7:4. t7:8 G
+7:4 p6 6:2 [D g G g]
+6:4 7 7 8 G
+8 t8 8:2 [G d D g]
+
+t8:2 8:4. 7':8 A
+8:4 6' 7:2 [A D]
+7:4 p6 t6 p6 [D g D g]
+p7:4 t7 p6:2 [G d G g]
+}
+
+\break
+
+\repeat volta 2
+{
+p6:4 t7 p7:2 [G d G g]
+p7:8 t7 p7 6' 8:4 8 G
+p6 t7 p7:2 [G d G g]
+p7:8 t7 p7 6' 8:4 8 G
+
+p6:4 t7 p7:2 [G d G g]
+p6:2 t7:4. 7:8 [G D]
+p6:4 t6 p6:2 [G d G g]
+}
+
+</tabulature>
+    <lyric>Mon -- sieur l'cu -- ré n'veut pas
+Que les gars em -- brassent les filles
+Mais il ne dé -- fend pas
+Que les filles em -- brassent les gars!
+
+Monsieur l’curé n’veut pas
+Que les gard embrassent les filles
+Mais Monsieur l’maire a dit
+D’les embrasser malgré lui! 
+
+Monsieur l’curé n’veut pas
+Que les gars dansent en Carême
+Mais il ne défend pas
+Que les filles sautent dans leurs bras!
+Monsieur l’curé n’veut pas
+Que les gars embrassent les filles
+Mais Monsieur l’maire a dit
+D’aller danser malgré lui!
+
+Monsieur l’curé n’veut pas
+Que les gars taquinent le cidre
+Mais il ne défend pas
+Que les filles fassent boire les gars!
+Monsieur l’curé n’veut pas
+Que les gars taquinent le cidre
+Mais Monsieur l’maire a dit
+Qu’un p’tit coup chasse les soucis! </lyric>
+</tabliato>

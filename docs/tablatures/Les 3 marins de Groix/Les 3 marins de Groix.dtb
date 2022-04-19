@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tabliato>
+    <propertie time="3/4" instrument="" subtitle="" displayFingering="auto" motif="3" rythm="B a a " tempo="4=130" poet="" system="cadb" accordion="ctl1gc" key="g \major" title="Les 3 marins de Groix" composer="" tagline="\tabliato"/>
+    <tabulature>\partial 4 p4 [r:4]
+
+\repeat volta 2
+{
+p4':2 t6:4 [E e a]
+p5':2 t5':4 [E e a]
+6':2 6':4 G
+6':2. G
+p8:2 6':4 C
+t6':2 5':4 D
+p7:2. ~ E
+7:2 4:4 E
+}
+
+p5':2. E
+t6 D
+p4'~ E
+4':2 4':4 E
+5':2. C
+t5':2. D
+6':2. ~ G
+6' G
+
+t6':2 6':4 G
+5':2. D
+6':2 6':4 D
+p5':2. E
+5':4 5' 5' E
+5':2. E
+t6 D
+p4' E
+</tabulature>
+    <lyric></lyric>
+</tabliato>

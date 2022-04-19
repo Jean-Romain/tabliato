@@ -7,8 +7,8 @@ all:
 	cp control tabliato/DEBIAN/
 	cp tabliato.desktop tabliato/usr/share/applications/
 	cp ../tabliato tabliato/usr/bin/
-	cp ../share/icon/tabliato.svg tabliato/usr/share/app-install/icons/
-	cp ../share/icon/tabliato.svg tabliato/usr/share/icons/
+	cp ../ressources/icons/tabliato.svg tabliato/usr/share/app-install/icons/
+	cp ../ressources/icons/tabliato.svg tabliato/usr/share/icons/
 	rm -rf tabliato/usr/share/tabliato
 	dpkg-deb --build tabliato
 

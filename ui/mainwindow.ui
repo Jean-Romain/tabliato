@@ -58,7 +58,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>379</width>
+         <width>521</width>
          <height>564</height>
         </rect>
        </property>
@@ -89,7 +89,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>379</width>
+         <width>521</width>
          <height>564</height>
         </rect>
        </property>
@@ -284,7 +284,7 @@
         </size>
        </property>
        <property name="currentIndex">
-        <number>0</number>
+        <number>2</number>
        </property>
        <widget class="QWidget" name="Informations">
         <property name="geometry">
@@ -940,8 +940,8 @@ supplémentaires</string>
         <property name="geometry">
          <rect>
           <x>0</x>
-          <y>-55</y>
-          <width>374</width>
+          <y>0</y>
+          <width>301</width>
           <height>183</height>
          </rect>
         </property>
@@ -1028,7 +1028,7 @@ supplémentaires</string>
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>374</width>
+          <width>301</width>
           <height>208</height>
          </rect>
         </property>
@@ -1064,7 +1064,7 @@ supplémentaires</string>
             <item>
              <widget class="QRadioButton" name="cogeron_radio">
               <property name="text">
-               <string>Cogeron</string>
+               <string>Corgeron</string>
               </property>
              </widget>
             </item>
@@ -1126,8 +1126,8 @@ supplémentaires</string>
    </property>
    <property name="minimumSize">
     <size>
-     <width>217</width>
-     <height>141</height>
+     <width>337</width>
+     <height>144</height>
     </size>
    </property>
    <property name="sizeIncrement">
@@ -1172,7 +1172,7 @@ supplémentaires</string>
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>415</width>
+          <width>346</width>
           <height>575</height>
          </rect>
         </property>

@@ -1,21 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tabliato>
-    <propertie instrument="" subtitle="" tempo="4=130" composer="" displayFingering="auto" motif="2" key="c \major" system="cadb" tagline="" time="2/2" poet="" accordion="ctl1gc" title="Exemple - boutons ou notes" rythm="B a (binaire)"/>
-    <tabulature>% Il est possible de donner la note au lieu du bouton
-% Si il n'y a qu'une seule possibilité la conversion est automatique
+    <propertie instrument="" subtitle="" tempo="4=130" composer="" displayFingering="auto" motif="2" key="c \major" system="cadb" tagline="" time="2/4" poet="" accordion="ctl1gc" title="Exemple - boutons ou notes" rythm="B a (binaire)"/>
+    <tabulature>% Il est possible de donner des notes au lieu des numéros de bouton
 
-p e':2 e'' c' c''
-t f':4 f'' c' c''
+% On commence par donner un sens de jeu préférentiel
+p
 
-% Si il y a plusieurs possibilités il faut préciser le rang. Ici sur le rang 2
+% Si il n'y a qu'une seule possibilité dans le sens de 
+% jeu tabliato retrouve le bouton correspondant
+e' e''
+
+% la même chose en tiré
+t e' e''
+
+% Quelques notes de plus
+p c' c''
+t f' f''
+
+% Si il y a plusieurs possibilités tabliato affiche les deux en rouge
+t a''
+
+% Dans ce cas on doit préciser le rang pour n'avoir plus qu'une option.
+% Ici le rang 2
 t a''/2
 
-% La meme note sur le rang 1
-t a''/1:2.
+% si la note n'existe pas dans le sens de jeu tabliato donne l'autre sens de jeu.
+% ici on demande un la en poussé mais il propose les la en tiré
+p a'':2
 
-% On peut mélanger note et bouton
-p 7':2 8' e'' t f'' 9' p 9
+\break
 
-A A G G A [A g] [G a]</tabulature>
+% On peut mélanger notes et boutons
+% Ici en poussé boutons 7', 8', mi, tiré fa, bouton 9', poussé boutons 9 8 7 sol mi
+p 7':4 8' 
+e'' t f'' 
+9' p 9 
+8 7 
+g'' e''</tabulature>
     <lyric></lyric>
 </tabliato>

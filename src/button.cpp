@@ -15,47 +15,67 @@ ButtonParser::ButtonParser(Keyboard &keyboard)
 
 void ButtonParser::set_rhs_note(QString str)
 {
+    m_rank = "";
     m_side = RHS;
     m_duration = CURRENTDURATION;
     m_direction = CURRENTDIRECTION;
 
+    // extraction de la note a b c d e f g avec ses ' e.g a''
     extractNote.indexIn(str);
     m_note = extractNote.cap(1);
 
+    // extraction du rang sur le diato /1 e.g. a''/2 pour le rang 2
     if (extractRankNote.indexIn(str) >= 0)
         m_rank = extractRankNote.cap(1);
 
+    // extraction de la durée de la note e.g. a'':4/2
     if (extractDuration.indexIn(str) >= 0)
-    {
         m_duration = extractDuration.cap(1);
-    }
 
+    // extraction de la direction ta'':4/2 (ne fonctionne pas)
     if (extractDirection.indexIn(str) >= 0)
-    {
-        m_direction = extractDirection.cap(1);
-        m_direction = m_direction.toLower();
-    }
+        m_direction = extractDirection.cap(1).toLower();
 
+    // Trouve tous les boutons qui font cette note
     avaibleButton = kbd->getButtons(m_note);
 
+    // Si il n'y a qu'une option c'est facile
     if (avaibleButton.length() == 1)
     {
         m_button = avaibleButton[0];
     }
+    // Si il y a plus d'une options il faut déterminier quel bouton choisir.
+    // Il ne peut pas y avoir 3 fois la même note donc la taille est 2 (enfin je crois)
     else if (avaibleButton.length() > 1)
     {
+        // Si aucune possibilités n'est dans la direction actuelle on change de direction automatiquement
         if (QString(avaibleButton[1][0]) != m_direction && QString(avaibleButton[0][0]) != m_direction)
-            throw std::logic_error(QString("Vous ne pouvez pas jouer la note " + m_note + " dans le sens " + ((m_direction == "t") ? "tiré" : "poussé") + " avec cet accordéon.").toStdString());
+            m_direction = (m_direction == "p") ? "t" : "p";
+            //throw std::logic_error(QString("Vous ne pouvez pas jouer la note " + m_note + " dans le sens " + ((m_direction == "t") ? "tiré" : "poussé") + " avec cet accordéon.").toStdString());
 
+        // Si on a pas précisé le rang
         if (m_rank.isEmpty())
         {
-            if(QString(avaibleButton[0][0]) == m_direction && QString(avaibleButton[1][0]) != m_direction)
+            // Si la direction de la première option correspond à la direction actuelle mais pas la deuxième alors on prend la première option
+            if (QString(avaibleButton[0][0]) == m_direction && QString(avaibleButton[1][0]) != m_direction)
+            {
                m_button = avaibleButton[0];
-            else if(QString(avaibleButton[1][0]) == m_direction && QString(avaibleButton[0][0]) != m_direction)
+            }
+            // Si la direction de la deuxième option correspond à la direction actuelle mais pas la première alors on prend la deuxième option
+            else if (QString(avaibleButton[1][0]) == m_direction && QString(avaibleButton[0][0]) != m_direction)
+            {
                m_button = avaibleButton[1];
+            }
+            // Sinon on ne sait pas quoi faire il y a deux options. On va afficher les deux options en rouge
+            // en trichant sur le contenu de m_bouton pour que la fonction print affiche de quoi
             else
-               throw std::logic_error(QString("Il y a deux possibilités pour la note " + m_note + "\n  1. " + avaibleButton[0] + "\n  2. " + avaibleButton[1] + "\nAjoutez une indication de rang. Par exemple : " + m_note + "/1").toStdString());
+            {
+               m_button = avaibleButton[0].remove(0,1) + "\" \\once \\override TextScript.color = #red \\" + m_direction + " \""  + avaibleButton[1].remove(0,1);
+               //throw std::logic_error(QString("Il y a deux possibilités pour la note " + m_note + "\n  1. " + avaibleButton[0] + "\n  2. " + avaibleButton[1] + "\nAjoutez une indication de rang. Par exemple : " + m_note + "/1").toStdString());
+                return;
+            }
         }
+        // Si on a précisé le rang, les options viennent par ordre de rang
         else
         {
             int i = m_rank.toInt();
@@ -67,7 +87,7 @@ void ButtonParser::set_rhs_note(QString str)
          }
      }
 
-    if (extractNumButton.indexIn(m_button) >= 0)
+    if (extractNumButton.indexIn(m_button) >= 0){}
         m_button = extractNumButton.cap(1);
 }
 

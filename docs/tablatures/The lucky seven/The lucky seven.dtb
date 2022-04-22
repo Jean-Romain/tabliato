@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tabliato>
+    <propertie displayFingering="auto" subtitle="" tagline="\tabliato" key="g \major" motif="11" accordion="ctl1gc" title="The lucky seven" system="cadb" time="6/8" rythm="B aB a" poet="" composer="Trad. Ecosse" instrument="" tempo="4=130"/>
+    <tabulature>\repeat volta 2
+{
+5:8 6 6 6 t6 p6  G
+t5 p6 6 5 6 6 [D G]
+}
+\alternative
+{
+  { t5 p6 6 5 6 6 [D G] 
+    t5 7 7 7 p6 t5 A
+  }
+  { 
+    t5 p6 6 t6 p6 t7 D
+    p7 6 6 6:4. G 
+  }
+}
+
+\break
+
+\repeat volta 2
+{
+ p5:8 7 7 7 t7 p7 G
+ p8 7 7 7 t7 p6 G
+}
+\alternative
+{
+  { 
+    t5:4 7:8 7 p6 t7 A
+    p7 t7 7 7 p6 t5 [G D]
+  }
+  {
+    t5:4 p6:8 t6 p6 t7 [A e D d]
+    p7 6 6 6:4. G
+  }
+}</tabulature>
+    <lyric></lyric>
+</tabliato>

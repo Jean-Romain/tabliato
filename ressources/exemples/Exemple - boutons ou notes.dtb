@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tabliato>
     <propertie instrument="" subtitle="" tempo="4=130" composer="" displayFingering="auto" motif="2" key="c \major" system="cadb" tagline="" time="2/4" poet="" accordion="ctl1gc" title="Exemple - boutons ou notes" rythm="B a (binaire)"/>
-    <tabulature>% Il est possible de donner des notes au lieu des numéros de bouton
+    <tabulature>% Il est possible de donner des notes 
+% au lieu des numéros de bouton
 
 % On commence par donner un sens de jeu préférentiel
 p
@@ -17,21 +18,25 @@ t e' e''
 p c' c''
 t f' f''
 
-% Si il y a plusieurs possibilités tabliato affiche les deux en rouge
+% Si il y a plusieurs possibilités 
+% tabliato affiche les deux en rouge
 t a''
 
-% Dans ce cas on doit préciser le rang pour n'avoir plus qu'une option.
+% Dans ce cas on doit préciser le rang.
 % Ici le rang 2
 t a''/2
 
-% si la note n'existe pas dans le sens de jeu tabliato donne l'autre sens de jeu.
-% ici on demande un la en poussé mais il propose les la en tiré
+% Si la note n'existe pas dans le sens de jeu 
+% tabliato produit automatiquement l'autre sens de jeu.
+% Ici on demande un La en poussé mais il propose les La en tiré
 p a'':2
 
 \break
 
 % On peut mélanger notes et boutons
-% Ici en poussé boutons 7', 8', mi, tiré fa, bouton 9', poussé boutons 9 8 7 sol mi
+% - poussé boutons 7', 8', mi, 
+% - tiré fa, bouton 9', 
+% - poussé boutons 9 8 7 sol mi
 p 7':4 8' 
 e'' t f'' 
 9' p 9 

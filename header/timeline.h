@@ -2,6 +2,7 @@
 #define TIMELINE_H
 
 #include <QVector>
+#include <QDebug>
 
 struct TimeUnit
 {
@@ -62,6 +63,9 @@ private:
     QString m_tempo;
     QVector<Timeline> timelines;
 };
+
+QDebug operator<<(QDebug stream, const TimeUnit &tu);
+QDebug operator<<(QDebug stream, const Timeline &tl);
 
 
 #endif // TIMELINE_H

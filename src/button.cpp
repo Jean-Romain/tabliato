@@ -75,13 +75,25 @@ void ButtonParser::set_rhs_note(QString str)
                 return;
             }
         }
-        // Si on a précisé le rang, les options viennent par ordre de rang
+        // Si on a précisé le rang
         else
         {
-            int i = m_rank.toInt();
+            int rank = m_rank.toInt();
+            int pos = -1;
 
-            if (i <= avaibleButton.length())
-                m_button = avaibleButton[i-1];
+            for (int i = 0 ; i < avaibleButton.size() ; i++)
+            {
+                int srank = 1;
+                if (extractRankButton.indexIn(avaibleButton[i]) >= 0)
+                    srank = extractRankButton.cap(1).length()+1;
+
+                if (rank == srank)
+                    pos = i;
+            }
+
+
+            if (pos >= 0)
+                m_button = avaibleButton[pos];
             else
                 throw std::logic_error(QString("Le rang " + m_rank + " n'est pas un rang valide pour la note " + m_note + " sur cet accordéon").toStdString());
          }

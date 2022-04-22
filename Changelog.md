@@ -1,3 +1,9 @@
+## Tabliato 1.1.1
+
+- New: quand une note correspond à plusieurs bouttons possibles, c'est à dire quand l'utilisateur donne une note sans indication de rangée, toutes les possibilités sont affichées sur la tablature en rouge au lieu d'un message d'erreur.
+- Bug: correction du système d'écriture de tablature par note
+- Bug: tracking de la musique sur le rendu même si il n'y pas d'accompagnement main gauche.
+
 ## Tabliato 1.1.0
 
 - New: support du "point and click" bidirectionnel. Il possible de cliquer sur la tablature pour trouver la ligne de code correspondante et inversement se mettre sur une ligne de code met en evidence la correspondance dans la tablature en surlignant en jaune les éléments.

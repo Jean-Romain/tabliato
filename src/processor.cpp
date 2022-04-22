@@ -454,6 +454,8 @@ void TabliatoProcessor::parseMusic()
         throw std::logic_error(err.toStdString());
     }
 
+    m_timeline = timeline.timeline();
+
     m_tab->melody = parsedSymbolsMelody.join(" ");
     m_tab->melody.replace(QRegExp(":"), "");
     m_tab->melody.replace(QRegExp("\\doublegt"), ">>");
@@ -463,8 +465,6 @@ void TabliatoProcessor::parseMusic()
 
     m_tab->bass = parsedSymbolsBass.join(" ");
     m_tab->bass.replace(QRegExp(":"), "");
-
-    m_timeline = timeline.timeline();
 }
 
 void TabliatoProcessor::parseLyric()

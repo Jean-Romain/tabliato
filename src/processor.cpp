@@ -31,7 +31,7 @@ TabliatoProcessor::TabliatoProcessor(Tabulature &tabulature)
 void TabliatoProcessor::parseMusic()
 {
     // A button holds the logic of parsing the notes and stores some context
-    CURRENTDIRECTION = "p";
+    CURRENTDIRECTION = "";
     CURRENTDURATION = "4";
 
     ButtonParser button(m_keyboard);
@@ -123,12 +123,16 @@ void TabliatoProcessor::parseMusic()
                 currentSymbolIsBass = false;
 
                 if (type == BUTTON)
+                {
                     button.set_rhs_button(symbol);
+                    CURRENTDIRECTION =  button.direction();
+                }
                 else
+                {
                     button.set_rhs_note(symbol);
+                }
 
                 CURRENTDURATION = button.duration();
-                CURRENTDIRECTION =  button.direction();
 
                 timeline.append(CURRENTDURATION, nnote);
 
@@ -382,6 +386,11 @@ void TabliatoProcessor::parseMusic()
                         i++;
                         parsed += " " + symbols[i];
                     }
+                }
+                else if (symbol == "\\pt")
+                {
+                    CURRENTDIRECTION = "";
+                    parsed = "";
                 }
 
                 break;

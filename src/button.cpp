@@ -39,19 +39,30 @@ void ButtonParser::set_rhs_note(QString str)
     // Trouve tous les boutons qui font cette note
     avaibleButton = kbd->getButtons(m_note);
 
+    qDebug() << avaibleButton;
+
     // Si il n'y a qu'une option c'est facile
     if (avaibleButton.length() == 1)
     {
-        m_button = avaibleButton[0];
+        m_direction = avaibleButton[0].at(0);
+        m_button = avaibleButton[0].remove(0,1);
     }
     // Si il y a plus d'une options il faut déterminier quel bouton choisir.
     // Il ne peut pas y avoir 3 fois la même note donc la taille est 2 (enfin je crois)
     else if (avaibleButton.length() > 1)
     {
-        // Si aucune possibilités n'est dans la direction actuelle on change de direction automatiquement
-        if (QString(avaibleButton[1][0]) != m_direction && QString(avaibleButton[0][0]) != m_direction)
-            m_direction = (m_direction == "p") ? "t" : "p";
-            //throw std::logic_error(QString("Vous ne pouvez pas jouer la note " + m_note + " dans le sens " + ((m_direction == "t") ? "tiré" : "poussé") + " avec cet accordéon.").toStdString());
+        // Si les deux options on le même sens de jeu alors on a pas le choix du sens de jeu
+        if (avaibleButton[1][0] == avaibleButton[0][0])
+            m_direction = avaibleButton[0][0];
+
+        // Si on a une information de sense de jeu on vérfie que la note est jouable dans ce sens sinon
+        // on change de sens. Si le sens de jeu n'est pas pécisé alors on affiche tout
+        if (m_direction != "")
+        {
+            // Si aucune possibilités n'est dans la direction actuelle on change de direction automatiquement
+            if (QString(avaibleButton[1][0]) != m_direction && QString(avaibleButton[0][0]) != m_direction)
+                m_direction = (m_direction == "p") ? "t" : "p";
+        }
 
         // Si on a pas précisé le rang
         if (m_rank.isEmpty())
@@ -70,9 +81,11 @@ void ButtonParser::set_rhs_note(QString str)
             // en trichant sur le contenu de m_bouton pour que la fonction print affiche de quoi
             else
             {
-               m_button = avaibleButton[0].remove(0,1) + "\" \\once \\override TextScript.color = #red \\" + m_direction + " \""  + avaibleButton[1].remove(0,1);
-               //throw std::logic_error(QString("Il y a deux possibilités pour la note " + m_note + "\n  1. " + avaibleButton[0] + "\n  2. " + avaibleButton[1] + "\nAjoutez une indication de rang. Par exemple : " + m_note + "/1").toStdString());
-                return;
+              m_direction = avaibleButton[0][0];
+              QString d2( avaibleButton[1][0]);
+
+              m_button = avaibleButton[0].remove(0,1) + "\" \\once \\override TextScript.color = #red \\" +  d2 + " \""  + avaibleButton[1].remove(0,1);
+              return;
             }
         }
         // Si on a précisé le rang

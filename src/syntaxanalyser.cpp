@@ -13,14 +13,14 @@ SyntaxAnalyser::SyntaxAnalyser()
     fingering_rgx.setPattern("/([a-zA-Z]+|\\d)");
     closeChord_rgx.setPattern(">(:\\d{1,2})?\\.?~?");                                           // matches close chord e.g. >, >:2
     openChord_rgx.setPattern("[ptPT]?<");
-    note_rgx.setPattern("\\$?[ptPT]?[a-g]{1}(is|es)?(,|'){0,2}(/[123])?(:\\d{0,2}.?)?(/[123])?~?");    // matches a to g gis ges bes cis ces a, b, c', d', d'', d'':2.
+    note_rgx.setPattern("\\$?[ptPT]?[a-g]{1}(is|es)?(,|'){0,3}(/[123])?(:\\d{0,2}.?)?(/[123])?~?");    // matches a to g gis ges bes cis ces a, b, c', d', d'', d'':2.
     metric_rgx.setPattern("\\d{1,2}/\\d{1,2}");                                                 // matches 3/4, 2/2, 6/8
 
     extractRankNote.setPattern("/(\\d)");
     extractRankButton.setPattern("('+)");
     extractDuration.setPattern(":(\\d{1,2}\\.?)");
     extractNumButton.setPattern("[ptPT]?(\\d{1,2}'{0,2})");
-    extractNote.setPattern("([a-g]{1}(is|es)?(,|'){0,2})");
+    extractNote.setPattern("([a-g]{1}(is|es)?(,|'){0,3})");
     extractDirection.setPattern("^([ptPT])");
     extractTie.setPattern("(~)");
 

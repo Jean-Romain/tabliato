@@ -61,6 +61,7 @@ void TabliatoProcessor::parseMusic()
     tabulature.replace(QRegExp(" +"), " ");    // Replace multiple spaces by a single space
 
     QStringList symbols = tabulature.split(" "); // Séparation du contenu à chaque espace pour analyser les éléments un par un
+    symbols.append("\n");
     QStringList parsedSymbolsMelody;             // Certain symboles vont dans la mélodie
     QStringList parsedSymbolsBass;               // Certain symboles vont dans l'accompagnement
 

@@ -5,24 +5,22 @@
 
 html { font-size: 100%; font-family: sans-serif; }
 
-body 
-{
-background: #EAEAEA;
-font-size:14px;
-color:#484848;
-margin:0;
-line-height: 1.4;
+body {
+	background: #EAEAEA;
+	font-size:14px;
+	color:#484848;
+	margin:0;
+	line-height: 1.4;
 }
 
-label
-{
-display: block;
-width: 65px;
-float: left;
+label {
+	display: block;
+	width: 65px;
+	float: left;
 }
 
-fieldset
-{
+
+fieldset {
 	border : 2px solid #e3e7ec;
 	background-color: #f8fafd;
 	margin-bottom : 12px;
@@ -34,8 +32,7 @@ fieldset
 	-webkit-border-radius : 8px;
 }
 
-legend
-{
+legend {
 	padding-left : 8px;
 	padding-right : 8px;
 	background-color : #DBE5F4;
@@ -98,7 +95,15 @@ a:visited {text-decoration:dashed;}
 p, pre { margin:1.5em 0;}
 p:first-child {margin-top:0}
 
-pre {color:white;background-color:black;padding:5px;font-family:Courier;font-size:15px}
+.hljs {
+border: 1px solid gray;
+border-radius:7px;
+margin-right:250px;
+}
+
+.hljs:hover {
+  border-color: #ff4754;
+}
 
 li {line-height: 1.7;}
 li p {margin-top:0}

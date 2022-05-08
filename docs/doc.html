@@ -7,8 +7,9 @@ title: Tutoriels
 	<li><a href="#Tabliato">Tabliato et Lilypond</a></li>
     <li><a href="#Interface">Interface graphique</a></li>
 	<li><a href="#Clef">Titre, armure, rythme, tempo</a></li>
+	<li><a href="#Bouttons">Écrire les boutons</a></li>
 	<li><a href="#Notes">Écrire les notes</a></li>
-	<li><a href="#Basses">Écrire les basses</a></li>
+	<li><a href="#Basses">Écrire l'accompagnement</a></li>
 	<li><a href="#Silence">Silences</a></li>
 	<li><a href="#Repetitions">Répétitions</a></li>
 	<li><a href="#Sauts">Changement de ligne</a></li>
@@ -25,7 +26,7 @@ title: Tutoriels
 
 <h2 id="Interface"><a href="#Top">Interface grahique</a></h2>
 
-L'interface graphique se divise en trois partie. À gauche des informations nécésaire pour chaque pièce (titre, métrique, rythme, tempo), au milieu le code Tabliato qui sera interprété en tablature et à droite le rendu final. Pour produire le rendu final, il faut cliquer sur le bouton « compiler » ce qui génère un fichier pdf et un fichier audio qui peut être lu dans Tabliato (module en bas à gauche).
+L'interface graphique se divise en trois partie. À gauche des informations nécessaire pour chaque pièce (titre, métrique, rythme, tempo), au milieu le code Tabliato qui sera interprété en tablature et à droite le rendu final. Pour produire le rendu final, il faut cliquer sur le bouton « compiler » ce qui génère un fichier pdf et un fichier audio qui peut être lu dans Tabliato (module en bas à gauche).
 
 	<p><img src="img/screen-tabliato.png" width = "775px"/></p>
 
@@ -36,93 +37,136 @@ L'interface graphique se divise en trois partie. À gauche des informations néc
 	<p><img src="img/doc-dock.png" /></p>
 	
 
-<h2 id="Notes"><a href="#Top">Écrire les notes</a></h2>
+<h2 id="Bouttons"><a href="#Top">Écrire les boutons</a></h2>
 
-	<p>Pour écrire une note il faut écrire son numéro suivi d'une apostrophe « ' » si c'est un bouton de la seconde rangée. </p>
+	<p>La façon la plus simple d'écrire une tablature est d'utiliser le nom des boutons. Pour écrire un bouton il faut écrire son numéro suivi d'une apostrophe « ' » si c'est un bouton de la seconde rangée. Pour indiquer si le sens de jeu est poussé ou tiré on ajoute un « p » ou un « t » devant la note. Exemple : 
 
-	<p>Pour indiquer si cette note est poussée ou tirée on ajoute un « p » ou un « t » devant la note. Exemple : 
-
-	<pre>p5'</pre>
+	<pre><code class="cpp">p5'</code></pre>
 
 	<p>Il n'est pas nécessaire de le répéter à chaque fois. Tant qu'on joue dans le même sens la lettre s'applique aux autres notes. Exemple :
 
-<pre>t7 8 7' 9 9 p6 7 6' 8 8</pre>
+	<pre><code class="cpp">t7 8 7' 9 9 p6 7 6' 8 8</code></pre>
 	
 	<p><img src="img/doc-exemple1.png" /></p>
 	
 	<p>La syntaxe est très libre: minuscule, majuscule avec ou sans espace. Tabliato détecte un 'p' ou un 't' et comprend que tout ce qui suit est poussé ou tiré.</p>
 
-	<p>Enfin il faut spécifier la durée de la note: ronde, blanche, noire, croche, etc.
-	Dans lilypond une ronde est notée 1, une blanche 2, une noire 4, une croche 8, etc. Dans tabliato, comme les chiffres sont déjà utilisés pour nommer les boutons il faut ajouter le symbole « : » suivi de la valeur pour ne pas que la durée soit interprétée comme une note. De même il n'est pas besoin de répéter cette valeur tant qu'elle ne change pas. Exemple : </p>
+	<p>Enfin il faut spécifier la durée de la note: ronde, blanche, noire, croche, etc.	Dans lilypond une ronde est notée 1, une blanche 2, une noire 4, une croche 8, etc. Dans tabliato, comme les chiffres sont déjà utilisés pour nommer les boutons il faut ajouter le symbole « : » suivi de la valeur pour ne pas que la durée soit interprétée comme un bouton. De même il n'est pas besoin de répéter cette valeur tant qu'elle ne change pas. Exemple : </p>
 
-	<pre>t7:4 8 7' 9:2 9:4 p6 7 6' 8:2 8:4</pre>
+	<pre><code class="cpp">t7:4 8 7' 9:2 9:4 p6 7 6' 8:2 8:4</code></pre>
 	
 	<p><img src="img/doc-exemple2.png" /></p>
 
 	<p>Pour les notes pointées, il suffit d'ajouter un point à la valeur du temps. Exemple :</p>
 
-	<pre>p5':4.</pre>
+	<pre><code class="cpp">p5':4.</code></pre>
 
 
-<h2 id="Basses"><a href="#Top">Écrire les basses</a></h2>
+<h2 id="Notes"><a href="#Top">Écrire les Notes</a></h2>
 
-	<p>Il y a 3 façons d'écrire l'accompagnement de la main gauche. La syntaxe automatique, semi-automatique et manuelle.</p> 
+	<p>L'autre façon d'écrire une tablature consiste à écrire les notes. Cette méthode est un peu plus compliquée car si à chaque bouton correspond une unique note, à chaque note peut correspondre plusieurs boutons sur différentes rangées ou dans différents sens de jeu. L'utilisateur doit donc faire des choix.</p>
 
-	<p>La syntaxe automatique est la plus simple il suffit d'écrire, pour chaque mesure, la lettre des accords (nomenclature anglaise
-	couramment utilisée en accordéon) et tabliato interprète automatiquement en fonction du motif rythmique de la pièce. Exemple :</p>
+	<p>Dans lilypond les notes s'écrivent avec la notation anglaisr c d e f g a b suivit de un ou plusieurs apostrophe « ' » pour indiquer l'octave. Pour obtenir un dièse ou un bécarre on ajoute a « is » ou « es » au nom de la note. Par example « cis'' » pour un do dièse deuxième octave.</p>
+
+	<p>Dans l'example suivant on écrit la game de do majeur. On voit que le rendu de la tablature est souvent rouge. Celà indique qu'il y a plusieurs options de jeu possible. En effet nous n'avons pas indiqué de sens de jeu ou de rang ainsi tabliato montre toutes les options tirées et pousées rang 1 et rang 2. On note cependant que le fa apparait noir en tiré sur le boutont 4' car c'est l'unique option.</p>
+
+	<pre><code class="cpp">c' d' e' f' t g' a' b' c''</code></pre>
+
+	<p><img src="img/doc-exemple2-1.png" /></p>
+
+	<p>Pour réduire le nombre d'options on peut commencer par indiquer un sens de jeu avec les lettres 'p' et 't'. Dans l'exemple suivant on indique qu'on veut jouer en poussé. Cependant ca ne change rien pour le fa et le la qui ne peuvent être joués que en tiré.<p>
+
+	<pre><code class="cpp">p c' d' e' f' t g' a' b' c''</code></pre>
+
+	<p><img src="img/doc-exemple2-2.png" /></p>
+
+    <p>Et voici en tiré :<p>
+
+	<pre><code class="cpp">t c' d' e' f' t g' a' b' c''</code></pre>
+
+	<p><img src="img/doc-exemple2-3.png" /></p>
+
+	<p>Il nous reste deux notes rouges car il y a deux options sur les rangs 1 et 2. Pour ce faire on ajoute une indication de rang avec « / »</p>
+
+	<pre><code class="cpp">t c' d' e' f' t g'/1 a'/1 b' c''</code></pre>
+
+	<p><img src="img/doc-exemple2-4.png" /></p>
+
+    <p>Un fois qu'on a indiqué un sens de jeu, cela s'applique à toutes les notes qui suivent jusqu'à ce qu'une autre indication soit rencontrée. La commande '\pt' permet d'annuler le sens de jeu pour réafficher toutes les options. Exemple:
+
+<pre><code class="cpp">t c' d' e' f' g'/1 a'/1 b' c''
+\pt c'' d'' e'' f'' g'' a'' b'' c'''</code></pre>
+
+	<p><img src="img/doc-exemple2-5.png" /></p>
+
+	<p>Les durées s'indiquent de la même façon avec le symbole « : » suivi de la valeur de la durée et il est tout à fait possible de mélanger nom de notes et nom de boutons.</p>
+
+<h2 id="Basses"><a href="#Top">Écrire l'accompagnement</a></h2>
+
+	<p>Pour chaque mesure l'accompagnement s'écrit entre crochets « [ ] ». Il y a 3 façons d'écrire l'accompagnement de la main gauche. La syntaxe automatique, semi-automatique et manuelle. Le but étant d'écrire le moins de symbole possible et de laisser tabliato interpréter automatiquement. </p> 
+
+	<p>La syntaxe automatique est la plus simple il suffit d'écrire, en majuscule et pour chaque mesure, la lettre des accords (nomenclature anglaise couramment utilisée en accordéon) et tabliato interprète automatiquement en fonction du motif rythmique de la pièce. Dans l'exemple suivant le motif choisit étant Basse accord accord:</p>
 		
-<pre>t7:4 8 7' A
+<pre><code class="cpp">t7:4 8 7' A
 9:2 9:4 A
 p6 7 6' G
-8:2 8:4 G</pre>
+8:2 8:4 G</code></pre>
 	
 	<p><img src="img/doc-exemple3.png" /></p>
 
+<p>Ici pas de crochets [ ] car les lettres majuscules ne peuvent pas être confondues avec autre chose donc tabliato « sait » qu'il s'agit de l'accompagment. Cependant écrire « [A] » fonctionne aussi.<p/> 
+
 	<p>La syntaxe automatique est très pratique puisqu'elle permet de n'écrire qu'une seule lettre et interprète automatiquement la correspondance rythmique. Cependant cette syntaxe est limitée et ne permet pas d'avoir des accords différents dans une même mesure. Dans ce cas la syntaxe semi-automatique permet un plus grande flexibilité. Exemple :</p>
 	
-<pre>t7:4 8 7' [A a f]
+<pre><code class="cpp">t7:4 8 7' [A a f]
 9:2 9:4 A
 p6 7 6' [G g e]
-8:2 8:4 G</pre>
+8:2 8:4 G</code></pre>
 
 	<p><img src="img/doc-exemple3-1.png" /></p>
 
-	<p>La syntaxe semi-automatique, dans de rares cas, ne suffit pas. Dans ce cas la syntaxe manuelle permet une liberté totale sans contrainte de motif. Exemple :</p>
+	<p>Ici les crochets sont nécéssaires car sinon a, f, g et e sont interprétés comme des notes dans la mélodie.<p/> 
+
+<p>La syntaxe semi-automatique interprète aussi plusieurs lettres majuscules comme étant plusieurs sous parties d'un même motif rythmique d'une même mesure. Dans l'exemple suivant, en 6/8 avec un motif rythmique « B aB a », à la mesure 1 on accompagne avec des la. Le A est interprété A aA a. Cependant à la mesure 2 [G A] n'est pas interprété « G gG gA aA a » mais bien « G gA a » car il s'agit d'une seule mesure. Notez que [G g A a] aurait donné le même résultat avec deux lettres en plus.</>
+
+<pre><code class="cpp">t8:8 8 8 8 6' 8 A
+p 8 6' 8 7':4 7':8 [G A]</code></pre>
+
+	<p><img src="img/doc-exemple3-21.png" /></p>
+
+	<p>La syntaxe semi-automatique, dans de rares cas, ne suffit pas. Dans ce cas la syntaxe manuelle permet une liberté totale sans contrainte de motif. Chaque lettre doit être suivie d'une durée. Exemple :</p>
 	
-<pre>t7:4 8 7' [A:2 a:4]
+<pre><code class="cpp">t7:4 8 7' [A:2 a:4]
 9:2 9:4 [A:8 a:8 a:8 A:8 a:4]
 p6 7 6' G
-8:2 8:4 [G:4 r2]</pre>
+8:2 8:4 [G:4 r2]</code></pre>
 
 	<p><img src="img/doc-exemple3-2.png" /></p>
+
+<p>Cette façon de faire et assez laborieuse et ne doit donc être utilisée que localement à des endroits spécifiques mais jamais sur une tablature complète.</p>
 
 <h2 id="Silence"><a href="#Top">Silences</a></h2>
 
 <p>Les silences s'écrivent « r » suivi de la durée, notifiée sur le même principe que les notes.</p>
 							
-<pre>t7:4 8 r A
+<pre><code class="cpp">t7:4 8 r A
 9:2 9:4 A
 p6 r:2 G
-8:2 8:4 G</pre>
+8:2 8:4 G</code></pre>
 
 	<p><img src="img/doc-exemple10.png" /></p>
-	
-	<p>Il s'agit d'un cas particulier où il n'est pas nécessaire d'écrire la durée avec « : ». Cependant la syntaxe suivante est tout
-	aussi correcte :</p>
-	
-<pre>r:1 r:2 r:4 r:8 r:16 r:32 r:64 r:128</pre>
 
 <h2 id="Repetitions"><a href="#Top">Les répétitions</a></h2>
 
 	<p>Les répétitions s'indiquent avec le mot clé « \repeat volta » suivi du nombre de répétitions : </p>
 
-<pre>\repeat volta 2
+<pre><code class="cpp">\repeat volta 2
 {
 t7:4 8 7' A
 9:2 9:4 A
 p6 7 6' G
 8:2 8:4 G
-}</pre>
+}</code></pre>
 
 	<p><img src="img/doc-exemple5.png" /></p>
 
@@ -132,18 +176,17 @@ p6 7 6' G
 	<p>Une fin alternative s'écrit comme suit : on indique qu'il va y avoir une répétition puis on omet la dernière mesure que l'on place dans \alternative.
 	S'il y a trois répétitions on peut bien sûr mettre trois alternatives.</p>
 	
-<pre>\repeat volta 2
+<pre><code class="cpp">\repeat volta 2
 {
 t7:4 8 7' A
 9:2 9:4 A
 p6 7 6' G
-
 }
 \alternative
 {
   { p8:2 8:4 G }
   { 8:2 t7:4 G }
-}</pre>
+}</code></pre>
 
 	<p><img src="img/doc-exemple7.png" /></p>
 
@@ -152,25 +195,25 @@ p6 7 6' G
 	<p>Si la mise en page automatique ne vous convient pas, vous pouvez forcer un retour à la ligne en ajoutant le mot \break. 
 	Dans ce cas la ligne va occuper toute la place disponible même si elle est courte :</p>
 
-<pre>t7:4 8 7' A
+<pre><code class="cpp">t7:4 8 7' A
 9:2 9:4 A
 
 \break
 
 p6 7 6' G
-p8:2 8:4 G</pre>
+p8:2 8:4 G</code></pre>
 
-	<p><img src="img/doc-exemple6.png" width = "775px" /></p>
+	<!-- <p><img src="img/doc-exemple6.png" width = "775px" /></p> -->
 	
 <h2 id="Anacrouse"><a href="#Top">Mesure incomplète, anacrouse</a></h2>
 
-	<p>Le mesures incomplètes s'annoncent avec le mot clé « \partial » suivi du nombre de temps. Les accords doivent alors être en syntaxe manuelle car la mesure est incomplète :</p>
+	<p>Le mesures incomplètes s'annoncent avec le mot clé « \partial » suivi du nombre de temps. L'accompagnement doit alors être en syntaxe manuelle car la mesure est incomplète et ne peut/doit pas être interprétée avec le motif rythmique. Ici un A sur une noire pour l'exemple mais en général on trouvera plutôt un silence :</p>
 
-<pre>\partial 2*8 p7:8 7:8 [A:4]
+<pre><code class="cpp">\partial 2*8 p7:8 7:8 [A:4]
 t7:4 8 7' A
 9:2 9:4 A
 p6 7 6' G
-p8:2 8:4 G</pre>
+p8:2 8:4 G</code></pre>
 
 	<p><img src="img/doc-exemple4.png" /></p>
 
@@ -178,19 +221,19 @@ p8:2 8:4 G</pre>
 	
 	<p>Les liaisons de prolongation s'écrivent avec un « ~ » :</p>
 	
-<pre>t7:4 8 7' A
+<pre><code class="cpp">t7:4 8 7' A
 9:2 ~ 9:4 A
 p6 7 6' G
-p8:2 8:4 G</pre>
+p8:2 8:4 G</code></pre>
 
 	<p><img src="img/doc-exemple8.png" /></p>
 	
 	<p>Les liaisons d'articulation et de phrasé s'écrivent avec des parenthèses :</p>
 	
-<pre>t7:4 8 7' A
+<pre><code class="cpp">t7:4 8 7' A
 ( 9:2 ) 9:4 A
 p6 7 ( 6' ) G
-p8:2 8:4 G</pre>
+p8:2 8:4 G</code></pre>
 
 	<p><img src="img/doc-exemple9.png" /></p>
 
@@ -198,52 +241,63 @@ p8:2 8:4 G</pre>
 
 Certaines pièces ont des rythmes particuliers qui n'existent pas dans le menu déroulant des rythmes. Dans ce cas écrire le rythme pour chaque mesure avec la syntaxe manuelle s'avère extrêmement laborieux. La commande « \motif » permet de définir ses propres rythmes. Dans l'exemple suivant une basse sur une noire pointée et deux accords sur deux noires.
 
-<pre>\motif [B:4. a:4 a:4]
+<pre><code class="cpp">\motif [B:4. a:4 a:4]
 
 t8:8 6' 7 8 6' 7 6':16 8 A
 7':4 7:8 7':4 7' D
 7':8 9 8' 9 7' 8  7' G
 p7':4 t8':8 p7':4 7' C
-</pre>
+</code></pre>
 
-	<p><img src="img/doc-exemple11.png" /></p>
+
+<p><img src="img/doc-exemple11.png" /></p>
+
+<p>On trouve parfois des pièces avec des basses tenues sur toute la mesure. Ceci ne se trouve pas non plus dans le menu déroulant. On peut employer la commande de motif dans ce cas aussi.<p>
+
+<pre><code class="cpp">\motif [B:2.]
+t8:8 8 8 8 6' 8 A
+p 8 6' 8 7':4 7':8 G
+</code></pre>
+
+	<p><img src="img/doc-exemple11-2.png" /></p>
 	
 <h2 id="Plus"><a href="#Top">Aller plus loin</a></h2>
 
-	<p>Tout ce que le logiciel lilypond sait faire tabliato doit svoir le faire aussi car sous le capos c'est lilypond qui génère le rendu. Je ne l'ai personnellement jamais utilisé ni vu utilisé sur des tablatures d'accordéon diatonique qui sont en général des partitions très simples. Pour écrire des choses plus complexes veuillez vous référer à la 
+	<p>Tout ce que le logiciel lilypond sait faire tabliato doit savoir le faire aussi car sous le capos c'est lilypond qui génère le rendu. Je ne l'ai personnellement jamais utilisé ni vu utilisé sur des tablatures d'accordéon diatonique qui sont en général des partitions très simples. Pour écrire des choses plus complexes veuillez vous référer à la 
 	<a href="http://www.lilypond.org/manuals.fr.html">documentation de Lilypond</a>. Par exemple nous pouvons controler les associations de notes.</p>
 
-<pre>\motif [B:4. a:4 a:4]
+<!-- <pre><code class="cpp">\motif [B:4. a:4 a:4]
 
 t8:8 6' 7 8 6' 7 6':16 8 A
 7':4 7:8 7':4 7' D
 7':8 9 8' 9 7' 8  7' G
 p7':4 t8':8 p7':4 7' C
-</pre>
+</code></pre>
 
-	<p><img src="img/doc-exemple12.png" /></p>
+	<p><img src="img/doc-exemple12.png" /></p>-->
 
-<pre>\motif [B:4. a:4 a:4]
+<pre><code class="cpp">\motif [B:4. a:4 a:4]
 
+\set Timing.beamExceptions=#'()
 \set Timing.beatStructure=3,3,2
 
 t8:8 6' 7 8 6' 7 6':16 8 A
 7':4 7:8 7':4 7' D
 7':8 9 8' 9 7' 8  7' G
 p7':4 t8':8 p7':4 7' C
-</pre>
+</code></pre>
 
 	<p><img src="img/doc-exemple11.png" /></p>
 
 <p>Nous pouvons aussi écrire des triolets avec « \tuplet 3/2 »</p>
 
-<pre>\set Timing.beamExceptions=#'()
+<pre><code class="cpp">\set Timing.beamExceptions=#'()
 \set Timing.beatStructure=1,1,1
 
 t8:4 8' 9 F
 p8:4 \tuplet 3/2 { 6':8 8 6' } \tuplet 3/2 { 7 6' 7 } E
 t7:8 5 7 6' 8 7' A
-</pre>
+</code></pre>
 
 	<p><img src="img/doc-triolet.png" /></p>
 

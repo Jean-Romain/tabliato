@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tabliato>
-    <propertie time="6/8" key="c \major" tempo="4.=100" instrument="" tagline="\tabliato" title="Tarentelle" motif="11" subtitle="Trad. Italie" accordion="ctl1gc" rythm="B aB a" displayFingering="auto" composer="" poet="" system="cadb"/>
+    <propertie displayFingering="auto" time="6/8" key="c \major" rythm="B aB a" poet="" composer="" title="Tarentelle" subtitle="Trad. Italie" accordion="ctl1gc" system="cadb" motif="11" instrument="" tagline="\tabliato" tempo="4.=100"/>
     <tabulature>\repeat volta 2
 {
 t5:8 7 6' 8 6' 8 A
-p 8 6' 7 t8:4 7:8 [G g A a]
-5 7 8 p7:4 7:8 [A a E e]
+p 8 6' 7 t8:4 7:8 [G A]
+5 7 8 p7:4 7:8 [A E]
 }
 \alternative
 {
-  { p8 6' 7 t8:4 7:8 [E e A a] }
-  { p8 6' 7 t7:4. [E e A a] }
+  { p8 6' 7 t8:4 7:8 [E A] }
+  { p8 6' 7 t7:4. [E A] }
 }
 
 \break
@@ -19,17 +19,16 @@ p 8 6' 7 t8:4 7:8 [G g A a]
 {
 t11:4 11:8 t9:4 9:8 A
 t11:4 11:8 t9:4 9:8 A
-9 7' 9 t8':4 8':8 [A a F f]
-8' p8' t8' p7':4. [F f C c]
+9 7' 9 t8':4 8':8 [A F]
+8' p8' t8' p7':4. [F C]
 
 \break
 
-p7':8 t8' p7' 7':4 8:8 [C c G g]
-8 t9 p8 t8:4 8:8 [G g A a]
-t8:8 p8 t8 p7 t7 p7 [A a G g]
-8 6' 7 t7:4. [E e A a]
+p7':8 t8' p7' 7':4 8:8 [C G]
+8 t9 p8 t8:4 8:8 [G A]
+t8:8 p8 t8 p7 t7 p7 [A G]
+8 6' 7 t7:4. [E A]
 }
-
 </tabulature>
     <lyric></lyric>
 </tabliato>

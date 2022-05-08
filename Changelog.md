@@ -1,7 +1,7 @@
-## Tabliato 1.1.1
+## Tabliato 1.2.0
 
-- New: quand une note correspond à plusieurs bouttons possibles, c'est à dire quand l'utilisateur donne une note sans indication de rangée, toutes les possibilités sont affichées sur la tablature en rouge au lieu d'un message d'erreur.
-- Bug: correction du système d'écriture de tablature par note
+- New: le mode d'écriture par note plutôt que par bouton à été repensé, réparé et documenté. Plutôt que d'écire les boutons `p7' t8 ...` etc. il est aussi possible d'écrire les notes de musiques. Les correspondances muliples sont affichées sur la tabature. Quand une note correspond à plusieurs bouttons possibles, c'est à dire quand l'utilisateur donne une note sans indication de rangée ou de direction, toutes les possibilités sont affichées sur la tablature en rouge au lieu d'un message d'erreur.
+- New: la page de documentation a été modifiée pour ajouter une partie sur ce mode d'écriture.
 - Bug: tracking de la musique sur le rendu même si il n'y pas d'accompagnement main gauche.
 
 ## Tabliato 1.1.0

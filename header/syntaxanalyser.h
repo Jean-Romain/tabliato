@@ -53,6 +53,7 @@ class SyntaxAnalyser
 
         QRegExp extractRankButton;
         QRegExp extractRankNote;
+        QRegExp extractFinger;
         QRegExp extractDuration;
         QRegExp extractNumButton;
         QRegExp extractNote;

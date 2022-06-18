@@ -52,6 +52,7 @@ private:
      QTextCharFormat chordFormat;
      QTextCharFormat restFormat;
      QTextCharFormat bracketFormat;
+     QTextCharFormat fingeringFormat;
 
      QTextCharFormat m_formats[LastConstruct + 1];
 };

@@ -1027,7 +1027,7 @@ supplémentaires</string>
         <property name="geometry">
          <rect>
           <x>0</x>
-          <y>0</y>
+          <y>-80</y>
           <width>301</width>
           <height>208</height>
          </rect>
@@ -1083,16 +1083,6 @@ supplémentaires</string>
             <string>Afficher la ligne de doigtés</string>
            </property>
            <layout class="QHBoxLayout" name="horizontalLayout_10">
-            <item>
-             <widget class="QRadioButton" name="displayFingering_auto">
-              <property name="text">
-               <string>Auto</string>
-              </property>
-              <property name="checked">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
             <item>
              <widget class="QRadioButton" name="displayFingering_yes">
               <property name="text">

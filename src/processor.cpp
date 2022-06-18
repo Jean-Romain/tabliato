@@ -44,6 +44,8 @@ void TabliatoProcessor::parseMusic()
     QString tempo = m_tab->get("tempo");
     Timelines timeline(tempo);
 
+    m_tab->set("hasFingering", "false");
+
     // Protections préliminaires
     QString tabulature = m_tab->tabulature;
     tabulature.replace("\t", " ");             // Remplace les m_tabulations par des espaces
@@ -116,6 +118,12 @@ void TabliatoProcessor::parseMusic()
                 break;
             }
 
+            case FINGER:
+            {
+                m_tab->set("hasFingering", "true");
+                break;
+            }
+
             // Bouton main droite. On parse, on trouve la note, on génè le code lilypond
             // et en fonction de la durée on regarde si on doit ouvrir ou fermer des spanners
             case BUTTON:
@@ -141,6 +149,8 @@ void TabliatoProcessor::parseMusic()
 
                 parsed = button.print(m_rhs_markup);
                 parsed = insert_rhs_spanners(parsed);
+
+                if (button.finger() != "") m_tab->set("hasFingering", "true");
 
                 nnote++;
                 break;
@@ -393,6 +403,10 @@ void TabliatoProcessor::parseMusic()
                     CURRENTDIRECTION = "";
                     parsed = "";
                 }
+                else if (symbol == "\\finger")
+                {
+                    m_tab->set("hasFingering", "true");
+                }
 
                 break;
             }
@@ -519,7 +533,7 @@ void TabliatoProcessor::generateLilypondCode()
     QString lilypondCode;
 
     cadb = (m_tab->get("system") != "cadb") ? "f" : "t";
-    fingerDisplay = (m_tab->get("fingerDisplay") != "true") ? "f" : "t";
+    fingerDisplay = ((m_tab->get("displayFingering") == "true") && (m_tab->get("hasFingering") == "true")) ? "t" : "f";
     bassDisplay = (m_tab->bass != "") ? "t" : "f";
 
     QFile file(TEMPLATE + "/tabliato.ly");

@@ -2,22 +2,28 @@
 
 SyntaxAnalyser::SyntaxAnalyser()
 {
-    button_rgx.setPattern("\\$?[ptPT]?(\\d{1,2}'{0,2}){1}(:\\d{0,2})?\\.?~?");                  // matches a pressed button e.g. p4, p4, t5', p6:4, p6':4. t7':2~
-    comment_rgx.setPattern("%.*");                                                              // matches a latex comment e.g. % blablabla
-    direction_rgx.setPattern("[ptPT]");                                                         // matches a push/pull directive e.g. p, P, T
-    impliciteBass_rgx.setPattern("^[a-gA-G]{1}[mb#]?$");                                        // matches a left hand implicit pattern e.g. A, Am, G, Gb
-    expliciteBass_rgx.setPattern("[a-gA-G]{1}[mb#]?:?\\d{1,2}.?~?");                            // matches a left hand explicit pattern e.g. A:4 g:4 g:4
-    rest_rgx.setPattern("r(:?\\d{1,2}\\.?)?");                                                  // matches a rest symbol e.g. r, r4 r:4, r:4.
-    pushed_rgx.setPattern("^([pP]).*$");                                                        // matches a p or P at the begining
-    command_rgx.setPattern("\\\\\\w+");                                                         // matches \blabla
-    fingering_rgx.setPattern("/([a-zA-Z]+|\\d)");
-    closeChord_rgx.setPattern(">(:\\d{1,2})?\\.?~?");                                           // matches close chord e.g. >, >:2
+    // Detection du code d'indication de bouton. Liste de choses possible:
+    // p4, p4', t5', p6:4, p6':4. t7':2~ p6':2.\1~ p6':2.-1~
+    QString brgx = "\\$?[ptPT]?(\\d{1,2}'{0,2}){1}(:\\d{0,2})?\\.?((\\\\|-)\\d)?~?";
+    QString nrgx = "\\$?[ptPT]?[a-g]{1}(is|es)?(,|'){0,3}(/[123])?(:\\d{0,2}.?)?(/[123])?~?";
+
+    button_rgx.setPattern(brgx);                                        // matches a pressed button e.g. p4, p4', t5', p6:4, p6':4. t7':2~
+    comment_rgx.setPattern("%.*");                                      // matches a latex comment e.g. % blablabla
+    direction_rgx.setPattern("[ptPT]");                                 // matches a push/pull directive e.g. p, P, T
+    impliciteBass_rgx.setPattern("^[a-gA-G]{1}[mb#]?$");                // matches a left hand implicit pattern e.g. A, Am, G, Gb
+    expliciteBass_rgx.setPattern("[a-gA-G]{1}[mb#]?:?\\d{1,2}.?~?");    // matches a left hand explicit pattern e.g. A:4 g:4 g:4
+    rest_rgx.setPattern("r(:?\\d{1,2}\\.?)?");                          // matches a rest symbol e.g. r, r4 r:4, r:4.
+    pushed_rgx.setPattern("^([pP]).*$");                                // matches a p or P at the begining
+    command_rgx.setPattern("\\\\\\w+");                                 // matches \blabla
+    fingering_rgx.setPattern("(\\\\|-)\\d");
+    closeChord_rgx.setPattern(">(:\\d{1,2})?\\.?~?");                   // matches close chord e.g. >, >:2
     openChord_rgx.setPattern("[ptPT]?<");
-    note_rgx.setPattern("\\$?[ptPT]?[a-g]{1}(is|es)?(,|'){0,3}(/[123])?(:\\d{0,2}.?)?(/[123])?~?");    // matches a to g gis ges bes cis ces a, b, c', d', d'', d'':2.
-    metric_rgx.setPattern("\\d{1,2}/\\d{1,2}");                                                 // matches 3/4, 2/2, 6/8
+    note_rgx.setPattern(nrgx);                                          // matches a to g gis ges bes cis ces a, b, c', d', d'', d'':2.
+    metric_rgx.setPattern("\\d{1,2}/\\d{1,2}");                         // matches 3/4, 2/2, 6/8
 
     extractRankNote.setPattern("/(\\d)");
     extractRankButton.setPattern("('+)");
+    extractFinger.setPattern("((\\\\|-)\\d)");
     extractDuration.setPattern(":(\\d{1,2}\\.?)");
     extractNumButton.setPattern("[ptPT]?(\\d{1,2}'{0,2})");
     extractNote.setPattern("([a-g]{1}(is|es)?(,|'){0,3})");

@@ -22,6 +22,8 @@ Highlighter::Highlighter(QTextDocument *parent) : QSyntaxHighlighter(parent)
     // Format des crochets
     bracketFormat.setForeground(QColor(122, 0, 157));
 
+    fingeringFormat.setForeground(QColor(73, 144, 0));
+
     // Pattern de reconnaissance des informations de temps
     QStringList timePatterns;
     timePatterns << "(:[0-9]{1,2}.?)" << "\\s\\d{1,2}/\\d{1,2}" << "\\s\\d{1,2}\\*\\d{1,2}" << "\\\\partial ([0-9]{1,2}\\.? )";
@@ -75,6 +77,11 @@ Highlighter::Highlighter(QTextDocument *parent) : QSyntaxHighlighter(parent)
     // Pattern de reconnaissance des commentaires
     rule.pattern = QRegExp("%[^\n]*");
     rule.format = commentFormat;
+    highlightingRules.append(rule);
+
+    // Pattern de reconnaissance des notations de doigté
+    rule.pattern = QRegExp("(\\\\|-)[1-5]+");
+    rule.format = fingeringFormat;
     highlightingRules.append(rule);
 
     QTextCharFormat entityFormat;

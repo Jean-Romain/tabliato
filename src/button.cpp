@@ -39,8 +39,6 @@ void ButtonParser::set_rhs_note(QString str)
     // Trouve tous les boutons qui font cette note
     avaibleButton = kbd->getButtons(m_note);
 
-    qDebug() << avaibleButton;
-
     // Si il n'y a qu'une option c'est facile
     if (avaibleButton.length() == 1)
     {
@@ -119,6 +117,7 @@ void ButtonParser::set_rhs_note(QString str)
 void ButtonParser::set_rhs_button(QString str)
 {    
     m_side = RHS;
+    m_finger = "";
     m_duration = CURRENTDURATION;
     m_direction = CURRENTDIRECTION;
 
@@ -140,6 +139,9 @@ void ButtonParser::set_rhs_button(QString str)
 
     if (extractDirection.indexIn(str) >= 0)
         m_direction = extractDirection.cap(1);
+
+    if (extractFinger.indexIn(str) >= 0)
+        m_finger = extractFinger.cap(1);
 
     extractRankButton.indexIn(str);
 
@@ -191,7 +193,7 @@ QString ButtonParser::print(bool markup)
         if (!m_button.isEmpty() && markup)
             btn = " \"" + m_button + "\" ";
 
-        return dir + btn + m_note + m_duration;
+        return dir + btn + m_note + m_duration + m_finger;
     }
     else
     {

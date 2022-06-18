@@ -39,6 +39,7 @@ public:
     QString button() { return m_button; }
     QString rank() { return m_rank; }
     QString note() { return m_note; }
+    QString finger() { return m_finger; }
     Side side() { return m_side; }
 };
 

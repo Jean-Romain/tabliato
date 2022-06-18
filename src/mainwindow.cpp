@@ -294,9 +294,7 @@ void MainWindow::updateUIFromMusic(Tabulature tab)
     else
         ui->cadb_radio->setChecked(true);
 
-    if(tab.get("displayFingering") == "auto")
-        ui->displayFingering_auto->setChecked(true);
-    else if(tab.get("displayFingering") == "true")
+    if ((tab.get("displayFingering") == "true") || (tab.get("displayFingering") == "auto"))
         ui->displayFingering_yes->setChecked(true);
     else
         ui->displayFingering_no->setChecked(true);
@@ -323,14 +321,12 @@ Tabulature MainWindow::readMusicFromUI()
     tab.set("accordion", accordionList.value(ui->accordion_comboBox->currentText()));
     //tab.setFilePath(currentOpenedFile);
 
-    if(ui->cadb_radio->isChecked())
+    if (ui->cadb_radio->isChecked())
         tab.set("system", "cadb");
     else
         tab.set("system", "cogeron");
 
-    if(ui->displayFingering_auto->isChecked())
-        tab.set("displayFingering", "auto");
-    else if(ui->displayFingering_yes->isChecked())
+    if (ui->displayFingering_yes->isChecked())
         tab.set("displayFingering", "true");
     else
         tab.set("displayFingering", "false");
@@ -932,8 +928,8 @@ void MainWindow::download_soundfonts(QString name)
 
 void MainWindow::goto_line(int line)
 {
-    int offset1 = 268;
-    int offset2 = 307;
+    int offset1 = 269;
+    int offset2 = 309;
     int nline = ui->melodie_textarea->document()->blockCount();
     int ln = (line - offset1 <= nline) ? line - offset1 : line - offset2 - nline + 1;
     QTextCursor cursor(ui->melodie_textarea->document()->findBlockByLineNumber(ln)); // ln-1 because line number starts from 0
@@ -942,8 +938,8 @@ void MainWindow::goto_line(int line)
 
 void MainWindow::highlight_notes_from_current_line_in_pdf()
 {
-    int offset1 = 268;
-    int offset2 = 307;
+    int offset1 = 269;
+    int offset2 = 309;
     int line = ui->melodie_textarea->textCursor().blockNumber();
     int nline = ui->melodie_textarea->document()->blockCount();
     int line1 = line + offset1;

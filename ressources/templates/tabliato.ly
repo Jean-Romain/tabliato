@@ -223,9 +223,10 @@ up =
   'text ( markup #:fontsize -1.5 button))
 )
 
-fngr =
+finger =
 #(define-event-function (parser location finger) (string?)
-  (make-music 'StrokeFingerEvent 'text finger)
+  (make-music 'StrokeFingerEvent 'text 
+    (markup #:line (#:circle (#:finger finger))))
 )
 
 %=================
@@ -331,7 +332,7 @@ graceSettings = \with
     (Voice AccidentalCautionary font-size -4)
     (Voice Slur direction ,DOWN)
     (Voice Script font-size -3)
-    (Voice Fingering font-size -8)
+    (Voice Fingering font-size -6)
     (Voice StringNumber font-size -8)
     (Voice TextScript font-size -3)
   ) 
@@ -339,19 +340,27 @@ graceSettings = \with
 
 diatoStaffSetup = \with 
 {
+\override TextScript #'stencil = ##f
+\override TextSpanner #'stencil = #point-stencil
+\override TextSpanner #'to-barline = ##t  
+\override StrokeFinger #'font-name = #'"LilyPond Serif"
+\override StrokeFinger #'font-series = #'italic
+
+
+#(if (not fingerDisplay)
+#{ 
+\override StringNumber #'stencil = ##f
 \override StringNumber #'text = #point-stencil
 \override Fingering #'stencil = #point-stencil
 \override StrokeFinger #'stencil = ##f
-\override TextScript #'stencil = ##f
-\override StringNumber #'stencil = ##f
-\override TextSpanner #'stencil = #point-stencil
-\override TextSpanner #'to-barline = ##t
+#}
+)
 
 \graceSettings
 }
 
-diatoFingeringSetup = \with 
-{
+%diatoFingeringSetup = \with 
+%{
   \remove "Time_signature_engraver"
 
   \override StaffSymbol #'line-count = #0
@@ -384,7 +393,10 @@ diatoFingeringSetup = \with
   \override StrokeFinger #'font-size = #-3
   \override StrokeFinger #'padding = #10
   \override StrokeFinger #'self-alignment-X = #-.5
-}
+  \override StrokeFinger #'font-name = #'"LilyPond Serif"
+  \override StrokeFinger #'font-series = #'italic
+  \override VerticalAxisGroup #'staff-staff-spacing =  #'(('basic-distance  . 0) (minimum-distance . 5) (padding . 2) (stretchability . 0))
+%}
 
 diatoButtonSetup = \with
 {
@@ -476,15 +488,12 @@ diatoBassSetup = \with
     %\override StaffGroup.SystemStartBracket #'transparent = ##t
     
     %\new Staff \with { \diatoStaffSetup } << \key c \major \transpose \scoreIn \scoreOut \melody >>  
-    \new Staff \with { \diatoStaffSetup } << \melody \addlyrics{\paroles} >>  
+    \new Staff \with { \diatoStaffSetup } << \melody \addlyrics{\paroles} >>
     
     \new DrumStaff \with { \diatoButtonSetup } << \tabulature >> 
     
     #(if bassDisplay 
        #{ \new DrumStaff \with { \diatoBassSetup } << \bass >> #})
-     
-    #(if fingerDisplay 
-       #{\new Staff \with { \diatoFingeringSetup } << \melody >> #}) 
    
   >>
   

@@ -1,3 +1,8 @@
+## Tabliato 1.3.0
+
+- New: support d'ajout d'indications de doigté
+- Doc: ajout d'une section sur les indications doigté dans la documentation.
+
 ## Tabliato 1.2.0
 
 - New: le mode d'écriture par note plutôt que par bouton à été repensé, réparé et documenté. Plutôt que d'écire les boutons `p7' t8 ...` etc. il est aussi possible d'écrire les notes de musiques. Les correspondances muliples sont affichées sur la tabature. Quand une note correspond à plusieurs bouttons possibles, c'est à dire quand l'utilisateur donne une note sans indication de rangée ou de direction, toutes les possibilités sont affichées sur la tablature en rouge au lieu d'un message d'erreur.

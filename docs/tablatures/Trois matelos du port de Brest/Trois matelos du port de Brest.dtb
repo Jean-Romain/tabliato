@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tabliato>
+    <propertie displayFingering="true" title="Trois matelos du port de Brest" system="cadb" motif="22" time="4/4" accordion="ctl1gc" composer="" key="c \major" tempo="4=160" instrument="" poet="" rythm="B a B a " subtitle="" tagline=""/>
+    <tabulature>\repeat volta 2
+{
+p8:4 \finger "a" 6':8 7 t7:4. \finger "m"  5:8 \finger "i" [G A]
+t7:4 \finger "m" p7 t8 p7 [A:4 G:4 F:4 E:4]
+8 6':8 7 t7:4. 5:8 [G A]
+t7:4 p7 t8 p7 [A:4 G:4 F:4 E:4]
+}
+
+\break
+
+\repeat volta 2
+{
+t7:4 6':8 8 p7:4 6':8 8 [A G]
+7':4 7' 8:8 6' 7:4 [C E]
+t7' 6':8 8 p7:4 6':8 8 [A G]
+6':4 7 t7:2 [F:4 E:4 A:4 a:4]
+}
+</tabulature>
+    <lyric></lyric>
+</tabliato>

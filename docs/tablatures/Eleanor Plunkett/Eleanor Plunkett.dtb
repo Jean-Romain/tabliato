@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tabliato>
+    <propertie composer="Turlough O'Carolan" motif="3" rythm="B a a " subtitle="Trad. Irlandais" title="Eleanor Plunkett" tempo="4=100" instrument="" time="3/4" accordion="ctl1gc" key="c \major" poet="" displayFingering="true" system="cadb" tagline="\tabliato"/>
+    <tabulature>\partial 8*3 p4:8 3' 5 [r:4.]
+
+\repeat volta 2
+{
+  p 4':4 4' 5:8 3' C
+  3':2 6':8 7 C
+  t7:4 7 7:8 p6 F
+  p4':2 5:8 3' C
+  t3:4 3' 3':8 5 D
+}
+\alternative
+{
+  { p5:2 3':8 5 G }
+  { p5:2 6':8 8 G }
+}
+
+\break
+
+\repeat volta 2
+{
+  p7':4 8:8 6' t7 p6 [C c g]
+  t7:2 6':4 A
+  t8 8 9 F
+  p8 7':8 8 6' 7 G
+  t8:4 7':8 8 6' 7 F
+  p6:4 4' 6 E
+  t7 8 4 F
+  p4':2 5:8 3 C
+  t3:4 3' 3':8 5 D
+}
+\alternative
+{
+  { p5:2 6':8 8 G }
+  { p5:2. G }
+}
+</tabulature>
+    <lyric></lyric>
+</tabliato>

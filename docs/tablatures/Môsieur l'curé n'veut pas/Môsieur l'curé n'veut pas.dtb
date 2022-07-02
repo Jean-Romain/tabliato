@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tabliato>
-    <propertie composer="" accordion="ctl1gc" key="g \major" motif="22" rythm="B a B a " poet="" instrument="" subtitle="" tempo="4=240" system="cadb" tagline="\tabliato" displayFingering="auto" time="4/4" title="Môsieur l'curé n'veut pas"/>
+    <propertie composer="" displayFingering="true" key="g \major" accordion="ctl1gc" motif="22" poet="" instrument="" tempo="4=240" rythm="B a B a " system="cadb" subtitle="" title="Môsieur l'curé n'veut pas" tagline="\tabliato" time="4/4"/>
     <tabulature>\repeat volta 2
 {
 p7:2 7:4. t7:8 G
@@ -35,7 +35,7 @@ Mais il ne dé -- fend pas
 Que les filles em -- brassent les gars!
 
 Monsieur l’curé n’veut pas
-Que les gard embrassent les filles
+Que les gars embrassent les filles
 Mais Monsieur l’maire a dit
 D’les embrasser malgré lui! 
 

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tabliato>
+    <propertie composer="Trad. Breton" motif="2" instrument="" tempo="4=80" title="Rouanez Karet en Arvor" key="g \major" system="cadb" displayFingering="true" accordion="ctl1gc" rythm="B a (binaire)" tagline="\tabliato" poet="" subtitle="Cantique à Sainte Anne" time="6/8"/>
+    <tabulature>\motif [B:4 r:8 B:4 r:8]
+
+p5:8 6 t7 p7 t7 8 [G E] 
+p7:4. 6 [E G]
+p7:8 t7 p6 t5:4 p5:8 [E D]
+p6:4. ~ p6:4 r:8 [G:2.]
+
+\break
+
+p5:8 6 t7 p7 t7 8 [G E] 
+p7:4. 6 [E G]
+p7:8 t7 p6 t5:4 p5:8 [E D]
+p6:4. ~ p6:4 r:8 [G:2.]
+
+\break
+
+p6:8 7 t8 p8:4 8:8 [G C]
+t8:4 p7:8 t7:4. [F D]
+p8:8 8 6 t8:4 p7:8 [C F]
+t7:2. [A:2.]
+
+\break
+
+p5:8 6 t7 p7 t7 8 [G E] 
+p7:4. 6 [E G]
+p7:8 t7 p6 t5:4 p5:8 [E D]
+p6:2. [G:2.]
+</tabulature>
+    <lyric></lyric>
+</tabliato>

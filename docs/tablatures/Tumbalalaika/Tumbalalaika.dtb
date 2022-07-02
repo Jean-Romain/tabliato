@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tabliato>
+    <propertie composer="Trad. juif ashkénaze russe" instrument="" poet="" tagline="\tabliato" tempo="4=150" time="3/4" key="c \major" rythm="B a a " displayFingering="true" title="Tumbalalaika" system="cadb" accordion="ctl1gc" motif="3" subtitle=""/>
+    <tabulature>t5:2 5:4 A
+t5:2 5:4 A
+5 3' 4 A
+p4:2. E
+5:2 5:4 E
+5:2 5:4 E
+p5 3' 4 E
+t3:2. A
+
+\break
+
+3:4 4 5 A
+7:2. F
+8:4 6' 7 F
+p4':2. C
+5:4 t 4' 3' [C d d]
+p4:2. E
+p5:4 3' 4 E
+t3:2. A
+
+\break
+
+
+3:4 4 5 A
+7:2. F
+8:4 6' 7 F
+p4':2. C
+5:4 t 4' 3' [C d d]
+p4:2. E
+p5:4 3' 4 E
+t3:2. ~ A
+t3:2. A
+</tabulature>
+    <lyric></lyric>
+</tabliato>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tabliato>
-    <propertie time="3/4" key="c \major" tempo="4=130" instrument="" tagline="\tabliato" title="Valse Israëlienne" motif="3" subtitle="" accordion="ctl1gc" rythm="B a a " displayFingering="auto" composer="" poet="" system="cadb"/>
+    <propertie instrument="" subtitle="" tagline="\tabliato" tempo="4=130" key="c \major" accordion="ctl1gc" poet="" system="cadb" composer="" title="Valse Israëlienne" time="3/4" motif="3" rythm="B a a " displayFingering="true"/>
     <tabulature>\repeat volta 2
 {
 t9:4. 8':8 9 8
@@ -22,6 +22,8 @@ E E E A
 
 \break
 
+\repeat volta 2
+{
 t7:4 8 9
 9':2 9':4
 p9':4 t10' 9'
@@ -33,28 +35,18 @@ A F F C
 
 p8':4 t8' 7'
 6':2 6':4
-7':4 8 7'
-p7' 6' 7
 
-[C g g] G G C
+[C g g] G 
+}
+\alternative
+{
+  { t7':4 8 7' G
+    p7' 6' 7  C }
+  { p8:4 6' 7 E
+    t7:2. A }
+}
 
-\break
 
-t7 8 9
-9':2 9':4
-p9':4 t10' 9'
-p7':2 7':4
-
-A F F C
-
-\break
-
-8':4 t8' 7'
-6':2 6':4
-p8:4 6' 7
-t7:2.
-
-[C g g] G E A
 </tabulature>
     <lyric></lyric>
 </tabliato>

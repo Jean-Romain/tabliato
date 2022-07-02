@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tabliato>
-    <propertie time="6/8" key="c \major" tempo="4.=100" instrument="" tagline="\tabliato" title="Marche 125" motif="11" subtitle="" accordion="ctl1gc" rythm="B aB a" displayFingering="auto" composer="" poet="" system="cadb"/>
+    <propertie composer="" tagline="\tabliato" displayFingering="true" tempo="4.=100" key="g \major" instrument="" motif="11" poet="" subtitle="" system="cadb" accordion="ctl1gc" time="6/8" title="Marche 125" rythm="B aB a"/>
     <tabulature>\repeat volta 2
 {
 p5:4 8:8 7 6 5 G

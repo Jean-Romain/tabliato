@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tabliato>
+    <propertie poet="" tempo="4=150" tagline="\tabliato" displayFingering="false" subtitle="Gigue Irlandaise" instrument="" accordion="ctl1gc" composer="" key="g \major" title="Porth Mhuirgheasa" time="6/8" motif="11" system="cadb" rythm="B aB a"/>
+    <tabulature>\repeat volta 2
+{
+t3:8 3 3 5 3 5 A
+3 5 3 p5 4 3 [A G]
+t3 3 3 5 3 5 A
+p6 t6 5 p5 4 3 [G d E e]
+
+t3 3 3 5 3 5 A
+3 5 3 p5 4 3 [A G]
+3' 3' 3' t2' p 3' t3' [C G]
+p4' t3' p3' t2' 3 p3 [C c D g]
+}
+
+\break
+
+t5 7 7 p7 t7 7 [A E]
+p8 t7 7 p7 t7 p6 [F G]
+t5 7 7 p7 t7 7 [A a E a]
+p8:4 t8:8 p7 t7 p6 [F G]
+
+t5 7 7 p7 t7 7 [A a E a]
+p8 t7 7 p7 t7 p6 [F G]
+t8 p7 t7 p6:4 5:8 [A G]
+t5 p5 t4 p4 t3 p3 [D E]
+
+t5 7 7 p7 t7 7 [A E]
+p8 t7 7 p7 t7 p6 [F G]
+t5 7 7 p7 t7 7 [A a E a]
+p8:4 t8:8 p7 t7 p6 [F G]
+
+p6':4. 6':8 t6' 5' [C c C g]
+p5' t5' 6' p6':4 5':8 [C g C c]
+t7 p6 t6 p6:4 5:8 [D G]
+t5 p5 t4 p4 t3 p3 [D E]</tabulature>
+    <lyric></lyric>
+</tabliato>

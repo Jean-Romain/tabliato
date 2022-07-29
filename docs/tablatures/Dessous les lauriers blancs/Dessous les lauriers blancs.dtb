@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tabliato>
-    <propertie system="cadb" instrument="" accordion="ctl1gc" composer="Trad." displayFingering="auto" motif="22" poet="" subtitle="Hanter dro" tagline="\tabliato" key="c \major" rythm="B a B a " tempo="4=150" time="4/4" title="Dessous les lauriers blancs"/>
-    <tabulature>\repeat volta2 
+    <propertie rythm="B a B a " accordion="ctl1gc" poet="" tagline="\tabliato" motif="22" subtitle="Hanter dro" composer="Trad." system="cadb" instrument="" key="c \major" title="Dessous les lauriers blancs" displayFingering="true" tempo="4=150" time="4/4"/>
+    <tabulature>\repeat volta 2 
 { 
  t7:4 6':8 8 7:4 p6:4 [A a A e]
  t7:2 7:4 6':8 8 A

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tabliato>
-    <propertie tagline="\tabliato" tempo="2=120" accordion="ctl1gc" poet="" subtitle="" title="Bella Ciao" key="c \major" system="cadb" time="2/2" instrument="" motif="22" composer="Trad. Italien" rythm="B a B a " displayFingering="auto"/>
+    <propertie rythm="B a B a " accordion="ctl1gc" poet="" tagline="\tabliato" motif="22" subtitle="" composer="Trad. Italien" system="cadb" instrument="" key="c \major" title="Bella Ciao" displayFingering="true" tempo="2=120" time="2/2"/>
     <tabulature>\partial 4*3 t5:4 7 6' [a:8 r:8 A:8 r:8 a:8 r:8]
 
 \repeat volta 2

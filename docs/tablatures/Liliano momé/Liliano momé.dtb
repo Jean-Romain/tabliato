@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tabliato>
-    <propertie tagline="\tabliato" subtitle="Traditionnel bulgare" system="cadb" title="Liliano momé" instrument="Accodéon 3 rangs Sol/Do" key="c \major" poet="" displayFingering="auto" composer="" accordion="ctl4gc" motif="-1" time="7/8" rythm="Manuel" tempo="4=130"/>
-    <tabulature>\motif [B:4. a:4 a:4]
+    <propertie poet="" system="cadb" tempo="4=130" subtitle="Accordéon 3 rangs Sol/Do" accordion="ctl4gc" displayFingering="true" tagline="\tabliato" instrument="" key="c \major" motif="-1" time="7/8" title="Liliano momé" composer="Traditionnel bulgare" rythm="Manuel"/>
+    <tabulature>\motif [B:4. a:8 r:8 a:8 r:8]
 
 \set Timing.beatStructure=3,3,2
 

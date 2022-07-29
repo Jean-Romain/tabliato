@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tabliato>
-    <propertie instrument="" subtitle="" tagline="\tabliato" tempo="4.=110" key="c \major" accordion="ctl1gc" poet="" system="cadb" composer="" title="Cercle du Ragaloup" time="6/8" motif="11" rythm="B aB a" displayFingering="true"/>
+    <propertie rythm="B aB a" accordion="ctl1gc" poet="" tagline="\tabliato" motif="11" subtitle="" composer="" system="cadb" instrument="" key="c \major" title="Cercle du Ragaloup" displayFingering="true" tempo="4.=110" time="6/8"/>
     <tabulature>\repeat volta 2
 {
 p5':4 3':8 3' 4' 5' C

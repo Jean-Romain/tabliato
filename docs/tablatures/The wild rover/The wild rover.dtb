@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tabliato>
+    <propertie composer="" displayFingering="false" subtitle="Trad. Irlandais" tempo="4=150" key="g \major" poet="" tagline="\tabliato" system="cadb" time="3/4" accordion="ctl1gc" instrument="" motif="3" title="The wild rover" rythm="B a a "/>
+    <tabulature>\partial 4 p5:4 [g:8 r:8]
+
+\repeat volta 2
+{
+p6:4. t7:8 p6:4 G
+t5:4 3':4. 6':8 D
+6':4 7:4. 6':8 G
+p6':2. ~ C
+6':2 t6':8 8 [C c g]
+t7':4 6' 7' G
+8:4 7:4. 6:8 D
+3':4 6':4. 7:8 D
+
+
+}
+\alternative
+{
+  { 
+  p6:2. ~ G
+  p6:2 5:4 G 
+  }
+ 
+  { 
+  p6:4. t6:8 p6:4 G 
+  t7:2. D
+  }
+}
+
+\break
+
+t7:2. D
+t6:4 3':2 ~ D
+3':2. D
+r:4 p7:4 7 G
+7 t7 p7 [G d g]
+6':2. ~ C
+6':4 t6' p 6' [C g c]
+p8:2. ~ G
+8:4 7 6 G
+t6 5:2 ~ A
+5:2 5:4 A
+3':4 6':2 ~ D
+6':2 7:4 D
+p6:2. ~ G
+6:2 r:4 G</tabulature>
+    <lyric></lyric>
+</tabliato>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tabliato>
-    <propertie composer="Gille Chabenat" displayFingering="true" key="g \major" accordion="ctl1gc" motif="3" poet="" instrument="" tempo="4.=110" rythm="B a a " system="cadb" subtitle="" title="Mazurka des écoliers de Saint-Genest" tagline="\tabliato" time="9/8"/>
+    <propertie rythm="B a a " accordion="ctl1gc" poet="" tagline="\tabliato" motif="3" subtitle="" composer="Gille Chabenat" system="cadb" instrument="" key="g \major" title="Mazurka des écoliers de Saint-Genest" displayFingering="true" tempo="4.=110" time="9/8"/>
     <tabulature>\partial:2 p4':8 t6:4 p4':8 [r:8 d:4 r:8]
 
 \repeat volta 2

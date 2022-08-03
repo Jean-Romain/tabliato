@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tabliato>
+    <propertie system="cadb" accordion="ctl4gc" poet="" motif="22" tagline="\tabliato" title="À la claire fontaine" composer="" rythm="B a B a " displayFingering="true" key="c \major" tempo="2=80" instrument="" time="4/4" subtitle=""/>
+    <tabulature>p6:2 6:4 7 G
+7 t7 p7 7 [G d G g]
+6:2 6:4 7 G
+7 t7 p7:2 [G d G g]
+
+\break
+
+p7:2 7:4 t7 [G g G d]
+p6:4 7 8 7 G
+8:2 8:4 7 G
+6 7 t7:2 [G g A a]
+
+\break
+
+\repeat volta 2
+{
+p6:2 6:4 7 G
+7:4 t7:8 p6 7:4 6 [G d G g]
+7:2 7:4 t7:8 p6 [G g G d]
+7:4 t7 p6:2 [G g G g]
+}
+</tabulature>
+    <lyric>À la clai -- re fon -- tai -- ne
+M'en al -- lant pro -- me -- ner
+J'ai trou -- vé l'eau si bel -- le
+Que je m'y suis bai -- gnée
+Il ya long -- temps que je t'ai -- me
+Ja -- mais je ne t'ou -- blie -- rai
+
+Sous les feuilles d'un chêne
+Je me suis fait sécher
+Sur la plus haute branche
+Un rossignol chantait
+
+Chante rossignol chante
+Toi qui as le cœur gai
+Tu as le cœur à rire
+Moi je l'ai à pleurer
+
+C'est pour mon ami Pierre
+Qui ne veut plus m'aimer
+Pour un bouton de rose
+Que je lui refusais
+
+J'ai perdu mon ami
+Sans l'avoir mérité
+Pour un bouquet de roses
+Que je lui refusais</lyric>
+</tabliato>

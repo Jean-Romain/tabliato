@@ -78,25 +78,25 @@ L'interface graphique se divise en trois partie. À gauche des informations néc
 
 	<p>Pour réduire le nombre d'options on peut commencer par indiquer un sens de jeu avec les lettres 'p' et 't'. Dans l'exemple suivant on indique qu'on veut jouer en poussé. Cependant ca ne change rien pour le fa et le la qui ne peuvent être joués que en tiré.<p>
 
-	<pre><code class="cpp">p c' d' e' f' t g' a' b' c''</code></pre>
+	<pre><code class="cpp">p c' d' e' f' g' a' b' c''</code></pre>
 
 	<p><img src="img/doc-exemple2-2.png" /></p>
 
     <p>Et voici en tiré :<p>
 
-	<pre><code class="cpp">t c' d' e' f' t g' a' b' c''</code></pre>
+	<pre><code class="cpp">t c' d' e' f' g' a' b' c''</code></pre>
 
 	<p><img src="img/doc-exemple2-3.png" /></p>
 
 	<p>Il nous reste deux notes rouges car il y a deux options sur les rangs 1 et 2. Pour ce faire on ajoute une indication de rang avec « / »</p>
 
-	<pre><code class="cpp">t c' d' e' f' t g'/1 a'/1 b' c''</code></pre>
+	<pre><code class="cpp">p c' d' e' f' g'/1 a'/1 b' c''</code></pre>
 
 	<p><img src="img/doc-exemple2-4.png" /></p>
 
     <p>Un fois qu'on a indiqué un sens de jeu, cela s'applique à toutes les notes qui suivent jusqu'à ce qu'une autre indication soit rencontrée. La commande '\pt' permet d'annuler le sens de jeu pour réafficher toutes les options. Exemple:
 
-<pre><code class="cpp">t c' d' e' f' g'/1 a'/1 b' c''
+<pre><code class="cpp">p c' d' e' f' t g'/1 a'/1 b' c''
 \pt c'' d'' e'' f'' g'' a'' b'' c'''</code></pre>
 
 	<p><img src="img/doc-exemple2-5.png" /></p>

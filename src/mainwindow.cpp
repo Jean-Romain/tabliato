@@ -840,6 +840,23 @@ void MainWindow::initRythmComboBx()
 
 void MainWindow::initAccordionComboBox()
 {
+    // File are ressources but for keyboards users must be able to add
+    // or remove keyboards manually by modifiying the file so we make
+    // a physical copy in user's directory
+    QDir directory(KEYBOARDS);
+    if (!directory.exists())
+    {
+      QDir().mkpath(KEYBOARDS);
+      QDir keyboard_dir(":/keyboards/ressources/keyboards/");
+      QStringList csv = keyboard_dir.entryList(QStringList() << "*.csv", QDir::Files);
+      for(auto f : csv)
+      {
+          QFileInfo info(f);
+          QFile::copy(":/keyboards/ressources/keyboards/" + f,  KEYBOARDS + "/" + f);
+          QFile::setPermissions(KEYBOARDS + "/" + f, QFileDevice::ReadOwner|QFileDevice::WriteOwner);
+      }
+    }
+
     QFile file(KEYBOARDS +  "/assemblages.csv");
 
     if(!file.open(QIODevice::ReadOnly | QIODevice::Text))
@@ -870,6 +887,9 @@ void MainWindow::initAccordionComboBox()
 
 void MainWindow::initSf2ComboBox()
 {
+    // File are ressources but for soundfonts users must be able to add
+    // or remove soundfonts manually by modifiying the folder so we make
+    // a physical copy in user's directory
     QDir directory(SOUNDFONTS);
     if (!directory.exists())
     {

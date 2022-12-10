@@ -1,3 +1,7 @@
+## Tabliato 1.3.1
+
+- Change: les fichiers de configuration clavier sont maintenant dans un dossier utilisateur ce qui permet de créer ses propres claviers
+
 ## Tabliato 1.3.0
 
 - New: support d'ajout d'indications de doigté

@@ -136,12 +136,21 @@
      <addaction name="actionOpenExNotes"/>
      <addaction name="actionOpenExRythme"/>
     </widget>
+    <widget class="QMenu" name="menuConfiguration">
+     <property name="title">
+      <string>Configuration</string>
+     </property>
+     <addaction name="actionOpenKeyboardDir"/>
+     <addaction name="actionOpenSf2Dir"/>
+    </widget>
     <addaction name="actionNew"/>
     <addaction name="actionOpen"/>
     <addaction name="menuOuvrir_un_exemple"/>
     <addaction name="actionSave"/>
     <addaction name="actionSaveAs"/>
     <addaction name="separator"/>
+    <addaction name="separator"/>
+    <addaction name="menuConfiguration"/>
    </widget>
    <widget class="QMenu" name="menuAide">
     <property name="title">
@@ -198,7 +207,7 @@
       <string>Télécharger des fichiers de rendu audio d'accordéon</string>
      </property>
      <property name="title">
-      <string>Installer des fontes sonores</string>
+      <string>Télécharger des fontes sonores</string>
      </property>
      <addaction name="actionBallone_Burini"/>
      <addaction name="actionGaillard"/>
@@ -1027,7 +1036,7 @@ supplémentaires</string>
         <property name="geometry">
          <rect>
           <x>0</x>
-          <y>-80</y>
+          <y>0</y>
           <width>301</width>
           <height>208</height>
          </rect>
@@ -2516,6 +2525,31 @@ color: rgb(255, 255, 255);</string>
   <action name="actionOpenExRythme">
    <property name="text">
     <string>Rythme spécial</string>
+   </property>
+  </action>
+  <action name="actionAdd">
+   <property name="text">
+    <string>Ajouter manuellement une fonte</string>
+   </property>
+  </action>
+  <action name="actionfolderkeybord">
+   <property name="text">
+    <string>folder</string>
+   </property>
+  </action>
+  <action name="actionfoldersf2">
+   <property name="text">
+    <string>folder</string>
+   </property>
+  </action>
+  <action name="actionOpenKeyboardDir">
+   <property name="text">
+    <string>Claviers</string>
+   </property>
+  </action>
+  <action name="actionOpenSf2Dir">
+   <property name="text">
+    <string>Soundfonts</string>
    </property>
   </action>
   <zorder>playerDock</zorder>

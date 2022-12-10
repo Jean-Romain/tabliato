@@ -135,6 +135,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 
     // === Misc ====
     connect(ui->time_combobox,SIGNAL(currentIndexChanged(int)),this,SLOT(updateRythmComboBx()));
+    connect(ui->actionOpenKeyboardDir,  &QAction::triggered, [=]() { QDesktopServices::openUrl(QUrl(KEYBOARDS)); });
+    connect(ui->actionOpenSf2Dir,  &QAction::triggered, [=]() { QDesktopServices::openUrl(QUrl(SOUNDFONTS)); });
 
     // Fix #19 window only. This works natively on linux
     #ifdef Q_OS_WINDOWS

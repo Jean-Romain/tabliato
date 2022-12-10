@@ -1,6 +1,7 @@
 ## Tabliato 1.3.1
 
-- Change: les fichiers de configuration clavier sont maintenant dans un dossier utilisateur ce qui permet de créer ses propres claviers
+- Change: les fichiers de configuration clavier sont maintenant dans un dossier utilisateur ce qui permet de créer ses propres claviers.
+- New: ajout d'un bouton Fichier > Configuation pour trouver les dossiers qui contiennent les fichiers de configuration (clavier et soundfonts).
 
 ## Tabliato 1.3.0
 

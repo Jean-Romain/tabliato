@@ -7,7 +7,7 @@ LIBS += -L./poppler/bin -lpoppler-qt5 -lstdc++
 INCLUDEPATH += C:/Qt/Tools/OpenSSL/Win_x86/include
 LIBS += -LC:/Qt/Tools/OpenSSL/Win_x86/bin -llibcrypto-1_1 -llibssl-1_1
 Release:DESTDIR = windows
-RC_ICONS = ./share/icon/tabliato.ico
+RC_ICONS = ./ressources/icons/tabliato.ico
 }
 
 unix{

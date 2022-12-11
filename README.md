@@ -18,4 +18,9 @@ make
 
 ### Windows
 
-Ce dépot git ne contient pas les `.dll` nécessaires au fonctionnment du logiciel. De plus le logiciel `timidity++` est inclu dans le `.exe` téléchargeable sur le site mais ne se trouve pas dans le dépôt git. Si vous souhaitez vraiment compiler pour Windows le mieux est d'ouvrir une [issue](https://github.com/Jean-Romain/tabliato/issues).
+Ce dépot git ne contient pas les `.dll` nécessaires au fonctionnment du logiciel. De plus le logiciel `timidity++` est inclu dans le `.exe` téléchargeable sur le site mais ne se trouve pas dans le dépôt git. Si vous souhaitez vraiment compiler pour Windows le mieux est d'ouvrir une [issue](https://github.com/Jean-Romain/tabliato/issues) pour obtenir de l'aide.
+- Installer Qt5 en avec OpenSSL ([help](https://stackoverflow.com/questions/71636426/qnetworkaccessmanager-does-not-work-on-windows-with-https)) en **32 bits** en utilisant `Qt maintenance tool`.
+- Télécharger [Timidity++ pour Windows](https://sourceforge.net/projects/timidity/files/TiMidity%2B%2B/TiMidity%2B%2B-git-hourly/w32/)
+- Utiliser [windeployqt](https://doc.qt.io/qt-6/windows-deployment.html) pour trouver les DLL
+- Copier les DLL de [poppler](https://sourceforge.net/projects/poppler-qt5-mingw32/files/Poppler%200.32.0/)
+- Compiler le project avec `mingw32`. Le projet doit être compilé en 32 bits car impossible de trouver des dll poppler en 64 bits.

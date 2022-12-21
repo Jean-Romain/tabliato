@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tabliato>
+    <propertie motif="22" instrument="" tempo="4=130" title="Du rhum, des femmes" key="c \major" subtitle="" time="4/4" accordion="ctl1gc" tagline="\tabliato" displayFingering="false" rythm="B a B a " poet="" system="cadb" composer="Soldat Louis"/>
+    <tabulature>\partial 8 p8:8 [r:8]
+
+
+p6:4 8 8 6':8 7 G
+t8 6' 7:4 p6:4. 6:8 [C G] 
+t8:8 7' 9 p8:4. 6':8 7 [C G]
+t8:8 7' 9:4 7:4. p8:8 [C D]
+6:4 8 8 6':8 7 G
+
+\break
+
+t8 6' 7:4 p6:4. 6:8 [C G]
+t8:8 7' 9:4 p8:4 7:8 6 [C G]
+t7:8 6' 7:4 p6:4. p6:8 [D G]
+t8:8 7' 9 p8:4. 6':8 7 [C G]
+t7:8 p7 t7:4 p6:2 [C G]
+
+\break
+
+\repeat volta 2
+{
+  p6:4 8 8 6':8 7 G
+  t8 7' 9: p8:4. 8:8 8 [C G]
+}
+\alternative
+{
+  { 
+    t8 7' 9:8 p8:4. 6':8 7 [C G]
+    t8 7' 9:4 7':4. 7':8 [C D]
+  }
+  {  
+    t8:8 7' 9 p8:4. 7:8 6 [C G]
+    t7 6' 7:4 p6:2 [D G]
+  }
+}
+\bar "|." 
+
+
+
+
+
+</tabulature>
+    <lyric></lyric>
+</tabliato>

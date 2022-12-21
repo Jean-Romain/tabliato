@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tabliato>
+    <propertie key="c \major" title="Hanter dro de Languidic" subtitle="" accordion="ctl1gc" motif="2" tempo="4=180" rythm="B a (binaire)" system="cadb" tagline="\tabliato" displayFingering="false" instrument="" poet="" composer="Trad. Bretagne" time="2/4"/>
+    <tabulature>\repeat volta 2
+{
+t9:4 9:8 7' A
+8:4 9 D
+7:2 F
+p7':4 7':8 8 C
+6':4 8 F
+}
+\alternative
+{
+  { p7':4 8' E }
+  { 7':2 E }
+}
+
+\break
+
+\repeat volta 2
+{
+t9:4 9:8 9 A
+8':4 9 D
+p7:4. 6':8 E
+8:4 7':8 8 G
+}
+\alternative
+{
+  {  
+    t8:8 8 7 8 F
+    p7:2 E
+  }
+  { 
+    t8:4 p7 [F g]
+    t&lt;5 7>:2 [A]
+  }
+}
+
+\bar "|." </tabulature>
+    <lyric></lyric>
+</tabliato>

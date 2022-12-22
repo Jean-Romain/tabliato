@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tabliato>
+    <propertie composer="Trad. Irlandais" tempo="4=110" poet="" motif="22" key="c \major" accordion="ctl1gc" displayFingering="true" rythm="B a B a " system="cadb" subtitle="" tagline="" time="4/4" title="Captain Campbell’s Highland Fling" instrument=""/>
+    <tabulature>\repeat volta 2
+{
+ t5:16 7:8. 7 6':16 8:8. 7:16 6' p6:8. A
+ p5:16 6:8. 6 t7:16 p7:8. 8:16 7 6:8. G
+ t5:16 7:8. 7 6':16 8:8. 6':16 8 9:8. [A F]
+ p8:16 7:8. 9 7:16 t7:4 7 [G A]
+}
+
+\break
+
+t7:16 11:8. 11 p9:16 t9:8. 7':16 8 9:8. D
+p8:16 7':8. 9 7':16 8:8. 7:16 6 7:8. E
+t7:16 11:8. 11 p9:16 t9:8. 7':16 8 9:8. F 
+p8:16 7:8. 9:8. 7:16 t7:4 7 [G A]
+
+\break
+
+t7:16 11:8. 11 p9:16 t9:8. 7':16 8 9:8. D
+p8:16 7':8. 9 7':16 8:8. 7:16 6 7:8. E
+t8:16 7:8. 7' p6':16 t9:8. 7':16 8 9:8. F
+p8:16 7:8. 9:8. 7:16 t7:4 7 [G A]
+
+</tabulature>
+    <lyric></lyric>
+</tabliato>

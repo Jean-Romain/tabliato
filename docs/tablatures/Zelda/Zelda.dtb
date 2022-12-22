@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tabliato>
+    <propertie rythm="B aB a" subtitle="" title="Zelda" key="c \major" displayFingering="true" motif="11" system="cadb" instrument="" accordion="ctl1gc" time="6/8" composer="Philippe Plard" poet="" tempo="4=150" tagline="\tabliato"/>
+    <tabulature>\repeat volta 2
+{
+ t9:4 7:8 9:4 7:8 A
+ 8':8 9 7' p7':4. [F C]
+7':8 8 6' 7:4 7:8 [C E]
+}
+\alternative
+{
+  { p7:8 6' 8 t8:4 7:8 [E A] }
+  { p7:8 6' 7 t7:4. [E A] }
+}
+
+\break
+
+\repeat volta 2
+{
+  t7:8 6' 8 t5:4 5:8 A
+  t7 6' 8 4':4 4:8 [A F]
+  t7 6' 8 p7:4 7:8 [F E]
+}
+\alternative
+{
+  { p8:8 6' 7 t8:4 7:8 [E A] }
+  { p8:8 6' 7 t7:4. [E A]}
+}
+
+\break
+
+\repeat volta 2
+{
+ t9:4 7:8 9:4 7:8 A
+ 8':8 9 7' p7':4. [F C]
+7':8 8 6' 7:4 7:8 [C E]
+}
+\alternative
+{
+  { p7:8 6' 8 t8:4 7:8 [E A] }
+  { p7:8 6' 7 t7:4. [E A] }
+}
+
+\break
+
+\repeat volta 2
+{
+ t7:8 6' 8 9:4 9:8 A
+ 7:8 6' 8 8':4 8':8 [A F]
+ 7:8 6' 8 p7:4 7:8 [F E]
+}
+\alternative
+{
+  { p8:8 6' 7 t8:4 7:8 [E A] }
+  { p6:8 6' 7 t7:4. [E A] }
+}
+
+\bar "|." </tabulature>
+    <lyric></lyric>
+</tabliato>

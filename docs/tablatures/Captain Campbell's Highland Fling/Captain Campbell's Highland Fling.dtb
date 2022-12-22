@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tabliato>
-    <propertie composer="Trad. Irlandais" tempo="4=110" poet="" motif="22" key="c \major" accordion="ctl1gc" displayFingering="true" rythm="B a B a " system="cadb" subtitle="" tagline="" time="4/4" title="Captain Campbell’s Highland Fling" instrument=""/>
+    <propertie accordion="ctl1gc" key="c \major" motif="22" poet="" tempo="4=110" subtitle="" composer="Trad. Irlandais" title="Captain Campbell’s Highland Fling" displayFingering="true" instrument="" time="4/4" system="cadb" rythm="B a B a " tagline=""/>
     <tabulature>\repeat volta 2
 {
  t5:16 7:8. 7 6':16 8:8. 7:16 6' p6:8. A

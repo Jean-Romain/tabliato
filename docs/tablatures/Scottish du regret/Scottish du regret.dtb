@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tabliato>
-    <propertie rythm="B a B a " subtitle="" title="Scottish du regret" key="c \major" displayFingering="true" motif="22" system="cadb" instrument="" accordion="ctl1gc" time="4/4" composer="Yann-Fañch Perroches" poet="" tempo="4=150" tagline=""/>
+    <propertie subtitle="" tempo="4=150" composer="Yann-Fañch Perroches" instrument="" time="4/4" displayFingering="true" title="Scottish du regret" accordion="ctl1gc" motif="22" system="cadb" key="c \major" poet="" tagline="\tabliato" rythm="B a B a "/>
     <tabulature>\set Timing.beamExceptions=#'()
 \set Timing.beatStructure=2
 

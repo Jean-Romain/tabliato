@@ -25,7 +25,7 @@ int main(int argc, char *argv[])
     QScopedPointer<QCoreApplication> app(createApplication(argc, argv));
     QCoreApplication::setOrganizationName("tabliato");
     QCoreApplication::setApplicationName("tabliato");
-    QCoreApplication::setApplicationVersion("1.3.1");
+    QCoreApplication::setApplicationVersion("1.3.2");
 
     APPDIR = QApplication::applicationDirPath();
     APPPATH = QApplication::applicationFilePath();

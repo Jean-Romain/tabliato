@@ -1,3 +1,8 @@
+## Tabliato 1.3.2
+
+- Change: quand une nouvelle partition est créée, le champ `Tagline` est prérempli avec la commande `tabliato` afin que les partitions créées avec `tabliato` aient le texte suivant en bas de page: *Éditié avec Tabliato et Lilypond*. Les utilisateurs peuvent supprimer cette marque mais elle apparait par default.
+- Bug: quand une nouvelle partition est créée, les paroles de l'ancienne n'étaient pas supprimées.
+
 ## Tabliato 1.3.1
 
 - Change: les fichiers de configuration clavier sont maintenant dans un dossier utilisateur ce qui permet de créer ses propres claviers.

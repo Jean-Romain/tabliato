@@ -485,6 +485,7 @@ void MainWindow::openNew()
     ui->time_combobox->setCurrentIndex(0);
     ui->key_combobox->setCurrentIndex(0);
     ui->instrument_LineEdit->clear();
+    ui->lyrics_textarea->clear();
 
     ui->tempo_comboBox->setCurrentIndex(2);
     ui->tempo_spinBox->setValue(130);
@@ -493,6 +494,8 @@ void MainWindow::openNew()
     ui->cogeron_radio->setChecked(false);
 
     currentOpenedFile.clear();
+
+    ui->tagline_LineEdit->setText("\\tabliato");
 
     this->setWindowTitle("Tabliato - Sans titre");
 }

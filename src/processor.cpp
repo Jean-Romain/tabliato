@@ -366,6 +366,12 @@ void TabliatoProcessor::parseMusic()
                     }
                     pattern = Motif(tmp.join(" "));
                 }
+                else if (symbol == "\\mbox")
+                {
+                    currentSymbolIsBass = true;
+                    currentSymbolIsMelody = true;
+                    parsed = "\\tweak X-offset #0 \\mark \\markup \\override #'(box-padding . 0.5) \\box \\caps";
+                }
                 else if (symbol == "\\repeat")
                 {
                     m_scope.append(REPEAT);

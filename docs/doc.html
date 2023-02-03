@@ -19,6 +19,7 @@ title: Tutoriels
 	<li><a href="#Liaisons">Liaisons</a></li>
 	<li><a href="#Rythme">Rythme speciaux</a></li>
 	<li><a href="#Doigts">Indications de doigté</a></li>
+	<li><a href="#Triolets">Triolets</a></li>
 	<li><a href="#Plus">Aller plus loin</a></li>
 </ol>
 
@@ -293,11 +294,25 @@ t7:4 \finger "m" p7 t8 p7 [A:4 G:4 F:4 E:4]
 
 
 <p><img src="img/doc-exemple13-2.png" /></p>
-	
+
+<h2 id="Triolets"><a href="#Top">Triolets</a></h2>
+
+<p>Les triolets s'écrivent « \tuplet 3/2 »</p>
+
+<pre><code class="cpp">
+t8:4 8' 9 F
+p8:4 \tuplet 3/2 { 6':8 8 6' } \tuplet 3/2 { 7 6' 7 } E
+t7:8 5 7 6' 8 7' A
+</code></pre>
+
+<p><img src="img/doc-triolet.png" /></p>
+
+<p>Les N-olets s'écrivent sur la même base mais je n'en ai jamais vu dans des tablatures.</p>
+
+
 <h2 id="Plus"><a href="#Top">Aller plus loin</a></h2>
 
-	<p>Tout ce que le logiciel lilypond sait faire tabliato doit savoir le faire aussi car sous le capos c'est lilypond qui génère le rendu. Je ne l'ai personnellement jamais utilisé ni vu utilisé sur des tablatures d'accordéon diatonique qui sont en général des partitions très simples. Pour écrire des choses plus complexes veuillez vous référer à la 
-	<a href="http://www.lilypond.org/manuals.fr.html">documentation de Lilypond</a>. Par exemple nous pouvons controler les associations de notes.</p>
+	<p>Tout ce que le logiciel lilypond sait faire tabliato doit savoir le faire aussi car sous le capos c'est lilypond qui génère le rendu. En général les tablatures d'accordéon diatonique sont des partitions très simples donc les éléments mentionnés sur cette pages sont suffisants. Pour écrire des choses plus complexes veuillez vous référer à la <a href="http://www.lilypond.org/manuals.fr.html">documentation de Lilypond</a>. Par exemple nous pouvons controler les associations de notes.</p>
 
 <!-- <pre><code class="cpp">\motif [B:4. a:4 a:4]
 
@@ -322,17 +337,19 @@ p7':4 t8':8 p7':4 7' C
 
 	<p><img src="img/doc-exemple11.png" /></p>
 
-<p>Nous pouvons aussi écrire des triolets avec « \tuplet 3/2 »</p>
+<p>Il est aussi possible d'ajouter des commentaires encadrés et aligné avec une commande comme suit :</p>
 
-<pre><code class="cpp">\set Timing.beamExceptions=#'()
-\set Timing.beatStructure=1,1,1
-
-t8:4 8' 9 F
-p8:4 \tuplet 3/2 { 6':8 8 6' } \tuplet 3/2 { 7 6' 7 } E
-t7:8 5 7 6' 8 7' A
+<pre><code class="cpp">
+\tweak X-offset #0 \mark \markup \override #'(box-padding . 0.5) \box  \caps "Partie 1"
 </code></pre>
 
-	<p><img src="img/doc-triolet.png" /></p>
+<p>Ceci est pratique pour nommer des parties d'une pièce et indiquer des options de variantes. Le lecteur pourra trouver un example de ca dans la <a href="tablatures/Valse triste/Valse triste.pdf">Valse triste</a>. À partir de la version 1.3.2 de tabliato il existe une commande « \mbox » qui remplace le code précédent automatiquement.
+
+<pre><code class="cpp">
+\mbox "Partie 1"
+</code></pre>
+
+
 
 
 

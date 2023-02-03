@@ -146,7 +146,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     #endif
 
     ui->scrollArea->setWidget(pdf);
-    ui->toolBox->setCurrentIndex(0);
     ui->toolBox_2->setCurrentIndex(0);
 
     setIcons();

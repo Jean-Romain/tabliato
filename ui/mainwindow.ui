@@ -12,8 +12,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1240</width>
-    <height>841</height>
+    <width>1162</width>
+    <height>1318</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -58,8 +58,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>521</width>
-         <height>564</height>
+         <width>378</width>
+         <height>1059</height>
         </rect>
        </property>
        <attribute name="label">
@@ -89,8 +89,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>521</width>
-         <height>564</height>
+         <width>378</width>
+         <height>1059</height>
         </rect>
        </property>
        <attribute name="label">
@@ -118,7 +118,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1240</width>
+     <width>1162</width>
      <height>24</height>
     </rect>
    </property>
@@ -251,8 +251,8 @@
    </property>
    <property name="minimumSize">
     <size>
-     <width>250</width>
-     <height>266</height>
+     <width>200</width>
+     <height>600</height>
     </size>
    </property>
    <property name="sizeIncrement">
@@ -268,7 +268,7 @@
     <set>QDockWidget::DockWidgetFloatable|QDockWidget::DockWidgetMovable</set>
    </property>
    <property name="windowTitle">
-    <string>Informations et options</string>
+    <string/>
    </property>
    <attribute name="dockWidgetArea">
     <number>1</number>
@@ -276,842 +276,849 @@
    <widget class="QWidget" name="dockWidgetContents">
     <layout class="QVBoxLayout" name="verticalLayout_4">
      <item>
-      <widget class="QToolBox" name="toolBox">
-       <property name="enabled">
-        <bool>true</bool>
+      <widget class="QGroupBox" name="formGroupBox">
+       <property name="styleSheet">
+        <string notr="true"> QGroupBox {
+ background-color: rgb(232, 235, 238);
+ border: 1px solid gray;
+ border-radius: 10px;
+ margin-top: 1ex; /* leave space at the top for the title */
+ padding:1ex;
+ padding-top:1.5ex;
+}
+
+QGroupBox::title {
+    subcontrol-origin: margin;
+    left: 7px;
+    padding: 0px 5px 0px 5px;
+}</string>
        </property>
+       <property name="title">
+        <string>Informations principales</string>
+       </property>
+       <layout class="QFormLayout" name="formLayout_6">
+        <item row="0" column="0">
+         <widget class="QLabel" name="titreLabel_2">
+          <property name="text">
+           <string>Titre</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QLineEdit" name="title_LineEdit">
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QLabel" name="timeLabel">
+          <property name="text">
+           <string>Mesure</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QComboBox" name="time_combobox">
+          <property name="enabled">
+           <bool>true</bool>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>28</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>56</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="currentIndex">
+           <number>0</number>
+          </property>
+          <item>
+           <property name="text">
+            <string>2/2</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>2/4</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>3/4</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>3/8</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>4/4</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>4/2</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>5/4</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>6/4</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>6/8</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>7/4</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>7/8</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>8/4</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>9/8</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>12/8</string>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="QLabel" name="keyLabel">
+          <property name="text">
+           <string>Armure</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="QComboBox" name="key_combobox">
+          <property name="enabled">
+           <bool>true</bool>
+          </property>
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>56</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>29</width>
+            <height>20</height>
+           </size>
+          </property>
+          <item>
+           <property name="text">
+            <string>c \major</string>
+           </property>
+           <property name="icon">
+            <iconset resource="../Ressources.qrc">
+             <normaloff>:/icons/ressources/icons/C-major.svg</normaloff>:/icons/ressources/icons/C-major.svg</iconset>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>g \major</string>
+           </property>
+           <property name="icon">
+            <iconset resource="../Ressources.qrc">
+             <normaloff>:/icons/ressources/icons/G-major.svg</normaloff>:/icons/ressources/icons/G-major.svg</iconset>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>d \major</string>
+           </property>
+           <property name="icon">
+            <iconset resource="../Ressources.qrc">
+             <normaloff>:/icons/ressources/icons/D-major.svg</normaloff>:/icons/ressources/icons/D-major.svg</iconset>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>a \major</string>
+           </property>
+           <property name="icon">
+            <iconset resource="../Ressources.qrc">
+             <normaloff>:/icons/ressources/icons/A-major.svg</normaloff>:/icons/ressources/icons/A-major.svg</iconset>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>e \major</string>
+           </property>
+           <property name="icon">
+            <iconset resource="../Ressources.qrc">
+             <normaloff>:/icons/ressources/icons/E-major.svg</normaloff>:/icons/ressources/icons/E-major.svg</iconset>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>b \major</string>
+           </property>
+           <property name="icon">
+            <iconset resource="../Ressources.qrc">
+             <normaloff>:/icons/ressources/icons/B-major.svg</normaloff>:/icons/ressources/icons/B-major.svg</iconset>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>fis \major</string>
+           </property>
+           <property name="icon">
+            <iconset resource="../Ressources.qrc">
+             <normaloff>:/icons/ressources/icons/F-sharp-major.svg</normaloff>:/icons/ressources/icons/F-sharp-major.svg</iconset>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>cis \major</string>
+           </property>
+           <property name="icon">
+            <iconset resource="../Ressources.qrc">
+             <normaloff>:/icons/ressources/icons/C-sharp-major.svg</normaloff>:/icons/ressources/icons/C-sharp-major.svg</iconset>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item row="3" column="0">
+         <widget class="QLabel" name="tempoLabel">
+          <property name="text">
+           <string>Tempo</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="1">
+         <layout class="QHBoxLayout" name="layoutTempo">
+          <property name="spacing">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QComboBox" name="tempo_comboBox">
+            <property name="maximumSize">
+             <size>
+              <width>46</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="currentIndex">
+             <number>0</number>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>20</width>
+              <height>20</height>
+             </size>
+            </property>
+            <item>
+             <property name="text">
+              <string>1</string>
+             </property>
+             <property name="icon">
+              <iconset resource="../Ressources.qrc">
+               <normaloff>:/icons/ressources/icons/ronde.svg</normaloff>:/icons/ressources/icons/ronde.svg</iconset>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>2</string>
+             </property>
+             <property name="icon">
+              <iconset resource="../Ressources.qrc">
+               <normaloff>:/icons/ressources/icons/blanche.svg</normaloff>:/icons/ressources/icons/blanche.svg</iconset>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>4</string>
+             </property>
+             <property name="icon">
+              <iconset resource="../Ressources.qrc">
+               <normaloff>:/icons/ressources/icons/noire.svg</normaloff>:/icons/ressources/icons/noire.svg</iconset>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>4.</string>
+             </property>
+             <property name="icon">
+              <iconset resource="../Ressources.qrc">
+               <normaloff>:/icons/ressources/icons/noire-dot.svg</normaloff>:/icons/ressources/icons/noire-dot.svg</iconset>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>8</string>
+             </property>
+             <property name="icon">
+              <iconset resource="../Ressources.qrc">
+               <normaloff>:/icons/ressources/icons/croche.svg</normaloff>:/icons/ressources/icons/croche.svg</iconset>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>8.</string>
+             </property>
+             <property name="icon">
+              <iconset resource="../Ressources.qrc">
+               <normaloff>:/icons/ressources/icons/crochedot.svg</normaloff>:/icons/ressources/icons/crochedot.svg</iconset>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_equal">
+            <property name="maximumSize">
+             <size>
+              <width>11</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>=</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QSpinBox" name="tempo_spinBox">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>60</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="maximum">
+             <number>999</number>
+            </property>
+            <property name="value">
+             <number>130</number>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </item>
+        <item row="4" column="0">
+         <widget class="QLabel" name="bassLabel">
+          <property name="text">
+           <string>Rythme       </string>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="1">
+         <layout class="QHBoxLayout" name="horizontalLayout_3">
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QComboBox" name="rythm_comboBox">
+            <property name="currentIndex">
+             <number>2</number>
+            </property>
+            <item>
+             <property name="text">
+              <string>B a</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>B a </string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>B a a </string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>B aB a</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>B a B a </string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>B a a B a </string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>B a a B a a </string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>B a a B a a B a </string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>B a a B a a B a a B a </string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pushButton">
+            <property name="enabled">
+             <bool>true</bool>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>25</width>
+              <height>25</height>
+             </size>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset resource="../Ressources.qrc">
+              <normaloff>:/icons/ressources/icons/question.svg</normaloff>:/icons/ressources/icons/question.svg</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>20</width>
+              <height>20</height>
+             </size>
+            </property>
+            <property name="flat">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer_2">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </item>
+        <item row="6" column="0">
+         <widget class="QLabel" name="accordionLabel">
+          <property name="text">
+           <string>Accordéon</string>
+          </property>
+         </widget>
+        </item>
+        <item row="6" column="1">
+         <layout class="QHBoxLayout" name="layoutAccordion">
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QComboBox" name="accordion_comboBox">
+            <property name="enabled">
+             <bool>true</bool>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>200</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <item>
+             <property name="text">
+              <string>Mélodéon système stantard</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Mélodéon système Bouchard</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Mélodéon système Sagné</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Diatonique modèle Viennois deux rangées</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Diatonique modèle Viennois deux rangées avec altérations
+supplémentaires</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Diatonique modèle irlandais standard</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Diatonique modèle irlandais inversé</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Diatonique modèle basque - Trikitixa</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Diatonique modèle Viennois deux rangées + 2 boutons</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Diatonique modèle Viennois deux rangées + 2 boutons inversés</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Diatonique modèle Viennois deux rangées + 2 boutons</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Diatonique modèle Viennois deux rangées + 2 boutons inversés</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Diatonique modèle Viennois deux rangées + 5 boutons</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Diatonique modèle Viennois deux rangées + 6 boutons</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Diatonique trois rangées modèle Corgeron</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Diatonique trois rangées modèle Heim</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Diatonique trois rangées modèle Leray</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="infoButton_accordion">
+            <property name="enabled">
+             <bool>true</bool>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>25</width>
+              <height>25</height>
+             </size>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset resource="../Ressources.qrc">
+              <normaloff>:/icons/ressources/icons/question.svg</normaloff>:/icons/ressources/icons/question.svg</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>20</width>
+              <height>20</height>
+             </size>
+            </property>
+            <property name="flat">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer_4">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+     </item>
+     <item>
+      <widget class="QGroupBox" name="formGroupBox_2">
+       <property name="styleSheet">
+        <string notr="true"> QGroupBox {
+ background-color: rgb(232, 235, 238);
+ border: 1px solid gray;
+ border-radius: 10px;
+ margin-top: 1ex; /* leave space at the top for the title */
+ padding:1ex;
+ padding-top:1.5ex;
+}
+
+QGroupBox::title {
+    subcontrol-origin: margin;
+    left: 7px;
+    padding: 0px 5px 0px 5px;
+}</string>
+       </property>
+       <property name="title">
+        <string>Informations secondaires</string>
+       </property>
+       <layout class="QFormLayout" name="formLayout_7">
+        <item row="4" column="1">
+         <widget class="QLineEdit" name="tagline_LineEdit">
+          <property name="text">
+           <string>\tabliato</string>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="0">
+         <widget class="QLabel" name="taglineLabel">
+          <property name="text">
+           <string>Tagline</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="1">
+         <widget class="QLineEdit" name="instrument_LineEdit"/>
+        </item>
+        <item row="3" column="0">
+         <widget class="QLabel" name="instrumentLabel">
+          <property name="text">
+           <string>Instrument</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="QLineEdit" name="poet_LineEdit"/>
+        </item>
+        <item row="2" column="0">
+         <widget class="QLabel" name="poetLabel">
+          <property name="text">
+           <string>Poète</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QLineEdit" name="composer_LineEdit"/>
+        </item>
+        <item row="1" column="0">
+         <widget class="QLabel" name="compositeurLabel">
+          <property name="text">
+           <string>Compositeur</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QLineEdit" name="subtitle_LineEdit"/>
+        </item>
+        <item row="0" column="0">
+         <widget class="QLabel" name="sousTitreLabel_2">
+          <property name="text">
+           <string>Sous-titre</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </item>
+     <item>
+      <widget class="QGroupBox" name="system_groupBox">
        <property name="minimumSize">
         <size>
          <width>0</width>
          <height>0</height>
         </size>
        </property>
-       <property name="sizeIncrement">
+       <property name="styleSheet">
+        <string notr="true"> QGroupBox {
+ background-color: rgb(232, 235, 238);
+ border: 1px solid gray;
+ border-radius: 10px;
+ margin-top: 1ex; /* leave space at the top for the title */
+ padding:1ex;
+ padding-top:1.5ex;
+}
+
+QGroupBox::title {
+    subcontrol-origin: margin;
+    left: 7px;
+    padding: 0px 5px 0px 5px;
+}</string>
+       </property>
+       <property name="title">
+        <string>Mise en page</string>
+       </property>
+       <layout class="QFormLayout" name="formLayout_2">
+        <item row="0" column="0">
+         <widget class="QLabel" name="formatLabel">
+          <property name="text">
+           <string>Format tablature</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <layout class="QHBoxLayout" name="horizontalLayout_8">
+          <item>
+           <widget class="QRadioButton" name="cadb_radio">
+            <property name="text">
+             <string>CADB</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="cogeron_radio">
+            <property name="text">
+             <string>Corgeron</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer_9">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </item>
+        <item row="4" column="0">
+         <widget class="QLabel" name="afficherDoigtLabel">
+          <property name="text">
+           <string>Afficher doigté</string>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="1">
+         <layout class="QHBoxLayout" name="horizontalLayout">
+          <item>
+           <widget class="QRadioButton" name="displayFingering_yes">
+            <property name="text">
+             <string>Oui</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="displayFingering_no">
+            <property name="text">
+             <string>Non</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="horizontalSpacer_7">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+     </item>
+     <item>
+      <spacer name="verticalSpacer_2">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
         <size>
-         <width>2</width>
-         <height>2</height>
+         <width>20</width>
+         <height>40</height>
         </size>
        </property>
-       <property name="currentIndex">
-        <number>2</number>
-       </property>
-       <widget class="QWidget" name="Informations">
-        <property name="geometry">
-         <rect>
-          <x>0</x>
-          <y>0</y>
-          <width>374</width>
-          <height>276</height>
-         </rect>
-        </property>
-        <attribute name="label">
-         <string>Informations</string>
-        </attribute>
-        <layout class="QFormLayout" name="formLayout_2">
-         <property name="fieldGrowthPolicy">
-          <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
-         </property>
-         <item row="0" column="0">
-          <widget class="QLabel" name="titreLabel">
-           <property name="text">
-            <string>Titre</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="1">
-          <widget class="QLineEdit" name="title_LineEdit">
-           <property name="text">
-            <string/>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="0">
-          <widget class="QLabel" name="timeLabel">
-           <property name="text">
-            <string>Mesure</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="1">
-          <widget class="QComboBox" name="time_combobox">
-           <property name="enabled">
-            <bool>true</bool>
-           </property>
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>28</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>56</width>
-             <height>16777215</height>
-            </size>
-           </property>
-           <property name="currentIndex">
-            <number>0</number>
-           </property>
-           <item>
-            <property name="text">
-             <string>2/2</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>2/4</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>3/4</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>3/8</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>4/4</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>4/2</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>5/4</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>6/4</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>6/8</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>7/4</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>7/8</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>8/4</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>9/8</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>12/8</string>
-            </property>
-           </item>
-          </widget>
-         </item>
-         <item row="2" column="0">
-          <widget class="QLabel" name="keyLabel">
-           <property name="text">
-            <string>Armure</string>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="1">
-          <widget class="QComboBox" name="key_combobox">
-           <property name="enabled">
-            <bool>true</bool>
-           </property>
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>56</width>
-             <height>16777215</height>
-            </size>
-           </property>
-           <property name="iconSize">
-            <size>
-             <width>29</width>
-             <height>20</height>
-            </size>
-           </property>
-           <item>
-            <property name="text">
-             <string>c \major</string>
-            </property>
-            <property name="icon">
-             <iconset resource="../Ressources.qrc">
-              <normaloff>:/icons/ressources/icons/C-major.svg</normaloff>:/icons/ressources/icons/C-major.svg</iconset>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>g \major</string>
-            </property>
-            <property name="icon">
-             <iconset resource="../Ressources.qrc">
-              <normaloff>:/icons/ressources/icons/G-major.svg</normaloff>:/icons/ressources/icons/G-major.svg</iconset>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>d \major</string>
-            </property>
-            <property name="icon">
-             <iconset resource="../Ressources.qrc">
-              <normaloff>:/icons/ressources/icons/D-major.svg</normaloff>:/icons/ressources/icons/D-major.svg</iconset>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>a \major</string>
-            </property>
-            <property name="icon">
-             <iconset resource="../Ressources.qrc">
-              <normaloff>:/icons/ressources/icons/A-major.svg</normaloff>:/icons/ressources/icons/A-major.svg</iconset>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>e \major</string>
-            </property>
-            <property name="icon">
-             <iconset resource="../Ressources.qrc">
-              <normaloff>:/icons/ressources/icons/E-major.svg</normaloff>:/icons/ressources/icons/E-major.svg</iconset>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>b \major</string>
-            </property>
-            <property name="icon">
-             <iconset resource="../Ressources.qrc">
-              <normaloff>:/icons/ressources/icons/B-major.svg</normaloff>:/icons/ressources/icons/B-major.svg</iconset>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>fis \major</string>
-            </property>
-            <property name="icon">
-             <iconset resource="../Ressources.qrc">
-              <normaloff>:/icons/ressources/icons/F-sharp-major.svg</normaloff>:/icons/ressources/icons/F-sharp-major.svg</iconset>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>cis \major</string>
-            </property>
-            <property name="icon">
-             <iconset resource="../Ressources.qrc">
-              <normaloff>:/icons/ressources/icons/C-sharp-major.svg</normaloff>:/icons/ressources/icons/C-sharp-major.svg</iconset>
-            </property>
-           </item>
-          </widget>
-         </item>
-         <item row="3" column="0">
-          <widget class="QLabel" name="tempoLabel">
-           <property name="text">
-            <string>Tempo</string>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="1">
-          <layout class="QHBoxLayout" name="layoutTempo">
-           <property name="spacing">
-            <number>0</number>
-           </property>
-           <item>
-            <widget class="QComboBox" name="tempo_comboBox">
-             <property name="maximumSize">
-              <size>
-               <width>46</width>
-               <height>16777215</height>
-              </size>
-             </property>
-             <property name="currentIndex">
-              <number>0</number>
-             </property>
-             <property name="iconSize">
-              <size>
-               <width>20</width>
-               <height>20</height>
-              </size>
-             </property>
-             <item>
-              <property name="text">
-               <string>1</string>
-              </property>
-              <property name="icon">
-               <iconset resource="../Ressources.qrc">
-                <normaloff>:/icons/ressources/icons/ronde.svg</normaloff>:/icons/ressources/icons/ronde.svg</iconset>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>2</string>
-              </property>
-              <property name="icon">
-               <iconset resource="../Ressources.qrc">
-                <normaloff>:/icons/ressources/icons/blanche.svg</normaloff>:/icons/ressources/icons/blanche.svg</iconset>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>4</string>
-              </property>
-              <property name="icon">
-               <iconset resource="../Ressources.qrc">
-                <normaloff>:/icons/ressources/icons/noire.svg</normaloff>:/icons/ressources/icons/noire.svg</iconset>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>4.</string>
-              </property>
-              <property name="icon">
-               <iconset resource="../Ressources.qrc">
-                <normaloff>:/icons/ressources/icons/noire-dot.svg</normaloff>:/icons/ressources/icons/noire-dot.svg</iconset>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>8</string>
-              </property>
-              <property name="icon">
-               <iconset resource="../Ressources.qrc">
-                <normaloff>:/icons/ressources/icons/croche.svg</normaloff>:/icons/ressources/icons/croche.svg</iconset>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>8.</string>
-              </property>
-              <property name="icon">
-               <iconset resource="../Ressources.qrc">
-                <normaloff>:/icons/ressources/icons/crochedot.svg</normaloff>:/icons/ressources/icons/crochedot.svg</iconset>
-              </property>
-             </item>
-            </widget>
-           </item>
-           <item>
-            <widget class="QLabel" name="label_equal">
-             <property name="maximumSize">
-              <size>
-               <width>11</width>
-               <height>16777215</height>
-              </size>
-             </property>
-             <property name="text">
-              <string>=</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QSpinBox" name="tempo_spinBox">
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>30</height>
-              </size>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>60</width>
-               <height>16777215</height>
-              </size>
-             </property>
-             <property name="maximum">
-              <number>999</number>
-             </property>
-             <property name="value">
-              <number>130</number>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <spacer name="horizontalSpacer">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>40</width>
-               <height>20</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-          </layout>
-         </item>
-         <item row="6" column="0" colspan="2">
-          <widget class="Line" name="line">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-          </widget>
-         </item>
-         <item row="8" column="0">
-          <layout class="QHBoxLayout" name="horizontalLayout"/>
-         </item>
-         <item row="10" column="0">
-          <widget class="QLabel" name="bassLabel">
-           <property name="text">
-            <string>Rythme</string>
-           </property>
-          </widget>
-         </item>
-         <item row="10" column="1">
-          <layout class="QHBoxLayout" name="horizontalLayout_3">
-           <property name="topMargin">
-            <number>0</number>
-           </property>
-           <item>
-            <widget class="QComboBox" name="rythm_comboBox">
-             <property name="currentIndex">
-              <number>2</number>
-             </property>
-             <item>
-              <property name="text">
-               <string>B a</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>B a </string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>B a a </string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>B aB a</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>B a B a </string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>B a a B a </string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>B a a B a a </string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>B a a B a a B a </string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>B a a B a a B a a B a </string>
-              </property>
-             </item>
-            </widget>
-           </item>
-           <item>
-            <widget class="QPushButton" name="pushButton">
-             <property name="enabled">
-              <bool>true</bool>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>25</width>
-               <height>25</height>
-              </size>
-             </property>
-             <property name="text">
-              <string/>
-             </property>
-             <property name="icon">
-              <iconset resource="../Ressources.qrc">
-               <normaloff>:/icons/ressources/icons/question.svg</normaloff>:/icons/ressources/icons/question.svg</iconset>
-             </property>
-             <property name="iconSize">
-              <size>
-               <width>20</width>
-               <height>20</height>
-              </size>
-             </property>
-             <property name="flat">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <spacer name="horizontalSpacer_2">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>40</width>
-               <height>20</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-          </layout>
-         </item>
-         <item row="12" column="0" colspan="2">
-          <widget class="Line" name="line_4">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-          </widget>
-         </item>
-         <item row="13" column="0">
-          <widget class="QLabel" name="accordionLabel">
-           <property name="text">
-            <string>Accordéon</string>
-           </property>
-          </widget>
-         </item>
-         <item row="13" column="1">
-          <layout class="QHBoxLayout" name="layoutAccordion">
-           <property name="topMargin">
-            <number>0</number>
-           </property>
-           <item>
-            <widget class="QComboBox" name="accordion_comboBox">
-             <property name="enabled">
-              <bool>true</bool>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>200</width>
-               <height>16777215</height>
-              </size>
-             </property>
-             <item>
-              <property name="text">
-               <string>Mélodéon système stantard</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Mélodéon système Bouchard</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Mélodéon système Sagné</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Diatonique modèle Viennois deux rangées</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Diatonique modèle Viennois deux rangées avec altérations
-supplémentaires</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Diatonique modèle irlandais standard</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Diatonique modèle irlandais inversé</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Diatonique modèle basque - Trikitixa</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Diatonique modèle Viennois deux rangées + 2 boutons</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Diatonique modèle Viennois deux rangées + 2 boutons inversés</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Diatonique modèle Viennois deux rangées + 2 boutons</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Diatonique modèle Viennois deux rangées + 2 boutons inversés</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Diatonique modèle Viennois deux rangées + 5 boutons</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Diatonique modèle Viennois deux rangées + 6 boutons</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Diatonique trois rangées modèle Corgeron</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Diatonique trois rangées modèle Heim</string>
-              </property>
-             </item>
-             <item>
-              <property name="text">
-               <string>Diatonique trois rangées modèle Leray</string>
-              </property>
-             </item>
-            </widget>
-           </item>
-           <item>
-            <widget class="QPushButton" name="infoButton_accordion">
-             <property name="enabled">
-              <bool>true</bool>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>25</width>
-               <height>25</height>
-              </size>
-             </property>
-             <property name="text">
-              <string/>
-             </property>
-             <property name="icon">
-              <iconset resource="../Ressources.qrc">
-               <normaloff>:/icons/ressources/icons/question.svg</normaloff>:/icons/ressources/icons/question.svg</iconset>
-             </property>
-             <property name="iconSize">
-              <size>
-               <width>20</width>
-               <height>20</height>
-              </size>
-             </property>
-             <property name="flat">
-              <bool>true</bool>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <spacer name="horizontalSpacer_4">
-             <property name="orientation">
-              <enum>Qt::Horizontal</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>40</width>
-               <height>20</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-          </layout>
-         </item>
-        </layout>
-       </widget>
-       <widget class="QWidget" name="complements">
-        <property name="geometry">
-         <rect>
-          <x>0</x>
-          <y>0</y>
-          <width>301</width>
-          <height>183</height>
-         </rect>
-        </property>
-        <attribute name="label">
-         <string>Informations complémentaires</string>
-        </attribute>
-        <layout class="QFormLayout" name="formLayout_4">
-         <property name="fieldGrowthPolicy">
-          <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
-         </property>
-         <item row="2" column="1">
-          <widget class="QLineEdit" name="composer_LineEdit">
-           <property name="text">
-            <string/>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="1">
-          <widget class="QLineEdit" name="subtitle_LineEdit">
-           <property name="text">
-            <string/>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="0">
-          <widget class="QLabel" name="compositeurLabel">
-           <property name="text">
-            <string>Compositeur</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="0">
-          <widget class="QLabel" name="sousTitreLabel">
-           <property name="text">
-            <string>Sous-titre</string>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="1">
-          <widget class="QLineEdit" name="poet_LineEdit">
-           <property name="text">
-            <string/>
-           </property>
-          </widget>
-         </item>
-         <item row="4" column="1">
-          <widget class="QLineEdit" name="instrument_LineEdit"/>
-         </item>
-         <item row="5" column="1">
-          <widget class="QLineEdit" name="tagline_LineEdit">
-           <property name="text">
-            <string>\tabliato</string>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="0">
-          <widget class="QLabel" name="poetLabel">
-           <property name="text">
-            <string>Poète</string>
-           </property>
-          </widget>
-         </item>
-         <item row="4" column="0">
-          <widget class="QLabel" name="instrumentLabel">
-           <property name="text">
-            <string>Instrument</string>
-           </property>
-          </widget>
-         </item>
-         <item row="5" column="0">
-          <widget class="QLabel" name="taglineLabel">
-           <property name="text">
-            <string>Tagline</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </widget>
-       <widget class="QWidget" name="options">
-        <property name="enabled">
-         <bool>true</bool>
-        </property>
-        <property name="geometry">
-         <rect>
-          <x>0</x>
-          <y>0</y>
-          <width>301</width>
-          <height>208</height>
-         </rect>
-        </property>
-        <attribute name="label">
-         <string>Options</string>
-        </attribute>
-        <layout class="QFormLayout" name="formLayout">
-         <property name="fieldGrowthPolicy">
-          <enum>QFormLayout::AllNonFixedFieldsGrow</enum>
-         </property>
-         <item row="3" column="0">
-          <widget class="QGroupBox" name="system_groupBox">
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="title">
-            <string>Système de tablature</string>
-           </property>
-           <layout class="QHBoxLayout" name="horizontalLayout_8">
-            <item>
-             <widget class="QRadioButton" name="cadb_radio">
-              <property name="text">
-               <string>CADB</string>
-              </property>
-              <property name="checked">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QRadioButton" name="cogeron_radio">
-              <property name="text">
-               <string>Corgeron</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </widget>
-         </item>
-         <item row="8" column="0">
-          <widget class="QGroupBox" name="groupBox">
-           <property name="minimumSize">
-            <size>
-             <width>0</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="title">
-            <string>Afficher la ligne de doigtés</string>
-           </property>
-           <layout class="QHBoxLayout" name="horizontalLayout_10">
-            <item>
-             <widget class="QRadioButton" name="displayFingering_yes">
-              <property name="text">
-               <string>Oui</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QRadioButton" name="displayFingering_no">
-              <property name="text">
-               <string>Non</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </widget>
-         </item>
-        </layout>
-       </widget>
-      </widget>
+      </spacer>
      </item>
     </layout>
    </widget>
@@ -1171,8 +1178,8 @@ supplémentaires</string>
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>346</width>
-          <height>575</height>
+          <width>317</width>
+          <height>1070</height>
          </rect>
         </property>
        </widget>
@@ -1564,8 +1571,8 @@ color: rgb(255, 255, 255);</string>
    </attribute>
    <widget class="QWidget" name="insertTextDockLayout">
     <layout class="QGridLayout" name="gridLayout_2">
-     <item row="1" column="3">
-      <widget class="QPushButton" name="rest128">
+     <item row="1" column="2">
+      <widget class="QPushButton" name="rest64">
        <property name="sizePolicy">
         <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
          <horstretch>0</horstretch>
@@ -1589,13 +1596,108 @@ color: rgb(255, 255, 255);</string>
        </property>
        <property name="icon">
         <iconset resource="../Ressources.qrc">
-         <normaloff>:/icons/ressources/icons/rest128.svg</normaloff>:/icons/ressources/icons/rest128.svg</iconset>
+         <normaloff>:/icons/ressources/icons/rest64.svg</normaloff>:/icons/ressources/icons/rest64.svg</iconset>
        </property>
        <property name="iconSize">
         <size>
          <width>25</width>
          <height>25</height>
         </size>
+       </property>
+       <property name="flat">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="3">
+      <widget class="QPushButton" name="rest8">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>40</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>40</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="../Ressources.qrc">
+         <normaloff>:/icons/ressources/icons/rest8.svg</normaloff>:/icons/ressources/icons/rest8.svg</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>25</width>
+         <height>25</height>
+        </size>
+       </property>
+       <property name="flat">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="1">
+      <spacer name="verticalSpacer">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>40</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="0" column="2">
+      <widget class="QPushButton" name="rest4">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>40</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>40</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="../Ressources.qrc">
+         <normaloff>:/icons/ressources/icons/rest4.svg</normaloff>:/icons/ressources/icons/rest4.svg</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>25</width>
+         <height>25</height>
+        </size>
+       </property>
+       <property name="autoDefault">
+        <bool>false</bool>
+       </property>
+       <property name="default">
+        <bool>false</bool>
        </property>
        <property name="flat">
         <bool>true</bool>
@@ -1628,44 +1730,6 @@ color: rgb(255, 255, 255);</string>
        <property name="icon">
         <iconset resource="../Ressources.qrc">
          <normaloff>:/icons/ressources/icons/rest1.svg</normaloff>:/icons/ressources/icons/rest1.svg</iconset>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>25</width>
-         <height>25</height>
-        </size>
-       </property>
-       <property name="flat">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="0">
-      <widget class="QPushButton" name="rest16">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="minimumSize">
-        <size>
-         <width>40</width>
-         <height>40</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>40</width>
-         <height>40</height>
-        </size>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="icon">
-        <iconset resource="../Ressources.qrc">
-         <normaloff>:/icons/ressources/icons/rest16.svg</normaloff>:/icons/ressources/icons/rest16.svg</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -1716,8 +1780,8 @@ color: rgb(255, 255, 255);</string>
        </property>
       </widget>
      </item>
-     <item row="2" column="3">
-      <widget class="QPushButton" name="endrepeat">
+     <item row="1" column="3">
+      <widget class="QPushButton" name="rest128">
        <property name="sizePolicy">
         <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
          <horstretch>0</horstretch>
@@ -1741,7 +1805,121 @@ color: rgb(255, 255, 255);</string>
        </property>
        <property name="icon">
         <iconset resource="../Ressources.qrc">
-         <normaloff>:/icons/ressources/icons/endrepeat.svg</normaloff>:/icons/ressources/icons/endrepeat.svg</iconset>
+         <normaloff>:/icons/ressources/icons/rest128.svg</normaloff>:/icons/ressources/icons/rest128.svg</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>25</width>
+         <height>25</height>
+        </size>
+       </property>
+       <property name="flat">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1">
+      <widget class="QPushButton" name="slurs">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>40</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>40</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="../Ressources.qrc">
+         <normaloff>:/icons/ressources/icons/slurs.svg</normaloff>:/icons/ressources/icons/slurs.svg</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>25</width>
+         <height>25</height>
+        </size>
+       </property>
+       <property name="flat">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QPushButton" name="rest16">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>40</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>40</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="../Ressources.qrc">
+         <normaloff>:/icons/ressources/icons/rest16.svg</normaloff>:/icons/ressources/icons/rest16.svg</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>25</width>
+         <height>25</height>
+        </size>
+       </property>
+       <property name="flat">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QPushButton" name="endbar">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>40</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>40</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="../Ressources.qrc">
+         <normaloff>:/icons/ressources/icons/endbar.svg</normaloff>:/icons/ressources/icons/endbar.svg</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -1833,215 +2011,6 @@ color: rgb(255, 255, 255);</string>
        </property>
       </widget>
      </item>
-     <item row="1" column="2">
-      <widget class="QPushButton" name="rest64">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="minimumSize">
-        <size>
-         <width>40</width>
-         <height>40</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>40</width>
-         <height>40</height>
-        </size>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="icon">
-        <iconset resource="../Ressources.qrc">
-         <normaloff>:/icons/ressources/icons/rest64.svg</normaloff>:/icons/ressources/icons/rest64.svg</iconset>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>25</width>
-         <height>25</height>
-        </size>
-       </property>
-       <property name="flat">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="3">
-      <widget class="QPushButton" name="rest8">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="minimumSize">
-        <size>
-         <width>40</width>
-         <height>40</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>40</width>
-         <height>40</height>
-        </size>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="icon">
-        <iconset resource="../Ressources.qrc">
-         <normaloff>:/icons/ressources/icons/rest8.svg</normaloff>:/icons/ressources/icons/rest8.svg</iconset>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>25</width>
-         <height>25</height>
-        </size>
-       </property>
-       <property name="flat">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="2">
-      <widget class="QPushButton" name="beginrepaeat">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="minimumSize">
-        <size>
-         <width>40</width>
-         <height>40</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>40</width>
-         <height>40</height>
-        </size>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="icon">
-        <iconset resource="../Ressources.qrc">
-         <normaloff>:/icons/ressources/icons/beginrepeat.svg</normaloff>:/icons/ressources/icons/beginrepeat.svg</iconset>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>25</width>
-         <height>25</height>
-        </size>
-       </property>
-       <property name="flat">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-     <item row="4" column="1">
-      <spacer name="verticalSpacer">
-       <property name="orientation">
-        <enum>Qt::Vertical</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>20</width>
-         <height>40</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item row="0" column="2">
-      <widget class="QPushButton" name="rest4">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="minimumSize">
-        <size>
-         <width>40</width>
-         <height>40</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>40</width>
-         <height>40</height>
-        </size>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="icon">
-        <iconset resource="../Ressources.qrc">
-         <normaloff>:/icons/ressources/icons/rest4.svg</normaloff>:/icons/ressources/icons/rest4.svg</iconset>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>25</width>
-         <height>25</height>
-        </size>
-       </property>
-       <property name="autoDefault">
-        <bool>false</bool>
-       </property>
-       <property name="default">
-        <bool>false</bool>
-       </property>
-       <property name="flat">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="1">
-      <widget class="QPushButton" name="endbar">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="minimumSize">
-        <size>
-         <width>40</width>
-         <height>40</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>40</width>
-         <height>40</height>
-        </size>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="icon">
-        <iconset resource="../Ressources.qrc">
-         <normaloff>:/icons/ressources/icons/endbar.svg</normaloff>:/icons/ressources/icons/endbar.svg</iconset>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>25</width>
-         <height>25</height>
-        </size>
-       </property>
-       <property name="flat">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
      <item row="3" column="0">
       <widget class="QPushButton" name="tie">
        <property name="sizePolicy">
@@ -2080,8 +2049,8 @@ color: rgb(255, 255, 255);</string>
        </property>
       </widget>
      </item>
-     <item row="3" column="1">
-      <widget class="QPushButton" name="slurs">
+     <item row="2" column="3">
+      <widget class="QPushButton" name="endrepeat">
        <property name="sizePolicy">
         <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
          <horstretch>0</horstretch>
@@ -2105,7 +2074,45 @@ color: rgb(255, 255, 255);</string>
        </property>
        <property name="icon">
         <iconset resource="../Ressources.qrc">
-         <normaloff>:/icons/ressources/icons/slurs.svg</normaloff>:/icons/ressources/icons/slurs.svg</iconset>
+         <normaloff>:/icons/ressources/icons/endrepeat.svg</normaloff>:/icons/ressources/icons/endrepeat.svg</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>25</width>
+         <height>25</height>
+        </size>
+       </property>
+       <property name="flat">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="2">
+      <widget class="QPushButton" name="beginrepaeat">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>40</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>40</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="../Ressources.qrc">
+         <normaloff>:/icons/ressources/icons/beginrepeat.svg</normaloff>:/icons/ressources/icons/beginrepeat.svg</iconset>
        </property>
        <property name="iconSize">
         <size>

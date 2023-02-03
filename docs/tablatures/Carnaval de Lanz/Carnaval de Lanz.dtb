@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tabliato>
+    <propertie time="2/2" displayFingering="true" tagline="\tabliato" motif="22" system="cadb" rythm="B a B a " composer="Trad. Pays Basque" poet="" title="Carnaval de Lanz" key="g \major" instrument="" subtitle="" tempo="4=180" accordion="ctl1gc"/>
+    <tabulature>\partial 4 p7:8 6' [g:8 r:8]
+
+\repeat volta 2
+{
+8:4 8:8 7' t7' 8 6' 7 [G D]
+p6:4. 7:8 7:4 7 G
+t7:4. 6':8 8:4 7' D 
+p7':2 t7':4 6':8 8 [C D]
+
+\break
+
+p8:4 8:8 7' t7' 8 6' 7 [G G] % change
+p6:4. 7:8 7:4 7 G
+t7:4. 6':8 8:4 7' D
+}
+\alternative
+{
+  { p6:2. 7:8 6' G }
+  { p6:1 G }
+}
+
+\break
+
+\repeat volta 2
+{
+p6:4. 7:8 8:4 9 G 
+p9:4 t10 11:2 [G d D d]
+t7:4. 6:8 8:4 9 D
+p7':4 8:4 7:2 G
+
+\break
+
+p6:4. 7:8 8:4 9 G
+p9:4 t10 11:4. p9:8 [G d D d]
+t10:4 7' 9 10 D
+p9:1 G
+}</tabulature>
+    <lyric></lyric>
+</tabliato>

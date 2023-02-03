@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tabliato>
-    <propertie time="3/4" key="c \major" tempo="4=130" instrument="" tagline="\tabliato" title="Valse triste" motif="3" subtitle="" accordion="ctl1gc" rythm="B a a " displayFingering="auto" composer="Trad." poet="" system="cadb"/>
-    <tabulature>\repeat volta 2 
-{
+    <propertie accordion="ctl1gc" instrument="" tagline="\tabliato" key="c \major" poet="" tempo="4=130" motif="3" rythm="B a a " displayFingering="true" system="cadb" composer="Trad." subtitle="" title="Valse triste" time="3/4"/>
+    <tabulature>\tweak X-offset #0 \mark \markup{ \override #'(box-padding . 0.5) \box  \caps "Partie 1"}
+
   t5:2. 4' 5
   5:4 4' 5
   p5:2. 4' 5
@@ -19,15 +19,83 @@
   G G G G
   A A A A
   G G G G
-}
 
 \break
 
+\tweak X-offset #0 \mark \markup{ \override #'(box-padding . 0.5) \box  \caps "Partie 2"}
+
+t5:2. 4' 7 A A A
+5:4 7 5 A
+p5:2. 4' 7 G G G
+5:4 7 5 G
+  
+\break
+  
+t4:2. 5 8 A A A
+8:4 6' 7 A
+p7:2. 6' G G
+
+\bar "|." 
+
+\break
+
+\tweak X-offset #0 \mark \markup{ \override #'(box-padding . 0.5) \box  \caps "Variante partie 1"}
+
+  t5:2 4':4 A
+  5:2 4':4  A
+  5:2. A
+  5:4 4' 5 A
+
+  p5:2 4':4 G
+  5:2 4':4 G
+  5:2. G
+  5:4 4' 5 G
+  
+  t4:2 3':4 F
+  4:2 3':4 F
+  4:2. F
+  4:4 3' 4 F
+
+  p4:2. G
+  4:4 3' 5 G
+  4:2. E
+  4:4 3' 5 E
+
+\break
+
+\tweak X-offset #0 \mark \markup{ \override #'(box-padding . 0.5) \box  \caps "Variante partie 2"}
+
+  t5:2. A
+  4':4 5 4' A
+  7:2. A
+  5:4 7 5 A
+
+  p5:2. G
+  4':4 5 4' G
+  7:2. G
+  5:4 7 5 G
+
+  t4:2. F
+  3':4 4 3' F
+  7:2. F
+  7:4 6' 8 F
+
+  p7:2. G
+  7:4 6' 8 G
+  7:2. E
+  4:4 3' 5 E
+
+\tweak X-offset #0 \mark \markup{ \override #'(box-padding . 0.5) \box  \caps "Variante partie 2"}
+
 \repeat volta 2 
 {
-  t5:2. 4' 7
-  5:4 7 5
-  p5:2. 4' 7
+  t5:4 4' 5
+  5 4' 5
+  8:2.
+  5:4 4' 5
+  p5 4' 5
+  5 4' 5
+  7:2.
   5:4 7 5
   
   \break
@@ -39,12 +107,12 @@
   A A A A
   G G G G
   A A A A
-  G G
+  G G 
 }
 \alternative
 {
   { p7 5:4 4' 5 G G }
-  { t7:2.~ 7 A A }
-} </tabulature>
+  { t7:2. ~ t7 A A }
+}</tabulature>
     <lyric></lyric>
 </tabliato>

@@ -295,10 +295,10 @@ void MainWindow::updateUIFromMusic(Tabulature tab)
     else
         ui->cadb_radio->setChecked(true);
 
-    if ((tab.get("displayFingering") == "true") || (tab.get("displayFingering") == "auto"))
+    /*if ((tab.get("displayFingering") == "true") || (tab.get("displayFingering") == "auto"))
         ui->displayFingering_yes->setChecked(true);
     else
-        ui->displayFingering_no->setChecked(true);
+        ui->displayFingering_no->setChecked(true);*/
 }
 
 Tabulature MainWindow::readMusicFromUI()
@@ -327,10 +327,10 @@ Tabulature MainWindow::readMusicFromUI()
     else
         tab.set("system", "cogeron");
 
-    if (ui->displayFingering_yes->isChecked())
+    /*if (ui->displayFingering_yes->isChecked())
         tab.set("displayFingering", "true");
     else
-        tab.set("displayFingering", "false");
+        tab.set("displayFingering", "false");*/
 
     return tab;
 }

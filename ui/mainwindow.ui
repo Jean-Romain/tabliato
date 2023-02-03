@@ -58,7 +58,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>378</width>
+         <width>280</width>
          <height>1059</height>
         </rect>
        </property>
@@ -89,7 +89,7 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>378</width>
+         <width>280</width>
          <height>1059</height>
         </rect>
        </property>
@@ -251,8 +251,8 @@
    </property>
    <property name="minimumSize">
     <size>
-     <width>200</width>
-     <height>600</height>
+     <width>0</width>
+     <height>0</height>
     </size>
    </property>
    <property name="sizeIncrement">
@@ -995,13 +995,7 @@ QGroupBox::title {
       </widget>
      </item>
      <item>
-      <widget class="QGroupBox" name="system_groupBox">
-       <property name="minimumSize">
-        <size>
-         <width>0</width>
-         <height>0</height>
-        </size>
-       </property>
+      <widget class="QGroupBox" name="formGroupBox">
        <property name="styleSheet">
         <string notr="true"> QGroupBox {
  background-color: rgb(232, 235, 238);
@@ -1021,11 +1015,11 @@ QGroupBox::title {
        <property name="title">
         <string>Mise en page</string>
        </property>
-       <layout class="QFormLayout" name="formLayout_2">
+       <layout class="QFormLayout" name="formLayout_3">
         <item row="0" column="0">
-         <widget class="QLabel" name="formatLabel">
+         <widget class="QLabel" name="formatLabel_2">
           <property name="text">
-           <string>Format tablature</string>
+           <string>Format</string>
           </property>
          </widget>
         </item>
@@ -1050,47 +1044,6 @@ QGroupBox::title {
           </item>
           <item>
            <spacer name="horizontalSpacer_9">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>40</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-         </layout>
-        </item>
-        <item row="4" column="0">
-         <widget class="QLabel" name="afficherDoigtLabel">
-          <property name="text">
-           <string>Afficher doigté</string>
-          </property>
-         </widget>
-        </item>
-        <item row="4" column="1">
-         <layout class="QHBoxLayout" name="horizontalLayout">
-          <item>
-           <widget class="QRadioButton" name="displayFingering_yes">
-            <property name="text">
-             <string>Oui</string>
-            </property>
-            <property name="checked">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QRadioButton" name="displayFingering_no">
-            <property name="text">
-             <string>Non</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <spacer name="horizontalSpacer_7">
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
             </property>

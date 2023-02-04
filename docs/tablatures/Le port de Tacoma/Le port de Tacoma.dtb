@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tabliato>
+    <propertie system="cadb" poet="" accordion="ctl1gc" motif="22" tagline="\tabliato" time="4/4" title="Le port de Tacoma" composer="Hugues Aufray" rythm="B a B a " subtitle="" tempo="4=180" key="g \major" instrument=""/>
+    <tabulature>p8:4 8:8 8 7:4 8 G
+7' 8 7:2 G
+7:4 t7:2. [G D]
+7:4 t7:2. [G D]
+
+\break
+
+p8:4 8:8 8 7:4 8 G
+7' 8 7:2 G
+t7:4 7 6' 7 D
+p6:1 G
+
+\break
+
+p6:4. 6:8 7:4 8 G
+9:2. t10:4 G
+9:4. 10:8 p9:4 t9 [D d G g]
+p8:1 G
+
+\break
+
+p8:4 8:8 8 7:4 8:8 8 G
+7':4 8 7 7:8 7 G
+t7:4 7 6' 7 D
+p6:1 G
+
+\bar "|." </tabulature>
+    <lyric></lyric>
+</tabliato>

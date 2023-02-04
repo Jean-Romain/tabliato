@@ -8,19 +8,14 @@ title: Tabliato
 
 <h2>Logiciel de tablatures pour accordéon diatonique</h2>
 
-	<p>Tabliato est un logiciel libre permettant de créer des tablatures de grande qualité pour accordéon diatonique.</p>
+	<p>Tabliato est un logiciel libre et gratuit permettant de créer des tablatures de grande qualité pour accordéon diatonique.</p>
 	
-	<p>Tabliato permet de saisir facilement une tablature. Vous entrez le numéro des touches au clavier et le programme 
+	<p>Tabliato permet de saisir facilement une tablature. L'utilisateur entre le numéro des touches au clavier et le programme 
 	se charge de produire une tablature de qualité professionelle. Tabliato repose sur Lilypond, un logiciel libre de gravure 
 	musicale, destiné à produire des partitions de grande qualité.</p>
 
-
-	<p>Si vous cherchez un moyen simple, libre et gratuit d'écrire vos tablatures d'accordéon diatonique, Tabliato est le bon logiciel. 
-	Visitez la page « <a href="features.html"> en savoir plus</a> » pour une description détaillée du logiciel.</p>
-
 	<p class="center">
-		<a href="img/slideview.png" class="fancybox"><img src="img/slideview_700.png" alt="Screenshoots"/></a><br>
-		<a href="screenshoots.html">&gt; Voir plus de screenshots </a>
+		<a href="img/slideview.png" class="fancybox"><img src="img/slideview_700.png" alt="Screenshoots"/></a>
 	</p>
 	
 	<p class="psmall center"><a class="btn" href="download.html">Télécharger Tabliato</a></p>
@@ -28,14 +23,75 @@ title: Tabliato
 
 	<div class="clear"></div>
 
-<h2>Caractéristiques principales</h2>
+<!-- <ol>
+	<li><a href="#UI">Interface graphique</a></li>
+	<li><a href="#Interpretation">Interprétation automatique</a></li>
+	<li><a href="#Transposition">Transposition du système CADB et Cogeron</a></li>
+	<li><a href="#Lecture">Lecture de la musique</a></li>
+	<li><a href="#Tracking">Suivi de la musique</a></li>
+	<li><a href="#Coloration">Coloration syntaxique du code</a></li>
+	<li><a href="#Musique">Export de la musique au format audio</a></li>
+	<li><a href="#Export">Export de la tablature</a></li>
+</ol> -->
+			
+<h2 id="UI">Interface graphique</h2>	
+	
+<p>L'interface graphique permet de saisir la musique en simplifiant la syntaxe. L'écriture de la partition 
+au clavier plutôt que l'édition avec une souris peut sembler plus difficile. En réalité, les utilisateurs de Lilypond 
+ou de LaTeX le savent, elle se révèle dans la pratique incroyablement plus simple, rapide et puissante.</p>
 
-	<ul>
-		<li>Entrez uniquement les touches, leur durée et l'accompagnemment, le logiciel s'occupe du reste</li>
-		<li>Coloration syntaxique dédiée à l'accordéon</li>
-		<li>Permet de produire et de transposer des tablatures dans les systèmes CADB et Corgeron</li>
-		<li>Export de la musique au format audio .midi et .wav</li>
-		<li>Possibilité d'écouter le morceau pendant son écriture</li>
-		<li>Export de la tablature aux formats .pdf .png et .ly</li>
-		<li>Des exemples pré-installés</li>
-	</ul>
+<p class="center"><a href="img/screen-tabliato.png" class="fancybox"><img src="img/screen-tabliato_600.png" alt="Screenshots"></a></p>
+
+<h2 id="Interpretation">Interprétation automatique</h2>
+
+Vous n'avez pas à entrer les notes. Entrez uniquement les touches de l'accordéon. Ainsi même sans connaître la musique 
+vous pouvez écrire des tablatures. Cependant l'inverse fonctionne aussi. Entrez les notes et tabliato trouve le ou les boutons correspondants. Lisez la page sur la <a href="doc.html">syntaxe d'écriture de tablatures</a>.
+
+<h2 id="Transposition">Transposition du système CADB et Corgeron</h2>
+
+<p>Écrivez la musique une seule fois et exportez la tablature dans votre système préféré. 
+Vous écrivez les numéros des boutons et le logiciel se charge de convertir soit 
+dans le système CADB soit dans le système Corgeron au choix.</p>
+
+<p class="center"><img src="img/feature-systeme.png" alt="Screenshots"></p>
+
+<h2 id="Musique">Lecture de la musique au format audio</h2>
+
+<p>Tabliato exporte aussi le fichier son de votre partition au format 
+<a href="http://fr.audiofanzine.com/bien-debuter/editorial/dossiers/le-midi-pour-les-nuls.html">midi</a>
+ ou ogg. Une fonction de lecture permet de lire directement la musique dans le logiciel. Un soin particulier
+ a été mis dans le rendu de la musique générée en utilisant de vrais enregistrements d'accordéons.</p>
+
+<p class="center">
+	<audio controls>
+		<source src="music/danse-ours.mp3" type="audio/mp3">
+		Your browser does not support the audio element.
+	</audio>
+	<br/>Danse de l'ours - Musique générée par tabliato
+</p>
+
+<p class="center">
+	<audio controls>
+		<source src="music/en-avant-blonde.ogg" type="audio/ogg">
+		Your browser does not support the audio element.
+	</audio>
+	<br/>En avant blonde - Musique générée par tabliato
+</p>
+
+<h2 id="Tracking">Suivi de la musique</h2>
+
+Lorsque la musique est jouée un curseur suit la musique en direct
+
+<p class="center"><img src="img/feature-tracking.gif" alt="Screenshots"></p>
+
+<h2 id="Coloration">Coloration syntaxique du code</h2>
+
+Le code de la partiton est coloré pour pouvoir le lire plus facilement. Les mots clés de la syntaxe Lilypond sont en bleu tandis que la musique
+est en bleu ou en rouge en fonction du sens poussé ou tiré des notes. La durée est indiquée en jaune.
+
+<p class="center"><img src="img/feature-syntaxe-highlight.png" /><p>
+
+<h2 id="Export">Export de la tablature et de la musique</h2>
+
+Tabliato permet de sauvegarder votre tablature aux formats pdf ou au format image png (préférez le pdf qui permet d'avoir une image vectorielle).
+La musique quant à elle peut être sauvegardée aux formats <a href="http://fr.audiofanzine.com/bien-debuter/editorial/dossiers/le-midi-pour-les-nuls.html">midi</a> ou au format audio wav (windows) ou ogg (linux).

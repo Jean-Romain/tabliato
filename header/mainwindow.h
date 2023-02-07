@@ -86,6 +86,9 @@ class MainWindow : public QMainWindow
         QMap<QString, QString> accordionList;
         QMap<QString, QString> accordionListReverted;
 
+    public:
+       void open(QString filename);
+
     private:
         Tabulature readMusicFromUI();
         void initRythmComboBx();
@@ -93,7 +96,6 @@ class MainWindow : public QMainWindow
         void initSf2ComboBox();
         void updateUIFromMusic(Tabulature tab);
         void terminal(QString str);
-        void open(QString filename);
         void setIcons();
         void updatePreview(QString);
         void exportFiles();

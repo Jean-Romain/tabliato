@@ -2,6 +2,7 @@ all:
 	mkdir -p tabliato
 	mkdir -p tabliato/DEBIAN
 	mkdir -p tabliato/usr/bin/
+	mkdir -p tabliato/usr/share/icons/
 	mkdir -p tabliato/usr/share/applications/
 	mkdir -p tabliato/usr/share/app-install/icons/
 	cp control tabliato/DEBIAN/

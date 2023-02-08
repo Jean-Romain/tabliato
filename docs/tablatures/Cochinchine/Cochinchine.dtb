@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tabliato>
+    <propertie accordion="ctl1gc" time="2/4" title="Cochinchine" key="g \major" subtitle="" motif="2" tagline="\tabliato" tempo="4=140" poet="" rythm="B a (binaire)" composer="Trad. Danemark, Suède" system="cadb" instrument=""/>
+    <tabulature>\repeat volta 2
+{p8:4 8 G
+p7:8 6 7 8 G
+p7 6 7 8 G
+t7' 8 7 6 D
+t7':4 7' D
+p7:8 6 7 8 G
+t7' 8 7 6 D
+p6:2 G} 
+\break
+\repeat volta 2
+{p7:4 7 G
+p5':8 4' 4' 4' E
+t8:4 8 A
+t7:8 6 6 6 D
+t7':4 7' D
+p7:8 6 7 8 G 
+t7' 8 7 6 D
+p6:2 G}</tabulature>
+    <lyric></lyric>
+</tabliato>

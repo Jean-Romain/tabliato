@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tabliato>
+    <propertie accordion="ctl1gc" time="3/4" title="La Valse des Balançoires" key="g \major" subtitle="" motif="3" tagline="\tabliato" tempo="4=160" poet="" rythm="B a a " composer="Trad. (arr. La Chiffonie)" system="cadb" instrument=""/>
+    <tabulature>p5:4 6 7 G
+p8:2 p8:4 G
+p8 t9 p8 [G d g]
+t8 t7:8 t8 t7 t8 D
+t6:2 t7:4 D
+t8:2 t8:4 D
+t8 p8 t8 [D g d]
+p7 p6:8 p7 p6 p7 G
+
+\break
+
+p5:4 6 7 G
+p8:2 p8:4 G
+p8 t9 p8 [G d g]
+t8 t7:8 t8 t7 t8 D
+t6:2 t7:4 D
+t8:2 t8:4 D
+t8 p7 t7 [D g d]
+
+\break
+
+p6 p6:8 p7 p6 p7 G
+p5:4 p5:8 p6 p5 p6 G
+t6:4 t5:8 t6 t5 t6 D
+t4:2 t5:4 D
+t6:8 t4 t5 t6 t5 t6 D
+t6 t4 t5 t6 t5 t6 D
+p6:4 p5:8 p6 p5 p6 G
+p4:2 p5:4 G
+p6:8 p4 5 6 5 6 G
+p6 4 5 6 5 6 G
+t6:4 t5:8 t6 t5 t6 D
+t4:2 t5:4 D
+t6:8 t4 5 6 5 t6 D
+t6 t4 t5 t6 t5 t6 D
+p6:4 p7 p8 G
+p9:2. G</tabulature>
+    <lyric></lyric>
+</tabliato>

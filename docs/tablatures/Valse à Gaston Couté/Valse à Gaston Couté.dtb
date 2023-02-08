@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tabliato>
+    <propertie accordion="ctl1gc" time="3/4" title="Valse à Gaston Couté" key="c \major" subtitle="" motif="3" tagline="\tabliato" tempo="4=160" poet="" rythm="B a a " composer="" system="cadb" instrument=""/>
+    <tabulature>\repeat volta 2
+{t5:4 7 6' A
+t8:2 6':4 A
+t7:2 6':4 A
+t8:2. A
+t7:4 6' 8 A
+p7:2 6:4 G
+p6:2 4':4 G
+p4':2. E
+
+t5:4 7 6' A
+t8:2 6':4 A
+t7:2 6':4 A
+t8:2. A
+t7:4 9 8 A
+p8:2 7:4 G
+p6:2 7:4 G
+t7:2. A}
+\break
+\repeat volta 2
+{t8:4 8 7' A
+p7':2 8:4 C
+p6':2 8:4 C
+p7':2. C
+p6':4 8' 7' C
+t7':2 8:4 G
+t6':2 8:4 G
+p7:2. E
+t5:4 7 6' A
+t8:2 6':4 A
+ t7:2 6':4 A
+t8:2. A
+t7:4 9 8 A
+p8:2 7:4 G
+p6:2 7:4 G
+t7:2. A}
+</tabulature>
+    <lyric></lyric>
+</tabliato>

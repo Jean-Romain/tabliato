@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tabliato>
+    <propertie accordion="ctl1gc" time="6/8" title="Suite de Rondeaux" key="c \major" subtitle="" motif="11" tagline="\tabliato" tempo="4=160" poet="" rythm="B aB a" composer="Trad. (arr. Mélusine)" system="cadb" instrument=""/>
+    <tabulature>\repeat volta 2
+{p7:4 6:8 7:4 8:8 G
+p8 t8 p7 t7 p6 t7 [G D]
+p7:4 p6:8 p7:4 p8:8 G
+p8 t8 p7 t7:4. G}
+
+\repeat volta 2
+{p7:4 p6:8 t7:4 6:8 [G D]
+p5 t5 t6 p6 t6 p6 [G d G g]
+p7:4 p6:8 t7:4 t6:8 [G D]
+p5 t5 t6 p6:4. [G d G g]}
+
+\break
+\repeat volta 2
+{p8:4 p7:8 p8:4 t9:8 [G g G d]
+p8 t8 p7 t7:4 p6:8 [G g D g]
+t8 p7 t7 p7:4 p6:8 [G d G g]
+t7:4 p7:8 t8:4 t7:8 [D g D d]
+p8:4 p7:8 p8:4 t9:8 [G g G d]
+p8 t8 p7 t7:4 p6:8 [G g G d]
+t8 p7 t7 p7:4 p6:8 [G d G g]
+t7:4. t7:4. D}
+
+\break
+p8:8 t8 p7 t7:4 p6:8 [G g D g]
+t8:4 t7:8 p7:4 p6:8 [D d G g]
+t7:4 t8:8 p7:8 t7:8 p6 [D g G g]
+t7:4 p7:8 t8:4 t7:8 [D g D d]
+p8:8 t8 p7 t7:4 p6:8 [G g D g]
+t8:4 t7:8 p7:4 p6:8 [D d G g]
+t7:4 t8:8 p7:8 t7:8 p6 [D g G g]
+t7:4. t7:4 r:8 [D D]
+
+\bar "|." </tabulature>
+    <lyric></lyric>
+</tabliato>

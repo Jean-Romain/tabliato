@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tabliato>
+    <propertie instrument="" accordion="ctl1gc" time="2/2" motif="2" rythm="B a (binaire)" key="c \major" poet="" subtitle="" system="cadb" composer="" tagline="\tabliato" tempo="4=160" title="Scottish - Valse"/>
+    <tabulature>\mbox "Scottish"
+
+\time 2/4
+\motif [B:8 r:8 a:8 r:8]
+
+\partial 8*2 p7:8 t8 [r:4]
+
+\repeat volta 2
+{
+p8:4 t9 G
+p8 t7:8 p7 [G d]
+t8:4 p8 [D g]
+t8:8 p7 t7 p6 D
+t7:4 8 D
+p7 t7:8 p6 [G d]
+t7:4 p7 [D g]
+p6 p7:8 t8 G
+p8:4 t9  [G d]
+p8 t7:8 p7 [G d]
+t8:4 p8 [D g]
+t8:8 p7 t7 p6 D
+t7:4 8 D
+p7 t7:8 p6 [G d]
+t7:4 p7 [D g]
+}
+
+\break
+
+\mbox "Valse"
+
+\time 3/4
+\motif [B:8 r:8 a:8 r:8 a:8 r:8]
+
+\repeat volta 2
+{
+p6:4 p7 t8 [G g d]
+p8 t9 p8 [G d g]
+p8 t7 p7 [G d g]
+t8 p8 t8 [D g d]
+p7 t7 p6 [G d g]
+t7 t8 p7 [D d g]
+p7 t7 p6 [G d g]
+}
+\alternative
+{
+  { t7 p7 t7 [D g d] }
+  { p6:2. G }
+}
+
+\bar "|." 
+
+</tabulature>
+    <lyric></lyric>
+</tabliato>

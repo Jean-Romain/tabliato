@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tabliato>
+    <propertie composer="Emile Lapras" tagline="\tabliato" tempo="4=160" time="3/4" instrument="" subtitle="" accordion="ctl1gc" rythm="B a a " key="c \major" poet="" system="cadb" title="Valse à Marie-Françoise" motif="3"/>
+    <tabulature>\mbox "Partie 1"
+
+\repeat volta 2
+{
+t7:4 6' 8 A
+5:2. A
+t7:4 6' 8 A
+4':2. F
+t7:4 6' 8 A
+p7:2. G
+8:4 7 6 G
+}
+\alternative
+{
+{t5:2. A}
+{t7:2. A}
+}
+\break
+
+\mbox "Partie 2"
+
+\repeat volta 2
+{
+p6':4 8 7' C
+7':2. C
+p8':4 7' 6' C
+t8':2. F
+t9':4 8' 7' G
+}
+\alternative
+{
+  {
+    t6':2. G 
+    t7':4 8' 9' G
+    p8':2. C 
+  }
+  {
+    t6':2 7':4 G
+    t8':2 t6':4 G
+    p6':2. C
+  }
+} 
+
+\bar "|." 
+
+\break
+
+\mbox "Variante partie 1"
+
+\repeat volta 2
+{
+t7:4 6':8 8 6' 7 A
+t5:2. A
+t7:4 6':8 8 6' 7 A
+t4':2. A
+t7:4 6':8 8 6' 7 A
+p7:2. G
+p8:4 7:8 8 7 6 G
+}
+\alternative
+{
+ {t5:2. A}
+ {t7:2. A}
+}
+\bar "|." 
+
+\break
+
+\mbox "Variante partie 2"
+
+\repeat volta 2
+{
+p6':4 8 7' C
+7' 6' 7' C
+8' 7' 6' C
+t8' 7' 8' F
+t9':4 8' 7' F
+t6' t7' t6' G
+}
+\alternative
+{
+ {
+  t7':4 8' 9' G
+  p8':2. C
+ }
+ {
+  t8':4 t9 t7' F
+  t8:2. A
+ }
+}
+\bar "|." 
+
+
+</tabulature>
+    <lyric></lyric>
+</tabliato>

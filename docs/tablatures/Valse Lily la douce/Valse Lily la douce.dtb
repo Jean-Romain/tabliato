@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tabliato>
+    <propertie poet="" rythm="B a a " composer="Daniel Denécheau" instrument="" system="cadb" title="Lily la douce" key="g \major" accordion="ctl1ad" subtitle="Valse à main droite seule" tempo="4=130" tagline="\tabliato" time="3/4" motif="3"/>
+    <tabulature>p6':4 &lt;7' 8'> &lt;7' 8'>
+7 &lt;7' 8'> &lt;7' 8'> 
+t7 p&lt;7' 8'> &lt;7' 8'>
+6 &lt;7' 8'> &lt;7' 8'>
+6' &lt;7' 8'> &lt;7' 8'>
+7 &lt;7' 8'> &lt;7' 8'>
+t5' &lt;7' 8'> &lt;7' 8'>
+4' &lt;7' 8'> &lt;7' 8'>
+7' &lt;8' 9'> &lt;8' 9'>
+8 &lt;8' 9'> &lt;8' 9'>
+6' &lt;8' 9'> &lt;8' 9'>
+7' &lt;8' 9'> &lt;8' 9'>
+8 &lt;8' 9'> &lt;8' 9'>
+6' &lt;8' 9'> &lt;8' 9'>
+p7' &lt;8' 9'> &lt;8' 9'>
+5' &lt;8' 9'> &lt;8' 9'>
+
+\break
+
+p6' &lt;7' 8'> &lt;7' 8'>
+6' &lt;7' 8'> &lt;7' 8'> 
+7 &lt;7' 8'> &lt;7' 8'>
+7 &lt;7' 8'> &lt;7' 8'>
+t7 &lt;8 9> &lt;8 9>
+7 &lt;8 9> &lt;8 9>
+p6' &lt;6' 7'> &lt;6' 7'>
+6' &lt;6' 7'> &lt;6' 7'>
+t6 &lt;7 7'> &lt;7 7'>
+6 &lt;7 7'> &lt;7 7'>
+4' &lt;7 7'> &lt;7 7'>
+4' &lt;7 7'> &lt;7 7'>
+4' &lt;7 7'> &lt;7 7'>
+p6 &lt;7 8> &lt;7 8>
+6 &lt;7 8> &lt;7 8>
+6 &lt;7 8> &lt;7 8>
+6 &lt;7 8> &lt;7 8></tabulature>
+    <lyric></lyric>
+</tabliato>

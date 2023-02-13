@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tabliato>
+    <propertie instrument="" system="cadb" composer="Maxou Heintzen" poet="" subtitle="Mazurka" accordion="ctl1gc" title="L'inconnu de Limoise" time="9/8" rythm="B a a " motif="3" key="c \major" tagline="\tabliato" tempo="4=150"/>
+    <tabulature>\partial 2 p6:8 p6':4 p8:8 [r:2]
+
+p7':4. ~ p7':4 p6':8 t8':4 t7':8 C
+t9:4. ~ t9:4 t9:8 t8':4 p8':8 A
+t8':4. ~ t8':4 t9:8 t7':4 t8:8 F
+
+\break
+
+p6:4. ~ p6:4 p6:8 p6':4 p8:8 G
+p7':4. ~ p7':4 p6':8 t8':4 t7':8 [C c g]
+t9:4. ~ t9:4 t9:8 t8':4 p8':8 A
+t8':4. ~ t8':4 t9:8 t7':4 t8:8 F
+t7':4. ~ t7':4 t9:8 t8':4 p8':8 G
+
+\break
+
+\repeat volta 2
+{
+   t9':4. p9':4 t10':8 t9':4 t10':8 F
+   p8':4. p8':4 t8':8 p7':4 p8:8 C
+   t8:4 t6':8 t8:4 t7':8 t9:4 t8:8 A
+   p6:2. p6':4 p7:8 E
+   t7:4. t7:4 t6':8 t8:4 t7':8 F
+   t8:4. t6':4. t7:4. F
+   p7:4. p7:4 p6':8 p8:4 p7':8 G
+}
+\alternative
+{
+   {p8:4. p8:4 p7':8 t8':4 p8':8 G}
+   {p6':4. ~ p6':4 [C:4. r:4]}
+}
+
+\bar "|." </tabulature>
+    <lyric></lyric>
+</tabliato>

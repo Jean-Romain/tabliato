@@ -66,7 +66,7 @@ Highlighter::Highlighter(QTextDocument *parent) : QSyntaxHighlighter(parent)
 
     // Pattern de reconnaissance des mots clés
     QStringList keywordPatterns;
-    keywordPatterns << "(\\\\[a-z]+)" << "(volta[ ]?[0-9]?)" << "(Timing.[a-zA-Z]+ ?={1} ?.*)";
+    keywordPatterns << "(\\\\[a-z]+)" << "(volta[ ]?[0-9]?)" << "(segno[ ]?[0-9]?)" << "(Timing.[a-zA-Z]+ ?={1} ?.*)";
     foreach (const QString &pattern, keywordPatterns)
     {
         rule.pattern = QRegExp(pattern);

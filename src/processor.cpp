@@ -51,7 +51,7 @@ void TabliatoProcessor::parseMusic()
     tabulature.replace("\t", " ");             // Remplace les m_tabulations par des espaces
     tabulature.replace("~", " ~");             // Ajoute un espace avant les ~ des liaisons des notes
     tabulature.replace("\n", " \n ");          // Protection des retours chariots pour linéariser le contenu
-    tabulature.replace("volta 2", "volta:2");  // Protection d'un cas particulier
+    //tabulature.replace("volta 2", "volta:2");  // Protection d'un cas particulier
     tabulature.replace("<<", " \\doubelt ");   // Protection de << pour les contre chants
     tabulature.replace(">>", " \\doubegt ");   // Protection de >> pour les contre chants
     tabulature.replace("<", "< ");
@@ -375,11 +375,25 @@ void TabliatoProcessor::parseMusic()
                 else if (symbol == "\\repeat")
                 {
                     m_scope.append(REPEAT);
-                    QStringList tmp = symbols[i+1].split(":");
-                    if (tmp.size() < 2)
-                        throw std::logic_error("Nombre de répétitions non détectée après \\repeat volta");
 
-                    int repeat = tmp[1].toInt();
+                    // parse volta ou segno after repeat
+                    QString tmp = symbols[i+1];
+                    if (tmp != "volta" || tmp != "segno")
+                    if (tmp.size() < 2)
+                        throw std::logic_error("\\repeat doit être suivit des mots clé 'volta' ou 'segno'");
+
+                    // parse the number of repetition after volta
+                    tmp = symbols[i+2];
+
+                    QRegExp rexint("\\d");
+                    if (!rexint.exactMatch(tmp))
+                        throw std::logic_error("\\repeat volta doit être suivit d'un nombre entier.");
+
+                    int repeat = tmp.toInt();
+
+                    if (repeat < 2)
+                        throw std::logic_error("\\repeat volta doit être suivit d'un nombre supérieur ou égal à 2.");
+
                     timeline.add_timeline();
                     timeline.set_repetition(repeat);
                     while(i < symbols.size()-1 && !isOpenBracket(symbols[i])) {

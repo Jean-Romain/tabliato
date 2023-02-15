@@ -1,0 +1,54 @@
+---
+layout: home
+title: Tutoriels
+---
+
+<ol>
+	<li><a href="#keyboard">Modification/ajout de claviers</a></li>
+    <li><a href="#commentaires">Insertion de commentaires</a></li>
+	<li><a href="#tempo">Partition avec plusieurs tempo</a></li>
+</ol>
+
+<h2 id="keyboard"><a href="#Top">Modification/ajout de claviers</a></h2>
+
+	<p>
+1. Ouvrir le dossier de configuration clavier <kbd>Fichier</kbd> > <kbd>Configuration</kbd> > <kbd>Clavier</kbd>. 
+2. Le premier fichier important est `assemblage.csv` qui permet de construire des claviers à partir de sous claviers standards. Il est construit sous la forme
+```
+code;Description longue;fichier_#1;fichier_#2;...;fichier_#n
+```
+Dans votre cas mettons que la main droite a un clavier special mais à gauche l'accompagnement est standard on pourrait ajouter une ligne comme suit:
+```
+monaccordeon;Mon super accordéon spécial;mon_clavier_special;ctl_8bass_GC
+```
+3. Il faut créer `mon_clavier_special.csv`. Pas très compliqué c'est `bouton;note`  avec note dans la notation de `lilypond`
+```
+t1;e
+t2;fis
+t3;a
+t4;c'
+t5;e'
+t6;fis'
+[...]
+```
+4. Redémarrer `tabliato`</p>
+
+<h2 id="commentaires"><a href="#Top">Insertion de commentaires</a></h2>
+
+\mark \markup{ \override #'(box-padding . 0.5) \box  \caps "Partie 2"}
+
+\mbox "Partie 2"
+
+
+<h2 id="tempo"><a href="#Top">Partition avec plusieurs tempo</a></h2>
+
+	<p>Tout est géré par Tabliato dans l'interface graphique. Indiquez grâce aux listes déroulantes les options de votre partition. Une liste déroulante est paticulièrement importante: le rythme. Cette information permet de générer automatiquement la plupart des informations d'accompagment sans avoir à les écrires explicitements. C'est ce que nous verrons dans les prochaines sections.</p>
+	
+	<p><img src="img/doc-dock.png" /></p>
+	
+
+
+
+
+
+			

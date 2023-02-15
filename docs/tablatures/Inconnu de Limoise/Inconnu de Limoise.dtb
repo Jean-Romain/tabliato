@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tabliato>
-    <propertie instrument="" system="cadb" composer="Maxou Heintzen" poet="" subtitle="Mazurka" accordion="ctl1gc" title="L'inconnu de Limoise" time="9/8" rythm="B a a " motif="3" key="c \major" tagline="\tabliato" tempo="4=150"/>
+    <propertie poet="" system="cadb" time="9/8" tagline="\tabliato" rythm="B a a " subtitle="Mazurka" accordion="ctl1gc" title="L'inconnu de Limoise" tempo="4=150" composer="Maxou Heintzen" instrument="" motif="3" key="c \major"/>
     <tabulature>\partial 2 p6:8 p6':4 p8:8 [r:2]
 
 p7':4. ~ p7':4 p6':8 t8':4 t7':8 C

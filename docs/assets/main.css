@@ -308,3 +308,17 @@ table.lexicon td, th {width: 20%;text-align: left;}
     background-color: #cef3d1;
 }
 
+kbd {
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  display: inline-block;
+  font-size: 0.8em;
+  font-weight: bold;
+  line-height: 1;
+  padding: 2px 4px;
+  text-align: center;
+  white-space: nowrap;
+}
+
+

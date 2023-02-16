@@ -156,7 +156,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 
 
     #ifdef Q_OS_WINDOWS
-    font.setFamily("Courier New");
+    font.setFamily("Consola");
     #endif
 
     font.setStyleHint(QFont::Monospace);

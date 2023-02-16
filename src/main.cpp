@@ -95,15 +95,6 @@ int main(int argc, char *argv[])
 
     const QStringList args = parser.positionalArguments();
 
-    #ifdef Q_OS_WINDOWS
-    QSettings s("HKEY_CURRENT_USER\\SOFTWARE\\CLASSES", QSettings::NativeFormat);
-
-    QString path = QDir::toNativeSeparators(app->applicationFilePath());
-    s.setValue(".dtb/DefaultIcon/.", path);
-    s.setValue(".dtb/.","tabliato");
-    s.setValue("tabliato/shell/open/command/.", QStringLiteral("\"%1\"").arg(path) + " \"%1\"");
-    #endif
-
     if (qobject_cast<QApplication *>(app.data()))
     {
         // Check if a new version is available before to start the program

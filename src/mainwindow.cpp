@@ -894,13 +894,14 @@ void MainWindow::updateRythmComboBx()
 {
     QStringList list = rythmList.keys();
     ui->rythm_comboBox->clear();
+    QString time = ui->time_combobox->currentText();
 
     for (int i = 0; i < list.length(); ++i)
     {
         Motif motif;
         motif = rythmList.value(list[i]);
 
-        if(motif.isCompatible(ui->time_combobox->currentText()))
+        if (motif.isCompatible(time))
             ui->rythm_comboBox->addItem(list[i]);
     }
 

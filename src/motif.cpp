@@ -1,5 +1,6 @@
 ﻿#include <QStringList>
 #include <QDebug>
+#include <cstdlib>
 
 #include <stdexcept>
 
@@ -66,7 +67,7 @@ QString Motif::getBeat(QString metric)
         return "8";
     else if(time == 16)
         return "16";
-    else if(time == 16.0/3.0)
+    else if(std::abs(time - 16.0/3.0) < 0.001) // time == 16.0/3.0 fails on windows because of floating point error #39
         return "8.";
     else
         return "-1";
@@ -302,5 +303,6 @@ QString Motif::parseMotif(int num, QString note)
 bool Motif::isCompatible(QString metric)
 {
     if (number == -1) return true;
-    return (getBeat(metric) == "-1")?false:true;
+    QString beat = getBeat(metric);
+    return (beat == "-1")?false:true;
 }

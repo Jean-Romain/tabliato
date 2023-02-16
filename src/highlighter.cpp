@@ -28,7 +28,10 @@ Highlighter::Highlighter(QTextDocument *parent) : QSyntaxHighlighter(parent)
 
     // Pattern de reconnaissance des informations de temps
     QStringList timePatterns;
-    timePatterns << "(:[0-9]{1,2}.?)" << "\\s\\d{1,2}/\\d{1,2}" << "\\s\\d{1,2}\\*\\d{1,2}" << "\\\\partial ([0-9]{1,2}\\.? )";
+    timePatterns << "(:[0-9]{1,2}\\.?)"               // matches :8.
+                 << "\\s\\d{1,2}/\\d{1,2}"           // matches 3/4
+                 << "\\s\\d{1,2}\\*\\d{1,2}"         // matches multiplication 3*8
+                 << "\\\\partial ([0-9]{1,2}\\.? )"; // matches for anacrouse
     foreach (const QString &pattern, timePatterns)
     {
         rule.pattern = QRegExp(pattern);
@@ -55,11 +58,6 @@ Highlighter::Highlighter(QTextDocument *parent) : QSyntaxHighlighter(parent)
         rule.format = chordFormat;
         highlightingRules.append(rule);
     }
-
-    // Pattern de reconnaissance des crochets
-    rule.pattern = QRegExp("[{}]");
-    rule.format = bracketFormat;
-    highlightingRules.append(rule);
 
     // Pattern de reconnaissance des silences
     rule.pattern = QRegExp("r\\d?\\d?");

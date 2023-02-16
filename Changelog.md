@@ -3,8 +3,9 @@
 - New: on peut maintenant ouvrir un fichier tabliato en cliquant sur un fichier `.dtb`.
 - New: `tabliato` retient la taille des caratères de l'éditeur entre deux sessions.
 - Change: utilisation de la police Consola sous windows pour le code source + taille 11 par defaut.
-- Change: Sous Windows `tabliato` test si `lilypond` est installé avant de compiler afin de renvoyer une erreur informative le cas contraire.
+- Change: sous Windows `tabliato` test si `lilypond` est installé avant de compiler afin de renvoyer une erreur informative le cas contraire.
 - Bug: les chaines de caractères sont colorées et parsées correctement. Par ex. dans `\mbox "Partie 1 - valse"` le 1 n'est plus interprété comme le bouton 1. La chaine est traitée correctement.
+- Bug: amélioration de coloration syntaxique des informations de durée.
 - Bug: sous Windows certain motifs rythmiques disparaissaient de la liste déroulante pour certain tempo [#39](https://github.com/Jean-Romain/tabliato/issues/39)
 
 ## Tabliato 1.3.2

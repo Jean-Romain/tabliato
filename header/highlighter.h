@@ -44,16 +44,6 @@ private:
      };
 
      QVector<HighlightingRule> highlightingRules;
-
-     QTextCharFormat keywordFormat;
-     QTextCharFormat commentFormat;
-     QTextCharFormat timeFormat;
-     QTextCharFormat bassFormat;
-     QTextCharFormat chordFormat;
-     QTextCharFormat restFormat;
-     QTextCharFormat bracketFormat;
-     QTextCharFormat fingeringFormat;
-     QTextCharFormat stringFormat;
      QTextCharFormat m_formats[LastConstruct + 1];
 };
 

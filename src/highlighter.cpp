@@ -4,31 +4,43 @@ Highlighter::Highlighter(QTextDocument *parent) : QSyntaxHighlighter(parent)
 {
     HighlightingRule rule;
 
-    // Format des mots clés
+    QTextCharFormat keywordFormat;
     keywordFormat.setForeground(QColor(0, 153, 255));
     keywordFormat.setFontWeight(QFont::Bold);
 
-    // Format des information de temps
+    QTextCharFormat timeFormat;
     timeFormat.setForeground(QColor(204, 164, 0));
 
-    // Format des basses accord silence
+    QTextCharFormat bassFormat;
     bassFormat.setFontWeight(QFont::Bold);
+
+    QTextCharFormat chordFormat;
     chordFormat.setFontWeight(QFont::Normal);
+
+    QTextCharFormat restFormat;
     restFormat.setFontWeight(QFont::Normal);
 
-    // Format des commentaires
+    QTextCharFormat commentFormat;
     commentFormat.setForeground(QColor(120, 120, 120));
 
+    QTextCharFormat stringFormat;
     stringFormat.setForeground(QColor(90, 134, 0));
 
-    // Format des crochets
+    QTextCharFormat bracketFormat;
     bracketFormat.setForeground(QColor(122, 0, 157));
 
+    QTextCharFormat fingeringFormat;
     fingeringFormat.setForeground(QColor(73, 144, 0));
+
+    QTextCharFormat entityFormat;
+    entityFormat.setForeground(QColor(150, 0, 0));
+
+    QTextCharFormat tagFormat;
+    tagFormat.setForeground(QColor(0, 0, 150));
 
     // Pattern de reconnaissance des informations de temps
     QStringList timePatterns;
-    timePatterns << "(:[0-9]{1,2}\\.?)"               // matches :8.
+    timePatterns << "(:[0-9]{1,2}\\.?)"              // matches :8.
                  << "\\s\\d{1,2}/\\d{1,2}"           // matches 3/4
                  << "\\s\\d{1,2}\\*\\d{1,2}"         // matches multiplication 3*8
                  << "\\\\partial ([0-9]{1,2}\\.? )"; // matches for anacrouse
@@ -66,7 +78,10 @@ Highlighter::Highlighter(QTextDocument *parent) : QSyntaxHighlighter(parent)
 
     // Pattern de reconnaissance des mots clés
     QStringList keywordPatterns;
-    keywordPatterns << "(\\\\[a-z]+)" << "(volta[ ]?[0-9]?)" << "(segno[ ]?[0-9]?)" << "(Timing.[a-zA-Z]+ ?={1} ?.*)";
+    keywordPatterns << "(\\\\[a-z]+)"                   // matches \abcdef
+                    << "(volta[ ]?[0-9]?)"              // matches volta 2
+                    << "(segno[ ]?[0-9]?)"              // matches segno 2
+                    << "(Timing.[a-zA-Z]+ ?={1} ?.*)";  // matches Timing.beamExceptions = #'() | Timing.beatStructure=1,1,1
     foreach (const QString &pattern, keywordPatterns)
     {
         rule.pattern = QRegExp(pattern);
@@ -89,14 +104,7 @@ Highlighter::Highlighter(QTextDocument *parent) : QSyntaxHighlighter(parent)
     rule.format = fingeringFormat;
     highlightingRules.append(rule);
 
-    QTextCharFormat entityFormat;
-    entityFormat.setForeground(QColor(150, 0, 0));
-    //entityFormat.setFontWeight(QFont::Bold);
     setFormatFor(Entity, entityFormat);
-
-    QTextCharFormat tagFormat;
-    tagFormat.setForeground(QColor(0, 0, 150));
-    //tagFormat.setFontWeight(QFont::Bold);
     setFormatFor(Tag, tagFormat);
 }
 

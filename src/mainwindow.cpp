@@ -154,9 +154,9 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     font.setFamily("Ubuntu mono");
     #endif
 
-
     #ifdef Q_OS_WINDOWS
     font.setFamily("Consola");
+    font.setPointSize(11);
     #endif
 
     font.setStyleHint(QFont::Monospace);

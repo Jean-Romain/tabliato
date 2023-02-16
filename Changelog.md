@@ -1,7 +1,7 @@
 ## Tabliato 1.3.3
 
 - New: on peut maintenant ouvrir un fichier tabliato en cliquant sur un fichier `.dtb`.
-- Change: utilisation de la police Consola sous windows pour le code source
+- Change: utilisation de la police Consola sous windows pour le code source + taille 11 par defaut.
 - Bug: les chaines de caractères sont coloré et parsé correctement. Par ex. dans `\mbox "Partie 1 - valse"` le 1 n'est plus interprété comme le bouton 1. La chaine est traitée correctement.
 - Bug: certain motifs rythmiques disparaissaient de la liste déroulante pour certain tempo [#39](https://github.com/Jean-Romain/tabliato/issues/39)
 

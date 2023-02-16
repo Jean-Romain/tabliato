@@ -761,6 +761,7 @@ void MainWindow::writeSettings()
     settings.setValue("scalePDF", pdf->scale());
     settings.setValue("previewWidth", ui->previewDock->width());
     settings.setValue("editorWidth", ui->centralwidget->width());
+    settings.setValue("editorFontSize", ui->melodie_textarea->font().pointSize());
     settings.setValue("v110", 0);
 }
 
@@ -789,6 +790,10 @@ void MainWindow::readSettings()
 
         ui->centralwidget->resize(settings.value("editorWidth").toInt(), ui->centralwidget->height());
         ui->previewDock->resize(settings.value("previewWidth").toInt(), ui->previewDock->height());
+
+        QFont font = ui->melodie_textarea->font();
+        font.setPointSize(settings.value("editorFontSize").toInt());
+        ui->melodie_textarea->setFont(font);
 
         restoreCheckedDock();
 

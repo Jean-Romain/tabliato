@@ -39,7 +39,7 @@ Highlighter::Highlighter(QTextDocument *parent) : QSyntaxHighlighter(parent)
     tagFormat.setForeground(QColor(0, 0, 150));
 
     // Pattern de reconnaissance des crochets
-    rule.pattern = QRegExp("[{}]");
+    rule.pattern = QRegExp("[\\[{}\\]]");
     rule.format = bracketFormat;
     highlightingRules.append(rule);
 

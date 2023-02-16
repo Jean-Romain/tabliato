@@ -186,6 +186,16 @@ void MainWindow::compile()
 
     terminal("Compilation");
 
+    #ifdef Q_OS_WINDOWS
+    QSettings settings("HKEY_LOCAL_MACHINE\\SOFTWARE\\wow6432node\\PilyPond", QSettings::NativeFormat); // 32 bits : HKEY_LOCAL_MACHINE\\SOFTWARE\\LilyPond
+    QString lilypath = settings.value("Install_Dir").toString();
+    if (lilypath == "")
+    {
+        QMessageBox::critical(this, "Erreur", "Impossible de trouver le logicel lilypond sur cet machine. Lilypond ne semble pas avoir été installé.");
+        return;
+    }
+    #endif
+
     Tabulature tab = readMusicFromUI();
 
     try

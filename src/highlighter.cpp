@@ -19,6 +19,8 @@ Highlighter::Highlighter(QTextDocument *parent) : QSyntaxHighlighter(parent)
     // Format des commentaires
     commentFormat.setForeground(QColor(120, 120, 120));
 
+    stringFormat.setForeground(QColor(90, 134, 0));
+
     // Format des crochets
     bracketFormat.setForeground(QColor(122, 0, 157));
 
@@ -73,6 +75,11 @@ Highlighter::Highlighter(QTextDocument *parent) : QSyntaxHighlighter(parent)
         rule.format = keywordFormat;
         highlightingRules.append(rule);
     }
+
+    // Pattern de reconnaissance des strings
+    rule.pattern = QRegExp("\\\".+\\\"");
+    rule.format = stringFormat;
+    highlightingRules.append(rule);
 
     // Pattern de reconnaissance des commentaires
     rule.pattern = QRegExp("%[^\n]*");

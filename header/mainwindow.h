@@ -98,6 +98,7 @@ class MainWindow : public QMainWindow
         void terminal(QString str);
         void setIcons();
         void updatePreview(QString);
+        void updateRessources();
         void exportFiles();
         void writeSettings();
         void readSettings();

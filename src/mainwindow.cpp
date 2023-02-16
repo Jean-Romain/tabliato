@@ -148,7 +148,23 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     ui->scrollArea->setWidget(pdf);
     ui->toolBox_2->setCurrentIndex(0);
 
+    QFont font;
+
+    #ifdef Q_OS_LINUX
+    font.setFamily("Ubuntu mono");
+    #endif
+
+
+    #ifdef Q_OS_WINDOWS
+    font.setFamily("Courier New");
+    #endif
+
+    font.setStyleHint(QFont::Monospace);
+    font.setFixedPitch(true);
+    ui->melodie_textarea->setFont(font);
+
     setIcons();
+    updateRessources();
     initRythmComboBx();
     initAccordionComboBox();
     initSf2ComboBox();
@@ -772,13 +788,6 @@ void MainWindow::readSettings()
     }
     else // it's the first time, register is not written yet
     {
-        QFont font;
-        font.setFamily("Courier");
-        font.setStyleHint(QFont::Monospace);
-        font.setFixedPitch(true);
-
-        ui->melodie_textarea->setFont(font);
-
         ui->actionDisplayConsole->setChecked(false);
         ui->actionDisplayToolBar->setChecked(true);
         ui->actionDisplayPlayer->setChecked(true);
@@ -844,23 +853,6 @@ void MainWindow::initRythmComboBx()
 
 void MainWindow::initAccordionComboBox()
 {
-    // File are ressources but for keyboards users must be able to add
-    // or remove keyboards manually by modifiying the file so we make
-    // a physical copy in user's directory
-    QDir directory(KEYBOARDS);
-    if (!directory.exists())
-    {
-      QDir().mkpath(KEYBOARDS);
-      QDir keyboard_dir(":/keyboards/ressources/keyboards/");
-      QStringList csv = keyboard_dir.entryList(QStringList() << "*.csv", QDir::Files);
-      for(auto f : csv)
-      {
-          QFileInfo info(f);
-          QFile::copy(":/keyboards/ressources/keyboards/" + f,  KEYBOARDS + "/" + f);
-          QFile::setPermissions(KEYBOARDS + "/" + f, QFileDevice::ReadOwner|QFileDevice::WriteOwner);
-      }
-    }
-
     QFile file(KEYBOARDS +  "/assemblages.csv");
 
     if(!file.open(QIODevice::ReadOnly | QIODevice::Text))
@@ -886,21 +878,11 @@ void MainWindow::initAccordionComboBox()
     }
 
     file.close();
-
 }
 
 void MainWindow::initSf2ComboBox()
 {
-    // File are ressources but for soundfonts users must be able to add
-    // or remove soundfonts manually by modifiying the folder so we make
-    // a physical copy in user's directory
     QDir directory(SOUNDFONTS);
-    if (!directory.exists())
-    {
-      QDir().mkpath(SOUNDFONTS);
-      QFile::copy(":/soundfonts/ressources/soundfonts/Accordion.sf2",  SOUNDFONTS + "/Accordion.sf2");
-    }
-
     QStringList sf2 = directory.entryList(QStringList() << "*.sf2", QDir::Files);
 
     ui->sf2_combobox->clear();
@@ -983,6 +965,38 @@ void MainWindow::highlight_notes_from_current_music_time_in_pdf()
         int nline = ui->melodie_textarea->document()->blockCount();
         int offset = offset2 + nline - 1;
         pdf->highlight_note(pos, offset);
+    }
+}
+
+void MainWindow::updateRessources()
+{
+    // File are ressources but for soundfonts users must be able to add
+    // or remove soundfonts manually by modifiying the folder so we make
+    // a physical copy in user's directory
+    QDir directory;
+
+    directory.setPath(SOUNDFONTS);
+    if (!directory.exists())
+    {
+      QDir().mkpath(SOUNDFONTS);
+      QFile::copy(":/soundfonts/ressources/soundfonts/Accordion.sf2",  SOUNDFONTS + "/Accordion.sf2");
+    }
+
+    // File are ressources but for keyboards users must be able to add
+    // or remove keyboards manually by modifiying the file so we make
+    // a physical copy in user's directory
+    directory.setPath(KEYBOARDS);
+    if (!directory.exists())
+    {
+      QDir().mkpath(KEYBOARDS);
+      QDir keyboard_dir(":/keyboards/ressources/keyboards/");
+      QStringList csv = keyboard_dir.entryList(QStringList() << "*.csv", QDir::Files);
+      for(auto f : csv)
+      {
+          QFileInfo info(f);
+          QFile::copy(":/keyboards/ressources/keyboards/" + f,  KEYBOARDS + "/" + f);
+          QFile::setPermissions(KEYBOARDS + "/" + f, QFileDevice::ReadOwner|QFileDevice::WriteOwner);
+      }
     }
 }
 

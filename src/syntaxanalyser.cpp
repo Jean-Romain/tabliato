@@ -103,6 +103,11 @@ bool SyntaxAnalyser::isCloseBracket(QString str){
     return str == "}";
 }
 
+bool SyntaxAnalyser::isDoubleQuote(QString str){
+    return str == "\"";
+}
+
+
 bool SyntaxAnalyser::isNote(QString str){
     return genericTest(note_rgx, str);
 }
@@ -157,6 +162,8 @@ int SyntaxAnalyser::getType(QString str)
         return OPENBRACKET;
     else if (isCloseBracket(str))
         return CLOSEBRACKET;
+    else if (isDoubleQuote(str))
+        return DOUBLEQUOTE;
     else
         return OTHER;
 }

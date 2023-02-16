@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tabliato>
+    <propertie title="Quoan vols ganhar" tagline="\tabliato" tempo="4=160" time="3/4" instrument="" system="cadb" motif="3" poet="" accordion="ctl1gc" rythm="B a a " subtitle="Combien veux-tu gagner - Valse" composer="Trad. des Landes de Gascogne" key="c \major"/>
+    <tabulature>\partial 4 p7:8 p6' [r:4]
+
+\repeat volta 2
+{
+  p8:4 8 t8 [G g d]
+  p7 7 7 G
+  p7 t7:8 p7 t7 p7 [G d d]
+  p8:2 t8:4 [G g d]
+
+  \break
+
+  t8 8 p7	[D d g]
+  t7 p7 t8 [D g d]
+  p8:4 t9:4. p8:8 [G d d]
+}
+\alternative
+{
+   { p7:2 p7:8 p6' G }
+   { p6:2 p7:4 G }
+}
+
+\break
+
+\repeat volta 2
+{
+  p6:2 p7:4 G
+  t9:2 t8:4 D
+  t8 t10:4. 9:8 D
+  p8:2 p8:4 G
+
+  \break
+
+  p8 t9 p8 [G d g]
+  t10 t9 t7' D
+}
+\alternative
+{
+  {
+    t8 t6':4. t7:8 D
+    p7:2 p7:4 G
+  }
+  {
+    t8:4 t6' t7 D
+    p6:2 [G:2]
+  }
+}
+
+\bar "|." 
+</tabulature>
+    <lyric></lyric>
+</tabliato>

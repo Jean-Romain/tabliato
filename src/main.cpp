@@ -11,6 +11,7 @@
 #include "mainwindow.h"
 #include "file.h"
 #include "filedownloader.h"
+#include "lilypond.h"
 
 QCoreApplication* createApplication(int &argc, char *argv[])
 {
@@ -243,16 +244,7 @@ int main(int argc, char *argv[])
             arguments.append(QString("--output=") + ofolder + "/" + ofile);
             arguments.append(filebasepath + ".ly");
 
-
-            #ifdef Q_OS_WINDOWS
-            QSettings settings("HKEY_LOCAL_MACHINE\\SOFTWARE\\wow6432node\\LilyPond", QSettings::NativeFormat); // 32 bits : HKEY_LOCAL_MACHINE\\SOFTWARE\\LilyPond
-            QString lilypath = settings.value("Install_Dir").toString();
-            QString command = "\"" + lilypath + "\\usr\\bin\\lilypond.exe" + "\"";
-            #endif
-
-            #ifdef Q_OS_LINUX
-            QString command = "lilypond";
-            #endif
+            QString command = Lilypond::get_lilypond_command();
 
             if (verbose) qDebug() << command << " " << arguments;
 

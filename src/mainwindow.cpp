@@ -20,6 +20,7 @@
 #include "versiondialog.h"
 #include "global.h"
 #include "highlighter.h"
+#include "lilypond.h"
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWindow)
 {
@@ -186,15 +187,11 @@ void MainWindow::compile()
 
     terminal("Compilation");
 
-    #ifdef Q_OS_WINDOWS
-    QSettings settings("HKEY_LOCAL_MACHINE\\SOFTWARE\\wow6432node\\LilyPond", QSettings::NativeFormat); // 32 bits : HKEY_LOCAL_MACHINE\\SOFTWARE\\LilyPond
-    QString lilypath = settings.value("Install_Dir").toString();
-    if (lilypath == "")
+    if (!Lilypond::is_lilypond_installed())
     {
         QMessageBox::critical(this, "Erreur", "Impossible de trouver le logicel lilypond sur cet machine. Lilypond ne semble pas avoir été installé.");
         return;
     }
-    #endif
 
     Tabulature tab = readMusicFromUI();
 

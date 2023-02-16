@@ -5,46 +5,59 @@ title: Tutoriels
 
 <ol>
 	<li><a href="#keyboard">Modification/ajout de claviers</a></li>
-    <li><a href="#commentaires">Insertion de commentaires</a></li>
 	<li><a href="#tempo">Partition avec plusieurs tempo</a></li>
 </ol>
 
-<h2 id="keyboard"><a href="#Top">Modification/ajout de claviers</a></h2>
+<h2 id="keyboard"><a href="#Top">Mon accordéon a un clavier différent des claviers proposés dans tabliato. Puis-je créer mon propre clavier ?</a></h2>
 
-	<p>
-1. Ouvrir le dossier de configuration clavier <kbd>Fichier</kbd> > <kbd>Configuration</kbd> > <kbd>Clavier</kbd>. 
-2. Le premier fichier important est `assemblage.csv` qui permet de construire des claviers à partir de sous claviers standards. Il est construit sous la forme
-```
-code;Description longue;fichier_#1;fichier_#2;...;fichier_#n
-```
-Dans votre cas mettons que la main droite a un clavier special mais à gauche l'accompagnement est standard on pourrait ajouter une ligne comme suit:
-```
-monaccordeon;Mon super accordéon spécial;mon_clavier_special;ctl_8bass_GC
-```
-3. Il faut créer `mon_clavier_special.csv`. Pas très compliqué c'est `bouton;note`  avec note dans la notation de `lilypond`
-```
-t1;e
+	<p><ol>
+<li>Ouvrir le dossier de configuration clavier qui contient toutes les fichiers de claviers. Il y a un raccourci dans tabliato: <kbd>Fichier</kbd> > <kbd>Configuration</kbd> > <kbd>Clavier</kbd>. 
+<li>Le premier fichier important est « assemblage_utilisateur.csv » qui permet de construire des claviers personnalisés à partir de sous claviers standards ou de claviers utilisateur. Il est construit comme le fichier « assemblages.csv »  sous la forme:
+
+<pre><code class="csv">code;Description longue;fichier_#1;fichier_#2;...;fichier_#n</code></pre></li>
+
+Mettons que la main droite a un clavier spécial mais à gauche l'accompagnement est standard on pourrait ajouter une ligne comme suit:
+
+<pre><code class="csv">monaccordeon;Mon super accordéon spécial;mon_clavier_special;ctl_8bass_GC
+</code></pre></li>
+
+<li>Il faut ensuite créer « mon_clavier_special.csv ». Ce n'est pas très compliqué, la syntaxe est « bouton;note »  avec « note » dans la notation de lilypond
+
+<pre><code class="csv">t1;e
 t2;fis
 t3;a
 t4;c'
 t5;e'
 t6;fis'
 [...]
-```
-4. Redémarrer `tabliato`</p>
+</code></pre></li>
 
-<h2 id="commentaires"><a href="#Top">Insertion de commentaires</a></h2>
-
-\mark \markup{ \override #'(box-padding . 0.5) \box  \caps "Partie 2"}
-
-\mbox "Partie 2"
+<li>Redémarrer tabliato</li>
+</ol>
+</p>
 
 
-<h2 id="tempo"><a href="#Top">Partition avec plusieurs tempo</a></h2>
+<h2 id="tempo"><a href="#Top">Est-il possible de changer le tempo au cours d'un morceau ?</a></h2>
 
-	<p>Tout est géré par Tabliato dans l'interface graphique. Indiquez grâce aux listes déroulantes les options de votre partition. Une liste déroulante est paticulièrement importante: le rythme. Cette information permet de générer automatiquement la plupart des informations d'accompagment sans avoir à les écrires explicitements. C'est ce que nous verrons dans les prochaines sections.</p>
-	
-	<p><img src="img/doc-dock.png" /></p>
+	<p>Vu que le tempo est déclaré dans le panneau de gauche il s'applique a priori à l'ensemble du morceau donc on peut croire que non ce n'est pas possible. Mais en fait c'est possible. Il y a un exemple dans les tablatures du site: <a href = "tablatures/Cotillons%20verts/Cotillons%20verts.pdf">Cotillons verts</a>.</p>
+
+<p>L'interface graphique rend plus facile d'accès certaines options mais c'est le code qui compte. On peut réécrire le rythme à n'importe quel moment avec « \time » et « \motif ». Dans l'exemple ci-dessous on peut déclarer le morceau en 3/4 avec un motif rythmique de valse « B a a » et changer au milieu de la musique en 7/8.</p>
+
+<pre><code class="cpp">p7:4 t6 p6 E
+t7 6':4. p5':8 D
+t6:4  p4':2 E
+r:8 p4:8 4' t6 p6 7  E
+
+\break
+
+\time 7/8
+\motif [B:4. a:4 a:4]
+
+t8:8 6' 7 8 6' 7 6':16 8 A
+7':4 7:8 7':4 7' D
+7':8 9 8' 9 7' 8  7' G
+p7':4 t8':8 p7':4 7' C
+</code></pre>
 	
 
 

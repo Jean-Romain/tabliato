@@ -515,8 +515,6 @@ void TabliatoProcessor::parseMusic()
     m_tab->melody.replace(QRegExp(":"), "");
     m_tab->melody.replace(QRegExp("\\doublegt"), ">>");
     m_tab->melody.replace(QRegExp("\\doubleglt"), "<<");
-    m_tab->melody.replace("\" ", "\"");
-    m_tab->melody.replace(" \" ", "\"");
 
     if (nbass == 0) return;
 

@@ -187,7 +187,7 @@ void MainWindow::compile()
     terminal("Compilation");
 
     #ifdef Q_OS_WINDOWS
-    QSettings settings("HKEY_LOCAL_MACHINE\\SOFTWARE\\wow6432node\\PilyPond", QSettings::NativeFormat); // 32 bits : HKEY_LOCAL_MACHINE\\SOFTWARE\\LilyPond
+    QSettings settings("HKEY_LOCAL_MACHINE\\SOFTWARE\\wow6432node\\LilyPond", QSettings::NativeFormat); // 32 bits : HKEY_LOCAL_MACHINE\\SOFTWARE\\LilyPond
     QString lilypath = settings.value("Install_Dir").toString();
     if (lilypath == "")
     {
@@ -863,31 +863,36 @@ void MainWindow::initRythmComboBx()
 
 void MainWindow::initAccordionComboBox()
 {
-    QFile file(KEYBOARDS +  "/assemblages.csv");
-
-    if(!file.open(QIODevice::ReadOnly | QIODevice::Text))
-    {
-        QMessageBox::critical(this, "Erreur", "Impossible de lire le fichier de configuration des claviers : " + KEYBOARDS + "/assemblages.csv");
-        return;
-    }
-
-    QTextStream stream(&file);
-    stream.setCodec("UTF-8");
+    QStringList assemblages = {"assemblages.csv", "assemblages_utilisateur.csv"};
 
     ui->accordion_comboBox->clear();
     accordionList.clear();
 
-    while (!stream.atEnd())
+    for (auto assemblage : assemblages)
     {
-        QString line = stream.readLine();
-        QStringList list = line.split(";");
+        QFile file(KEYBOARDS + "/" + assemblage);
 
-        accordionList.insert(list[1], list[0]);
-        accordionListReverted.insert(list[0], list[1]);
-        ui->accordion_comboBox->addItem(list[1]);
+        if(!file.open(QIODevice::ReadOnly | QIODevice::Text))
+        {
+            QMessageBox::critical(this, "Erreur", "Impossible de lire le fichier de configuration des claviers : " + KEYBOARDS + "/" + assemblage);
+            return;
+        }
+
+        QTextStream stream(&file);
+        stream.setCodec("UTF-8");
+
+        while (!stream.atEnd())
+        {
+            QString line = stream.readLine();
+            QStringList list = line.split(";");
+
+            accordionList.insert(list[1], list[0]);
+            accordionListReverted.insert(list[0], list[1]);
+            ui->accordion_comboBox->addItem(list[1]);
+        }
+
+        file.close();
     }
-
-    file.close();
 }
 
 void MainWindow::initSf2ComboBox()
@@ -981,33 +986,46 @@ void MainWindow::highlight_notes_from_current_music_time_in_pdf()
 
 void MainWindow::updateRessources()
 {
-    // File are ressources but for soundfonts users must be able to add
-    // or remove soundfonts manually by modifiying the folder so we make
-    // a physical copy in user's directory
-    QDir directory;
+    // File are ressources but for soundfonts and keyboards, users must be able to add
+    // or remove soundfonts manually by modifying the folder so we make
+    // a physical copy in user's directory. Also when updating the software we may want
+    // to add new default files without affecting changes made by users
 
+    QDir directory;
+    QFile file;
+
+    // If the directory for soundfont does not exist it is the first time tabliato is opened
+    // create the directory
     directory.setPath(SOUNDFONTS);
     if (!directory.exists())
-    {
-      QDir().mkpath(SOUNDFONTS);
-      QFile::copy(":/soundfonts/ressources/soundfonts/Accordion.sf2",  SOUNDFONTS + "/Accordion.sf2");
-    }
+       QDir().mkpath(SOUNDFONTS);
 
-    // File are ressources but for keyboards users must be able to add
-    // or remove keyboards manually by modifiying the file so we make
-    // a physical copy in user's directory
+    // Check if the ressource exist, if not copy.
+    file.setFileName(SOUNDFONTS + "/Accordion.sf2");
+    if (!file.exists())
+      QFile::copy(":/soundfonts/ressources/soundfonts/Accordion.sf2",  SOUNDFONTS + "/Accordion.sf2");
+
+    // If the directory for keyboard does not exist it is the first time tabliato is opened
+    // create the directory
     directory.setPath(KEYBOARDS);
     if (!directory.exists())
+        QDir().mkpath(KEYBOARDS);
+
+    // For each file check if it exist otherwise copy. This allows to add new files
+    QDir keyboard_dir(":/keyboards/ressources/keyboards/");
+    QStringList csv = keyboard_dir.entryList(QStringList() << "*.csv", QDir::Files);
+    for(auto f : csv)
     {
-      QDir().mkpath(KEYBOARDS);
-      QDir keyboard_dir(":/keyboards/ressources/keyboards/");
-      QStringList csv = keyboard_dir.entryList(QStringList() << "*.csv", QDir::Files);
-      for(auto f : csv)
-      {
-          QFileInfo info(f);
-          QFile::copy(":/keyboards/ressources/keyboards/" + f,  KEYBOARDS + "/" + f);
-          QFile::setPermissions(KEYBOARDS + "/" + f, QFileDevice::ReadOwner|QFileDevice::WriteOwner);
-      }
+        file.setFileName(KEYBOARDS + "/" + f);
+        if (!file.exists())
+        {
+            QFile::copy(":/keyboards/ressources/keyboards/" + f,  KEYBOARDS + "/" + f);
+            QFile::setPermissions(KEYBOARDS + "/" + f, QFileDevice::ReadOwner|QFileDevice::WriteOwner);
+
+            // Si un nouveau fichier à été copié alors c'est qu'il faut updater le fichier d'assemblages
+            QFile::copy(":/keyboards/ressources/keyboards/assemblages.csv",  KEYBOARDS + "/assemblages.csv");
+            QFile::setPermissions(KEYBOARDS + "/assemblages.csv", QFileDevice::ReadOwner|QFileDevice::WriteOwner);
+        }
     }
 }
 

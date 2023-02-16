@@ -38,6 +38,11 @@ Highlighter::Highlighter(QTextDocument *parent) : QSyntaxHighlighter(parent)
     QTextCharFormat tagFormat;
     tagFormat.setForeground(QColor(0, 0, 150));
 
+    // Pattern de reconnaissance des crochets
+    rule.pattern = QRegExp("[{}]");
+    rule.format = bracketFormat;
+    highlightingRules.append(rule);
+
     // Pattern de reconnaissance des informations de temps
     QStringList timePatterns;
     timePatterns << "(:[0-9]{1,2}\\.?)"              // matches :8.

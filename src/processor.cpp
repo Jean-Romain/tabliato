@@ -120,6 +120,7 @@ void TabliatoProcessor::parseMusic()
                     i++;
                 }
                 parsed += "\"";
+                parsed.remove(1,1);
                 break;
             // Lettre p t P T. On update l'état global courant
             case DIRECTION:

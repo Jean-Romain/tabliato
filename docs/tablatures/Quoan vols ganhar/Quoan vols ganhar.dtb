@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tabliato>
-    <propertie title="Quoan vols ganhar" tagline="\tabliato" tempo="4=160" time="3/4" instrument="" system="cadb" motif="3" poet="" accordion="ctl1gc" rythm="B a a " subtitle="Combien veux-tu gagner - Valse" composer="Trad. des Landes de Gascogne" key="c \major"/>
+    <propertie key="g \major" composer="Trad. des Landes de Gascogne" motif="3" tempo="4=160" time="3/4" title="Quoan vols ganhar" poet="" tagline="\tabliato" accordion="ctl1gc" system="cadb" subtitle="Combien veux-tu gagner - Valse" instrument="" rythm="B a a "/>
     <tabulature>\partial 4 p7:8 p6' [r:4]
 
 \repeat volta 2

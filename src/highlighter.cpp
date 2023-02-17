@@ -32,11 +32,13 @@ Highlighter::Highlighter(QTextDocument *parent) : QSyntaxHighlighter(parent)
     QTextCharFormat fingeringFormat;
     fingeringFormat.setForeground(QColor(73, 144, 0));
 
+    // Pull
     QTextCharFormat entityFormat;
-    entityFormat.setForeground(QColor(150, 0, 0));
+    entityFormat.setForeground(QColor(180, 0, 0));
 
+    // Push
     QTextCharFormat tagFormat;
-    tagFormat.setForeground(QColor(0, 0, 150));
+    tagFormat.setForeground(QColor(0, 0, 180));
 
     // Pattern de reconnaissance des crochets
     rule.pattern = QRegExp("[\\[{}\\]]");

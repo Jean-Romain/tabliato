@@ -143,7 +143,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     #ifdef Q_OS_WINDOWS
     ui->time_combobox->setStyleSheet("QComboBox QAbstractItemView {min-width: 70;}");
     ui->key_combobox->setStyleSheet("QComboBox QAbstractItemView {min-width: 100;}");
-    ui->accordion_comboBox->setStyleSheet("QComboBox QAbstractItemView {min-width: 300;}");
+    ui->accordion_comboBox->setStyleSheet("QComboBox QAbstractItemView {min-width: 300; min-height: 180;}");
     #endif
 
     ui->scrollArea->setWidget(pdf);
@@ -1025,6 +1025,7 @@ void MainWindow::updateRessources()
             QFile::setPermissions(KEYBOARDS + "/" + f, QFileDevice::ReadOwner|QFileDevice::WriteOwner);
 
             // Si un nouveau fichier à été copié alors c'est qu'il faut updater le fichier d'assemblages
+            QFile::remove(KEYBOARDS + "/assemblages.csv");
             QFile::copy(":/keyboards/ressources/keyboards/assemblages.csv",  KEYBOARDS + "/assemblages.csv");
             QFile::setPermissions(KEYBOARDS + "/assemblages.csv", QFileDevice::ReadOwner|QFileDevice::WriteOwner);
         }

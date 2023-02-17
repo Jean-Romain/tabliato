@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tabliato>
-    <propertie instrument="" subtitle="" tempo="4=130" composer="" displayFingering="auto" motif="3" key="c \major" system="cadb" tagline="" time="3/4" poet="" accordion="ctl1gc" title="Example - anacrouse" rythm="B a a "/>
-    <tabulature>\partial:8*3 p4':8 t6 p4' [r:8 d:8 r:8]
+    <propertie tempo="4=130" motif="3" rythm="B a a " accordion="ctl1gc" subtitle="" title="Example - anacrouse" poet="" tagline="" composer="" system="cadb" time="3/4" instrument="" key="c \major"/>
+    <tabulature>% Une anacrouse s'écrit \partial durée ici l'anacrouse est sur une noire pointée
+% La main gauche doit être écrite en mode explicite car la mesure est incomplète.
+
+\partial 4. p4':8 t6 p4' [r:8 d:8 r:8]
 
 p7:4 7:8 6' 8 7' E
 7:4. 7:8 6' 7 E

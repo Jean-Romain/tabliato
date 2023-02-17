@@ -1,9 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tabliato>
-    <propertie instrument="" subtitle="" tempo="4=130" composer="" displayFingering="auto" motif="-1" key="c \major" system="cadb" tagline="" time="7/8" poet="" accordion="ctl1gc" title="Exemple - rythme spécial" rythm="Manuel"/>
-    <tabulature>\motif [B:4. a:4 a:4]
+    <propertie accordion="ctl1gc" instrument="" tagline="" composer="" poet="" system="cadb" rythm="Manuel" tempo="4=130" time="7/8" title="Exemple - rythme spécial" key="c \major" motif="-1" subtitle=""/>
+    <tabulature>% Cette pièce a un rythme spécial qui n'est pas dans la liste.
+% Basse sur une noire pointée suivit de deux accords sur une noire
+% On le déclare comme suit et tabliato interprète correctement l'accompagnement en écriture automatique
+
+\motif [B:4. a:4 a:4]
 
 \set Timing.beatStructure=3,3,2
+
+t8:8 6' 7 8 6' 7 6':16 8 A
+7':4 7:8 7':4 7' D
+7':8 9 8' 9 7' 8  7' G
+p7':4 t8':8 p7':4 7' C
+
+\break
+
+% Pour plus de dynamisme dans le rendu audio et pour mieux correspondre
+% à la réalité de jeu on peux diviser par deux la durée et ajouter des silences.
+% Ecoutez la différence.
+
+\motif [B:4 r:8 a:8 r:8 a:8 r:8]
 
 t8:8 6' 7 8 6' 7 6':16 8 A
 7':4 7:8 7':4 7' D

@@ -5,23 +5,25 @@ title: Tutoriels
 
 <ol>
 	<li><a href="#keyboard">Modification/ajout de claviers</a></li>
-	<li><a href="#tempo">Partition avec plusieurs tempo</a></li>
+	<li><a href="#metrique">Partition avec plusieurs metriques</a></li>
 </ol>
 
 <h2 id="keyboard"><a href="#Top">Mon accordéon a un clavier différent des claviers proposés dans tabliato. Puis-je créer mon propre clavier ?</a></h2>
 
-	<p><ol>
+<p>Le logiciel a été pensé pour que les utilisteurs puissent créer leur propre claviers librement. Tabliato fonctionne avec un fichier <kbd>assemblages.csv</kbd> qui décrit comment combiner des sous-parties de claviers. Les sous parties de clavier sont aussi dans des fichiers et l'utilisateur peut ajouter de nouvelles lignes d'assemblage pour créer de nouveaux claviers mais aussi créer des nouveaux fichiers de clavier à assembler. </p>
+
+<p><ol>
 <li>Ouvrir le dossier de configuration clavier qui contient toutes les fichiers de claviers. Il y a un raccourci dans tabliato: <kbd>Fichier</kbd> > <kbd>Configuration</kbd> > <kbd>Clavier</kbd>. 
-<li>Le premier fichier important est « assemblage_utilisateur.csv » qui permet de construire des claviers personnalisés à partir de sous claviers standards ou de claviers utilisateur. Il est construit comme le fichier « assemblages.csv »  sous la forme:
+<li>Le premier fichier important est <kbd>assemblage_utilisateur.csv</kbd>  qui permet de construire des claviers personnalisés à partir de sous claviers standards ou de claviers utilisateur. Il est construit comme le fichier <kbd>assemblages.csv</kbd> sous la forme:
 
 <pre><code class="csv">code;Description longue;fichier_#1;fichier_#2;...;fichier_#n</code></pre></li>
 
 Mettons que la main droite a un clavier spécial mais à gauche l'accompagnement est standard on pourrait ajouter une ligne comme suit:
 
-<pre><code class="csv">monaccordeon;Mon super accordéon spécial;mon_clavier_special;ctl_8bass_GC
+<pre><code class="csv">monaccordeon1;Mon super accordéon;clavier_special1;ctl_8bass_GC
 </code></pre></li>
 
-<li>Il faut ensuite créer « mon_clavier_special.csv ». Ce n'est pas très compliqué, la syntaxe est « bouton;note »  avec « note » dans la notation de lilypond
+<li>Il faut ensuite créer <kbd>clavier_special1.csv</kbd>. Ce n'est pas très compliqué, la syntaxe est <kbd>bouton;note</kbd>. Une ligne par bouton avec « note » dans la notation de lilypond. Voici le début d'un tel fichier:
 
 <pre><code class="csv">t1;e
 t2;fis
@@ -37,11 +39,11 @@ t6;fis'
 </p>
 
 
-<h2 id="tempo"><a href="#Top">Est-il possible de changer le tempo au cours d'un morceau ?</a></h2>
+<h2 id="metrique"><a href="#Top">Est-il possible de changer la métrique au cours d'un morceau ?</a></h2>
 
-	<p>Vu que le tempo est déclaré dans le panneau de gauche il s'applique a priori à l'ensemble du morceau donc on peut croire que non ce n'est pas possible. Mais en fait c'est possible. Il y a un exemple dans les tablatures du site: <a href = "tablatures/Cotillons%20verts/Cotillons%20verts.pdf">Cotillons verts</a>.</p>
+	<p>Vu que la métrique est déclarée dans le panneau de gauche elle s'applique a priori à l'ensemble du morceau donc on peut croire que ce n'est pas possible d'en changer. Mais en fait c'est possible. Il y a un exemple dans les tablatures du site: <a href = "tablatures/Cotillons%20verts/Cotillons%20verts.pdf">Cotillons verts</a>.</p>
 
-<p>L'interface graphique rend plus facile d'accès certaines options mais c'est le code qui compte. On peut réécrire le rythme à n'importe quel moment avec « \time » et « \motif ». Dans l'exemple ci-dessous on peut déclarer le morceau en 3/4 avec un motif rythmique de valse « B a a » et changer au milieu de la musique en 7/8.</p>
+<p>L'interface graphique rend plus facile d'accès certaines options mais c'est le code qui compte. On peut réécrire la métrique et le rythme à n'importe quel moment avec <kbd>\time</kbd> et <kbd>\motif</kbd>. Dans l'exemple ci-dessous on peut déclarer le morceau en 3/4 avec un motif rythmique de valse « B a a » et changer au milieu de la musique en 7/8.</p>
 
 <pre><code class="cpp">p7:4 t6 p6 E
 t7 6':4. p5':8 D

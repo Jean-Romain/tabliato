@@ -58,9 +58,9 @@
 
  public:
      CodeEditor(QWidget *parent = 0);
-
      void lineNumberAreaPaintEvent(QPaintEvent *event);
      int lineNumberAreaWidth();
+     bool event(QEvent *event);
 
  protected:
      void resizeEvent(QResizeEvent *event);
@@ -73,6 +73,7 @@
 
  private:
      QWidget *lineNumberArea;
+     QString keyword_tooltip(QString);
  };
 
 

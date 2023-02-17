@@ -1,3 +1,7 @@
+## Tabliato 1.3.4
+
+- New: quand le curseur passe au dessus de certain mots clé du code, une infobulle affiche des informations sur le mot clé pour aider l'utilisateur.
+
 ## Tabliato 1.3.3
 
 - New: on peut maintenant ouvrir un fichier tabliato en cliquant sur un fichier `.dtb`.

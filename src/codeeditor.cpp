@@ -38,9 +38,9 @@
  **
  ****************************************************************************/
 
- #include <QtGui>
-
- #include "codeeditor.h"
+#include <QtGui>
+#include <QToolTip>
+#include "codeeditor.h"
 
 
  CodeEditor::CodeEditor(QWidget *parent) : QPlainTextEdit(parent)
@@ -51,103 +51,46 @@
      connect(this, SIGNAL(updateRequest(QRect,int)), this, SLOT(updateLineNumberArea(QRect,int)));
      connect(this, SIGNAL(cursorPositionChanged()), this, SLOT(highlightCurrentLine()));
 
+     //setMouseTracking(true);
      updateLineNumberAreaWidth(0);
      highlightCurrentLine();
  }
 
-
-
- int CodeEditor::lineNumberAreaWidth()
+ bool CodeEditor::event(QEvent *event)
  {
-     int digits = 1;
-     int max = qMax(1, blockCount());
-     while (max >= 10) {
-         max /= 10;
-         ++digits;
-     }
+     if (event->type() == QEvent::ToolTip)
+     {
+         QHelpEvent* helpEvent = static_cast<QHelpEvent*>(event);
 
-     int space = 3 + fontMetrics().width(QLatin1Char('9')) * digits;
+         QPoint pos = helpEvent->pos();
+         pos.setX(pos.x() - viewportMargins().left());
+         pos.setY(pos.y() - viewportMargins().top());
 
-     return space;
- }
+         QTextCursor cursor = cursorForPosition(pos);
+         cursor.select(QTextCursor::WordUnderCursor);
 
+         if (!cursor.selectedText().isEmpty())
+         {
 
+                      qDebug() << cursor.selectionStart() << cursor.selectionEnd();
 
- void CodeEditor::updateLineNumberAreaWidth(int /* newBlockCount */)
- {
-     setViewportMargins(lineNumberAreaWidth(), 0, 0, 0);
- }
+            QString str = cursor.selectedText();
+            QString tooltip = keyword_tooltip(str);
 
-
-
- void CodeEditor::updateLineNumberArea(const QRect &rect, int dy)
- {
-     if (dy)
-         lineNumberArea->scroll(0, dy);
-     else
-         lineNumberArea->update(0, rect.y(), lineNumberArea->width(), rect.height());
-
-     if (rect.contains(viewport()->rect()))
-         updateLineNumberAreaWidth(0);
- }
-
-
-
- void CodeEditor::resizeEvent(QResizeEvent *e)
- {
-     QPlainTextEdit::resizeEvent(e);
-
-     QRect cr = contentsRect();
-     lineNumberArea->setGeometry(QRect(cr.left(), cr.top(), lineNumberAreaWidth(), cr.height()));
- }
-
-
-
- void CodeEditor::highlightCurrentLine()
- {
-     QList<QTextEdit::ExtraSelection> extraSelections;
-
-     if (!isReadOnly()) {
-         QTextEdit::ExtraSelection selection;
-
-         QColor lineColor = QColor(Qt::yellow).lighter(180);
-
-         selection.format.setBackground(lineColor);
-         selection.format.setProperty(QTextFormat::FullWidthSelection, true);
-         selection.cursor = textCursor();
-         selection.cursor.clearSelection();
-         extraSelections.append(selection);
-     }
-
-     setExtraSelections(extraSelections);
- }
-
-
-
- void CodeEditor::lineNumberAreaPaintEvent(QPaintEvent *event)
- {
-     QPainter painter(lineNumberArea);
-     painter.fillRect(event->rect(),  QColor(Qt::lightGray).light(115));
-
-
-     QTextBlock block = firstVisibleBlock();
-     int blockNumber = block.blockNumber();
-     int top = (int) blockBoundingGeometry(block).translated(contentOffset()).top();
-     int bottom = top + (int) blockBoundingRect(block).height();
-
-     while (block.isValid() && top <= event->rect().bottom()) {
-         if (block.isVisible() && bottom >= event->rect().top()) {
-             QString number = QString::number(blockNumber + 1);
-             painter.setPen(Qt::black);
-             painter.drawText(0, top, lineNumberArea->width(), fontMetrics().height(),
-                              Qt::AlignRight, number);
+            if (!tooltip.isEmpty())
+                QToolTip::showText(helpEvent->globalPos(), tooltip);
+            else
+                QToolTip::hideText();
+         }
+         else
+         {
+             QToolTip::hideText();
          }
 
-         block = block.next();
-         top = bottom;
-         bottom = top + (int) blockBoundingRect(block).height();
-         ++blockNumber;
+         return true;
      }
+
+     return QPlainTextEdit::event(event);
  }
 
  void CodeEditor::wheelEvent ( QWheelEvent * event )
@@ -168,3 +111,125 @@
      else
          QPlainTextEdit::wheelEvent(event);
  }
+
+ void CodeEditor::resizeEvent(QResizeEvent *e)
+ {
+     QPlainTextEdit::resizeEvent(e);
+
+     QRect cr = contentsRect();
+     lineNumberArea->setGeometry(QRect(cr.left(), cr.top(), lineNumberAreaWidth(), cr.height()));
+ }
+
+
+ int CodeEditor::lineNumberAreaWidth()
+ {
+     int digits = 1;
+     int max = qMax(1, blockCount());
+     while (max >= 10) {
+         max /= 10;
+         ++digits;
+     }
+
+     int space = 3 + fontMetrics().width(QLatin1Char('9')) * digits;
+
+     return space;
+ }
+
+ void CodeEditor::updateLineNumberAreaWidth(int /* newBlockCount */)
+ {
+     setViewportMargins(lineNumberAreaWidth(), 0, 0, 0);
+ }
+
+ void CodeEditor::updateLineNumberArea(const QRect &rect, int dy)
+ {
+     if (dy)
+         lineNumberArea->scroll(0, dy);
+     else
+         lineNumberArea->update(0, rect.y(), lineNumberArea->width(), rect.height());
+
+     if (rect.contains(viewport()->rect()))
+         updateLineNumberAreaWidth(0);
+ }
+
+ void CodeEditor::highlightCurrentLine()
+ {
+     QList<QTextEdit::ExtraSelection> extraSelections;
+
+     if (!isReadOnly()) {
+         QTextEdit::ExtraSelection selection;
+
+         QColor lineColor = QColor(Qt::yellow).lighter(180);
+
+         selection.format.setBackground(lineColor);
+         selection.format.setProperty(QTextFormat::FullWidthSelection, true);
+         selection.cursor = textCursor();
+         selection.cursor.clearSelection();
+         extraSelections.append(selection);
+     }
+
+     setExtraSelections(extraSelections);
+ }
+
+ void CodeEditor::lineNumberAreaPaintEvent(QPaintEvent *event)
+ {
+     QPainter painter(lineNumberArea);
+     painter.fillRect(event->rect(),  QColor(Qt::lightGray).light(115));
+
+
+     QTextBlock block = firstVisibleBlock();
+     int blockNumber = block.blockNumber();
+     int top = (int) blockBoundingGeometry(block).translated(contentOffset()).top();
+     int bottom = top + (int) blockBoundingRect(block).height();
+
+     while (block.isValid() && top <= event->rect().bottom())
+     {
+         if (block.isVisible() && bottom >= event->rect().top())
+         {
+             QString number = QString::number(blockNumber + 1);
+             painter.setPen(Qt::black);
+             painter.drawText(0, top, lineNumberArea->width(), fontMetrics().height(), Qt::AlignRight, number);
+         }
+
+         block = block.next();
+         top = bottom;
+         bottom = top + (int) blockBoundingRect(block).height();
+         ++blockNumber;
+     }
+ }
+
+
+QString CodeEditor::keyword_tooltip(QString str)
+{
+    QStringList keywords;
+    QStringList tooltips;
+
+    keywords << "repeat"
+             << "volta"
+             << "break"
+             << "tuplet"
+             << "alternative"
+             << "time"
+             << "motif"
+             << "partial"
+             << "finger"
+             << "mbox";
+    tooltips << "repeat : répétiton ou reprise. Doit être suivit du mot clé volta"
+             << "volta : suit le mot clé repeat et indique un reprise"
+             << "break : instruction pour forcer le passage à la ligne suivante"
+             << "tuplet : suivit de 3/2 pour écrire un triolet"
+             << "alternative: une répétition avec fins alternatives. Vient après un bloc \\repeat volta n"
+             << "time : le chiffre de mesure indique le mètre d’une pièce"
+             << "motif : suivit d'un motif rythmique tel que [B:4 a:4 a:4] indique comment produire les informations d'accompagnement main gauche"
+             << "partial : mesure partielle d'anacrouse. Doit être de la durée de la mesure partielle"
+             << "finger : indication de doigté"
+             << "mbox : suivit d'une chaine de caractères. Crée un boite au dessus de la porté pour ajouter une annotation.";
+
+    int idx = keywords.indexOf(str);
+
+    if (idx == -1)
+        return ""; //str;
+    else
+        return tooltips[idx];
+}
+
+

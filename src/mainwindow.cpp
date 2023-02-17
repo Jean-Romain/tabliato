@@ -692,18 +692,25 @@ bool MainWindow::maybeSave()
 {
     if (!documentIsSaved)
     {
-        QMessageBox::StandardButton ret;
-        ret = QMessageBox::warning(this, tr("Application"),
-                     tr("Le document a été modifié.\n"
-                        "Voulez-vous sauvegarder vos changements ?"),
-                     QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
+        QMessageBox msgBox;
+        msgBox.setText("Le document a été modifié.\nVoulez-vous sauvegarder vos changements ?");
+        msgBox.setIcon(QMessageBox::Warning);
+        msgBox.setStandardButtons(QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
+        msgBox.setDefaultButton(QMessageBox::Save);
+        msgBox.setButtonText(QMessageBox::Save, "Sauvegarder");
+        msgBox.setButtonText(QMessageBox::Discard, "Supprimer");
+        msgBox.setButtonText(QMessageBox::Cancel, "Annuler");
+        int ret = msgBox.exec();
+
         if (ret == QMessageBox::Save)
         {
             save();
             return true;
         }
         else if (ret == QMessageBox::Cancel)
+        {
             return false;
+        }
     }
     return true;
 }
@@ -931,6 +938,7 @@ void MainWindow::download_soundfonts(QString name)
 
     QMessageBox::StandardButton reply;
     reply = QMessageBox::question(this, "", "Voulez vous télécharger le fichier " + name + " ?" , QMessageBox::Yes|QMessageBox::No);
+
     if (reply == QMessageBox::Yes)
     {
         terminal("Téléchargement de: " + name);

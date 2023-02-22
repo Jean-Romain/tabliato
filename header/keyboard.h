@@ -3,25 +3,27 @@
 
 #include <QMultiMap>
 
-#include "syntaxanalyser.h"
-
-class Keyboard : public SyntaxAnalyser
+class Keyboard
 {
-    public:
-        Keyboard();
-        void buildKeyboard(QString str);
-        QString getNote(QString key);
-        QStringList keys();
-        QList<QString> getButtons(QString key);
-        int ranks();
+public:
+    Keyboard();
+    Keyboard(QString name);
+    QString get_note_from_button(QString button);
+    QList<QString> get_buttons_from_note(QString note);
+    //QStringList keys();
+    int ranks();
 
-        QString accordionName;
+private:
+    void read_keyboard_from_assemblage(QString name);
+    void build_note_to_button_map();
+    void set_number_of_ranks();
+    QMultiMap<QString, QString> read_keyboard_from_name(QString name);
 
-    private:
-        int rankNumber;
-        QMultiMap<QString, QString>  loadKeyboard(QString name);
-        QMultiMap<QString, QString> map;
-        QMultiMap<QString, QString> revmap;
+private:
+    int m_number_of_ranks;
+    QString m_name;
+    QMultiMap<QString, QString> m_map_button_to_note;
+    QMultiMap<QString, QString> m_map_note_to_buttons;
 };
 
 #endif // KEYBOARD_H

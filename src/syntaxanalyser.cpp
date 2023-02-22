@@ -34,6 +34,8 @@ SyntaxAnalyser::SyntaxAnalyser()
     //isChord_rgx.setPattern("(^[ptPT]?(\\d{1,2}'?,){1,2}(\\d{1,2}'?){1}(:\\d)?\\.?)");
 }
 
+/* IS */
+
 bool SyntaxAnalyser::isButton(QString str){
     return genericTest(button_rgx, str);
 }
@@ -74,11 +76,6 @@ bool SyntaxAnalyser::isNewLine(QString str){
     return str == "\n";
 }
 
-/*bool SyntaxAnalyser::isChord(QString str)
-{
-    return genericTest(isChord_rgx, str);
-}*/
-
 bool SyntaxAnalyser::isOpenChord(QString str){
     return genericTest(openChord_rgx, str);
 }
@@ -107,7 +104,6 @@ bool SyntaxAnalyser::isDoubleQuote(QString str){
     return str == "\"";
 }
 
-
 bool SyntaxAnalyser::isNote(QString str){
     return genericTest(note_rgx, str);
 }
@@ -121,10 +117,7 @@ bool SyntaxAnalyser::hasDirection(QString str)
     return genericTest(hasDirection_rgx, str);
 }
 
-bool SyntaxAnalyser::genericTest(QRegExp rx, QString str)
-{
-    return rx.exactMatch(str);
-}
+/* GET */
 
 int SyntaxAnalyser::getType(QString str)
 {
@@ -175,3 +168,25 @@ QString SyntaxAnalyser::getDirection(QString str)
     else
         return QString("t");
 }
+
+int SyntaxAnalyser::getRank(QString str)
+{
+    int rank;
+    extractRankButton.indexIn(str);
+
+    if (extractRankButton.cap(0) == "")
+        rank = 1;
+    else if(extractRankButton.cap(0) == "'")
+        rank = 2;
+    else
+        rank = 3;
+
+    return rank;
+}
+
+
+bool SyntaxAnalyser::genericTest(QRegExp rx, QString str)
+{
+    return rx.exactMatch(str);
+}
+

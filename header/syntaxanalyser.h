@@ -9,6 +9,7 @@ class SyntaxAnalyser
     public:
         SyntaxAnalyser();
 
+        /* IS */
         bool isButton(QString str);
         bool isComment(QString str);
         bool isPushed(QString str);
@@ -31,10 +32,12 @@ class SyntaxAnalyser
         bool isOpenManualBass(QString str);
         bool isCloseManualBass(QString str);
 
+        /* HAS */
         bool hasDirection(QString str);
 
+        /* GET */
         int getType(QString str);
-
+        int getRank(QString str);
         QString getDirection(QString str);
 
     protected:

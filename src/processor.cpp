@@ -21,7 +21,7 @@ TabliatoProcessor::TabliatoProcessor(Tabulature &tabulature)
     m_lhs_open_spanner = false;
     m_rhs_markup = true;
 
-    m_keyboard.buildKeyboard(m_tab->get("accordion"));
+    m_keyboard = Keyboard(m_tab->get("accordion"));
 
     parseMusic();
     parseLyric();
@@ -36,6 +36,9 @@ void TabliatoProcessor::parseMusic()
 
     ButtonParser button(m_keyboard);
     MultiButtonParser multiButton(m_keyboard);
+
+    multiButton.set_lhs_multibutton("<A a>:4");
+    multiButton.print();
 
     // A motif holds the logic of parsing the left hand button into something that corresponds to the rythm
     Motif pattern(m_tab->get("time"), m_tab->get("motif").toInt());
@@ -291,6 +294,10 @@ void TabliatoProcessor::parseMusic()
                 // A:2.         -> A:2.
                 // A:2 a:4      -> A:2 a:4
                 // A:4 r:4 a:4  -> A:4 r:4 a:4
+                // from v1.4
+                // Aa           -> Aa:8 r:8 Aa:8 r:8
+                // Aa a         -> Aa:8 r:8 a:8 r:8
+                // Aa:2 a:4     -> Aa:2 a:4
                 tmp = pattern.decompact_motif(symbol);
 
                 if (i == symbols.size())

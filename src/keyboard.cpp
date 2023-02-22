@@ -7,119 +7,157 @@
 
 #include "global.h"
 #include "keyboard.h"
+#include "syntaxanalyser.h"
 
 Keyboard::Keyboard()
 {
-    rankNumber = 0;
+    m_number_of_ranks = 0;
 }
 
-void Keyboard::buildKeyboard(QString name)
+Keyboard::Keyboard(QString name)
 {
-    if(name.isEmpty())
-        throw std::logic_error(QString("Aucun accordéon n'a été choisi.").toStdString());
+    m_number_of_ranks = 0;
+    read_keyboard_from_assemblage(name);
+}
+
+void Keyboard::read_keyboard_from_assemblage(QString name)
+{
+    if (name.isEmpty())
+    {
+        QString e("Aucun accordéon n'a été choisi.");
+        throw std::logic_error(e.toStdString());
+    }
 
     QFile file(KEYBOARDS + "/assemblages.csv");
 
-    if(!file.open(QIODevice::ReadOnly | QIODevice::Text))
-        throw std::logic_error(QString("Impossible de lire le fichier de configuration des claviers : " + KEYBOARDS + "/assemblages.csv").toStdString());
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
+    {
+        QString e("Impossible de lire le fichier de configuration des claviers : " + KEYBOARDS + "/assemblages.csv");
+        throw std::logic_error(e.toStdString());
+    }
 
     QTextStream stream(&file);
     QStringList list;
 
-    while (!stream.atEnd() && accordionName != name)
+    while (!stream.atEnd() && m_name != name)
     {
         QString line = stream.readLine();
         list = line.split(";");
-        accordionName = list[0];
+        m_name = list[0];
     }
 
-    if (stream.atEnd() && accordionName != name)
-        throw std::logic_error(QString("Impossible de trouver le clavier " + name  + " dans le fichier de configuration des claviers").toStdString());
+    if (stream.atEnd() && m_name != name)
+    {
+        QString e("Impossible de trouver le clavier " + name  + " dans le fichier de configuration des claviers");
+        throw std::logic_error(e.toStdString());
+    }
 
     file.close();
 
-    accordionName = list[1];
+    m_name = list[1];
 
-    for(int i = 2 ; i < list.length() ; ++i)
-        map += loadKeyboard(list[i]);
+    for (int i = 2 ; i < list.length() ; ++i)
+        m_map_button_to_note += read_keyboard_from_name(list[i]);
 
-    int rank;
-    QMapIterator<QString, QString> it(map);
+    build_note_to_button_map();
+    set_number_of_ranks();
+}
+
+void Keyboard::build_note_to_button_map()
+{
+    QMapIterator<QString, QString> it(m_map_button_to_note);
     while (it.hasNext())
     {
         it.next();
-        revmap.insertMulti(it.value(), it.key());
-
-        extractRankButton.indexIn(it.key());
-
-        if(extractRankButton.cap(0) == "")
-            rank = 1;
-        else if(extractRankButton.cap(0) == "'")
-            rank = 2;
-        else
-            rank = 3;
-
-        if (rank > rankNumber)
-            rankNumber = rank;
+        m_map_note_to_buttons.insertMulti(it.value(), it.key());
     }
 }
 
-QMultiMap<QString, QString> Keyboard::loadKeyboard(QString name)
+void Keyboard::set_number_of_ranks()
+{
+    // Search the button with the most numerous ' to know
+    // how many ranks this accordion has. For exemple if
+    // p3'' exists this is a 3 ranks accordion
+
+    int rank;
+    SyntaxAnalyser sa;
+    QMapIterator<QString, QString> it(m_map_button_to_note);
+
+    while (it.hasNext())
+    {
+        it.next();
+        rank = sa.getRank(it.key());
+        if (rank > m_number_of_ranks)
+            m_number_of_ranks = rank;
+    }
+}
+
+QMultiMap<QString, QString> Keyboard::read_keyboard_from_name(QString name)
 {
     QMultiMap<QString, QString> map;
 
-    if(!name.isEmpty())
+    if (name.isEmpty())
+        return map;
+
+    QFile file(KEYBOARDS + "/" + name + ".csv");
+
+    if(!file.open(QIODevice::ReadOnly | QIODevice::Text))
     {
-        QFile file(KEYBOARDS + "/" + name + ".csv");
-
-        if(!file.open(QIODevice::ReadOnly | QIODevice::Text))
-            throw std::logic_error(QString("Impossible de lire le fichier de configuration des claviers : " + KEYBOARDS + "/" + name + ".csv").toStdString());
-
-        QTextStream stream(&file);
-
-        while (!stream.atEnd())
-        {
-            QString line = stream.readLine();
-            QStringList list = line.split(";");
-
-            QString button = list[0];
-            QString note = list[1];
-
-            map.insert(button, note);
-        }
-
-        file.close();
+        QString e("Impossible de lire le fichier de configuration des claviers : " + KEYBOARDS + "/" + name + ".csv");
+        throw std::logic_error(e.toStdString());
     }
+
+    QTextStream stream(&file);
+
+    while (!stream.atEnd())
+    {
+        QString line = stream.readLine();
+        QStringList list = line.split(";");
+
+        QString button = list[0];
+        QString note = list[1];
+
+        map.insert(button, note);
+    }
+
+    file.close();
+
 
     return map;
 }
 
-QString Keyboard::getNote(QString key)
+QString Keyboard::get_note_from_button(QString button)
 {
-    QString ret = map.value(key, "");
+    QString ret = m_map_button_to_note.value(button, "");
 
-    if(ret.isEmpty())
-        throw std::logic_error(QString("Le bouton " + key + " n'existe pas sur le clavier choisi.").toStdString());
+    if (ret.isEmpty())
+    {
+        QString e("Le bouton " + button + " n'existe pas sur le clavier choisi.");
+        throw std::logic_error(e.toStdString());
+    }
 
     return ret;
 }
 
-QList<QString> Keyboard::getButtons(QString key)
+QList<QString> Keyboard::get_buttons_from_note(QString note)
 {
-    QList<QString> ret = revmap.values(key);
+    QList<QString> ret = m_map_note_to_buttons.values(note);
 
-    if(ret.length() == 0)
-        throw std::logic_error(QString("Vous ne pouvez pas jouer la note " + key + " avec cet accordéon.").toStdString());
+    if (ret.length() == 0)
+    {
+        QString e("Vous ne pouvez pas jouer la note " + note + " avec cet accordéon.");
+        throw std::logic_error(e.toStdString());
+    }
 
     return ret;
 }
 
 int Keyboard::ranks()
 {
-   return rankNumber;
+   return m_number_of_ranks;
 }
 
-QStringList Keyboard::keys()
+/*QStringList Keyboard::keys()
 {
     //QList<QString> list = map.keys();
     QStringList list;
@@ -147,7 +185,7 @@ QStringList Keyboard::keys()
                 try
                 {
                     cmd = direction[d] + button[b] + rang[r];
-                    getNote(cmd);
+                    get_note_from_button(cmd);
                     list << cmd;
                 }
                 catch(const std::exception &e)
@@ -165,7 +203,7 @@ QStringList Keyboard::keys()
             try
             {
                 cmd = bass[ba] + alt[a];
-                getNote(cmd);
+                get_note_from_button(cmd);
                 list << cmd;
             }
             catch(const std::exception &e)
@@ -175,4 +213,4 @@ QStringList Keyboard::keys()
     }
 
     return list;
-}
+}*/

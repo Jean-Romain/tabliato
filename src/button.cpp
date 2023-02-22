@@ -37,7 +37,7 @@ void ButtonParser::set_rhs_note(QString str)
         m_direction = extractDirection.cap(1).toLower();
 
     // Trouve tous les boutons qui font cette note
-    avaibleButton = kbd->getButtons(m_note);
+    avaibleButton = kbd->get_buttons_from_note(m_note);
 
     // Si il n'y a qu'une option c'est facile
     if (avaibleButton.length() == 1)
@@ -152,7 +152,7 @@ void ButtonParser::set_rhs_button(QString str)
     else
         m_rank = "3";
 
-    m_note = kbd->getNote(m_direction + m_button);
+    m_note = kbd->get_note_from_button(m_direction + m_button);
 }
 
 void ButtonParser::set_lhs_button(QString str)
@@ -163,7 +163,7 @@ void ButtonParser::set_lhs_button(QString str)
     {
         m_duration = extractDuration.cap(1);
         m_button = str.split(":")[0];
-        m_note = kbd->getNote(m_button);
+        m_note = kbd->get_note_from_button(m_button);
 
         if (m_duration != "1"  && m_duration != "1."  &&
             m_duration != "2"  && m_duration != "2."  &&
@@ -249,7 +249,24 @@ void MultiButtonParser::set_rhs_multibutton(QString str)
 
 void MultiButtonParser::set_lhs_multibutton(QString str)
 {
-    // TODO
+    m_chord.clear();
+
+    // on trouve une durée dans ce bazarre après la fermeture
+    QString duration = "";
+
+    if (extractDuration.indexIn(str) >= 0)
+        duration = extractDuration.cap(1);
+
+    str = str.split("<")[1]; // remove first character which is <
+    str = str.split(">")[0]; // remove last character which is >
+
+    QStringList symbols = str.split(" ");
+    for (QString symbol : symbols)
+    {
+        ButtonParser button(*m_kbd);
+        button.set_lhs_button(symbol + ":" + duration);
+        m_chord.append(button);
+    }
 }
 
 QString MultiButtonParser::print(bool markup)
@@ -257,7 +274,6 @@ QString MultiButtonParser::print(bool markup)
     QString out;
     if (m_chord[0].side() == Button::RHS)
     {
-
         for(int i = 0 ; i < m_chord.length() ; ++i)
         {
             if (markup)
@@ -278,7 +294,19 @@ QString MultiButtonParser::print(bool markup)
     }
     else
     {
-        // TODO
+        for (int i = 0 ; i < m_chord.length() ; ++i)
+        {
+            out += m_chord[i].note();
+        }
+
+        out += m_chord[0].duration();
+
+        for(int i = 0 ; i < m_chord.length() ; ++i)
+        {
+            out += "^\"" + m_chord[i].button() + "\"";
+        }
+
+        out.replace("><", " ");
     }
 
     return out;

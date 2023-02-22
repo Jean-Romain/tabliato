@@ -11,7 +11,7 @@ title: Tablatures à télécharger
 	<tr>
 		<th style="width:90%">Titre</th>
 		<th class="center"> CADB </th>
-		<th class="center">Tabliato</th>
+		<th class="center hideonphone">Tabliato</th>
 		<th>Écouter</th>
 	</tr>
 
@@ -22,7 +22,7 @@ title: Tablatures à télécharger
 	{% if tab.path contains '.dtb' %}
 	<td style="vertical-align:middle; ">{{ tab.basename }} </td>
 	<td style="vertical-align:middle; " class="center"><a href="{{site.url}}/tabliato/tablatures/{{ tab.basename }}/{{ tab.basename }}.pdf"><img src="img/icone-pdf.png" /></a></td>
-	<td style="vertical-align:middle; " class="center"><a href="{{site.url}}/tabliato/tablatures/{{ tab.basename }}/{{ tab.basename }}.dtb" download=""><img src="img/icone-tabliato.png" /></a></td>
+	<td style="vertical-align:middle; " class="center hideonphone"><a href="{{site.url}}/tabliato/tablatures/{{ tab.basename }}/{{ tab.basename }}.dtb" download=""><img src="img/icone-tabliato.png" /></a></td>
 	<td style="vertical-align:middle; "><audio controls preload="none" style="width:200px"><source src="{{site.url}}/tabliato/tablatures/{{ tab.basename }}/{{ tab.basename }}.ogg" type="audio/ogg"></audio></td>
     {% endif %}
 

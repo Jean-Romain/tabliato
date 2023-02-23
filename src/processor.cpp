@@ -475,6 +475,10 @@ void TabliatoProcessor::parseMusic()
                 {
                     m_tab->set("hasFingering", "true");
                 }
+                else if (symbol == "\\relative")
+                {
+                    throw std::logic_error("\\relative est une commande lilyponde non supportée par tabliato");
+                }
 
                 break;
             }

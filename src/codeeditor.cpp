@@ -67,15 +67,44 @@
          pos.setY(pos.y() - viewportMargins().top());
 
          QTextCursor cursor = cursorForPosition(pos);
-         cursor.select(QTextCursor::WordUnderCursor);
+         int start,end;
 
-         if (!cursor.selectedText().isEmpty())
+         while (!cursor.atEnd())
          {
+             cursor.movePosition(QTextCursor::NextCharacter, QTextCursor::KeepAnchor);
+             if (cursor.selectedText() == ' ' || cursor.selectedText() == QChar(8233)) //8233 unicode for new paragraph
+             {
+                 cursor.movePosition(QTextCursor::PreviousCharacter, QTextCursor::KeepAnchor);
+                 break;
+             }
 
-                      qDebug() << cursor.selectionStart() << cursor.selectionEnd();
+             cursor.clearSelection();
+         }
 
-            QString str = cursor.selectedText();
-            QString tooltip = keyword_tooltip(str);
+         end = cursor.position();
+
+         while (!cursor.atStart())
+         {
+             cursor.movePosition(QTextCursor::PreviousCharacter, QTextCursor::KeepAnchor);
+             if (cursor.selectedText() == ' ' || cursor.selectedText() == QChar(8233))
+             {
+                 break;
+             }
+             cursor.clearSelection();
+         }
+
+         start = cursor.position();
+
+         for(int i= start ; i < end ; i++)
+         {
+             cursor.movePosition(QTextCursor::NextCharacter, QTextCursor::KeepAnchor);
+         }
+
+         QString s = cursor.selectedText();
+
+         if (!s.isEmpty())
+         {
+            QString tooltip = keyword_tooltip(s);
 
             if (!tooltip.isEmpty())
                 QToolTip::showText(helpEvent->globalPos(), tooltip);
@@ -203,26 +232,26 @@ QString CodeEditor::keyword_tooltip(QString str)
     QStringList keywords;
     QStringList tooltips;
 
-    keywords << "repeat"
+    keywords << "\\repeat"
              << "volta"
-             << "break"
-             << "tuplet"
-             << "alternative"
-             << "time"
-             << "motif"
-             << "partial"
-             << "finger"
-             << "mbox";
-    tooltips << "repeat : répétiton ou reprise. Doit être suivit du mot clé volta"
+             << "\\break"
+             << "\\tuplet"
+             << "\\alternative"
+             << "\\time"
+             << "\\motif"
+             << "\\partial"
+             << "\\finger"
+             << "\\mbox";
+    tooltips << "\\repeat : répétiton ou reprise. Doit être suivit du mot clé volta"
              << "volta : suit le mot clé repeat et indique un reprise"
-             << "break : instruction pour forcer le passage à la ligne suivante"
-             << "tuplet : suivit de 3/2 pour écrire un triolet"
-             << "alternative: une répétition avec fins alternatives. Vient après un bloc \\repeat volta n"
-             << "time : le chiffre de mesure indique le mètre d’une pièce"
-             << "motif : suivit d'un motif rythmique tel que [B:4 a:4 a:4] indique comment produire les informations d'accompagnement main gauche"
-             << "partial : mesure partielle d'anacrouse. Doit être de la durée de la mesure partielle"
-             << "finger : indication de doigté"
-             << "mbox : suivit d'une chaine de caractères. Crée un boite au dessus de la porté pour ajouter une annotation.";
+             << "\\break : instruction pour forcer le passage à la ligne suivante"
+             << "\\tuplet : suivit de 3/2 pour écrire un triolet"
+             << "\\alternative: une répétition avec fins alternatives. Vient après un bloc \\repeat volta n"
+             << "\\time : le chiffre de mesure indique le mètre d’une pièce"
+             << "\\motif : suivit d'un motif rythmique tel que [B:4 a:4 a:4] indique comment produire les informations d'accompagnement main gauche"
+             << "\\partial : mesure partielle d'anacrouse. Doit être de la durée de la mesure partielle"
+             << "\\finger : indication de doigté"
+             << "\\mbox : suivit d'une chaine de caractères. Crée un boite au dessus de la porté pour ajouter une annotation.";
 
     int idx = keywords.indexOf(str);
 

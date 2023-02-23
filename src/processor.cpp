@@ -30,54 +30,52 @@ TabliatoProcessor::TabliatoProcessor(Tabulature &tabulature)
 
 void TabliatoProcessor::parseMusic()
 {
-    // A button holds the logic of parsing the notes and stores some context
     CURRENTDIRECTION = "";
     CURRENTDURATION = "4";
 
+    // A button holds the logic of parsing the music indication
     ButtonParser button(m_keyboard);
     MultiButtonParser multiButton(m_keyboard);
 
-    multiButton.set_lhs_multibutton("<A a>:4");
-    multiButton.print();
-
-    // A motif holds the logic of parsing the left hand button into something that corresponds to the rythm
+    // A motif holds the logic of parsing the left hand indication
+    // into something that corresponds to the rythm
     Motif pattern(m_tab->get("time"), m_tab->get("motif").toInt());
 
-    // Timeline
-    QString tempo = m_tab->get("tempo");
-    Timelines timeline(tempo);
+    // A timeline holds the logic of parsing temporally what is
+    // happening and is used to track the music on the rendered score
+    Timelines timeline(m_tab->get("tempo"));
 
     m_tab->set("hasFingering", "false");
 
     // Protections préliminaires
     QString tabulature = m_tab->tabulature;
-
-    tabulature.replace("\t", " ");             // Remplace les m_tabulations par des espaces
-    tabulature.replace("~", " ~");             // Ajoute un espace avant les ~ des liaisons des notes
-    tabulature.replace("\n", " \n ");          // Protection des retours chariots pour linéariser le contenu
-    tabulature.replace("<<", " \\doubelt ");   // Protection de << pour les contre chants
-    tabulature.replace(">>", " \\doubegt ");   // Protection de >> pour les contre chants
+    tabulature.replace("\t", " ");               // Remplace les m_tabulations par des espaces
+    tabulature.replace("~", " ~");               // Ajoute un espace avant les ~ des liaisons des notes
+    tabulature.replace("\n", " \n ");            // Protection des retours chariots pour linéariser le contenu
+    tabulature.replace("<<", " \\doubelt ");     // Protection de << pour les contre chants
+    tabulature.replace(">>", " \\doubegt ");     // Protection de >> pour les contre chants
     tabulature.replace("<", "< ");
     tabulature.replace(">", " >");
     tabulature.replace("[", " [ ");
     tabulature.replace("]", " ] ");
     tabulature.replace("}", " } ");
     tabulature.replace("{", " { ");
-    tabulature.replace("\"", " \" ");          // Protection des doubles quotes
-    tabulature.replace(QRegExp(" +"), " ");    // Replace multiple spaces by a single space
+    tabulature.replace("\"", " \" ");            // Protection des doubles quotes
+    tabulature.replace(QRegExp(" +"), " ");      // Replace multiple spaces by a single space
 
     QStringList symbols = tabulature.split(" "); // Séparation du contenu à chaque espace pour analyser les éléments un par un
     symbols.append("\n");
+
     QStringList parsedSymbolsMelody;             // Certain symboles vont dans la mélodie
     QStringList parsedSymbolsBass;               // Certain symboles vont dans l'accompagnement
 
-    int line = 1;
-    int nnote = 0;
-    int nbass = 0;
+    int line = 1;                                // Curent line number counted from \n. Use to tell which line triggered an error
+    int nnote = 0;                               // Number of notes found. Used for the timeline
+    int nbass = 0;                               // Number of basses found. Uses to chose if we display the bass line
 
     try
     {
-        // Loop throught all symbols of the code
+        // Loop throught all symbols of the code sequentilly
         for (int i = 0 ; i < symbols.size() ; i++)
         {
             QString symbol = symbols[i];
@@ -86,10 +84,10 @@ void TabliatoProcessor::parseMusic()
             int type = getType(symbol);
 
             m_rhs_close_spanner = false;
-            m_rhs_open_spanner = false;
-            m_rhs_markup = true;
+            m_rhs_open_spanner  = false;
+            m_rhs_markup        = true;
             m_lhs_close_spanner = false;
-            m_lhs_open_spanner = false;
+            m_lhs_open_spanner  = false;
 
             // Séparation de main D/G
             bool currentSymbolIsMelody = true;
@@ -100,11 +98,14 @@ void TabliatoProcessor::parseMusic()
             // Une nouvelle ligne. On compte pour savoir potentiellement
             // où le parseur a trouvé une erreur
             case NEWLINE:
+            {
                 line++;
                 break;
+             }
 
             // Un commentaire % on parse et on skip jusqu'à la prochaine ligne
             case COMMENT:
+            {
                 while(i < symbols.size() && !isNewLine(symbols[i]))
                 {
                     i++;
@@ -113,8 +114,11 @@ void TabliatoProcessor::parseMusic()
 
                 line++;
                 break;
-            // string
+            }
+
+            // Une double quote " on est dans une chaine de catactères. On parse jusqu'au prochain "
             case DOUBLEQUOTE:
+            {
                 i++;
                 parsed = "\"";
                 while(i < symbols.size() && getType(symbols[i]) != DOUBLEQUOTE)
@@ -125,6 +129,8 @@ void TabliatoProcessor::parseMusic()
                 parsed += "\"";
                 parsed.remove(1,1);
                 break;
+             }
+
             // Lettre p t P T. On update l'état global courant
             case DIRECTION:
             {
@@ -133,6 +139,9 @@ void TabliatoProcessor::parseMusic()
                 break;
             }
 
+            // Une indication de doigté. Pas encore vraiment traité proprement
+            // car on ne peut plus cacher/montrer les indications de doigté. Doit
+            // être réimplémenté
             case FINGER:
             {
                 m_tab->set("hasFingering", "true");
@@ -146,6 +155,7 @@ void TabliatoProcessor::parseMusic()
             {
                 currentSymbolIsBass = false;
 
+                // /!\ create void Button::set_rhs(QString)
                 if (type == BUTTON)
                 {
                     button.set_rhs_button(symbol);
@@ -160,12 +170,15 @@ void TabliatoProcessor::parseMusic()
 
                 timeline.append(CURRENTDURATION, nnote);
 
+                // On ouvre un spanner si la durée est supérieure à la noire
                 update_rhs_spanner_state(button.get_duration_as_whole_note());
 
                 parsed = button.print(m_rhs_markup);
                 parsed = insert_rhs_spanners(parsed);
 
-                if (button.finger() != "") m_tab->set("hasFingering", "true");
+                // /!\ create bool Button::has_finger()
+                if (button.finger() != "")
+                    m_tab->set("hasFingering", "true");
 
                 nnote++;
                 break;
@@ -189,6 +202,7 @@ void TabliatoProcessor::parseMusic()
                 close_rhs_spanner();
                 parsed = insert_rhs_spanners(symbols[i]);
 
+                // /!\ create QString SyntaxAnalyser::getDuration(QString str)
                 if (extractDuration.indexIn(symbols[i]) >= 0)
                     CURRENTDURATION = extractDuration.cap(1);
                 else
@@ -205,6 +219,7 @@ void TabliatoProcessor::parseMusic()
 
             // symbole < d'ouverture d'accord dans la mélodie
             // On parse jusqu'au prochain > chaque symbole est une note ou un bouton
+            // /!\ relire
             case OPENCHORD:
             {
                 currentSymbolIsBass = false;
@@ -227,13 +242,17 @@ void TabliatoProcessor::parseMusic()
                     }
                     else if (!isOpenChord(symbols[i]) && !isCloseChord(symbols[i]))
                     {
-                        throw std::logic_error((QString("Symbole innatentu détecté à l'intérieur d'un accord: ") + symbols[i]).toStdString());
+                        QString e("Symbole innatentu détecté à l'intérieur d'un accord: " + symbols[i]);
+                        throw std::logic_error(e.toStdString());
                     }
+
                     i++;
                 }
 
                 if (i == symbols.size())
+                {
                     throw std::logic_error("Chevron < ouvert mais jamais fermé.");
+                }
 
                 symbol = open + tmp.join(" ") + symbols[i];
 
@@ -261,6 +280,7 @@ void TabliatoProcessor::parseMusic()
 
             // Symbole [ de syntaxe explicite ou semi-explicite de l'accompagnement
             // On parse jusqu'au prochain ]
+            // /!\ relire
             case OPENMANUALBASS:
             {
                 nbass++;
@@ -294,10 +314,6 @@ void TabliatoProcessor::parseMusic()
                 // A:2.         -> A:2.
                 // A:2 a:4      -> A:2 a:4
                 // A:4 r:4 a:4  -> A:4 r:4 a:4
-                // from v1.4
-                // Aa           -> Aa:8 r:8 Aa:8 r:8
-                // Aa a         -> Aa:8 r:8 a:8 r:8
-                // Aa:2 a:4     -> Aa:2 a:4
                 tmp = pattern.decompact_motif(symbol);
 
                 if (i == symbols.size())
@@ -339,6 +355,7 @@ void TabliatoProcessor::parseMusic()
             }
 
             // Une lettre associée à un chiffre e.g. A:4 ou g:2 toute seule en dehors de []
+            // /!\ relire je ne crois pas que ce soit utile
             case EXPLICITBASS:
             {
                 nbass++;
@@ -350,7 +367,7 @@ void TabliatoProcessor::parseMusic()
                 break;
              }
 
-            // Un commande latex e.g. \repeat
+            // Un commande latex/lilypond e.g. \repeat
             // Le cas spécial \motif permer de changer l'état du parseur de motif.
             case COMMAND:
             {
@@ -360,9 +377,13 @@ void TabliatoProcessor::parseMusic()
                 }
                 else if (symbol == "\\partial")
                 {
+
+                    // /!\ pas claire, revoir le code.
                     extractRankButton.indexIn(symbols[i+1]);
                     if (isButton(symbols[i+1]) && extractRankButton.cap(0) != "")
+                    {
                         throw std::logic_error("Symbol incorrect détecté après \\partial. Une durée est attendue.");
+                     }
 
                     parsed = symbols[i] + " " + symbols[i+1];
                     i++;
@@ -398,23 +419,30 @@ void TabliatoProcessor::parseMusic()
                     QString tmp = symbols[i+1];
                     if (tmp != "volta" || tmp != "segno")
                     if (tmp.size() < 2)
+                    {
                         throw std::logic_error("\\repeat doit être suivit des mots clé 'volta' ou 'segno'");
+                    }
 
                     // parse the number of repetition after volta
                     tmp = symbols[i+2];
 
                     QRegExp rexint("\\d");
                     if (!rexint.exactMatch(tmp))
+                    {
                         throw std::logic_error("\\repeat volta doit être suivit d'un nombre entier.");
+                    }
 
                     int repeat = tmp.toInt();
 
                     if (repeat < 2)
+                    {
                         throw std::logic_error("\\repeat volta doit être suivit d'un nombre supérieur ou égal à 2.");
+                    }
 
                     timeline.add_timeline();
                     timeline.set_repetition(repeat);
-                    while(i < symbols.size()-1 && !isOpenBracket(symbols[i])) {
+                    while(i < symbols.size()-1 && !isOpenBracket(symbols[i]))
+                    {
                         i++;
                         parsed += " " + symbols[i];
                     }
@@ -422,7 +450,8 @@ void TabliatoProcessor::parseMusic()
                 else if (symbol == "\\alternative")
                 {
                     m_scope.append(ALTERNATIVE);
-                    while(i < symbols.size()-1 && !isOpenBracket(symbols[i])) {
+                    while(i < symbols.size()-1 && !isOpenBracket(symbols[i]))
+                    {
                         i++;
                         parsed += " " + symbols[i];
                     }
@@ -431,7 +460,8 @@ void TabliatoProcessor::parseMusic()
                 {
                     m_scope.append(TUPLET);
                     timeline.set_speed_factor(symbols[i+1]);
-                    while(i < symbols.size()-1 && !isOpenBracket(symbols[i])) {
+                    while(i < symbols.size()-1 && !isOpenBracket(symbols[i]))
+                    {
                         i++;
                         parsed += " " + symbols[i];
                     }
@@ -451,7 +481,6 @@ void TabliatoProcessor::parseMusic()
 
             case OPENBRACKET:
             {
-
                 if (m_scope.size() > 0 && m_scope.last() == ALTERNATIVE)
                 {
                     timeline.not_end_timeline();
@@ -469,7 +498,9 @@ void TabliatoProcessor::parseMusic()
             case CLOSEBRACKET:
             {
                 if (m_scope.size() == 0)
+                {
                     throw std::logic_error("Crochet fermant surnuméraire détecté");
+                }
 
                 Scope scope = m_scope.last();
 

@@ -5,7 +5,7 @@ Maintainer: Jean-Romain Roussel <jromain.roussel@gmail.com>
 Homepage: https://jean-romain.github.io/Tabliato/
 Priority: optional
 Architecture: amd64
-Depends: lilypond, timidity, freepats, timidity-interfaces-extra, libc6, qtbase5-dev, libpoppler-qt5-dev, qtmultimedia5-dev
+Depends: lilypond, timidity, freepats, timidity-interfaces-extra, libc6, qtbase5-dev, libpoppler-qt5-dev, qtmultimedia5-dev, libqt5multimedia5-plugins
 Description: Tablatures de qualité pour accordéon diatonique
  Tabliato est un logiciel permettant de créer rapidement 
  et facilement des tablatures pour accordéon diatonique 

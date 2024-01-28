@@ -59,7 +59,7 @@
          <x>0</x>
          <y>0</y>
          <width>414</width>
-         <height>939</height>
+         <height>963</height>
         </rect>
        </property>
        <attribute name="label">
@@ -90,7 +90,7 @@
          <x>0</x>
          <y>0</y>
          <width>414</width>
-         <height>939</height>
+         <height>963</height>
         </rect>
        </property>
        <attribute name="label">
@@ -252,7 +252,7 @@
    <property name="minimumSize">
     <size>
      <width>362</width>
-     <height>608</height>
+     <height>665</height>
     </size>
    </property>
    <property name="sizeIncrement">
@@ -911,7 +911,7 @@ QGroupBox::title {
       </widget>
      </item>
      <item>
-      <widget class="QGroupBox" name="formGroupBox">
+      <widget class="QGroupBox" name="formGroupBoxLayout">
        <property name="styleSheet">
         <string notr="true"> QGroupBox {
  background-color: rgb(232, 235, 238);
@@ -972,6 +972,20 @@ QGroupBox::title {
            </spacer>
           </item>
          </layout>
+        </item>
+        <item row="1" column="0">
+         <widget class="QLabel" name="label">
+          <property name="text">
+           <string>Doigté</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QCheckBox" name="checkBoxDisplayFinger">
+          <property name="text">
+           <string>Ne pas afficher</string>
+          </property>
+         </widget>
         </item>
        </layout>
       </widget>
@@ -1048,7 +1062,7 @@ QGroupBox::title {
           <x>0</x>
           <y>0</y>
           <width>346</width>
-          <height>950</height>
+          <height>974</height>
          </rect>
         </property>
        </widget>

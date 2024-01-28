@@ -477,7 +477,7 @@ void TabliatoProcessor::parseMusic()
                 }
                 else if (symbol == "\\relative")
                 {
-                    throw std::logic_error("\\relative est une commande lilyponde non supportée par tabliato");
+                    throw std::logic_error("\\relative est une commande lilypond non supportée par tabliato");
                 }
 
                 break;

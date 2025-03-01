@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tabliato>
-    <propertie system="cadb" title="Exemple - basique" accordion="ctl1gc" rythm="B a a " tagline="Édité avec Tabliato et Lilypond" motif="3" subtitle="Valse triste" composer="Trad." displayFingering="auto" poet="" key="c \major" tempo="4=130" instrument="" time="3/4"/>
+    <propertie system="cadb" title="Exemple - basique" accordion="ctl1gc" rythm="B a a " tagline="\tabliato" motif="3" subtitle="Valse triste" composer="Trad." displayFingering="auto" poet="" key="c \major" tempo="4=130" instrument="" time="3/4"/>
     <tabulature>% Ceci est un exemple de tablature. Cliquez sur "compiler" pour voir le résultat
 
 % Pour en savoir plus allez dans Aide->Aide de Tabliato

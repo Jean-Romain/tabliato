@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tabliato>
-    <propertie accordion="ctl1gc" instrument="" tagline="" composer="" poet="" system="cadb" rythm="Manuel" tempo="4=130" time="7/8" title="Exemple - rythme spécial" key="c \major" motif="-1" subtitle=""/>
+    <propertie accordion="ctl1gc" instrument="" tagline="\tabliato" composer="" poet="" system="cadb" rythm="Manuel" tempo="4=130" time="7/8" title="Exemple - rythme spécial" key="c \major" motif="-1" subtitle=""/>
     <tabulature>% Cette pièce a un rythme spécial qui n'est pas dans la liste.
 % Basse sur une noire pointée suivit de deux accords sur une noire
 % On le déclare comme suit et tabliato interprète correctement l'accompagnement en écriture automatique

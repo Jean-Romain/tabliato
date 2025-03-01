@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tabliato>
-    <propertie instrument="" subtitle="" tempo="4=130" composer="" displayFingering="auto" motif="2" key="c \major" system="cadb" tagline="" time="2/4" poet="" accordion="ctl1gc" title="Exemple - boutons ou notes" rythm="B a (binaire)"/>
+    <propertie instrument="" subtitle="" tempo="4=130" composer="" displayFingering="auto" motif="2" key="c \major" system="cadb" tagline="\tabliato" time="2/4" poet="" accordion="ctl1gc" title="Exemple - boutons ou notes" rythm="B a (binaire)"/>
     <tabulature>% Il est possible de donner des notes 
 % au lieu des numéros de bouton
 

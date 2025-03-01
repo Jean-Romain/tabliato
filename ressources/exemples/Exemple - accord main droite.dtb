@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tabliato>
-    <propertie motif="3" system="cadb" title="Exemple - accords main droite" accordion="ctl1gc" composer="" time="3/4" instrument="" subtitle="" rythm="B a a " poet="" key="c \major" tagline="Édité avec Tabliato et Lilypond" tempo="4=150"/>
+    <propertie motif="3" system="cadb" title="Exemple - accords main droite" accordion="ctl1gc" composer="" time="3/4" instrument="" subtitle="" rythm="B a a " poet="" key="c \major" tagline="\tabliato" tempo="4=150"/>
     <tabulature>% Les accords s'écrivent poussé/tiré&lt;note1, note2, note3>:durée
 
 t &lt;7 8 9>:2 &lt;7 8 9>:4 A

@@ -1,8 +1,10 @@
 ## Tabliato 1.3.4
 
-- New: quand le curseur passe au dessus de certain mots clé du code, une infobulle affiche des informations sur le mot clé pour aider l'utilisateur.
-- Change: les exemples fournis avec tablito ont été un peu révisé.
-- Fix: l'affichage des doigté ne fonctionnait plus.
+- New: Affichage d’une infobulle au survol de certains mots-clés du code pour aider l’utilisateur.
+- Fix: Correction de l’affichage des doigtés qui ne fonctionnait plus.
+- Fix: Imposition du thème clair par défaut, indépendamment du thème du système d’exploitation.
+- Fix: Le mode Corgeron souligne désormais correctement les notes.
+- Change: Révision des exemples fournis avec Tabliato.
 
 ## Tabliato 1.3.3
 

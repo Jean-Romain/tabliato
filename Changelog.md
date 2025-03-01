@@ -2,6 +2,7 @@
 
 - New: quand le curseur passe au dessus de certain mots clé du code, une infobulle affiche des informations sur le mot clé pour aider l'utilisateur.
 - Change: les exemples fournis avec tablito ont été un peu révisé.
+- Fix: l'affichage des doigté ne fonctionnait plus.
 
 ## Tabliato 1.3.3
 

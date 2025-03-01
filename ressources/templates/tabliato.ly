@@ -122,7 +122,7 @@ make_cadb =
 )
 
 make_cogeron =
-#(define-music-function (parser location button) (string?)
+#(define-music-function (parser location button push) (string? number?)
 (if (not (eq? (rang button) 1)) ; si ce n'est pas le rang du milieux
 (make-music
   'SequentialMusic
@@ -160,7 +160,11 @@ make_cogeron =
             'TextSpanner))
         (make-music  ; add markup
             'TextScriptEvent 'direction (rang button)
-            'text ( markup #:fontsize -1.5 (touchnum button)))))
+            'text (if ( = push 1) 
+                      ( markup #:fontsize -1.5 (touchnum button))
+                      ( markup #:fontsize -1.5 #:underline (touchnum button))
+            )
+            )))
 
   (make-music
   'SequentialMusic
@@ -199,21 +203,24 @@ make_cogeron =
         (make-music
          'TextScriptEvent 
          'direction (rang button)
-         'text ( markup #:fontsize -1.5 (touchnum button)))))
+         'text (if (= push 1) 
+             ( markup #:fontsize -1.5 (touchnum button))
+             ( markup #:fontsize -1.5 #:underline (touchnum button))
+         ))))
   )
 )
 
 p = #(define-music-function (parser location button) (string?)
   (if cadb
     (make_cadb button 1)
-    (make_cogeron button)
+    (make_cogeron button 1)
   )
 )
 
 t = #(define-music-function (parser location button) (string?)
   (if cadb
     (make_cadb button -1)
-    (make_cogeron button)
+    (make_cogeron button -1)
   )
 )
 

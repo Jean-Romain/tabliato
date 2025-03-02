@@ -481,9 +481,13 @@ void MainWindow::open(QString filename)
 
 void MainWindow::openAbout()
 {
-     QMessageBox msgBox;
      QString html = File::read(HTML + "/about.html");
      html.replace("[version]", qApp->applicationVersion());
+
+     QString email; for (QChar c : "qyvthpu5yv|zzlsGnthps5jvt") email.append(QChar(c.unicode() - 7));
+     html.replace("@@", email);
+
+     QMessageBox msgBox;
      msgBox.setText(html);
      msgBox.exec();
 }

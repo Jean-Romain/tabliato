@@ -7,50 +7,50 @@
 
 \repeat volta 2 
 {
-  t5:2.
-  4'
-  5
-  5:4 4' 5	
-  p5:2.
-  4'
-  5
-  5:4 4' 5
+  t5:2. A
+  4' A
+  5 A
+  5:4 4' 5 A	
+  p5:2. G
+  4' G
+  5 G
+  5:4 4' 5 G
 
-   A A A A G G G G 
-  
   \break
   
-  t4:2.
-  3'
-  4
-  4:4 3' 4
-  p4:2.
-  3'
-  4
-  4:4 3' 5 
-
-   A A A A G G G G
+  t4:2. A
+  3' A
+  4 A
+  4:4 3' 4 A
+  p4:2. G
+  3' G
+  4 G
+  4:4 3' 5 G 
 }
 
 \break
 
 \repeat volta 2
 {
-  t5:2. 4' 7
-  5:4 7 5		
-  p5:2. 4' 7
-  5:4 7 5
-
-   A A A A G G G G 
+  t5:2. A 
+  4' A 
+  7 A
+  5:4 7 5 A		
+  p5:2. G 
+  4' G
+  7 G
+  5:4 7 5 G
   
   \break
   
-  t4:2. 5 8
-  8:4 6' 7
-  p7:2. 6' 7
-  5:4 4' 5
-
- A A A A G G G G
+  t4:2. A
+  5 A
+  8 A
+  8:4 6' 7 A
+  p7:2. G
+  6' G
+  7 G
+  5:4 4' 5 G
 }</tabulature>
     <lyric></lyric>
 </tabliato>

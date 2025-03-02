@@ -89,6 +89,7 @@
         <file>ressources/keyboards/mel_G.csv</file>
         <file>ressources/keyboards/Hohner_GC_SolDiese1PrimePousse.csv</file>
         <file>ressources/keyboards/assemblages_utilisateur.csv</file>
+        <file>ressources/keyboards/CastagnariRoma.csv</file>
     </qresource>
     <qresource prefix="/html">
         <file>ressources/html/about.html</file>

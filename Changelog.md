@@ -1,6 +1,7 @@
 ## Tabliato 1.3.4
 
 - New: Affichage d’une infobulle au survol de certains mots-clés du code pour aider l’utilisateur.
+- New: Ajout du clavier "Castagnari Roma"
 - Fix: Correction de l’affichage des doigtés qui ne fonctionnait plus.
 - Fix: Imposition du thème clair par défaut, indépendamment du thème du système d’exploitation.
 - Fix: Le mode Corgeron souligne désormais correctement les notes.

@@ -97,7 +97,7 @@ Highlighter::Highlighter(QTextDocument *parent) : QSyntaxHighlighter(parent)
     }
 
     // Pattern de reconnaissance des strings
-    rule.pattern = QRegExp("\\\".+\\\"");
+    rule.pattern = QRegExp("\"[^\"]*\"");
     rule.format = stringFormat;
     highlightingRules.append(rule);
 

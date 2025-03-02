@@ -4,6 +4,7 @@
 - Fix: Correction de l’affichage des doigtés qui ne fonctionnait plus.
 - Fix: Imposition du thème clair par défaut, indépendamment du thème du système d’exploitation.
 - Fix: Le mode Corgeron souligne désormais correctement les notes.
+- Fix: Coloration syntaxique des chaines de charactères multiples améliorée (non-greedy regex)
 - Change: Révision des exemples fournis avec Tabliato.
 
 ## Tabliato 1.3.3

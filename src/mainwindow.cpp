@@ -960,8 +960,8 @@ void MainWindow::download_soundfonts(QString name)
 
 void MainWindow::goto_line(int line)
 {
-    int offset1 = 269;
-    int offset2 = 309;
+    int offset1 = 276; // Diato in lilypond template
+    int offset2 = 316; // Bass in lilypond template (should be 315?)
     int nline = ui->melodie_textarea->document()->blockCount();
     int ln = (line - offset1 <= nline) ? line - offset1 : line - offset2 - nline + 1;
     QTextCursor cursor(ui->melodie_textarea->document()->findBlockByLineNumber(ln)); // ln-1 because line number starts from 0
@@ -970,8 +970,8 @@ void MainWindow::goto_line(int line)
 
 void MainWindow::highlight_notes_from_current_line_in_pdf()
 {
-    int offset1 = 269;
-    int offset2 = 309;
+    int offset1 = 276; // Diato in lilypond template
+    int offset2 = 316; // Bass in lilypond template (should be 315?)
     int line = ui->melodie_textarea->textCursor().blockNumber();
     int nline = ui->melodie_textarea->document()->blockCount();
     int line1 = line + offset1;
@@ -987,7 +987,7 @@ void MainWindow::highlight_notes_from_current_music_time_in_pdf()
 
     if (pos != -1)
     {
-        int offset2 = 307;
+        int offset2 = 316; // ??
         int nline = ui->melodie_textarea->document()->blockCount();
         int offset = offset2 + nline - 1;
         pdf->highlight_note(pos, offset);

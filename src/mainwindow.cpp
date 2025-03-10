@@ -270,6 +270,7 @@ void MainWindow::midi2audioFinished(int exit)
     QUrl audio = QUrl::fromLocalFile(OUTPUT+ "/output" + AUDIOEXT);
     music->setMedia(QMediaContent());
     music->setMedia(audio);
+    music->setPosition(0);
     terminal("Génération du rendu audio terminé");
 }
 

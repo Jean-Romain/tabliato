@@ -1,3 +1,8 @@
+## Tabliato 1.3.5
+
+- Bug: #52 ajout d'une option pour les machines très lentes.
+- Amélioration: tabliato n'est plus bloqué quand on lance la compilation. La fenêtre reste réactive.
+
 ## Tabliato 1.3.4
 
 - New: Affichage d’une infobulle au survol de certains mots-clés du code pour aider l’utilisateur.

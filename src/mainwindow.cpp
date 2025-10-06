@@ -28,7 +28,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 
     highlighterTab = new Highlighter(ui->melodie_textarea->document());
     music = new QMediaPlayer(this);
-    midi2audioCall = new QProcess(this);
+    score_compiler = new QProcess(this);
+    midi_converter = new QProcess(this);
     pdf = new PdfViewer();
     timer = new QTimer(this);
 
@@ -53,6 +54,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     // ==== Trigger rendering ====
     connect(ui->actionCompile, SIGNAL(triggered()), this, SLOT(compile()));
     connect(ui->actionCompile_tool, SIGNAL(triggered()), this, SLOT(compile()));
+    connect(score_compiler,SIGNAL(finished(int)),this,SLOT(scoreCompilerFinished(int)));
 
     // ==== Various exernal opening ====
     connect(ui->actionHelpTabliato,  &QAction::triggered, [=]() { QDesktopServices::openUrl(QUrl("https://jean-romain.github.io/tabliato/doc.html")); });
@@ -104,8 +106,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     connect(music, SIGNAL(stateChanged(QMediaPlayer::State)), this, SLOT(updateMusic(QMediaPlayer::State)));
 
     // ==== Music renderer ====
-    connect(midi2audioCall,SIGNAL(readyReadStandardOutput()),this,SLOT(midi2audioReadyRead()));
-    connect(midi2audioCall,SIGNAL(finished(int)),this,SLOT(midi2audioFinished(int)));
+    connect(midi_converter,SIGNAL(finished(int)), this,SLOT(midi2audioFinished(int)));
 
     // ===- Music download soundfonts ====
     connect(ui->actionBallone_Burini,  &QAction::triggered, [=]() { this->download_soundfonts("BalloneBurini.sf2"); });
@@ -177,7 +178,8 @@ MainWindow::~MainWindow()
     delete ui;
     delete highlighterTab;
     delete music;
-    delete midi2audioCall;
+    delete score_compiler;
+    delete midi_converter;
     delete pdf;
 }
 
@@ -185,30 +187,32 @@ void MainWindow::compile()
 {
     if (!currentOpenedFile.isEmpty()) save();
 
-    terminal("Compilation");
-
     if (!Lilypond::is_lilypond_installed())
     {
         QMessageBox::critical(this, "Erreur", "Impossible de trouver le logicel lilypond sur cet machine. Lilypond ne semble pas avoir été installé.");
         return;
     }
 
+    terminal("Compilation...");
+
+
+    ui->actionCompile->setEnabled(false);
+    ui->actionCompile_tool->setEnabled(false);
+
     Tabulature tab = readMusicFromUI();
 
     try
     {
-        QElapsedTimer timer;
-        timer.start();
-
         TabliatoProcessor proc(tab);
         m_timeline = proc.m_timeline;
         //terminal(proc.get_logs());
-        terminal("Tablature parsée en " + QString::number(timer.elapsed()) + " milliseconds");
     }
     catch(const std::exception &e)
     {
         QMessageBox::critical(this, "Erreur", QString(e.what()));
         terminal(e.what());
+        ui->actionCompile->setEnabled(true);
+        ui->actionCompile_tool->setEnabled(true);
         return;
     }
 
@@ -219,28 +223,34 @@ void MainWindow::compile()
     QElapsedTimer timer;
     timer.start();
 
-    QProcess tabliato;
     QStringList arguments;
+
+    if (ui->actionSlowCPU->isChecked()) arguments.append("--slow-machine"); // See #52
+
     arguments.append("--png");
     arguments.append("--pdf");
     arguments.append("--midi");
     arguments.append("--ly");
     arguments.append(dtb);
 
-    tabliato.start(APPPATH, arguments);
-    tabliato.waitForFinished(5000);
+    score_compiler->start(APPPATH, arguments);
+}
 
-    if (tabliato.exitCode() != 0)
+
+void MainWindow::scoreCompilerFinished(int exit)
+{
+    ui->actionCompile->setEnabled(true);
+    ui->actionCompile_tool->setEnabled(true);
+
+    if (exit != 0)
     {
-        QString err = tabliato.readAllStandardError();
-        QMessageBox::critical(this, "Erreur :", err);
+        QString errorDetails = score_compiler->readAllStandardError();
+        if (errorDetails.isEmpty())errorDetails = "La partition n'a pas pu être générée pour une raison inconnue.";
+        QMessageBox::critical(this, "Erreur", errorDetails);
+        terminal(errorDetails);
         return;
     }
 
-    if (!tabliato.readAllStandardOutput().isEmpty())
-        terminal(tabliato.readAllStandardOutput());
-
-    terminal("Gravure terminée en " + QString::number(timer.elapsed()) + " milliseconds");
     updatePreview(OUTPUT + "/output.pdf");
     stopMusic();
     midi2audio();
@@ -252,22 +262,26 @@ void MainWindow::midi2audio()
     ui->play_pushButton->setEnabled(false);
 
     QStringList arguments;
+    if (ui->actionSlowCPU->isChecked()) arguments.append("--slow-machine"); // See #52
     arguments.append("--soundfont=" + SOUNDFONTS + "/" + ui->sf2_combobox->currentText());
     arguments.append(OUTPUT + "/output" + MIDIEXT);
-    midi2audioCall->start(APPPATH, arguments);
-}
-
-void MainWindow::midi2audioReadyRead()
-{
-    terminal(midi2audioCall->readAllStandardOutput());
+    midi_converter->start(APPPATH, arguments);
 }
 
 void MainWindow::midi2audioFinished(int exit)
 {
     exportFiles();
-    if (exit) QMessageBox::critical(this, "Erreur", "La musique n'a pas pu être générée pour une raison inconnue");
+
+    if (exit != 0)
+    {
+        QString errorDetails = midi_converter->readAllStandardError();
+        if (errorDetails.isEmpty())errorDetails = "La musique n'a pas pu être générée pour une raison inconnue.";
+        QMessageBox::critical(this, "Erreur", errorDetails);
+        terminal(errorDetails);
+    }
+
     ui->play_pushButton->setEnabled(true);
-    QUrl audio = QUrl::fromLocalFile(OUTPUT+ "/output" + AUDIOEXT);
+    QUrl audio = QUrl::fromLocalFile(OUTPUT + "/output" + AUDIOEXT);
     music->setMedia(QMediaContent());
     music->setMedia(audio);
     music->setPosition(0);
@@ -771,6 +785,7 @@ void MainWindow::writeSettings()
     settings.setValue("previewWidth", ui->previewDock->width());
     settings.setValue("editorWidth", ui->centralwidget->width());
     settings.setValue("editorFontSize", ui->melodie_textarea->font().pointSize());
+    settings.setValue("slowcpu", ui->actionSlowCPU->isChecked());
     settings.setValue("v110", 0);
 }
 
@@ -799,6 +814,8 @@ void MainWindow::readSettings()
 
         ui->centralwidget->resize(settings.value("editorWidth").toInt(), ui->centralwidget->height());
         ui->previewDock->resize(settings.value("previewWidth").toInt(), ui->previewDock->height());
+
+        ui->actionSlowCPU->setChecked(settings.value("slowcpu").toBool());
 
         QFont font = ui->melodie_textarea->font();
         font.setPointSize(settings.value("editorFontSize").toInt());

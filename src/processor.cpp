@@ -475,6 +475,10 @@ void TabliatoProcessor::parseMusic()
                 {
                     m_tab->set("hasFingering", "true");
                 }
+                else if (symbol == "\\tempo")
+                {
+                   // The tempo changed, we need to update the timeline speed.
+                }
                 else if (symbol == "\\relative")
                 {
                     throw std::logic_error("\\relative est une commande lilypond non supportée par tabliato");

@@ -58,8 +58,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>414</width>
-         <height>963</height>
+         <width>352</width>
+         <height>976</height>
         </rect>
        </property>
        <attribute name="label">
@@ -89,8 +89,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>414</width>
-         <height>963</height>
+         <width>352</width>
+         <height>976</height>
         </rect>
        </property>
        <attribute name="label">
@@ -119,7 +119,7 @@
      <x>0</x>
      <y>0</y>
      <width>1162</width>
-     <height>24</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFichier">
@@ -169,6 +169,12 @@
     <property name="title">
      <string>Outils</string>
     </property>
+    <widget class="QMenu" name="menuConfiguation">
+     <property name="title">
+      <string>Configuation</string>
+     </property>
+     <addaction name="actionSlowCPU"/>
+    </widget>
     <addaction name="actionCompile"/>
     <addaction name="separator"/>
     <addaction name="actionExportPDF_tool"/>
@@ -176,6 +182,8 @@
     <addaction name="actionExportMIDI_tool"/>
     <addaction name="actionExportWAV_tool"/>
     <addaction name="actionExportLY_tool"/>
+    <addaction name="separator"/>
+    <addaction name="menuConfiguation"/>
    </widget>
    <widget class="QMenu" name="menuInsertion">
     <property name="title">
@@ -1015,8 +1023,8 @@ QGroupBox::title {
    </property>
    <property name="minimumSize">
     <size>
-     <width>337</width>
-     <height>144</height>
+     <width>347</width>
+     <height>157</height>
     </size>
    </property>
    <property name="sizeIncrement">
@@ -1061,8 +1069,8 @@ QGroupBox::title {
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>346</width>
-          <height>974</height>
+          <width>408</width>
+          <height>970</height>
          </rect>
         </property>
        </widget>
@@ -1390,8 +1398,8 @@ QGroupBox::title {
    </property>
    <property name="minimumSize">
     <size>
-     <width>89</width>
-     <height>111</height>
+     <width>93</width>
+     <height>121</height>
     </size>
    </property>
    <property name="sizeIncrement">
@@ -2440,6 +2448,25 @@ color: rgb(255, 255, 255);</string>
   <action name="actionOpenSf2Dir">
    <property name="text">
     <string>Soundfonts</string>
+   </property>
+  </action>
+  <action name="actionConfiguration">
+   <property name="text">
+    <string>Configuration</string>
+   </property>
+  </action>
+  <action name="actionSlowCPU">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>CPU faible performance</string>
+   </property>
+   <property name="iconText">
+    <string>CPU faible performance</string>
+   </property>
+   <property name="toolTip">
+    <string>Cochez si votre ordinateur est lent à produire les tablatures</string>
    </property>
   </action>
   <zorder>playerDock</zorder>

@@ -38,8 +38,8 @@ class MainWindow : public QMainWindow
         //void systemcallFinished(int exit);
 
         void compile();
+        void scoreCompilerFinished(int);
         void midi2audio();
-        void midi2audioReadyRead();
         void midi2audioFinished(int);
 
         void save();
@@ -73,7 +73,8 @@ class MainWindow : public QMainWindow
         Ui::MainWindow *ui;
         Highlighter *highlighterTab;
         QMediaPlayer *music;
-        QProcess *midi2audioCall;
+        QProcess *score_compiler;
+        QProcess *midi_converter;
         PdfViewer *pdf;
         QVector<qreal> scaleFactors;
         QTimer *timer;

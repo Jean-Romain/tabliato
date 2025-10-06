@@ -14,6 +14,10 @@
 #include "filedownloader.h"
 #include "lilypond.h"
 
+#define EXITOK 0
+#define EXITERROR 1
+#define TIMEOUT 2
+
 QCoreApplication* createApplication(int &argc, char *argv[])
 {
     if (argc > 2){
@@ -28,7 +32,7 @@ int main(int argc, char *argv[])
 
     QCoreApplication::setOrganizationName("tabliato");
     QCoreApplication::setApplicationName("tabliato");
-    QCoreApplication::setApplicationVersion("1.3.4");
+    QCoreApplication::setApplicationVersion("1.3.5");
 
     APPDIR = QApplication::applicationDirPath();
     APPPATH = QApplication::applicationFilePath();
@@ -81,6 +85,9 @@ int main(int argc, char *argv[])
     QCommandLineOption opt_sf2("soundfont", "Soundfont to generate audio from midi (implies --ogg)", "file.sf2");
     parser.addOption(opt_sf2);
 
+    QCommandLineOption opt_slow("slow-machine", "Use this option to increase lilypond and timidity timeout");
+    parser.addOption(opt_slow);
+
     QCommandLineOption opt_output(QStringList() << "o" << "output", "Write output in file or folder FILE. File extension is automatically added", "FILE");
     parser.addOption(opt_output);
 
@@ -95,6 +102,17 @@ int main(int argc, char *argv[])
     bool all = parser.isSet(opt_all);
     bool sf2 = parser.isSet(opt_sf2);
     bool out = parser.isSet(opt_output);
+    bool slow = parser.isSet(opt_slow);
+
+    int lilypond_timeout = 5000;
+    int timidity_timeout = 10000;
+
+    // See issue #52
+    if (slow)
+    {
+        lilypond_timeout *= 10;
+        timidity_timeout *= 10;
+    }
 
     const QStringList args = parser.positionalArguments();
 
@@ -143,15 +161,15 @@ int main(int argc, char *argv[])
             if (new_version > current_version)
             {
                 // Si il n'y a pas de fichier c'est que l'utilisateur n'a jamais cliqué sur Non pour l'update
-                // donc il on demande s'il veut mettre à jour
+                // donc on demande s'il veut mettre à jour
                 bool suggest_update = false;
                 if (!skip_update.exists())
                 {
                     suggest_update = true;
                 }
                 // Si le fichier existe c'est que l'utilisateur a dit non pour l'update
-                // mais quand même ca bloque pour l'éternité. Donc si c'est une version encore
-                // plus grande que celle refusée par l'utilisateur on propose quand mêm
+                // mais ca bloque pour l'éternité. Donc si c'est une version encore
+                // plus grande que celle refusée par l'utilisateur on propose quand même
                 else
                 {
                     QVersionNumber skiped_version = QVersionNumber::fromString(File::read(fileName));
@@ -260,6 +278,12 @@ int main(int argc, char *argv[])
 
             File::write(filebasepath + ".ly", tab.lilypond);
 
+            if (!QFile(filebasepath + ".ly").exists())
+            {
+                QTextStream(stderr) << QString::fromUtf8("Erreur inconnue: le fichier lilypond n'a pas été produit.");
+                return 1;
+            }
+
             QStringList arguments;
             if (png) arguments.append("--png");
             if (pdf) arguments.append("--pdf");
@@ -268,26 +292,42 @@ int main(int argc, char *argv[])
 
             QString command = Lilypond::get_lilypond_command();
 
-            if (verbose) qDebug() << command << " " << arguments;
-
             lilypond.start(command, arguments);
-            lilypond.waitForFinished(5000);
-            lilypond.readAllStandardOutput();
 
-            if(!QFile(filebasepath + ".pdf").exists() && !QFile(filebasepath + ".png").exists())
+            if (!lilypond.waitForStarted())
             {
-                //QTextStream(stderr) << lilypond.readAllStandardError() << endl;
-                QTextStream(stderr) << QString::fromUtf8("Erreur inconnue: le document n'a pas été compilé. Code probablement incorrect.");
+                QTextStream(stderr) << QString::fromUtf8("Erreur inconnue: lilypond n'a pas été démarré.") << Qt::endl;
                 return 1;
             }
 
-            if(!ly) QFile::remove(filebasepath + ".ly");
-            if(!midi)
+            if (!lilypond.waitForFinished(lilypond_timeout))
+            {
+                lilypond.kill();
+                lilypond.waitForFinished();
+                QTextStream(stderr) << QString::fromUtf8("Temps maximum dépassé pour lilypond. La partition n'a pas été produite. Réessayer avec l'option 'Outils' > 'Configuration' > 'CPU faible performance'.") << Qt::endl;
+                return 1;
+            }
+
+            // Check output files
+            bool pdfExists = QFile(filebasepath + ".pdf").exists();
+            bool pngExists = QFile(filebasepath + ".png").exists();
+
+            if (!pdfExists && !pngExists)
+            {
+                QTextStream(stderr) << QString::fromUtf8("Erreur inconnue: le document n'a pas été compilé. Code probablement incorrect.") << Qt::endl;
+                return 1;
+            }
+
+            if (!ly)
+            {
+                QFile::remove(filebasepath + ".ly");
+            }
+
+            if (!midi)
             {
                 QFile::remove(filebasepath + ".mid");
                 QFile::remove(filebasepath + ".midi");
             }
-
         }
 
         // ---------------------------------------
@@ -319,7 +359,15 @@ int main(int argc, char *argv[])
         arguments.append("--output-file=" + ofolder + "/" + ofile + AUDIOEXT);
 
         timidity.start(command, arguments);
-        timidity.waitForFinished(10000);
+
+        if (!timidity.waitForFinished(timidity_timeout))
+        {
+            timidity.kill();
+            timidity.waitForFinished();
+            QTextStream(stderr) << QString::fromUtf8("Erreur: temps maximum dépassé pour la conversion midi > audio. Le rendu audio n'a pas été produit. ´Réessayer avec l'option 'Outils' > 'Configuration' > 'CPU faible performance'.") << Qt::endl;
+            return 1;
+        }
+
         timidity.readAllStandardOutput();
 
         return 0;

@@ -1,6 +1,7 @@
 ## Tabliato 1.3.5
 
 - Bug: #52 ajout d'une option pour les machines très lentes.
+- Bug: #56 les doubles répétition ne font plus planter le logiciel.
 - Amélioration: tabliato n'est plus bloqué quand on lance la compilation. La fenêtre reste réactive.
 
 ## Tabliato 1.3.4

@@ -75,6 +75,8 @@ void Timeline::append(Timeline line)
     int n2 = line.main.size();
     int n = n1 + n2;
 
+    if (n1 == 0 && n2 == 0) return;
+
     TimeUnits units;
     units.reserve(n);
 

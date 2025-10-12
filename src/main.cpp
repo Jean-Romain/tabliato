@@ -296,7 +296,7 @@ int main(int argc, char *argv[])
 
             if (!lilypond.waitForStarted())
             {
-                QTextStream(stderr) << QString::fromUtf8("Erreur inconnue: lilypond n'a pas été démarré.") << Qt::endl;
+                QTextStream(stderr) << QString::fromUtf8("Erreur inconnue: lilypond n'a pas été démarré.") << '\n';
                 return 1;
             }
 
@@ -304,7 +304,7 @@ int main(int argc, char *argv[])
             {
                 lilypond.kill();
                 lilypond.waitForFinished();
-                QTextStream(stderr) << QString::fromUtf8("Temps maximum dépassé pour lilypond. La partition n'a pas été produite. Réessayer avec l'option 'Outils' > 'Configuration' > 'CPU faible performance'.") << Qt::endl;
+                QTextStream(stderr) << QString::fromUtf8("Temps maximum dépassé pour lilypond. La partition n'a pas été produite. Réessayer avec l'option 'Outils' > 'Configuration' > 'CPU faible performance'.") << '\n';
                 return 1;
             }
 
@@ -314,7 +314,7 @@ int main(int argc, char *argv[])
 
             if (!pdfExists && !pngExists)
             {
-                QTextStream(stderr) << QString::fromUtf8("Erreur inconnue: le document n'a pas été compilé. Code probablement incorrect.") << Qt::endl;
+                QTextStream(stderr) << QString::fromUtf8("Erreur inconnue: le document n'a pas été compilé. Code probablement incorrect.") << '\n';
                 return 1;
             }
 
@@ -364,7 +364,7 @@ int main(int argc, char *argv[])
         {
             timidity.kill();
             timidity.waitForFinished();
-            QTextStream(stderr) << QString::fromUtf8("Erreur: temps maximum dépassé pour la conversion midi > audio. Le rendu audio n'a pas été produit. ´Réessayer avec l'option 'Outils' > 'Configuration' > 'CPU faible performance'.") << Qt::endl;
+            QTextStream(stderr) << QString::fromUtf8("Erreur: temps maximum dépassé pour la conversion midi > audio. Le rendu audio n'a pas été produit. ´Réessayer avec l'option 'Outils' > 'Configuration' > 'CPU faible performance'.") << '\n';
             return 1;
         }
 

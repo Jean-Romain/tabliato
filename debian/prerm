@@ -1,0 +1,4 @@
+#!/bin/bash
+set -e
+xdg-mime default none application/x-tabliato-dtb || true
+exit 0

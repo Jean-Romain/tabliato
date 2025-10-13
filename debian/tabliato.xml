@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mime-info xmlns='http://www.freedesktop.org/standards/shared-mime-info'>
+  <mime-type type="application/x-tabliato-dtb">
+    <comment>Tabliato tablature</comment>
+    <comment xml:lang="fr">Tablature pour Tabliato</comment>
+    <glob pattern="*.dtb"/>
+    <icon name="tabliato"/>
+  </mime-type>
+</mime-info>

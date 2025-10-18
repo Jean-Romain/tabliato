@@ -32,7 +32,7 @@ int main(int argc, char *argv[])
 
     QCoreApplication::setOrganizationName("tabliato");
     QCoreApplication::setApplicationName("tabliato");
-    QCoreApplication::setApplicationVersion("1.3.5");
+    QCoreApplication::setApplicationVersion(APP_VERSION);
 
     APPDIR = QApplication::applicationDirPath();
     APPPATH = QApplication::applicationFilePath();

@@ -1,11 +1,16 @@
-Package: tabliato
-Version: 1.3.5
+Source: tabliato
 Section: sound
+Priority: optional
 Maintainer: Jean-Romain Roussel <jromain.roussel@gmail.com>
+Build-Depends: debhelper (>> 11.0.0), qtbase5-dev, lilypond, timidity, timidity-interfaces-extra, freepats, libpoppler-qt5-dev, qtmultimedia5-dev
+Standards-Version: 3.9.6
 Homepage: https://jean-romain.github.io/Tabliato/
+
+Package: tabliato
+Section: sound
 Priority: optional
 Architecture: amd64
-Depends: lilypond, timidity, freepats, timidity-interfaces-extra, libc6, qtbase5-dev, libpoppler-qt5-dev, qtmultimedia5-dev, libqt5multimedia5-plugins
+Depends: ${shlibs:Depends}, lilypond, timidity, freepats, timidity-interfaces-extra, libqt5multimedia5-plugins
 Description: Tablatures de qualité pour accordéon diatonique
  Tabliato est un logiciel permettant de créer rapidement 
  et facilement des tablatures pour accordéon diatonique 

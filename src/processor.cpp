@@ -608,10 +608,19 @@ void TabliatoProcessor::generateLilypondCode()
     QString fingerDisplay;
     QString bassDisplay;
     QString lilypondCode;
+    QString police_size;
 
     cadb = (m_tab->get("system") != "cadb") ? "f" : "t";
     fingerDisplay = ((m_tab->get("displayFingering") == "true") && (m_tab->get("hasFingering") == "true")) ? "t" : "f";
     bassDisplay = (m_tab->bass != "") ? "t" : "f";
+    police_size = m_tab->get("police_size");
+    if (police_size == "Petit") police_size = "-1";
+    else if (police_size == "Normal") police_size = "0";
+    else if (police_size == "Gros") police_size = "1";
+    else if (police_size == "Très gros") police_size = "2";
+    else police_size = "0";
+
+
 
     QFile file(TEMPLATE + "/tabliato.ly");
     if(!file.open(QIODevice::ReadOnly | QIODevice::Text))
@@ -641,6 +650,7 @@ void TabliatoProcessor::generateLilypondCode()
     lilypondCode.replace(QRegExp("<firstVerse>"), m_tab->firstVerse);
     lilypondCode.replace(QRegExp("<leftLyrics>"), m_tab->leftVerses);
     lilypondCode.replace(QRegExp("<rightLyrics>"), m_tab->rightVerses);
+    lilypondCode.replace(QRegExp("<policesize>"), police_size);
 
     m_tab->lilypond = lilypondCode;
 }

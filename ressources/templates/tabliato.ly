@@ -449,12 +449,14 @@ diatoButtonSetup = \with
                   
   \override TextSpanner #'style = #'solid-line
   \override TextSpanner.bound-details.left.padding = #2
-  \override TextSpanner.bound-details.right.padding = #1
+  \override TextSpanner.bound-details.right.padding = #2
   \override TextSpanner #'to-barline = ##t
   \override TextSpanner #'staff-padding = #1.4
   
   \override TupletBracket.bracket-visibility = ##f
   \override TupletNumber.text = ""
+  
+  \override TextScript #'font-size = #<policesize>
   
   \graceSettings
 }
@@ -481,6 +483,7 @@ diatoBassSetup = \with
   \override TextSpanner #'to-barline = ##t
   \override TextSpanner #'staff-padding = #1.2
   \override VerticalAxisGroup #'staff-staff-spacing =  #'(('basic-distance  . 0) (minimum-distance . 0) (padding . .5) (stretchability . 0))
+  \override TextScript #'font-size = #<policesize>
 }
 
 % ===================

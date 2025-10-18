@@ -337,6 +337,11 @@ void MainWindow::updateUIFromMusic(Tabulature tab)
         ui->checkBoxDisplayFinger->setChecked(true);
     else
         ui->checkBoxDisplayFinger->setChecked(false);
+
+    // New police size option 1.3.6
+    QString value = tab.get("police_size");
+    int index = ui->rythm_comboBox->findText(value);
+    if (index != -1) ui->rythm_comboBox->setCurrentIndex(index);
 }
 
 Tabulature MainWindow::readMusicFromUI()
@@ -358,6 +363,7 @@ Tabulature MainWindow::readMusicFromUI()
     tab.set("motif", QString::number(rythmList.value(ui->rythm_comboBox->currentText()).number));
     tab.set("tempo", ui->tempo_comboBox->currentText() + "=" + QString::number(ui->tempo_spinBox->value()));
     tab.set("accordion", accordionList.value(ui->accordion_comboBox->currentText()));
+    tab.set("police_size", ui->policeSize_comboBox->currentText());
     //tab.setFilePath(currentOpenedFile);
 
     if (ui->cadb_radio->isChecked())

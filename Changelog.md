@@ -1,3 +1,7 @@
+## Tabliato 1.3.6
+
+- New: possibilité d'aggrandir la taille des polices.
+
 ## Tabliato 1.3.5
 
 - Bug: #52 ajout d'une option pour les machines très lentes.

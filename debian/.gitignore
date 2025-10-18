@@ -1,0 +1,7 @@
+debhelper.log
+tabliato.debhelper.log
+tabliato.substvars
+tabliato/
+files
+*.debhelper
+debhelper-build-stamp

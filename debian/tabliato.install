@@ -1,3 +1,3 @@
-tabliato tabliato/usr/bin
+tabliato usr/bin/
 ressources/icons/tabliato.svg /usr/share/icons
 debian/tabliato.desktop usr/share/applications

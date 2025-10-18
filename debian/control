@@ -9,7 +9,7 @@ Homepage: https://jean-romain.github.io/Tabliato/
 Package: tabliato
 Section: sound
 Priority: optional
-Architecture: amd64
+Architecture: any
 Depends: ${shlibs:Depends}, lilypond, timidity, freepats, timidity-interfaces-extra, libqt5multimedia5-plugins
 Description: Tablatures de qualité pour accordéon diatonique
  Tabliato est un logiciel permettant de créer rapidement 

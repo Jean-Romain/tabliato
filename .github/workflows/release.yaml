@@ -1,0 +1,80 @@
+name: Build all Debian package and publish new release
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: node:20-trixie-slim
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install requirements
+        run: |
+          apt-get update
+          apt-get install --yes --no-install-recommends build-essential debhelper qtbase5-dev lilypond timidity timidity-interfaces-extra freepats libpoppler-qt5-dev qtmultimedia5-dev locales git python3-git wget sed ca-certificates
+      - name: Generate fr_FR.UTF-8 locale
+        run: |
+          sed -i 's/^# fr_FR.UTF-8/fr_FR.UTF-8/' /etc/locale.gen
+          locale-gen
+      - name: Install Gitdch and update Debian changelog
+        run: |
+          wget -O /usr/local/bin/gitdch https://gitea.zionetrix.net/bn8/gitdch/raw/master/gitdch
+          chmod +x /usr/local/bin/gitdch
+          git config --global --add safe.directory $(pwd)
+          /usr/local/bin/gitdch \
+            --package-name tabliato \
+            --version "$(git describe --tags | sed 's/^[^0-9]*//')" \
+            --code-name stable \
+            --output debian/changelog \
+            --append \
+            --revision "$( git log --oneline -n1 -- debian/changelog | cut -d' ' -f1 )..HEAD" \
+            --verbose \
+            --maintainer-name "Jean-Romain Roussel" \
+            --maintainer-email "jromain.roussel@gmail.com" \
+            --exclude "^CI: " \
+            --exclude "README\.md" \
+            --exclude "^Merge branch "
+      - name: Build Debian packages
+        run: dpkg-buildpackage --build=binary --no-sign
+      - name: Prepare distribution files
+        run: |
+          mkdir dist
+          mv ../tabliato_*_amd64.deb dist/tabliato_amd64.deb
+          mv ../tabliato-dbgsym_*_amd64.deb dist/tabliato-dbgsym_amd64.deb
+      - name: Upload built files
+        uses: actions/upload-artifact@v4.4.3
+        with:
+          name: dist
+          path: |
+            dist/*.deb
+  publish:
+    runs-on: ubuntu-latest
+    if: github.ref_type == 'tag'
+    needs: build
+    steps:
+      - uses: actions/checkout@v4
+      - name: "Download built files"
+        uses: actions/download-artifact@v4.1.8
+      - name: Generate changelog
+        id: changelog
+        uses: janheinrichmerker/action-github-changelog-generator@v2.3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          onlyLastTag: true
+      - name: Create release
+        uses: softprops/action-gh-release@v2.0.9
+        id: create_release
+        with:
+          draft: false
+          prerelease: false
+          tag_name: ${{ steps.changelog.outputs.toTag }}
+          name: ${{ steps.changelog.outputs.toTag }}
+          body: ${{ steps.changelog.outputs.changelog }}
+          make_latest: "true"
+          files: |
+            *.deb
+        env:
+          GITHUB_TOKEN: ${{ github.token }}

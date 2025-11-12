@@ -28,35 +28,57 @@ void Keyboard::read_keyboard_from_assemblage(QString name)
         throw std::logic_error(e.toStdString());
     }
 
-    QFile file(KEYBOARDS + "/assemblages.csv");
+    // List of possible config files to search
+    QStringList possibleFiles = {
+        KEYBOARDS + "/assemblages.csv",
+        KEYBOARDS + "/assemblages_utilisateur.csv"
+    };
 
-    if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
-    {
-        QString e("Impossible de lire le fichier de configuration des claviers : " + KEYBOARDS + "/assemblages.csv");
-        throw std::logic_error(e.toStdString());
-    }
-
-    QTextStream stream(&file);
     QStringList list;
+    bool found = false;
 
-    while (!stream.atEnd() && m_name != name)
+    // Try each file until we find the target assemblage
+    for (const QString& filename : possibleFiles)
     {
-        QString line = stream.readLine();
-        list = line.split(";");
-        m_name = list[0];
+        QFile file(filename);
+
+        if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
+        {
+            // Only warn about missing user file; fail only if both fail later
+            continue;
+        }
+
+        QTextStream stream(&file);
+
+        while (!stream.atEnd())
+        {
+            QString line = stream.readLine().trimmed();
+            if (line.isEmpty()) continue;
+
+            list = line.split(";");
+
+            if (!list.isEmpty() && list[0] == name)
+            {
+                found = true;
+                break;
+            }
+        }
+
+        file.close();
+
+        if (found)
+            break;
     }
 
-    if (stream.atEnd() && m_name != name)
+    if (!found)
     {
-        QString e("Impossible de trouver le clavier " + name  + " dans le fichier de configuration des claviers");
+        QString e("Impossible de trouver le clavier " + name + " dans les fichiers de configuration des claviers");
         throw std::logic_error(e.toStdString());
     }
-
-    file.close();
 
     m_name = list[1];
 
-    for (int i = 2 ; i < list.length() ; ++i)
+    for (int i = 2; i < list.length(); ++i)
         m_map_button_to_note += read_keyboard_from_name(list[i]);
 
     build_note_to_button_map();

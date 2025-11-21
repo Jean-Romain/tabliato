@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "tabliato"
-#define MyAppVersion "1.3.6"
+#define MyAppVersion "1.3.7"
 #define MyAppPublisher "tabliato"
 #define MyAppURL "https://jean-romain.github.io/tabliato/"
 #define MyAppExeName "tabliato.exe"

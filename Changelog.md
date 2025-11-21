@@ -1,3 +1,7 @@
+tabliato (1.3.7) stable; urgency=medium
+
+  * Fix: création de clavier utilisateur dans `assemblage_utilisateur.csv` réparé. (#29)
+
 tabliato (1.3.6) stable; urgency=medium
 
   * New: possibilité d'aggrandir la taille des polices.

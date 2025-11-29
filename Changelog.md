@@ -1,3 +1,7 @@
+tabliato (1.3.8) stable; urgency=medium
+
+  * Fix: crash de l'application avec des fichiers clavier utilisateur invalides
+
 tabliato (1.3.7) stable; urgency=medium
 
   * Fix: création de clavier utilisateur dans `assemblage_utilisateur.csv` réparé. (#29)

@@ -2,7 +2,7 @@ TEMPLATE = app
 TARGET = tabliato
 
 # Version definition
-VERSION = 1.3.7
+VERSION = 1.3.8
 DEFINES += APP_VERSION=\\\"$$VERSION\\\"
 
 # Platform-specific settings

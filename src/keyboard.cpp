@@ -134,18 +134,19 @@ QMultiMap<QString, QString> Keyboard::read_keyboard_from_name(QString name)
     while (!stream.atEnd())
     {
         QString line = stream.readLine();
+
         if (!line.isEmpty())
-        {
-            QStringList list = line.split(";");
+            throw std::runtime_error("Fichier de clavier invalide qui contient une ligne vide (" + name.toStdString() + ".csv)");
 
-            if (list.size() != 2)
-                throw std::runtime_error("Fichier de clavier invalide à la ligne: " + line.toStdString() +  " dans le fichier " + name.toStdString() + ".csv");
+        QStringList list = line.split(";");
 
-            QString button = list[0];
-            QString note = list[1];
+        if (list.size() != 2)
+            throw std::runtime_error("Fichier de clavier invalide à la ligne: " + line.toStdString() +  " (" + name.toStdString() + ".csv)");
 
-            map.insert(button, note);
-        }
+        QString button = list[0];
+        QString note = list[1];
+
+        map.insert(button, note);
     }
 
     file.close();

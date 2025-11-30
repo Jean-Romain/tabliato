@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tabliato>
+    <propertie key="c \major" accordion="stelrouz" poet="" subtitle="Tablature par Nathanaël Bonneau" instrument="Stelvio 2 rangs ½ GC" composer="Thierry Pinson" motif="22" tagline="\tabliato" system="cadb" time="4/4" displayFingering="true" police_size="Normal" tempo="4=150" rythm="B a B a " title="Scottisch à Berlot"/>
+    <tabulature>\set Timing.beamExceptions=#'()
+\set Timing.beatStructure=4
+
+\mbox "INTRO"
+
+\repeat volta 2
+{
+ p 4':4 5':4 [r2]  
+ t 3:4 4:4 [r2]
+ t3':4 7:4 [r2]
+ p 3':8 5':8 3''[r2] t 7[r2]
+ p 4':4 5':4 [r2]t 5':4 8 [r2]
+ 6:2 [r2]p 6:4 4':4[r2 ]
+ 3':4 4:2 ~ 4:4 [r2] 
+}
+
+\break
+
+\mbox "THÈME 1"
+
+\repeat volta 2
+{
+ p 7:8 4':8 6:8 7:8 7':4 4':4 E
+ t8:8 5:8 5':8 8:8 9:2 A
+ t7':8 9:8 7':8 8:8 6':8 7:8 4'':8 7:8 D
+ p7:4 6:4 t6:2 [G B]
+ p 7:8 4':8 6:8 7:8 7':4 4':4 E
+ t8:8 5:8 5':8 8:8 9:2 A
+ p6'':4 6'':8 7':8 t10:4 7'':4 [E B]
+}
+\alternative
+{
+  {p7':1 E}
+  {p7':4 7':8 7':16 7':16   8:4 ~ 8:4 [E G]}
+}
+
+\break
+
+\mbox "THÈME 2"
+
+\repeat volta 2 
+{
+ p9:8 7:8 8:8 9:4 7:8 8:8 9:8 G
+ t10:8 7'':8 10:8 9:8 7':2  [A D]
+ t10:8 7'':8 10:8 9:8 7':8 8:8 6':8 7:8  [A D]
+}
+\alternative
+{
+ {p7:4 t8 p7' t7' [G:4 A:4 G:4 D:4]}
+ {p6:4 t6 p6:2 [G:4 D:4 G:2]}
+}</tabulature>
+    <lyric></lyric>
+</tabliato>

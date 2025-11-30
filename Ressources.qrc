@@ -90,6 +90,7 @@
         <file>ressources/keyboards/Hohner_GC_SolDiese1PrimePousse.csv</file>
         <file>ressources/keyboards/assemblages_utilisateur.csv</file>
         <file>ressources/keyboards/CastagnariRoma.csv</file>
+        <file>ressources/keyboards/Stelvio_ranks_1_2_3.csv</file>
     </qresource>
     <qresource prefix="/html">
         <file>ressources/html/about.html</file>
@@ -105,4 +106,5 @@
         <file>ressources/exemples/Exemple - anacrouse.dtb</file>
         <file>ressources/exemples/Polka piquée.dtb</file>
     </qresource>
+    <qresource prefix="/"/>
 </RCC>

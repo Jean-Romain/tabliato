@@ -1,6 +1,7 @@
 tabliato (1.3.8) stable; urgency=medium
 
   * Fix: crash de l'application avec des fichiers clavier utilisateur invalides
+  * Nouveau clavier: Stelvio Rouzic 2 rangs et demi 12 basses sol/do
 
 tabliato (1.3.7) stable; urgency=medium
 

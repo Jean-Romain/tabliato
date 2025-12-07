@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tabliato>
-    <propertie key="c \major" accordion="stelrouz" poet="" subtitle="Tablature par Nathanaël Bonneau" instrument="Stelvio 2 rangs ½ GC" composer="Thierry Pinson" motif="22" tagline="\tabliato" system="cadb" time="4/4" displayFingering="true" police_size="Normal" tempo="4=150" rythm="B a B a " title="Scottisch à Berlot"/>
+    <propertie displayFingering="true" title="Scottisch à Berlot" composer="Thierry Pinson" subtitle="Tablature par Nathanaël Bonneau" motif="22" time="4/4" tagline="\tabliato" tempo="4=150" rythm="B a B a " accordion="stelrouz" system="cadb" instrument="Stelvio 2 rangs ½ GC" police_size="Normal" key="c \major" poet=""/>
     <tabulature>\set Timing.beamExceptions=#'()
 \set Timing.beatStructure=4
 
@@ -52,5 +52,5 @@
  {p7:4 t8 p7' t7' [G:4 A:4 G:4 D:4]}
  {p6:4 t6 p6:2 [G:4 D:4 G:2]}
 }</tabulature>
-    <lyric></lyric>
+    <lyric>lo -- rem  ip -- sum</lyric>
 </tabliato>

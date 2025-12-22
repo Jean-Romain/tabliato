@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tabliato>
-    <propertie time="3/4" key="c \major" tempo="4=200" instrument="" tagline="\tabliato" title="Game of Thrones" motif="3" subtitle="Main theme" accordion="ctl1gc" rythm="B a a " displayFingering="auto" composer="Arrang. Roberto Capancioni" poet="" system="cadb"/>
+    <propertie key="c \major" poet="" police_size="Normal" tagline="\tabliato" system="cadb" rythm="B a a " tempo="4=200" subtitle="Main theme" title="Game of Thrones" accordion="ctl1gc" composer="Arrang. Roberto Capancioni" displayFingering="true" time="3/4" motif="3" instrument=""/>
     <tabulature>% mesure 1
 t 9:2. A
 7 A
@@ -15,9 +15,9 @@ p 7:2. ~ E
 
 \break
 
-t7' G
+p8 G
 p6 G
-6':8 7 8:2 E
+7:8 6' 8:2 E
 6:2. E
 
 t8:8 6' 7:2 ~ A
@@ -38,7 +38,7 @@ p 7:2. ~ E
 
 \break
 
-t7' G
+p8 G
 p6 G
 7:4. 6' E
 7 6 E
@@ -61,7 +61,7 @@ t3:2. ~ D
 t4':2. F
 8 F
 &lt;8 7> D
-p&lt;7 6> D
+p&lt;7 6> G
 
 t&lt;7 5> ~ A
 &lt;7 5> ~ A
@@ -77,34 +77,34 @@ t9:4 7 8:8 7' A
 t9:4 7 8:8 7' A
 t9:4 7 8:8 7' A
 
-p7:4 4' 6:8 5' E
-p7:4 4' 6:8 5' E
-p7:4 4' 6:8 5' E
-p7:4 4' 6:8 5' E
+p7:4 4' 6:8 t7 E
+p7:4 4' 6:8 t7 E
+p7:4 4' 6:8 t7 E
+p7:4 4' 6:8 t7 E
 
 p8:4 6 7:8 6' G
 p8:4 6 7:8 6' G
 p8:4 6 7:8 6' E
 p8:4 6 6':8 7 E
 
-t7:4 5 4':8 5' A
-t7:4 5 4':8 5' A
-t7:4 5 4':8 5' A
-t7:4 5 4':8 5' A
+t7:4 5 4':8 p6 A
+t7:4 5 4':8 p6 A
+t7:4 5 4':8 p6 A
+t7:4 5 4':8 p6 A
 }
 
 \break
 
 \repeat volta 2
 {
-t7:4 4 4':8 5' F
+t7:4 4 4':8 p6 F
 t7:4 4 4':8 7 F
 p6:4 3' 4':8 t4' C
-p6:4 3' 4':8 6 C
+p5':4 3' 4':8 5' C
 
 t4':4 3 3':8 5 D
 t4':4 3 3':8 4' D
-t5':4 3 4':8 3' A
+t5':4 3 4:8 3' A
 t8:4 4' 7:8 6' A
 
 t8:4 4' 7:8 6' F

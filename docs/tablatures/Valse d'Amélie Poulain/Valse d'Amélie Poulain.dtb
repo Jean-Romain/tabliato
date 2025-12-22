@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tabliato>
-    <propertie rythm="B a a " accordion="ctl1gc" poet="" tagline="\tabliato" motif="3" subtitle="" composer="Yann Tiersen" system="cadb" instrument="" key="c \major" title="Valse d'Amélie Poulain" displayFingering="true" tempo="4=200" time="3/4"/>
+    <propertie composer="Yann Tiersen" tagline="\tabliato" motif="3" system="cadb" displayFingering="true" police_size="Normal" subtitle="" accordion="ctl1gc" time="3/4" tempo="4=200" instrument="" poet="" title="Valse d'Amélie Poulain" rythm="B a a " key="c \major"/>
     <tabulature>\partial 4*5 t7:4 6' 8 6' 8 [a:8 r:8 a:8 r:8] A
 
 \bar ".|" 
@@ -15,7 +15,7 @@ t7':2.~
 6':2.
 7
 p6'~
-6':2~ 6':8 t6'
+6':2~ 6':8 7
 
 p4':2.
 p4':4 t4' p4'
@@ -25,7 +25,7 @@ p4':4 t4' p4'
 4':4 t4' p4'
 
 D D A A
-A D A A 
+D D A A 
 F F C C 
 F F C C
 

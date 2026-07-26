@@ -52,7 +52,7 @@ make_cadb =
   (list (make-music
   'SequentialMusic
   'elements
-  (list 
+  (list
        ; Reglage de la position haut/bas des spanners
        ; par rapport à la ligne centrale
        (make-music
@@ -70,7 +70,7 @@ make_cadb =
             push
             'symbol
             'TextSpanner))
-        ; Reglage fin de la position des spanners pour 
+        ; Reglage fin de la position des spanners pour
         ; s'aligner sur la ligne centrale
         (make-music
           'ContextSpeccedMusic
@@ -89,7 +89,7 @@ make_cadb =
             (cons 0 (* -0.4 push))
             'symbol
             'TextSpanner))
-         ; Reglage fin de la marge gauche des spanners. Si le bouton a 
+         ; Reglage fin de la marge gauche des spanners. Si le bouton a
          ; deux chiffres (10 11 12 ...) il faut laisser un peu plus de
          ; place que pour 3 4 5
         (make-music
@@ -107,10 +107,10 @@ make_cadb =
             (list 'bound-details
                   'left
                   'padding)
-            'grob-value (if (> (string->number (touchnum button)) 9) 2.5 2)   
+            'grob-value (if (> (string->number (touchnum button)) 9) 2.5 2)
             'symbol
             'TextSpanner))
-        )) 
+        ))
         ; Ajout du markup
         (make-music
           'EventChord
@@ -121,94 +121,106 @@ make_cadb =
           ))
 )
 
-make_cogeron =
-#(define-music-function (parser location button push) (string? number?)
-(if (not (eq? (rang button) 1)) ; si ce n'est pas le rang du milieux
-(make-music
-  'SequentialMusic
-  'elements
-  (list (make-music 
-          'ContextSpeccedMusic
-          'context-type
-          'Bottom
-          'element
-          (make-music
-            'OverrideProperty
-            ;'pop-first #t
-            'grob-property-path
-            (list (quote direction))
-            'grob-value (if (< (rang button) 1) -1 1)   
-            'symbol
-            'TextSpanner))
-        (make-music
-          'ContextSpeccedMusic
-          'context-type
-          'Bottom
-          'element
-          (make-music
-            'OverrideProperty
-            'pop-first
-            #t
-            'grob-value
-            1
-            'grob-property-path
-            (list 'bound-details
-                  'left
-                  'padding)
-            'grob-value (if (> (string->number (touchnum button)) 9) 2.5 2)   
-            'symbol
-            'TextSpanner))
-        (make-music  ; add markup
-            'TextScriptEvent 'direction (rang button)
-            'text (if ( = push 1) 
-                      ( markup #:fontsize -1.5 (touchnum button))
-                      ( markup #:fontsize -1.5 #:underline (touchnum button))
-            )
-            )))
-
-  (make-music
-  'SequentialMusic
-  'elements
-  (list (make-music
-          'ContextSpeccedMusic
-          'context-type
-          'Bottom
-          'element
-          (make-music
-            'OverrideProperty
-            'once #t
-            ;'pop-first #t
-            'grob-property-path
-            (list (quote extra-offset))
-            'grob-value (cons 0 0)
-            'symbol
-            'TextScript))
-        (make-music ; override textspanner position
-          'ContextSpeccedMusic
-          'context-type
-          'Bottom
-          'element
-          (make-music
-            'OverrideProperty
-            'once #t
-            ;'pop-first #t
-            'grob-property-path
-            (list (quote direction))
-            'grob-value (if (< (rang button) 1) -1 1)
-            'grob-property-path
-            (list (quote extra-offset))
-            'grob-value (cons 0 2.9)
-            'symbol
-            'TextSpanner))
-        (make-music
-         'TextScriptEvent 
-         'direction (rang button)
-         'text (if (= push 1) 
-             ( markup #:fontsize -1.5 (touchnum button))
-             ( markup #:fontsize -1.5 #:underline (touchnum button))
-         ))))
+#(define rang-offset
+   (lambda (r)
+     (cond ((eq? r 0) -6)     ; rang 1 (bas) : encore plus bas
+           ((eq? r 1) -3.07)  ; rang 2 (milieu) : reference
+           (else -0.1))       ; rang 3 (haut) : encore plus haut
+     )
   )
 )
+
+% Fonction d'affichage des boutons en mode Corgeron
+% Comme la position de chaque rang n'est pas la même selon le nombre
+% de lignes disponibles, on distingue complètement les deux cas
+make_cogeron =
+#(define-music-function (parser location button push) (string? number?)
+(if (equal? rankNumber 3)
+
+  ; CAS 1 : instrument à 3 rangs
+  (make-music
+    'SequentialMusic
+    'elements
+    (list
+      ; Le spanner est toujours dessiné "vers le haut"
+      ; ici : la vraie hauteur (bas/milieu/haut) est ensuite fixée par
+      ; le décalage vertical (extra-offset) un peu plus bas, pas par
+      ; cette direction.
+      (make-music
+        'ContextSpeccedMusic 'context-type 'Bottom
+        'element (make-music 'OverrideProperty
+          'grob-property-path (list 'direction)
+          'grob-value 1
+          'symbol 'TextSpanner))
+      ; Reglage fin de la marge gauche du spanner. Si le bouton a
+      ; deux chiffres (10 11 12 ...) il faut laisser un peu plus de
+      ; place que pour 3 4 5.
+      (make-music
+        'ContextSpeccedMusic 'context-type 'Bottom
+        'element (make-music 'OverrideProperty 'pop-first #t
+          'grob-value 1
+          'grob-property-path (list 'bound-details 'left 'padding)
+          'grob-value (if (> (string->number (touchnum button)) 9) 2.5 2)
+          'symbol 'TextSpanner))
+      ; Décalage vertical du spanner : rang-offset renvoie la
+      ; bonne hauteur (bas, milieu ou haut) selon le rang du bouton
+      ; (calculé par la fonction rang). Sans ce bloc, le trait resterait
+      ; toujours en haut, peu importe le rang réel de la note tenue.
+      (make-music
+        'ContextSpeccedMusic 'context-type 'Bottom
+        'element (make-music 'OverrideProperty 'once #t
+          'grob-property-path (list 'extra-offset)
+          'grob-value (cons 0 (rang-offset (rang button)))
+          'symbol 'TextSpanner))
+      ; Même décalage vertical, mais appliqué cette fois au numéro du
+      ; bouton lui-même (TextScript), pour qu'il tombe exactement sur
+      ; la même ligne que son trait de tenue.
+      (make-music
+        'ContextSpeccedMusic 'context-type 'Bottom
+        'element (make-music 'OverrideProperty 'once #t
+          'grob-property-path (list 'extra-offset)
+          'grob-value (cons 0 (rang-offset (rang button)))
+          'symbol 'TextScript))
+      ; Ajout du numéro affiché : souligné si le bouton est joué en
+      ; tiré (push = -1), normal si il est joué en poussé (push = 1).
+      (make-music
+        'TextScriptEvent 'direction 1
+        'text (if (= push 1)
+                  (markup #:fontsize -1.5 (touchnum button))
+                  (markup #:fontsize -1.5 #:underline (touchnum button))))))
+
+  ; CAS 2 : instrument à 2 rangs (comme avant)
+  ; Ici pas besoin de décalage : une seule ligne de portée existe, donc
+  ; le rang 1 est simplement affiché en dessous (direction -1) et le
+  ; rang 2 au-dessus (direction 1).
+  (make-music
+    'SequentialMusic
+    'elements
+    (list
+      (make-music
+        'ContextSpeccedMusic 'context-type 'Bottom
+        'element (make-music 'OverrideProperty
+          'grob-property-path (list 'direction)
+          'grob-value (if (< (rang button) 1) -1 1)
+          'symbol 'TextSpanner))
+      ; Reglage fin de la marge gauche du spanner (même logique
+      ; que pour le cas 3 rangs ci-dessus).
+      (make-music
+        'ContextSpeccedMusic 'context-type 'Bottom
+        'element (make-music 'OverrideProperty 'pop-first #t
+          'grob-value 1
+          'grob-property-path (list 'bound-details 'left 'padding)
+          'grob-value (if (> (string->number (touchnum button)) 9) 2.5 2)
+          'symbol 'TextSpanner))
+      ; Ajout du numéro affiché, souligné en tiré comme pour le cas
+      ; 3 rangs.
+      (make-music
+        'TextScriptEvent 'direction (if (< (rang button) 1) -1 1)
+        'text (if (= push 1)
+                  (markup #:fontsize -1.5 (touchnum button))
+                  (markup #:fontsize -1.5 #:underline (touchnum button))))))
+)))
+
 
 p = #(define-music-function (parser location button) (string?)
   (if cadb
@@ -232,7 +244,7 @@ up =
 
 finger =
 #(define-event-function (parser location finger) (string?)
-  (make-music 'StrokeFingerEvent 'text 
+  (make-music 'StrokeFingerEvent 'text
     (markup #:line (#:circle (#:finger finger))))
 )
 
@@ -342,20 +354,20 @@ graceSettings = \with
     (Voice Fingering font-size -6)
     (Voice StringNumber font-size -8)
     (Voice TextScript font-size -3)
-  ) 
+  )
 }
 
-diatoStaffSetup = \with 
+diatoStaffSetup = \with
 {
 \override TextScript #'stencil = ##f
 \override TextSpanner #'stencil = #point-stencil
-\override TextSpanner #'to-barline = ##t  
+\override TextSpanner #'to-barline = ##t
 \override StrokeFinger #'font-name = #'"LilyPond Serif"
 \override StrokeFinger #'font-series = #'italic
 
 
 #(if (not fingerDisplay)
-#{ 
+#{
 \override StringNumber #'stencil = ##f
 \override StringNumber #'text = #point-stencil
 \override Fingering #'stencil = #point-stencil
@@ -366,7 +378,7 @@ diatoStaffSetup = \with
 \graceSettings
 }
 
-%diatoFingeringSetup = \with 
+%diatoFingeringSetup = \with
 %{
   \remove "Time_signature_engraver"
 
@@ -408,16 +420,16 @@ diatoStaffSetup = \with
 diatoButtonSetup = \with
 {
   \remove "Time_signature_engraver"			% Retire la signature du temps
-  
+
   \override StaffSymbol #'line-positions =
   #(if cadb
     #{ #'(0) #}
     (if (equal? rankNumber 3)
-      #{ #'(-3 3) #}
+      #{ #'(-9 -3 3) #}
       #{ #'(0) #}
     )
    )
-  
+
   \override NoteHead #'stencil = #point-stencil 	% Supprime les notes
   \override Tie #'stencil = ##f
   \override Slur #'stencil = ##f
@@ -426,7 +438,7 @@ diatoButtonSetup = \with
   \override Stem #'flag = #point-stencil
   \override Stem #'stencil = #point-stencil
   \override Beam #'stencil = #point-stencil
-  \override Beam #'positions = #'(0 . 0)  
+  \override Beam #'positions = #'(0 . 0)
   \override Staff #'stencil = #point-stencil
   \override StaffSymbol #'staff-space = #1
   \override LedgerLineSpanner #'stencil = #point-stencil
@@ -437,27 +449,27 @@ diatoButtonSetup = \with
   \override Clef #'stencil = #ly:text-interface::print
   \override Script #'stencil = ##f
   \override DynamicText #'stencil = ##f
-  
-  \override Clef #'text = 
+
+  \override Clef #'text =
   #(if cadb
     #{ \markup{\raise #0.6 \column{P T}} #}
     (if (equal? rankNumber 3)
-      #{ \markup{\raise #2.1 \column{3 2 1}} #}
+      #{ \markup{\raise #2.1 \column{Alt C G}} #}
       #{ \markup{\raise #0.6 \column{C G}} #}
     )
    )
-                  
+
   \override TextSpanner #'style = #'solid-line
   \override TextSpanner.bound-details.left.padding = #2
   \override TextSpanner.bound-details.right.padding = #2
   \override TextSpanner #'to-barline = ##t
   \override TextSpanner #'staff-padding = #1.4
-  
+
   \override TupletBracket.bracket-visibility = ##f
   \override TupletNumber.text = ""
-  
+
   \override TextScript #'font-size = #<policesize>
-  
+
   \graceSettings
 }
 
@@ -465,7 +477,7 @@ diatoBassSetup = \with
 {
   \remove "Time_signature_engraver"
   \remove "Clef_engraver"
-  
+
   \override StaffSymbol #'line-count = #1
   \override NoteHead #'font-size = #-50 	% Retire les notes de la tablature
   \override Stem #'length = #0
@@ -493,29 +505,29 @@ diatoBassSetup = \with
 \score
 {
 
-  \new StaffGroup 
+  \new StaffGroup
   <<
     %\override StaffGroup.SystemStartBracket #'transparent = ##t
-    
-    %\new Staff \with { \diatoStaffSetup } << \key c \major \transpose \scoreIn \scoreOut \melody >>  
+
+    %\new Staff \with { \diatoStaffSetup } << \key c \major \transpose \scoreIn \scoreOut \melody >>
     \new Staff \with { \diatoStaffSetup } << \melody \addlyrics{\paroles} >>
-    
-    \new DrumStaff \with { \diatoButtonSetup } << \tabulature >> 
-    
-    #(if bassDisplay 
+
+    \new DrumStaff \with { \diatoButtonSetup } << \tabulature >>
+
+    #(if bassDisplay
        #{ \new DrumStaff \with { \diatoBassSetup } << \bass >> #})
-   
+
   >>
-  
-  \layout 
+
+  \layout
   {
-    \context 
+    \context
     { %propriété des Lyrics
          \Lyrics
          \override LyricText #'font-name = #"Z003"
          \override LyricText #'font-size =  #-1.0
     }
-   } 
+   }
 }
 
 \markup {
@@ -527,9 +539,9 @@ diatoBassSetup = \with
 <leftLyrics>
         }
       }
-      
+
        ""
-      
+
       \column {
         \fontsize #-0.8
         \left-align {
@@ -549,7 +561,7 @@ diatoBassSetup = \with
   \unfoldRepeats
   {
     \new StaffGroup
-    <<     
+    <<
       \new Staff
       {
         \set Staff.midiInstrument="acoustic grand"
